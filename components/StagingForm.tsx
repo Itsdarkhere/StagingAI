@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import React, {useCallback, useState} from 'react'
-import styles from "../styles/StagingForm.module.css";
+import React, { useCallback, useState } from 'react';
+import styles from '../styles/StagingForm.module.css';
 import PrimaryButton from './PrimaryButton';
 
 export default function StagingForm() {
@@ -10,9 +10,9 @@ export default function StagingForm() {
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
+    if (e.type === 'dragenter' || e.type === 'dragover') {
       setDragActive(true);
-    } else if (e.type === "dragleave") {
+    } else if (e.type === 'dragleave') {
       setDragActive(false);
     }
   };
@@ -39,44 +39,67 @@ export default function StagingForm() {
 
   return (
     <div className={styles.stagingForm}>
-        <form className={styles.form} onDragEnter={handleDrag} action="/send-data" method="post">
-            <label htmlFor='input-file-upload' className={styles.label}>Your current interior</label>
-            <input onChange={handleChange} className={styles.input} type="file" id="input-file-upload" multiple={false} />
-            <label className={`${styles.inputLabel} ${dragActive ? 'drag_active' : ''}`} id="label-file-upload" htmlFor='input-file-upload'>
-                <div className={styles.inputLabelInner}>
-                    <p>Drag and drop your file here or click to upload</p>
-                </div>
-            </label>
-            { dragActive && 
-            <div 
-                id="drag-file-element" 
-                className={styles.dragFileElement}
-                onDragEnter={handleDrag} 
-                onDragLeave={handleDrag} 
-                onDragOver={handleDrag} 
-                onDrop={handleDrop}>
-            </div> 
-            }
-            <label htmlFor="room" className={styles.label}>Room type</label>
-            <select className={styles.select} name="room" id="room">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-            </select>
-            <label htmlFor="style" className={styles.label}>Style</label>
-            <select className={styles.select} name="style" id="style">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-            </select>
-            <label htmlFor="copies" className={styles.label}>Amount of copies</label>
-            <select className={styles.select} name="copies" id="copies">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-            </select>
-            <PrimaryButton text="Render" />
-        </form>
+      <form
+        className={styles.form}
+        onDragEnter={handleDrag}
+        action="/send-data"
+        method="post"
+      >
+        <label htmlFor="input-file-upload" className={styles.label}>
+          Your current interior
+        </label>
+        <input
+          onChange={handleChange}
+          className={styles.input}
+          type="file"
+          id="input-file-upload"
+          multiple={false}
+        />
+        <label
+          className={`${styles.inputLabel} ${dragActive ? 'drag_active' : ''}`}
+          id="label-file-upload"
+          htmlFor="input-file-upload"
+        >
+          <div className={styles.inputLabelInner}>
+            <p>Drag and drop your file here or click to upload</p>
+          </div>
+        </label>
+        {dragActive && (
+          <div
+            id="drag-file-element"
+            className={styles.dragFileElement}
+            onDragEnter={handleDrag}
+            onDragLeave={handleDrag}
+            onDragOver={handleDrag}
+            onDrop={handleDrop}
+          ></div>
+        )}
+        <label htmlFor="room" className={styles.label}>
+          Room type
+        </label>
+        <select className={styles.select} name="room" id="room">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+        </select>
+        <label htmlFor="style" className={styles.label}>
+          Style
+        </label>
+        <select className={styles.select} name="style" id="style">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+        </select>
+        <label htmlFor="copies" className={styles.label}>
+          Amount of copies
+        </label>
+        <select className={styles.select} name="copies" id="copies">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+        </select>
+        <PrimaryButton text="Render" />
+      </form>
     </div>
-  )
+  );
 }

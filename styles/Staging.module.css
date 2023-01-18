@@ -1,12 +1,12 @@
 .staging {
-    width: 100%;
-    height: calc(100vh - 75px);
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
+  width: 100%;
+  height: calc(100vh - 75px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
 }
 @media screen and (max-width: 800px) {
-    .staging {
-        flex-direction: column;
-    }
+  .staging {
+    flex-direction: column;
+  }
 }

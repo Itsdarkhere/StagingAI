@@ -1,30 +1,31 @@
 .button {
-    background-color: var(--bgThree);
-    color: var(--bgOne);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 12px;
-    height: 32px;
-    min-width: 44px;
-    box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.32), 0px 1.6px 3.6px rgba(0, 0, 0, 0.28);
-    border-radius: 4px;
-    border: 1px solid var(--bgThree);
+  background-color: var(--bgThree);
+  color: var(--bgOne);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 12px;
+  height: 32px;
+  min-width: 44px;
+  box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.32),
+    0px 1.6px 3.6px rgba(0, 0, 0, 0.28);
+  border-radius: 4px;
+  border: 1px solid var(--bgThree);
 }
 .mr {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 .button:hover {
-    background-color: var(--bgFour);
+  background-color: var(--bgFour);
 }
 .button:active {
-    background-color: var(--bgFive);
+  background-color: var(--bgFive);
 }
 .button:focus-visible {
-    border: 1px solid var(--bgOne);
+  border: 1px solid var(--bgOne);
 }
 .button:disabled {
-    background-color: var(--bgDisabled);
-    color: var(--textDisabled);
+  background-color: var(--bgDisabled);
+  color: var(--textDisabled);
 }

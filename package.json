@@ -10,7 +10,6 @@
     "prettier": "prettier --write ."
   },
   "dependencies": {
-    "@lottiefiles/lottie-player": "^1.6.3",
     "@next/font": "^13.1.2",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
