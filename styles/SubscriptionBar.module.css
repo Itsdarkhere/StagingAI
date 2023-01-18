@@ -1,0 +1,37 @@
+.subscriptionbar {
+  width: 100%;
+  border-bottom: 1px solid var(--bgDisabled);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.heading {
+  font-size: 22px;
+  font-weight: var(--regular);
+  color: var(--textOne);
+}
+.barRight {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.label {
+  font-size: 16px;
+  font-weight: var(--regular);
+  color: var(--textOne);
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.save {
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: var(--regular);
+  border: 1px solid var(--bgThree);
+  color: var(--bgThree);
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
