@@ -1,0 +1,37 @@
+.header {
+    background-color: var(--bgOne);
+    height: 75px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.headerInner {
+    width: 100%;
+    max-width: 1220px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.brandname {
+    font-size: 16px;
+    font-weight: var(--regular);
+    color: var(--textOne);
+    margin-left: 5px;
+}
+.headerLeft {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.headerRight {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 200px;
+}

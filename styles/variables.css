@@ -1,0 +1,15 @@
+:root {
+    --bgOne: #FFFFFF;
+    --bgTwo: #F5F5F5;
+    --bgThree: #5B5FC7;
+    --bgFour: #4F52B2;
+    --bgFive: #444791;
+    --bgDisabled: #EBEBEB;
+    --textOne: #616161;
+    --textTwo: #242424;
+    --textDisabled: #C7C7C7;
+    --normal: 400;
+    --regular: 500;
+    --semibold: 600;
+    --bold: 700;
+}
