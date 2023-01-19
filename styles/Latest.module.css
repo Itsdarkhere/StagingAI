@@ -26,7 +26,7 @@
 .heading {
     font-size: 40px;
     font-weight: var(--semibold);
-    color: var(--bgThree);
+    color: var(--textTwo);
     margin: 0;
     line-height: 40px;
 }
