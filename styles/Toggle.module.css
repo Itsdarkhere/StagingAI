@@ -3,6 +3,7 @@
   display: inline-block;
   width: 53px;
   height: 30px;
+  margin-right: 10px;
 }
 
 /* Hide default HTML checkbox */

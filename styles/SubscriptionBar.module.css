@@ -9,6 +9,7 @@
 @media screen and (max-width: 550px) {
     .subscriptionbar {
         flex-direction: column;
+        align-items: flex-start;
     }
 }
 .heading {
@@ -30,7 +31,6 @@
   font-weight: var(--regular);
   color: var(--textOne);
   margin-right: 10px;
-  margin-left: 10px;
 }
 .save {
   border-radius: 4px;
