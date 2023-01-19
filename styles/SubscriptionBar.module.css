@@ -6,16 +6,24 @@
   justify-content: space-between;
   align-items: center;
 }
+@media screen and (max-width: 550px) {
+    .subscriptionbar {
+        flex-direction: column;
+    }
+}
 .heading {
   font-size: 22px;
   font-weight: var(--regular);
   color: var(--textOne);
+  margin-bottom: 16px;
+  margin-top: 0;
 }
 .barRight {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  margin-bottom: 16px;
 }
 .label {
   font-size: 16px;

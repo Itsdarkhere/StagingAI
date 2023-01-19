@@ -6,3 +6,7 @@ body {
   --color: #FFFFF;
   background-color: var(--bgTwo);
 }
+
+* {
+  box-sizing: border-box;
+}
