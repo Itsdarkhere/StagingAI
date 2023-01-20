@@ -32,6 +32,9 @@
     padding-bottom: 200px;
 }
 @media screen and (max-width: 1000px) {
+    .how {
+        padding-top: 75px;
+    }
     .imgBox {
         position: relative;
         width: 100%;
@@ -62,15 +65,14 @@
     align-items: flex-start;
     padding: 40px 20px;
     border-radius: 8px;
-    margin-bottom: 20px;
-    transition: all 0.2s ease-in;
+    transition: all 0.1s ease-in-out;
 }
 .selected {
     transform: scale(1.02);
     background-color: var(--bgOne);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.12),
     0px 0px 20px rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease-in;
+    transition: all 0.1s ease-in-out;
 }
 .headingTwo {
     font-weight: var(--semibold);
