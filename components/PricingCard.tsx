@@ -22,18 +22,16 @@ export default function PricingCard({
 }) {
   return (
     <div
-      className={`${styles.pricingCard} ${
-        marginTop ? '' : styles.selected
-      }`}
+      className={`${styles.pricingCard} ${marginTop ? '' : styles.selected}`}
     >
       <h4 className={styles.headingOne}>{tier}</h4>
       <h5 className={styles.headingTwo}>
         ${price} <span className={styles.span}>/ Month</span>
       </h5>
       <p className={styles.p}>{text}</p>
-      <SellingPoint spt='Max images' sp={sp1} />
-      <SellingPoint spt='Support' sp={sp3} />
-      <SellingPoint spt='Speed' sp={sp2} />
+      <SellingPoint spt="Max images" sp={sp1} />
+      <SellingPoint spt="Support" sp={sp3} />
+      <SellingPoint spt="Speed" sp={sp2} />
       <button className={`${primaryStyles.button} ${styles.button}`}>
         Subscribe
       </button>

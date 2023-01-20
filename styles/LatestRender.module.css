@@ -1,19 +1,19 @@
 .latestRender {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
 }
 .p {
-    font-weight: var(--normal);
-    color: var(--textOne);
-    font-size: 14px;
-    margin: 0;
-    margin-top: 10px;
+  font-weight: var(--normal);
+  color: var(--textOne);
+  font-size: 14px;
+  margin: 0;
+  margin-top: 10px;
 }
 .heading {
-    font-weight: var(--normal);
-    color: var(--textTwo);
-    font-size: 16px;
-    margin: 0;
+  font-weight: var(--normal);
+  color: var(--textTwo);
+  font-size: 16px;
+  margin: 0;
 }
