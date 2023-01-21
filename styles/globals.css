@@ -4,7 +4,7 @@ body {
   /* overflow-x: hidden; */
   margin: 0;
   --color: #FFFFF;
-  background-color: var(--bgTwo);
+  background-color: var(--bgOne);
 }
 
 * {

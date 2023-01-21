@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 600px;
   padding-top: 150px;
+  padding-bottom: 150px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: var(--bgOne);
@@ -23,10 +24,21 @@
 .button {
   min-width: max-content;
 }
+.link {
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--textOne);
+  font-weight: var(--regular);
+  margin: 0;
+  line-height: 20px;
+}
+.link:hover {
+  text-decoration: underline;
+}
 .heading {
   font-size: 40px;
   font-weight: var(--semibold);
-  color: var(--textTwo);
+  color: var(--bgThree);
   margin: 0;
   line-height: 40px;
 }
@@ -37,15 +49,8 @@
 }
 .grid {
   width: 100%;
+  height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 20px;
-}
-
-@media screen and (max-width: 550px) {
-  .grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-  }
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
 }

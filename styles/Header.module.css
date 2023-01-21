@@ -9,7 +9,7 @@
 }
 .headerInner {
   width: 100%;
-  max-width: 1220px;
+  /* max-width: 1220px; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;

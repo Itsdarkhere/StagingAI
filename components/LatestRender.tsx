@@ -11,9 +11,10 @@ export default function LatestRender({ image }: { image: StaticImageData }) {
         style={{
           width: '100%',
           height: 'auto',
-          maxHeight: 400,
+          maxHeight: 500,
           objectFit: 'cover',
-          borderRadius: 4,
+          borderTopRightRadius: 4,
+          borderTopLeftRadius: 4,
         }}
         src={image}
         alt="render"

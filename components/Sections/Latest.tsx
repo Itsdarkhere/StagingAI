@@ -6,6 +6,8 @@ import LIVING from '../../public/living.jpeg';
 import BED from '../../public/bed.jpeg';
 import BEDROOM from '../../public/bedroom.jpeg';
 import KITCHEN from '../../public/kitchen.jpeg';
+import K from '../../public/4k.webp';
+import Link from 'next/link';
 
 export default function Latest() {
   return (
@@ -13,17 +15,14 @@ export default function Latest() {
       <div className={styles.latestInner}>
         <div className={styles.topBar}>
           <h2 className={styles.heading}>
-            Latest<span className={styles.span}> Renders</span>
+            Before<span className={styles.span}> After</span>
           </h2>
-          <button className={`${primaryStyles.button} ${styles.button}`}>
-            Try It out
-          </button>
+          <Link className={styles.link} href={'/create'}>
+            View all
+          </Link>
         </div>
         <div className={styles.grid}>
           <LatestRender image={LIVING} />
-          <LatestRender image={BED} />
-          <LatestRender image={BEDROOM} />
-          <LatestRender image={KITCHEN} />
         </div>
       </div>
     </div>

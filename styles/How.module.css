@@ -6,7 +6,7 @@
   padding-bottom: 200px;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: var(--bgTwo);
+  background-color: var(--bgOne);
 }
 .howInner {
   width: 100%;
@@ -70,6 +70,7 @@
   transform: scale(1.02);
   background-color: var(--bgOne);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.12), 0px 0px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow32);
   transition: all 0.1s ease-in-out;
 }
 .headingTwo {
@@ -80,7 +81,7 @@
   margin-bottom: 5px;
 }
 .p {
-  font-weight: var(--regular);
+  font-weight: var(--normal);
   color: var(--textOne);
   font-size: 18px;
   margin: 0;

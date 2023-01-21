@@ -13,18 +13,6 @@ export default function StagingDisplay() {
       <div className={styles.stagingBox}></div>
       <div className={styles.stagingBox}></div>
       <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
-      <div className={styles.stagingBox}></div>
     </div>
   );
 }

@@ -21,6 +21,7 @@ export default function How() {
     rootMargin: '-5% 0% -70% 0%',
   });
 
+
   return (
     <div className={styles.how}>
       <div className={styles.howInner}>

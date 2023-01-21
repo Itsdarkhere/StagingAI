@@ -4,9 +4,11 @@
   overflow: hidden;
   display: flex;
   flex-direction: row;
+  background-color: var(--galleryBgOne);
 }
 @media screen and (max-width: 800px) {
   .staging {
     flex-direction: column;
+    height: auto;
   }
 }

@@ -1,8 +1,9 @@
 .stagingForm {
-  width: 400px;
+  width: 600px;
   height: 100%;
-  padding: 10px 20px;
   position: relative;
+  background-color: var(--formBgOne);
+  border-top-right-radius: 4px;
 }
 @media screen and (max-width: 800px) {
   .stagingForm {
@@ -15,23 +16,23 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
+  padding: 20px 20px;
 }
 .input {
   display: none;
 }
 .inputLabel {
-  height: 200px;
+  height: 250px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-width: 2px;
   border-radius: 4px;
-  border-style: dashed;
-  border-color: var(--bgThree);
-  background-color: var(--bgOne);
+  background-color: var(--formElementOne);
   text-align: center;
   margin-bottom: 20px;
+  color: var(--textOne);
+  cursor: pointer;
 }
 .inputLabel.drag_active {
   background-color: #ffffff;
@@ -50,14 +51,73 @@
   left: 0px;
 }
 .label {
-  font-weight: var(--normal);
-  color: var(--textOne);
-  font-size: 16px;
+  font-weight: var(--regular);
+  color: var(--bgOne);
+  font-size: 14px;
   margin-bottom: 5px;
+  margin-top: 15px;
+  margin-left: 3px;
 }
-.select {
+.button {
+  margin-top: 40px;
   width: 100%;
-  height: 35px;
-  border-radius: 4px;
-  margin-bottom: 15px;
+  height: 55px !important;
+  font-weight: var(--regular);
+  font-size: 16px;
+  background-color: var(--bgOne) !important;
+  color: var(--formElementOne) !important;
+  box-shadow: var(--shadow32) !important;
+}
+.formTop {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.topButton {
+  width: 50%;
+  height: 50px;
+  background-color: var(--formBgOne);
+  border: none;
+  box-shadow: none;
+  color: var(--formInactive);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.selected {
+  background-color: #1F1F1F;
+  color: var(--bgOne);
+  box-shadow: var(--shadow16);
+  cursor: default;
+}
+.brightImage {
+  filter: brightness(150%);
+}
+.p {
+  font-size: 16px;
+  color: var(--bgOne);
+}
+.span {
+  color: var(--formInactive);
+}
+.span:hover {
+  text-decoration: underline;
+}
+.slider[type="range"] {
+  margin-top: 5px;
+  -webkit-appearance: none;
+  border-radius: 12px;
+  width: 100%;
+  height: 10px;
+  background-color: #242424;
+  cursor: ew-resize;
+}
+
+.slider[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: var(--bgOne);
+  border-radius: 50%;
 }

@@ -22,7 +22,9 @@ export default function PricingCard({
 }) {
   return (
     <div
-      className={`${styles.pricingCard} ${marginTop ? styles.mt : styles.selected}`}
+      className={`${styles.pricingCard} ${
+        marginTop ? styles.mt : styles.selected
+      }`}
     >
       <h4 className={styles.headingOne}>{tier}</h4>
       <h5 className={styles.headingTwo}>

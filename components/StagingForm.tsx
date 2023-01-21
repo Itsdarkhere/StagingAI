@@ -1,11 +1,22 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/StagingForm.module.css';
-import PrimaryButton from './PrimaryButton';
+import primaryStyles from '../styles/PrimaryButton.module.css';
+import UPLOAD from "../public/upload.svg";
+import Select from 'react-select';
+import Image from 'next/image';
+import PLUS from "../public/plus.svg";
+import TRASH from "../public/trash.svg";
 
 export default function StagingForm() {
   const [dragActive, setDragActive] = useState(false);
+  const [mode, setMode] = useState(false);
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ];
   // handle drag events
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -37,8 +48,22 @@ export default function StagingForm() {
     }
   };
 
+  const clickMode = (mode: boolean) => {
+    setMode(mode);
+  }
+
   return (
     <div className={styles.stagingForm}>
+      <div className={styles.formTop}>
+        <button onClick={() => clickMode(true)} className={`${styles.topButton} ${mode && styles.selected}`}>
+          <Image className={`${mode && styles.brightImage}`} src={PLUS} alt="plus" style={{marginRight: 5}} />
+          Add
+        </button>
+        <button onClick={() => clickMode(false)} className={`${styles.topButton} ${!mode && styles.selected}`} style={{borderTopRightRadius: 4}}>
+          <Image className={`${!mode && styles.brightImage}`} src={TRASH} alt="trash" style={{marginRight: 5}} />
+          Remove
+        </button>
+      </div>
       <form
         className={styles.form}
         onDragEnter={handleDrag}
@@ -61,7 +86,10 @@ export default function StagingForm() {
           htmlFor="input-file-upload"
         >
           <div className={styles.inputLabelInner}>
-            <p>Drag and drop your file here or click to upload</p>
+            <Image src={UPLOAD} alt="upload" />
+            <p className={styles.p}>
+              Click to upload <br /><span className={styles.span}>or drag and drop it here</span>
+            </p>
           </div>
         </label>
         {dragActive && (
@@ -77,28 +105,91 @@ export default function StagingForm() {
         <label htmlFor="room" className={styles.label}>
           Room type
         </label>
-        <select className={styles.select} name="room" id="room">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-        </select>
+        <Select
+          options={options}
+          placeholder="Room"
+          styles={{
+            container: (baseStyles, _) => ({
+              ...baseStyles,
+              width: '100%',
+              height: "48px"
+            }),
+            placeholder: (baseStyles, _) => ({
+              ...baseStyles,
+              fontSize: "14px",
+            }),
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: '#242424',
+              border: 'none',
+              height: "48px",
+              boxShadow: state.isFocused ? "0px 0px 6px #FFFFF" : "none",
+              "&:focus": {
+                boxShadow: 'none',
+                border: "1px solid red",
+                outline: "1px solid red",
+              },
+            }),
+            menu: (baseStyles, _) => ({
+              ...baseStyles,
+              marginTop: 0,
+            })
+          }}
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              neutral80: 'white',
+            },
+          })}
+        />
         <label htmlFor="style" className={styles.label}>
           Style
         </label>
-        <select className={styles.select} name="style" id="style">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-        </select>
+        <Select options={options}
+        placeholder="Style"
+        styles={{
+          container: (baseStyles, _) => ({
+            ...baseStyles,
+            width: '100%',
+            height: "48px"
+          }),
+          placeholder: (baseStyles, _) => ({
+            ...baseStyles,
+            fontSize: "14px",
+          }),
+          control: (baseStyles, state) => ({
+            ...baseStyles,
+            backgroundColor: '#242424',
+            height: "48px",
+            border: 'none',
+            boxShadow: state.isFocused ? "0px 0px 6px #FFFFF" : "none",
+            "&:focus": {
+              boxShadow: 'none',
+              border: "1px solid red",
+              outline: "1px solid red",
+            },
+          }),
+          menu: (baseStyles, _) => ({
+            ...baseStyles,
+            marginTop: 0,
+          })
+        }}
+        theme={(theme) => ({
+          ...theme,
+          colors: {
+            ...theme.colors,
+            neutral80: 'white',
+          },
+        })}
+        />
         <label htmlFor="copies" className={styles.label}>
           Amount of copies
         </label>
-        <select className={styles.select} name="copies" id="copies">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-        </select>
-        <PrimaryButton text="Render" />
+        <input type="range" className={styles.slider} />
+        <button className={`${primaryStyles.button} ${styles.button}`}>
+          Render Images
+        </button>
       </form>
     </div>
   );
