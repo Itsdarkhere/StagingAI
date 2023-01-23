@@ -18,10 +18,13 @@
   padding: 20px 20px;
 }
 .input {
-  display: none;
+  opacity: 0;
+  position: absolute;
+  top: 50px;
+  height: 220px;
 }
 .inputLabel {
-  height: 250px;
+  height: 220px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -44,7 +47,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);;
+  background-color: rgba(0, 0, 0, 0.5);
   top: 0px;
   right: 0px;
   bottom: 0px;
@@ -94,9 +97,27 @@
 .brightImage {
   filter: brightness(150%);
 }
+.imgName {
+  font-size: 16px;
+  color: var(--formInactive);
+  width: 100px;
+  max-width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+}
 .p {
   font-size: 16px;
   color: var(--bgOne);
+}
+.pTwo {
+  font-size: 14px;
+  color: var(--formInactive);
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .span {
   color: var(--formInactive);
@@ -104,7 +125,7 @@
 .span:hover {
   text-decoration: underline;
 }
-.slider[type="range"] {
+.slider[type='range'] {
   margin-top: 5px;
   -webkit-appearance: none;
   border-radius: 2px;
@@ -114,7 +135,7 @@
   cursor: ew-resize;
 }
 
-.slider[type="range"]::-webkit-slider-thumb {
+.slider[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;

@@ -16,16 +16,32 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .stagingDisplay {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 .stagingBox {
   width: 100%;
   height: 100%;
   min-height: 340px;
   max-width: 100%;
-  background-color: var(--formElementOne);
+  background-color: var(--form2);
   border-radius: 4px;
+  display: inline-block;
+  -webkit-mask: linear-gradient(
+      -60deg,
+      var(--form2) 30%,
+      #0005,
+      var(--form2) 70%
+    )
+    right/300% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 2.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    -webkit-mask-position: left;
+  }
 }
 @media screen and (min-width: 640px) {
   .stagingDisplay {
