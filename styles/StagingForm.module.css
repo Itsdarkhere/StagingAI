@@ -2,7 +2,7 @@
   width: 600px;
   height: 100%;
   position: relative;
-  background-color: var(--formBgOne);
+  background-color: var(--form2);
   border-top-right-radius: 4px;
 }
 @media screen and (max-width: 800px) {
@@ -28,7 +28,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  background-color: var(--formElementOne);
+  background-color: var(--form4);
   text-align: center;
   margin-bottom: 20px;
   color: var(--textOne);
@@ -65,7 +65,7 @@
   font-weight: var(--regular);
   font-size: 16px;
   background-color: var(--bgOne) !important;
-  color: var(--formElementOne) !important;
+  color: var(--textTwo) !important;
   box-shadow: var(--shadow32) !important;
 }
 .formTop {
@@ -76,7 +76,7 @@
 .topButton {
   width: 50%;
   height: 50px;
-  background-color: var(--formBgOne);
+  background-color: var(--form1);
   border: none;
   box-shadow: none;
   color: var(--formInactive);
@@ -86,9 +86,8 @@
   cursor: pointer;
 }
 .selected {
-  background-color: #1F1F1F;
+  background-color: var(--form3);
   color: var(--bgOne);
-  box-shadow: var(--shadow16);
   cursor: default;
 }
 .brightImage {
@@ -107,10 +106,10 @@
 .slider[type="range"] {
   margin-top: 5px;
   -webkit-appearance: none;
-  border-radius: 12px;
+  border-radius: 2px;
   width: 100%;
   height: 10px;
-  background-color: #242424;
+  background-color: var(--form3);
   cursor: ew-resize;
 }
 
@@ -119,5 +118,5 @@
   width: 20px;
   height: 20px;
   background-color: var(--bgOne);
-  border-radius: 50%;
+  border-radius: 4px;
 }

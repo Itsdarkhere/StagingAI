@@ -59,7 +59,7 @@ export default function StagingForm() {
           <Image className={`${mode && styles.brightImage}`} src={PLUS} alt="plus" style={{marginRight: 5}} />
           Add
         </button>
-        <button onClick={() => clickMode(false)} className={`${styles.topButton} ${!mode && styles.selected}`} style={{borderTopRightRadius: 4}}>
+        <button onClick={() => clickMode(false)} className={`${styles.topButton} ${!mode && styles.selected}`}>
           <Image className={`${!mode && styles.brightImage}`} src={TRASH} alt="trash" style={{marginRight: 5}} />
           Remove
         </button>
@@ -71,7 +71,7 @@ export default function StagingForm() {
         method="post"
       >
         <label htmlFor="input-file-upload" className={styles.label}>
-          Your current interior
+          Current interior
         </label>
         <input
           onChange={handleChange}
@@ -117,10 +117,11 @@ export default function StagingForm() {
             placeholder: (baseStyles, _) => ({
               ...baseStyles,
               fontSize: "14px",
+              color: '#ADADAD',
             }),
             control: (baseStyles, state) => ({
               ...baseStyles,
-              backgroundColor: '#242424',
+              backgroundColor: '#2E2E2E',
               border: 'none',
               height: "48px",
               boxShadow: state.isFocused ? "0px 0px 6px #FFFFF" : "none",
@@ -130,10 +131,14 @@ export default function StagingForm() {
                 outline: "1px solid red",
               },
             }),
+            indicatorSeparator: (baseStyles, _) => ({
+              ...baseStyles,
+              display: 'none',
+            }),
             menu: (baseStyles, _) => ({
               ...baseStyles,
               marginTop: 0,
-            })
+            }),
           }}
           theme={(theme) => ({
             ...theme,
@@ -157,10 +162,11 @@ export default function StagingForm() {
           placeholder: (baseStyles, _) => ({
             ...baseStyles,
             fontSize: "14px",
+            color: '#ADADAD',
           }),
           control: (baseStyles, state) => ({
             ...baseStyles,
-            backgroundColor: '#242424',
+            backgroundColor: '#2E2E2E',
             height: "48px",
             border: 'none',
             boxShadow: state.isFocused ? "0px 0px 6px #FFFFF" : "none",
@@ -169,6 +175,10 @@ export default function StagingForm() {
               border: "1px solid red",
               outline: "1px solid red",
             },
+          }),
+          indicatorSeparator: (baseStyles, _) => ({
+            ...baseStyles,
+            display: 'none',
           }),
           menu: (baseStyles, _) => ({
             ...baseStyles,
