@@ -187,6 +187,7 @@ export default function StagingForm() {
           placeholder="Room"
           options={options}
           id="room"
+          instanceId="room"
           name='room'
           required
           styles={{
@@ -236,6 +237,7 @@ export default function StagingForm() {
           options={options}
           placeholder="Style"
           id="style"
+          instanceId="style"
           name='style'
           required
           styles={{
