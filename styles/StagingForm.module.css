@@ -3,7 +3,6 @@
   height: 100%;
   position: relative;
   background-color: var(--form2);
-  border-top-right-radius: 4px;
 }
 @media screen and (max-width: 800px) {
   .stagingForm {
@@ -33,9 +32,10 @@
   margin-bottom: 20px;
   color: var(--textOne);
   cursor: pointer;
+  z-index: 6;
 }
-.inputLabel.drag_active {
-  background-color: #ffffff;
+.drag_active {
+  pointer-events: none;
 }
 .inputLabelInner {
   padding: 20px;
@@ -44,11 +44,12 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);;
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
+  z-index: 5;
 }
 .label {
   font-weight: var(--regular);

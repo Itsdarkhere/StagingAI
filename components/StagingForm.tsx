@@ -81,7 +81,7 @@ export default function StagingForm() {
           multiple={false}
         />
         <label
-          className={`${styles.inputLabel} ${dragActive ? 'drag_active' : ''}`}
+          className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}
           id="label-file-upload"
           htmlFor="input-file-upload"
         >
@@ -100,7 +100,8 @@ export default function StagingForm() {
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
-          ></div>
+          >
+          </div>
         )}
         <label htmlFor="room" className={styles.label}>
           Room type
