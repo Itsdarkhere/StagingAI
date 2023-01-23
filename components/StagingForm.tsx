@@ -138,7 +138,7 @@ export default function StagingForm() {
         onDragEnter={handleDrag}
       >
         <label htmlFor="input-file-upload" className={styles.label}>
-          Current interior
+          Current Interior
         </label>
         <input
           onChange={handleChange}
@@ -181,7 +181,7 @@ export default function StagingForm() {
           ></div>
         )}
         <label htmlFor="room" className={styles.label}>
-          Room type
+          Room Type
         </label>
         <Select
           placeholder="Room"
