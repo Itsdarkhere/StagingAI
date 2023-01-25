@@ -9,15 +9,11 @@
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 20px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 .stagingDisplay::-webkit-scrollbar {
   display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.stagingDisplay {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }
 .stagingBox {
   width: 100%;
@@ -27,6 +23,9 @@
   background-color: var(--form2);
   border-radius: 4px;
   display: inline-block;
+  position: relative;
+}
+.shimmer {
   -webkit-mask: linear-gradient(
       -60deg,
       var(--form2) 30%,

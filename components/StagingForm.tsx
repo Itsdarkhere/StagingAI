@@ -9,9 +9,8 @@ import Image from 'next/image';
 import PLUS from '../public/plus.svg';
 import TRASH from '../public/trash.svg';
 import FILE from "../public/file.svg";
-import { Circles, Puff } from 'react-loader-spinner';
 
-export default function StagingForm() {
+export default function StagingForm({fetchImage}: {fetchImage: () => void}) {
   const [dragActive, setDragActive] = useState(false);
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
   const [fetching, setFetching] = useState(false);
@@ -69,39 +68,34 @@ export default function StagingForm() {
 
   const validateForm = async (event: React.SyntheticEvent) => {
     // Stop the form from submitting and refreshing the page.
+    console.log("VALIDATING");
     event.preventDefault();
     if (fetching) {
       return;
     }
 
-    const target = event.target as typeof event.target & {
-      room: { value: string };
-      style: { value: string };
-      copies: { value: number };
-    };
+    setFetching(true);
+    // const target = event.target as typeof event.target & {
+    //   room: { value: string };
+    //   style: { value: string };
+    //   copies: { value: number };
+    // };
 
-    const data = {
-      room: target.room.value,
-      style: target.style.value,
-      copies: target.copies.value.toString(),
-      image: image!,
-    }
+    // const data = {
+    //   room: target.room.value,
+    //   style: target.style.value,
+    //   copies: target.copies.value.toString(),
+    //   image: image!,
+    // }
 
-    const JSONdata = JSON.stringify(data);
+    // const JSONdata = JSON.stringify(data);
 
-    // Endpoint
-    const endpoint = "/api/form";
+    // // Endpoint
+    // const endpoint = "/api/form";
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSONdata
-    }
-
-    // Send data
-    const response = await fetch(endpoint, options);
+    // Fill the above steps to the data object
+    fetchImage();
+    
     setFetching(false);
   };
 
@@ -284,8 +278,8 @@ export default function StagingForm() {
           Amount of copies
         </label>
         <input min="1" max="10" id="copies" name="copies" type="range" required className={styles.slider} />
-        <button className={`${primaryStyles.button} ${styles.button}`}>
-          {fetching ? <Circles height={30} width={30} color={'#5b5fc7'} /> : 'Render Images'}
+        <button type='submit' className={`${primaryStyles.button} ${styles.button}`}>
+          Render Images
         </button>
       </form>
     </div>
