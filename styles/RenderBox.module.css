@@ -1,0 +1,41 @@
+.renderbox {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-auto-flow: dense;
+    padding-top: 20px;
+    gap: 20px;
+}
+.stagingBox {
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    max-width: 100%;
+    background-color: var(--form2);
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+}
+.shimmer {
+    -webkit-mask: linear-gradient(
+        -60deg,
+        var(--form2) 30%,
+        #0005,
+        var(--form2) 70%
+      )
+      right/300% 100%;
+    background-repeat: no-repeat;
+    animation: shimmer 2.5s infinite;
+}
+  
+@keyframes shimmer {
+    100% {
+      -webkit-mask-position: left;
+    }
+}
+@media screen and (min-width: 640px) {
+    .renderbox {
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    }
+}

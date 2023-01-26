@@ -1,21 +1,11 @@
-import Image from 'next/image';
 import React from 'react';
 import styles from '../styles/StagingDisplay.module.css';
+import RenderBox from './RenderBox';
 
-export default function StagingDisplay({image}: {image: string}) {
+export default function StagingDisplay({copies}: {copies: number}) {
   return (
     <div className={styles.stagingDisplay}>
-      <div className={`${styles.stagingBox} ${!image && styles.shimmer}`}>
-        {image && <Image fill style={{objectFit: 'cover'}} src={image} alt="generated image" />}
-      </div>
-      <div className={`${styles.stagingBox} ${styles.shimmer}`}></div>
-      <div className={`${styles.stagingBox} ${styles.shimmer}`}></div>
-      <div className={`${styles.stagingBox} ${styles.shimmer}`}></div>
-      <div className={`${styles.stagingBox} ${styles.shimmer}`}></div>
-      <div className={`${styles.stagingBox} ${styles.shimmer}`}></div>
-      <div className={`${styles.stagingBox} ${styles.shimmer}`}></div>
-      <div className={`${styles.stagingBox} ${styles.shimmer}`}></div>
-      <div className={`${styles.stagingBox} ${styles.shimmer}`}></div>
+      <RenderBox copies={copies} />
     </div>
   );
 }
