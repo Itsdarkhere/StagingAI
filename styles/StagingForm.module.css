@@ -21,10 +21,10 @@
   opacity: 0;
   position: absolute;
   top: 50px;
-  height: 220px;
+  height: 180px;
 }
 .inputLabel {
-  height: 220px;
+  height: 180px;
   width: 100%;
   display: flex;
   justify-content: center;

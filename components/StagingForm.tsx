@@ -3,15 +3,14 @@
 import React, { useState } from 'react';
 import styles from '../styles/StagingForm.module.css';
 import primaryStyles from '../styles/PrimaryButton.module.css';
-import Select from 'react-select';
 import StagingTop from './StagingTop';
 import StagingDropZone from './FormDropZone';
 import FormSelect from './FormSelect';
+import { ProgressBar } from 'react-loader-spinner';
 
-export default function StagingForm({handleCopies, fetchImage}: {handleCopies: (event: React.ChangeEvent<HTMLInputElement>) => void, fetchImage: () => void}) {
+export default function StagingForm({fetchImage, fetching}: {fetchImage: () => void, fetching: boolean}) {
   const [dragActive, setDragActive] = useState(false);
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
-  const [fetching, setFetching] = useState(false);
   const [mode, setMode] = useState(false);
 
   interface Option {
@@ -72,12 +71,11 @@ export default function StagingForm({handleCopies, fetchImage}: {handleCopies: (
     if (fetching) {
       return;
     }
-    // Set fetching to true.
-    setFetching(true);
+    fetchImage();
   };
 
   const sliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    handleCopies(event);
+    console.log(event);
   }
 
   return (
@@ -104,8 +102,16 @@ export default function StagingForm({handleCopies, fetchImage}: {handleCopies: (
           Amount of copies
         </label>
         <input min={1} max={10} onChange={sliderChange} id="copies" name="copies" type="range" required className={styles.slider} />
-        <button type='submit' className={`${primaryStyles.button} ${styles.button}`}>
-          Render Images
+        <button type='submit' disabled={fetching} className={`${primaryStyles.button} ${styles.button}`}>
+          {fetching ? <ProgressBar
+            height="40"
+            width="60"
+            ariaLabel="progress-bar-loading"
+            wrapperStyle={{}}
+            wrapperClass="progress-bar-wrapper"
+            borderColor = '#252423'
+            barColor = '#2e2e2e'
+          /> : 'Render Images' }
         </button>
       </form>
     </div>
