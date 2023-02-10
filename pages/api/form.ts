@@ -30,7 +30,6 @@ export default async function handler(
     "width": 768,
     "steps": 20,
     "guidance_scale": 9,
-    "seed": 1,
   }
 
   const data = await banana.run(bananaKey, modelKey, modelParams);
