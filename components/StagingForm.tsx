@@ -8,7 +8,7 @@ import StagingDropZone from './FormDropZone';
 import FormSelect from './FormSelect';
 import { ProgressBar } from 'react-loader-spinner';
 
-export default function StagingForm({fetchImage, fetching}: {fetchImage: () => void, fetching: boolean}) {
+export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqData: {room: string, style: string}) => void, fetching: boolean}) {
   const [dragActive, setDragActive] = useState(false);
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
   const [mode, setMode] = useState(false);
@@ -17,10 +17,22 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: () => v
     value: string;
     label: string;
   }
-  const options: Option[] = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
+  const roomOptions: Option[] = [
+    { value: 'living room', label: 'Living room' },
+    { value: 'bedroom', label: 'Bedroom' },
+    { value: 'study room', label: 'Study room' },
+    { value: 'home office', label: 'Home office' },
+    { value: 'dining room', label: 'Dining room' },
+    { value: 'bathroom', label: 'Bathroom' },
+  ];
+
+  const styleOptions: Option[] = [
+    { value: 'modern', label: 'Modern' },
+    { value: 'minimalist', label: 'Minimalist' },
+    { value: 'scandinavian', label: 'Scandinavian' },
+    { value: 'industrial', label: 'Industrial' },
+    { value: 'midcentury modern', label: 'Midcentury modern' },
+    { value: 'rustic', label: 'Rustic' },
   ];
 
   // handle drag events
@@ -71,7 +83,17 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: () => v
     if (fetching) {
       return;
     }
-    fetchImage();
+
+    const target = event.target as typeof event.target & {
+      room: { value: string };
+      style: { value: string };
+    }
+    console.log("target", target.room.value);
+    const data = {
+      room: target.room.value,
+      style: target.style.value,
+    }
+    fetchImage(data);
   };
 
   const sliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,11 +115,11 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: () => v
         <label htmlFor="room" className={styles.label}>
           Room Type
         </label>
-        <FormSelect options={options} />
+        <FormSelect options={roomOptions} name='room' placeholder='Room' />
         <label htmlFor="style" className={styles.label}>
           Style
         </label>
-        <FormSelect options={options} />
+        <FormSelect options={styleOptions} name='style' placeholder='Style' />
         <label htmlFor="copies" className={styles.label}>
           Amount of copies
         </label>
