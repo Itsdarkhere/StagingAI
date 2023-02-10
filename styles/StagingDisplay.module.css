@@ -10,7 +10,7 @@
   padding: 0 20px;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 }
 .stagingDisplay::-webkit-scrollbar {
   display: none;
