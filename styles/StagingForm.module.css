@@ -110,6 +110,9 @@
 .p {
   font-size: 16px;
   color: var(--bgOne);
+  margin-top: 5px;
+  margin-bottom: 0;
+
 }
 .pTwo {
   font-size: 14px;
@@ -118,6 +121,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 .span {
   color: var(--formInactive);
