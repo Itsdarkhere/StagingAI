@@ -13,6 +13,9 @@ export default function Create() {
     try {
       const res = await fetch(`/api/form`, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
       });
       const data = await res.json();
       setImg(data.data.modelOutputs[0].image_base64)
