@@ -72,6 +72,7 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqDat
         let blob = new Blob([reader.result as ArrayBuffer]);
         let url = URL.createObjectURL(blob);
         setImage(url);
+        e.target.value = "";
       }
     }
   };

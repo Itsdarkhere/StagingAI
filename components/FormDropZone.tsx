@@ -23,7 +23,7 @@ export default function FormDropZone(
         <label
           htmlFor="input-file-upload"
           className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}>
-          {image ? 
+          {image !== undefined ? 
           <div className={styles.inputLabelInner}>
             <Image fill style={{objectFit: 'cover'}} src={image} alt="upload" />
             <button type='button' onClick={removeImage} className={styles.closeButton}>X</button>
