@@ -4,7 +4,8 @@ import BACK2 from "../public/back2.svg"
 import DELETE from "../public/delete.svg"
 import Image from 'next/image'
 
-export default function MaskControl() {
+export default function MaskControl({undo, sliderChange, clear, strokeWidth}: {undo: () => void, 
+    sliderChange: (event: React.ChangeEvent<HTMLInputElement>) => void, clear: () => void, strokeWidth: number}) {
   return (
     <div className={styles.maskControl}>
         <div className={styles.controlTop}>
@@ -12,13 +13,12 @@ export default function MaskControl() {
             <button className={styles.controlClose}>X</button>
         </div>
         <div className={styles.controlBottom}>
-            {/* onChange={sliderChange} */}
-            <input min={1} max={100} id="copies" name="copies" type="range" required className={styles.controlSlider} />
-            <input className={styles.controlValue} type={'text'} placeholder={'0'} />
-            <button className={styles.controlB}>
+            <input min={1} max={100} onChange={sliderChange} value={strokeWidth} id="copies" name="width" type="range" className={styles.controlSlider} />
+            <input className={styles.controlValue} type={'text'} value={strokeWidth} />
+            <button className={styles.controlB} onClick={undo}>
                 <Image width={20} height={20} src={BACK2} alt="back" />
             </button>
-            <button className={styles.controlR}>
+            <button className={styles.controlR} onClick={clear}>
                 <Image width={20} height={20} src={DELETE} alt="back" />
             </button>
         </div>
