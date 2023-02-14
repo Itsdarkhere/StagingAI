@@ -7,7 +7,7 @@ import MaskControl from './MaskControl';
 
 export default function MaskBox({originalImage, img64}: {originalImage: string | undefined, img64: string | null}) {
   const sketchRef = React.useRef<any>(null);
-  const [strokeWidth, setStrokeWidth] = useState(50);
+  const [strokeWidth, setStrokeWidth] = useState<number>(50);
   const canvasStyles = {
     border: 'none',
     borderRadius: '0.25rem',
@@ -27,7 +27,7 @@ export default function MaskBox({originalImage, img64}: {originalImage: string |
   }
 
   const sliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setStrokeWidth(event.target.value);
+    setStrokeWidth(parseInt(event.target.value));
   }
 
   return (
