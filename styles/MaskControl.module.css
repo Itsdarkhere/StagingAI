@@ -1,0 +1,95 @@
+.maskControl {
+    transform: translate3d(0px, 20px, 0px);
+    margin-left: auto;
+    margin-right: auto;
+    width: 486px;
+    background-color: var(--form2);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.controlTop {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px;
+    border-bottom: 1px solid var(--form3);
+}
+.controlBottom {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 15px 10px;
+}
+.controlLabel {
+    color: var(--bgTwo);
+    font-size: 14px;
+    font-weight: var(--regular);
+}
+.controlSlider[type='range'] {
+    margin-top: 5px;
+    -webkit-appearance: none;
+    border-radius: 2px;
+    width: 100%;
+    height: 10px;
+    background-color: var(--form3);
+    cursor: ew-resize;
+}  
+.controlSlider[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--bgOne);
+    border-radius: 4px;
+}
+.controlValue {
+    margin-left: 10px;
+    padding: 3px 5px;
+    width: 50px;
+    text-align: center;
+    border-radius: 8px;
+    outline: 2px solid transparent!important;
+    outline-offset: 2px!important;
+    border: none;
+    color: var(--bgOne);
+    background-color: var(--form3);
+}
+.controlB {
+    margin-left: 10px;
+    width: 40px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.controlR {
+    margin-left: 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    border-left: 1px solid var(--form3);
+    cursor: pointer;
+}
+.controlClose {
+    background-color: var(--form3);
+    border: none;
+    color: var(--bgOne);
+    border-radius: 4px;
+    cursor: pointer;
+}
+.controlClose:hover {
+    background-color: var(--bgFour);
+}
+.controlClose:active {
+    background-color: var(--bgFive);
+}
+.controlClose:focus-visible {
+    border: 1px solid var(--bgOne);
+}
+.controlClose:disabled {
+    background-color: var(--bgDisabled);
+    color: var(--textDisabled);
+}
