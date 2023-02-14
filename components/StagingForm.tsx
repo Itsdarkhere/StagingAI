@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import styles from '../styles/StagingForm.module.css';
 import primaryStyles from '../styles/PrimaryButton.module.css';
 import StagingTop from './StagingTop';
-import StagingDropZone from './FormDropZone';
+import FormDropZone from './FormDropZone';
 import FormSelect from './FormSelect';
 import { ProgressBar } from 'react-loader-spinner';
 
 export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqData: {room: string, style: string}) => void, fetching: boolean}) {
   const [dragActive, setDragActive] = useState(false);
-  const [image, setImage] = useState<string | ArrayBuffer | null>(null);
+  const [image, setImage] = useState<string | undefined>(undefined);
   const [mode, setMode] = useState(false);
 
   interface Option {
@@ -53,9 +53,11 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqDat
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       let reader = new FileReader();
-      reader.readAsDataURL(e.dataTransfer.files[0]); 
+      reader.readAsArrayBuffer(e.dataTransfer.files[0]); 
       reader.onload = function() {
-        setImage(reader.result);
+        let blob = new Blob([reader.result as ArrayBuffer]);
+        let url = URL.createObjectURL(blob);
+        setImage(url);
       }
     }
   };
@@ -65,12 +67,20 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqDat
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       let reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]); 
+      reader.readAsArrayBuffer(e.target.files[0]); 
       reader.onload = function() {
-        setImage(reader.result);
+        let blob = new Blob([reader.result as ArrayBuffer]);
+        let url = URL.createObjectURL(blob);
+        setImage(url);
       }
     }
   };
+
+  // Remove image from state
+  const removeImage = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setImage(undefined);
+  }
 
   const clickMode = (mode: boolean) => {
     setMode(mode);
@@ -87,11 +97,14 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqDat
     const target = event.target as typeof event.target & {
       room: { value: string };
       style: { value: string };
-    }
-    console.log("target", target.room.value);
+    };
+
     const data = {
       room: target.room.value,
       style: target.style.value,
+      // https://i.pinimg.com/474x/3e/61/d8/3e61d820bab59547d2c319bcd0c20c99.jpg
+      // https://media.istockphoto.com/id/990278494/photo/empty-concrete-wall.jpg?b=1&s=612x612&w=0&k=20&c=CXzQ1BKVkZCiVDbLZFDK8j29FWU8FDcdsw1nhoIUMQ8=
+      image: 'https://i.pinimg.com/474x/3e/61/d8/3e61d820bab59547d2c319bcd0c20c99.jpg'
     }
     fetchImage(data);
   };
@@ -111,7 +124,7 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqDat
         <label htmlFor="input-file-upload" className={styles.label}>
           Current Interior
         </label>
-        <StagingDropZone image={image} handleChange={handleChange} dragActive={dragActive} handleDrag={handleDrag} handleDrop={handleDrop}  />
+        <FormDropZone image={image} removeImage={removeImage} handleChange={handleChange} dragActive={dragActive} handleDrag={handleDrag} handleDrop={handleDrop}  />
         <label htmlFor="room" className={styles.label}>
           Room Type
         </label>

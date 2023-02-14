@@ -1,6 +1,6 @@
 .staging {
   width: 100%;
-  height: calc(100vh - 75px);
+  height: calc(100vh - 65px);
   overflow: hidden;
   display: flex;
   flex-direction: row;

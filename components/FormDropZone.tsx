@@ -1,12 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
 import UPLOAD from '../public/upload.svg';
-import FILE from '../public/file.svg';
 import styles from '../styles/StagingForm.module.css'
 
 export default function FormDropZone(
-  {handleChange, image, dragActive, handleDrag, handleDrop}: 
-  {handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void, image: string | ArrayBuffer | null, dragActive: boolean,
+  {handleChange, image, removeImage, dragActive, handleDrag, handleDrop}: 
+  {handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void, image: string | undefined, 
+  removeImage: (e: React.MouseEvent<HTMLButtonElement>) => void, dragActive: boolean,
   handleDrag: (e: React.DragEvent) => void, handleDrop: (e: React.DragEvent) => void}) {
   return (
     <>
@@ -25,10 +25,8 @@ export default function FormDropZone(
           className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}>
           {image ? 
           <div className={styles.inputLabelInner}>
-            <Image height={40} src={FILE} alt="upload" />
-            <p className={styles.pTwo}>
-              Image uploaded...
-            </p>
+            <Image fill style={{objectFit: 'cover'}} src={image} alt="upload" />
+            <button type='button' onClick={removeImage} className={styles.closeButton}>X</button>
           </div> 
           : 
           <div className={styles.inputLabelInner}>
