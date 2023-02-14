@@ -2,16 +2,15 @@
 
 import React, { useState } from 'react';
 import styles from '../styles/StagingForm.module.css';
-import primaryStyles from '../styles/PrimaryButton.module.css';
 import StagingTop from './StagingTop';
-import FormDropZone from './FormDropZone';
-import FormSelect from './FormSelect';
-import { ProgressBar } from 'react-loader-spinner';
+import AddForm from './AddForm';
+import RemoveForm from './RemoveForm';
 
-export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqData: {room: string, style: string}) => void, fetching: boolean}) {
+export default function StagingForm({fetchImage, fetching, clickMode, mode, setImage, image}: 
+  {fetchImage: (reqData: {room: string, style: string}) => void, fetching: boolean,
+  clickMode: (mode: boolean) => void, mode: boolean, setImage: (image: string | undefined) => void,
+  image: string | undefined}) {
   const [dragActive, setDragActive] = useState(false);
-  const [image, setImage] = useState<string | undefined>(undefined);
-  const [mode, setMode] = useState(false);
 
   interface Option {
     value: string;
@@ -24,6 +23,17 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqDat
     { value: 'home office', label: 'Home office' },
     { value: 'dining room', label: 'Dining room' },
     { value: 'bathroom', label: 'Bathroom' },
+  ];
+
+  const actionOptions: Option[] = [
+    { value: 'remove', label: 'Remove' },
+    { value: 'add', label: 'Add' },
+  ];
+
+  const furnitureOptions: Option[] = [
+    { value: 'sofa', label: 'Sofa' },
+    { value: 'chair', label: 'Chair' },
+    { value: 'table', label: 'Table' },
   ];
 
   const styleOptions: Option[] = [
@@ -83,10 +93,6 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqDat
     setImage(undefined);
   }
 
-  const clickMode = (mode: boolean) => {
-    setMode(mode);
-  };
-
   const validateForm = async (event: React.SyntheticEvent) => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault();
@@ -117,39 +123,16 @@ export default function StagingForm({fetchImage, fetching}: {fetchImage: (reqDat
   return (
     <div className={styles.stagingForm}>
       <StagingTop mode={mode} clickMode={clickMode} />
-      <form
-        onSubmit={(e) => validateForm(e)}
-        className={styles.form}
-        onDragEnter={handleDrag}
-      >
-        <label htmlFor="input-file-upload" className={styles.label}>
-          Current Interior
-        </label>
-        <FormDropZone image={image} removeImage={removeImage} handleChange={handleChange} dragActive={dragActive} handleDrag={handleDrag} handleDrop={handleDrop}  />
-        <label htmlFor="room" className={styles.label}>
-          Room Type
-        </label>
-        <FormSelect options={roomOptions} name='room' placeholder='Room' />
-        <label htmlFor="style" className={styles.label}>
-          Style
-        </label>
-        <FormSelect options={styleOptions} name='style' placeholder='Style' />
-        <label htmlFor="copies" className={styles.label}>
-          Amount of copies
-        </label>
-        <input min={1} max={10} onChange={sliderChange} id="copies" name="copies" type="range" required className={styles.slider} />
-        <button type='submit' disabled={fetching} className={`${primaryStyles.button} ${styles.button}`}>
-          {fetching ? <ProgressBar
-            height="40"
-            width="60"
-            ariaLabel="progress-bar-loading"
-            wrapperStyle={{}}
-            wrapperClass="progress-bar-wrapper"
-            borderColor = '#252423'
-            barColor = '#2e2e2e'
-          /> : 'Render Images' }
-        </button>
-      </form>
+      {mode ? 
+      <AddForm validateForm={validateForm} handleDrag={handleDrag} removeImage={removeImage} image={image}
+      handleChange={handleChange} dragActive={dragActive} handleDrop={handleDrop} 
+      roomOptions={roomOptions} styleOptions={styleOptions}
+      sliderChange={sliderChange} fetching={fetching} /> 
+      : 
+      <RemoveForm validateForm={validateForm} handleDrag={handleDrag} removeImage={removeImage} image={image}
+      handleChange={handleChange} dragActive={dragActive} handleDrop={handleDrop} 
+      actionOptions={actionOptions} furnitureOptions={furnitureOptions} styleOptions={styleOptions}
+      sliderChange={sliderChange} fetching={fetching} />}
     </div>
   );
 }

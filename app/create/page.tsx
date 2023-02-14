@@ -6,7 +6,9 @@ import styles from '../../styles/Staging.module.css';
 
 
 export default function Create() {
+  const [originalImage, setImage] = useState<string | undefined>(undefined);
   const [img64, setImg] = useState(null);
+  const [mode, setMode] = useState(false);
   const [fetching, setFetching] = useState(false);
 
   const fetchImage = async (reqData: {room: string, style: string}) => {
@@ -66,10 +68,20 @@ export default function Create() {
     }
   }
 
+  const clickMode = (mode: boolean) => {
+    setMode(mode);
+  }
+
+  const setOriginalImage = (img: string | undefined) => {
+    setImage(img);
+  }
+
   return (
     <div className={styles.staging}>
-      <StagingForm fetchImage={img2img} fetching={fetching} />
-      <StagingDisplay img64={img64} />
+      <StagingForm 
+      fetchImage={img2img} fetching={fetching} clickMode={clickMode} 
+      mode={mode} setImage={setOriginalImage} image={originalImage} />
+      <StagingDisplay img64={img64} originalImage={originalImage} mode={mode} />
     </div>
   );
 }

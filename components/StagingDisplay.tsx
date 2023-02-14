@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from '../styles/StagingDisplay.module.css';
+import MaskBox from './MaskBox';
 import RenderBox from './RenderBox';
 
-export default function StagingDisplay({img64}: {img64: string | null}) {
+export default function StagingDisplay({img64, originalImage, mode}: {img64: string | null, originalImage: string | undefined, mode: boolean}) {
   return (
     <div className={styles.stagingDisplay}>
-      <RenderBox img64={img64} />
+      {mode ? <RenderBox img64={img64} /> : <MaskBox originalImage={originalImage} img64={img64} />}
     </div>
   );
 }
