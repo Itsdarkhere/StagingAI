@@ -36,3 +36,8 @@
 .right {
 
 }
+@media screen and (max-width: 1220px) {
+    .maskBox {
+      grid-template-columns: 1fr;
+    }
+}
