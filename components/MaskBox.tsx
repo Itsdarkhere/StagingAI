@@ -32,11 +32,13 @@ export default function MaskBox({originalImage, img64}: {originalImage: string |
 
   return (
     <div className={styles.maskBox}>
-        {originalImage &&  <div className={`${styles.box} ${styles.left}`}>
-            <img src={originalImage} alt="original" style={{maxWidth: '100%', height: 'auto'}} />
+        {originalImage &&  
+        <div className={`${styles.box} ${styles.left}`}>
+            <img src={originalImage} alt="original" className={styles.img} style={{maxWidth: '100%', height: 'auto'}} />
             <div className={styles.sketchBox}>
                 <ReactSketchCanvas
                 ref={sketchRef}
+                canvasColor='transparent'
                 className={styles.sketchCanvas}
                 style={canvasStyles}
                 strokeWidth={strokeWidth}
@@ -44,7 +46,8 @@ export default function MaskBox({originalImage, img64}: {originalImage: string |
                 />
                 <MaskControl undo={undoCanvas} sliderChange={sliderChange} clear={clearCanvas} strokeWidth={strokeWidth} />
             </div>
-        </div>}
+        </div>
+        }
         <div className={`${styles.box} ${styles.right}`}>
             {img64 && <Image fill style={{objectFit: 'cover'}} src={'data:image/jpeg;base64,' + img64} alt="result" />}
         </div>
