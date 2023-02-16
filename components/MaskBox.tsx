@@ -39,7 +39,6 @@ export default function MaskBox({originalImage, img64}: {originalImage: string |
                 <ReactSketchCanvas
                 ref={sketchRef}
                 canvasColor='transparent'
-                className={styles.sketchCanvas}
                 style={canvasStyles}
                 strokeWidth={strokeWidth}
                 strokeColor="red"
