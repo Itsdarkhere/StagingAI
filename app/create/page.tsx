@@ -59,6 +59,7 @@ export default function Create() {
         },
         body: JSON.stringify(reqData),
       });
+      console.log("res: ", res);
       const data = await res.json();
       setImg(data.data.modelOutputs[0].image_base64)
       setFetching(false);
