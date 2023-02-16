@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 const banana = require('@banana-dev/banana-dev');
-const bananaKey = 'ef7b8fb5-a695-472e-9d01-4195a1e25553'
+const bananaKey = process.env.BANANA_API_KEY
 const modelKey = '792af5a9-da57-47be-9387-6117d6f12570'
 
 type Data = {

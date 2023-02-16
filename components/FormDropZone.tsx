@@ -25,7 +25,7 @@ export default function FormDropZone(
           className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}>
           {image !== undefined ? 
           <div className={styles.inputLabelInner}>
-            <Image fill style={{objectFit: 'cover'}} className={styles.image} src={image} alt="upload" />
+            <Image fill sizes='400px' style={{objectFit: 'cover'}} className={styles.image} src={image} alt="upload" />
             <button type='button' onClick={removeImage} className={styles.closeButton}>X</button>
           </div> 
           : 

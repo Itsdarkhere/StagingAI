@@ -7,7 +7,7 @@ import AddForm from './AddForm';
 import RemoveForm from './RemoveForm';
 
 export default function StagingForm({fetchImage, fetching, clickMode, mode, setImage, image}: 
-  {fetchImage: (reqData: {room: string, style: string}) => void, fetching: boolean,
+  {fetchImage: (reqData: {room: string, style: string, image: string}) => void, fetching: boolean,
   clickMode: (mode: boolean) => void, mode: boolean, setImage: (image: string | undefined) => void,
   image: string | undefined}) {
   const [dragActive, setDragActive] = useState(false);
@@ -87,6 +87,37 @@ export default function StagingForm({fetchImage, fetching, clickMode, mode, setI
     }
   };
 
+  // Upload image to S3
+  const uploadPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const file = e.target.files?.[0]!;
+    const filename = encodeURIComponent(file.name);
+    const fileType = encodeURIComponent(file.type);
+
+    // Generates a presigned POST
+    const res = await fetch(`/api/upload?file=${filename}&fileType=${fileType}`);
+    const { url, fields } = await res.json();
+    const formData = new FormData();
+
+    Object.entries({ ...fields, file }).forEach(([key, value]) => {
+      formData.append(key, value as string);
+    });
+
+    const upload = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    });
+
+    console.log(url + filename);
+    setImage(url + filename);
+
+    if (upload.ok) {
+      console.log('Upload success');
+    } else {
+      console.error('Upload error');
+    }
+  }
+
   // Remove image from state
   const removeImage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -109,9 +140,7 @@ export default function StagingForm({fetchImage, fetching, clickMode, mode, setI
     const data = {
       room: target.room.value,
       style: target.style.value,
-      // https://i.pinimg.com/474x/3e/61/d8/3e61d820bab59547d2c319bcd0c20c99.jpg
-      // https://media.istockphoto.com/id/990278494/photo/empty-concrete-wall.jpg?b=1&s=612x612&w=0&k=20&c=CXzQ1BKVkZCiVDbLZFDK8j29FWU8FDcdsw1nhoIUMQ8=
-      image: 'https://i.pinimg.com/474x/3e/61/d8/3e61d820bab59547d2c319bcd0c20c99.jpg'
+      image: image!
     }
     fetchImage(data);
   };
@@ -125,12 +154,12 @@ export default function StagingForm({fetchImage, fetching, clickMode, mode, setI
       <StagingTop mode={mode} clickMode={clickMode} />
       {mode ? 
       <AddForm validateForm={validateForm} handleDrag={handleDrag} removeImage={removeImage} image={image}
-      handleChange={handleChange} dragActive={dragActive} handleDrop={handleDrop} 
+      handleChange={uploadPhoto} dragActive={dragActive} handleDrop={handleDrop} 
       roomOptions={roomOptions} styleOptions={styleOptions}
       sliderChange={sliderChange} fetching={fetching} /> 
       : 
       <RemoveForm validateForm={validateForm} handleDrag={handleDrag} removeImage={removeImage} image={image}
-      handleChange={handleChange} dragActive={dragActive} handleDrop={handleDrop} 
+      handleChange={uploadPhoto} dragActive={dragActive} handleDrop={handleDrop} 
       actionOptions={actionOptions} furnitureOptions={furnitureOptions} styleOptions={styleOptions}
       sliderChange={sliderChange} fetching={fetching} />}
     </div>

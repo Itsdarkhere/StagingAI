@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 const banana = require('@banana-dev/banana-dev');
-const bananaKey = 'ef7b8fb5-a695-472e-9d01-4195a1e25553'
+const bananaKey = process.env.BANANA_API_KEY
 const modelKey = '2db08e43-4ddf-4eb0-8003-567198c43124'
 
 type Data = {
@@ -25,7 +25,7 @@ export default async function handler(
     }
   
     const modelParams = {
-        "prompt": `Furnished living room, modern minimalist, 4k, photorealistic`,
+        "prompt": `A ${body.room} in ${body.style} style with a tiger.`,
         "image": body.image,
         "guidance_scale": 12,
         "strength": 0.7

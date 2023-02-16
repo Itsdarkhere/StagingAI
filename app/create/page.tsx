@@ -49,7 +49,7 @@ export default function Create() {
     }
   }
 
-  const img2img = async (reqData: {room: string, style: string}) => {
+  const img2img = async (reqData: {room: string, style: string, image: string}) => {
     setFetching(true);
     try {
       const res = await fetch(`/api/img2img`, {
