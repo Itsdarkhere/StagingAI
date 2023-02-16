@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 const banana = require('@banana-dev/banana-dev');
 const bananaKey = process.env.BANANA_API_KEY
-const modelKey = '9f9d8945-7e72-4279-964b-8c7a99ec9b15'
+const modelKey = '59d1d602-115a-487f-84f4-fc5b18f23652'
 
 type Data = {
     data: {
@@ -25,7 +25,7 @@ export default async function handler(
     }
   
     const modelParams = {
-        "prompt": `A ${body.room} in ${body.style} style with a tiger.`,
+        "prompt": `A ${body.room} in ${body.style} style`,
         "image": body.image,
         "guidance_scale": 12,
         "strength": 0.7
