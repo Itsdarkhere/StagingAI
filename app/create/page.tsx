@@ -81,7 +81,7 @@ export default function Create() {
     <div className={styles.staging}>
       <StagingForm 
       fetchImage={img2img} fetching={fetching} clickMode={clickMode} 
-      mode={mode} setImage={setOriginalImage} image={originalImage} />
+      mode={mode} setImage={setOriginalImage} originalImage={originalImage} />
       <StagingDisplay img64={img64} originalImage={originalImage} mode={mode} />
     </div>
   );

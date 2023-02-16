@@ -6,10 +6,10 @@ import StagingTop from './StagingTop';
 import AddForm from './AddForm';
 import RemoveForm from './RemoveForm';
 
-export default function StagingForm({fetchImage, fetching, clickMode, mode, setImage, image}: 
+export default function StagingForm({fetchImage, fetching, clickMode, mode, setImage, originalImage}: 
   {fetchImage: (reqData: {room: string, style: string, image: string}) => void, fetching: boolean,
   clickMode: (mode: boolean) => void, mode: boolean, setImage: (image: string | undefined) => void,
-  image: string | undefined}) {
+  originalImage: string | undefined}) {
   const [dragActive, setDragActive] = useState(false);
 
   interface Option {
@@ -57,40 +57,27 @@ export default function StagingForm({fetchImage, fetching, clickMode, mode, setI
   };
 
   // triggers when file is dropped
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      let reader = new FileReader();
-      reader.readAsArrayBuffer(e.dataTransfer.files[0]); 
-      reader.onload = function() {
-        let blob = new Blob([reader.result as ArrayBuffer]);
-        let url = URL.createObjectURL(blob);
-        setImage(url);
-      }
+      const file = e.dataTransfer.files[0];
+      // Upload image to S3
+      await uploadPhoto(file);
     }
   };
 
   // triggers when file is selected with click
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (e.target.files && e.target.files[0]) {
-      let reader = new FileReader();
-      reader.readAsArrayBuffer(e.target.files[0]); 
-      reader.onload = function() {
-        let blob = new Blob([reader.result as ArrayBuffer]);
-        let url = URL.createObjectURL(blob);
-        setImage(url);
-        e.target.value = "";
-      }
-    }
+    const file = e.target.files?.[0]!;
+    // Upload image to S3
+    await uploadPhoto(file);
+    e.target.value = "";
   };
 
-  // Upload image to S3
-  const uploadPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const file = e.target.files?.[0]!;
+  const uploadPhoto = async (file: File) => {
     const filename = encodeURIComponent(file.name);
     const fileType = encodeURIComponent(file.type);
 
@@ -108,13 +95,8 @@ export default function StagingForm({fetchImage, fetching, clickMode, mode, setI
       body: formData,
     });
 
-    console.log(url + filename);
-    setImage(url + filename);
-
     if (upload.ok) {
-      console.log('Upload success');
-    } else {
-      console.error('Upload error');
+      setImage(url + filename + "?val=" + Math.random());
     }
   }
 
@@ -140,7 +122,7 @@ export default function StagingForm({fetchImage, fetching, clickMode, mode, setI
     const data = {
       room: target.room.value,
       style: target.style.value,
-      image: image!
+      image: originalImage!
     }
     fetchImage(data);
   };
@@ -153,13 +135,13 @@ export default function StagingForm({fetchImage, fetching, clickMode, mode, setI
     <div className={styles.stagingForm}>
       <StagingTop mode={mode} clickMode={clickMode} />
       {mode ? 
-      <AddForm validateForm={validateForm} handleDrag={handleDrag} removeImage={removeImage} image={image}
-      handleChange={uploadPhoto} dragActive={dragActive} handleDrop={handleDrop} 
+      <AddForm validateForm={validateForm} handleDrag={handleDrag} removeImage={removeImage} originalImage={originalImage}
+      handleChange={handleChange} dragActive={dragActive} handleDrop={handleDrop} 
       roomOptions={roomOptions} styleOptions={styleOptions}
       sliderChange={sliderChange} fetching={fetching} /> 
       : 
-      <RemoveForm validateForm={validateForm} handleDrag={handleDrag} removeImage={removeImage} image={image}
-      handleChange={uploadPhoto} dragActive={dragActive} handleDrop={handleDrop} 
+      <RemoveForm validateForm={validateForm} handleDrag={handleDrag} removeImage={removeImage} originalImage={originalImage}
+      handleChange={handleChange} dragActive={dragActive} handleDrop={handleDrop} 
       actionOptions={actionOptions} furnitureOptions={furnitureOptions} styleOptions={styleOptions}
       sliderChange={sliderChange} fetching={fetching} />}
     </div>

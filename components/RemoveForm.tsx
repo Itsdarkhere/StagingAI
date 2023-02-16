@@ -6,10 +6,10 @@ import styles from '../styles/StagingForm.module.css';
 import primaryStyles from '../styles/PrimaryButton.module.css';
 
 export default function RemoveForm(
-    { validateForm, handleDrag, removeImage, image, handleChange, dragActive, 
+    { validateForm, handleDrag, removeImage, originalImage, handleChange, dragActive, 
     handleDrop, fetching, sliderChange, actionOptions, furnitureOptions, styleOptions}: 
     {validateForm: (e: React.FormEvent<HTMLFormElement>) => void, handleDrag: (e: React.DragEvent) => void,
-    removeImage: (e: React.MouseEvent<HTMLButtonElement>) => void, image: string | undefined,
+    removeImage: (e: React.MouseEvent<HTMLButtonElement>) => void, originalImage: string | undefined,
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void, dragActive: boolean,
     handleDrop: (e: React.DragEvent) => void, fetching: boolean, sliderChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     actionOptions: {value: string, label: string}[], furnitureOptions: {value: string, label: string}[], 
@@ -23,7 +23,7 @@ export default function RemoveForm(
         <label htmlFor="input-file-upload" className={styles.label}>
           Current Interior
         </label>
-        <FormDropZone image={image} removeImage={removeImage} handleChange={handleChange} dragActive={dragActive} handleDrag={handleDrag} handleDrop={handleDrop}  />
+        <FormDropZone image={originalImage} removeImage={removeImage} handleChange={handleChange} dragActive={dragActive} handleDrag={handleDrag} handleDrop={handleDrop}  />
         <label htmlFor="room" className={styles.label}>
           Action
         </label>
