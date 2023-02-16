@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 const banana = require('@banana-dev/banana-dev');
 const bananaKey = process.env.BANANA_API_KEY
-const modelKey = '2db08e43-4ddf-4eb0-8003-567198c43124'
+const modelKey = '9f9d8945-7e72-4279-964b-8c7a99ec9b15'
 
 type Data = {
     data: {
