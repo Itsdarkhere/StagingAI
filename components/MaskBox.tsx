@@ -1,12 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from "../styles/MaskBox.module.css";
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import MaskControl from './MaskControl';
 
 export default function MaskBox({originalImage, img64}: {originalImage: string | undefined, img64: string | null}) {
-  const sketchRef = React.useRef<any>(null);
+  const sketchRef = useRef<any>(null);
+
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
   const canvasStyles = {
     border: 'none',
@@ -32,13 +33,14 @@ export default function MaskBox({originalImage, img64}: {originalImage: string |
 
   return (
     <div className={styles.maskBox}>
-        {originalImage &&  
         <div className={`${styles.box} ${styles.left}`}>
-            <img src={originalImage} alt="original" className={styles.img} style={{maxWidth: '100%', height: 'auto'}} />
+            <img src={originalImage} alt="original" className={styles.img} style={{maxWidth: '100%', width: '100%', height: 'auto'}} />
             <div className={styles.sketchBox}>
                 <ReactSketchCanvas
                 ref={sketchRef}
                 canvasColor='transparent'
+                // onChange={() => logPath()}
+                withViewBox={true}
                 style={canvasStyles}
                 strokeWidth={strokeWidth}
                 strokeColor="red"
@@ -46,7 +48,6 @@ export default function MaskBox({originalImage, img64}: {originalImage: string |
                 <MaskControl undo={undoCanvas} sliderChange={sliderChange} clear={clearCanvas} strokeWidth={strokeWidth} />
             </div>
         </div>
-        }
         <div className={`${styles.box} ${styles.right}`}>
             {img64 && <Image fill style={{objectFit: 'cover'}} src={'data:image/jpeg;base64,' + img64} alt="result" />}
         </div>
