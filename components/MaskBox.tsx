@@ -34,7 +34,7 @@ export default function MaskBox({originalImage, img64}: {originalImage: string |
   return (
     <div className={styles.maskBox}>
         <div className={`${styles.box} ${styles.left}`}>
-            <img src={originalImage} alt="original" className={styles.img} style={{maxWidth: '100%', width: '100%', height: 'auto'}} />
+            <img src={originalImage} alt="original" className={styles.img} style={{width: 'auto', maxWidth: '100%', height: '100%', maxHeight: '520px'}} />
             <div className={styles.sketchBox}>
                 <ReactSketchCanvas
                 ref={sketchRef}
