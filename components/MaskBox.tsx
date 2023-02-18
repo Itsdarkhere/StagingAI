@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
-import React, { useRef, useState } from 'react'
+import React, { RefObject, useRef, useState } from 'react'
 import styles from "../styles/MaskBox.module.css";
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import MaskControl from './MaskControl';
 import NewRender from './NewRender';
 
-export default function MaskBox({originalImage, img64, rendering}: {originalImage: string | undefined, img64: string | null, rendering: boolean}) {
-  const sketchRef = useRef<any>(null);
+export default function MaskBox({sketchRef, originalImage, img64, rendering}: 
+    {sketchRef: RefObject<any>, originalImage: string | undefined, img64: string | null, rendering: boolean}) {
 
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
   const canvasStyles = {
@@ -34,13 +34,13 @@ export default function MaskBox({originalImage, img64, rendering}: {originalImag
 
   return (
     <div className={styles.maskBox}>
-        {originalImage &&<div className={`${styles.box} ${styles.left}`}>
+        {originalImage && 
+        <div className={`${styles.box} ${styles.left}`}>
             <img src={originalImage} alt="original" className={styles.img} style={{width: 'auto', maxWidth: '100%', height: '100%', maxHeight: '520px'}} />
             <div className={styles.sketchBox}>
                 <ReactSketchCanvas
                 ref={sketchRef}
                 canvasColor='transparent'
-                // onChange={() => logPath()}
                 withViewBox={true}
                 style={canvasStyles}
                 strokeWidth={strokeWidth}

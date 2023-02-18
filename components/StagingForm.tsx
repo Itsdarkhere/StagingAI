@@ -2,48 +2,14 @@
 
 import React, { useState } from 'react';
 import styles from '../styles/StagingForm.module.css';
-import StagingTop from './StagingTop';
-import AddForm from './AddForm';
-import RemoveForm from './RemoveForm';
+import MultiForm from './MultiForm';
 
-export default function StagingForm({fetchImage, fetching, clickMode, mode, setImage, originalImage}: 
-  {fetchImage: (reqData: {room: string, style: string, image: string}) => void, fetching: boolean,
-  clickMode: (mode: boolean) => void, mode: boolean, setImage: (image: string | undefined) => void,
+export default function StagingForm({img2img, inpainting, fetching, setImage, originalImage}: 
+  {img2img: (reqData: {room: string, style: string, image: string}) => void,
+  inpainting: (reqData: {room: string, style: string, image: string, mask: string}) => void, fetching: boolean,
+  setImage: (image: string | undefined) => void,
   originalImage: string | undefined}) {
   const [dragActive, setDragActive] = useState(false);
-
-  interface Option {
-    value: string;
-    label: string;
-  }
-  const roomOptions: Option[] = [
-    { value: 'living room', label: 'Living room' },
-    { value: 'bedroom', label: 'Bedroom' },
-    { value: 'study room', label: 'Study room' },
-    { value: 'home office', label: 'Home office' },
-    { value: 'dining room', label: 'Dining room' },
-    { value: 'bathroom', label: 'Bathroom' },
-  ];
-
-  const actionOptions: Option[] = [
-    { value: 'remove', label: 'Remove' },
-    { value: 'add', label: 'Add' },
-  ];
-
-  const furnitureOptions: Option[] = [
-    { value: 'sofa', label: 'Sofa' },
-    { value: 'chair', label: 'Chair' },
-    { value: 'table', label: 'Table' },
-  ];
-
-  const styleOptions: Option[] = [
-    { value: 'modern', label: 'Modern' },
-    { value: 'minimalist', label: 'Minimalist' },
-    { value: 'scandinavian', label: 'Scandinavian' },
-    { value: 'industrial', label: 'Industrial' },
-    { value: 'midcentury modern', label: 'Midcentury modern' },
-    { value: 'rustic', label: 'Rustic' },
-  ];
 
   // handle drag events
   const handleDrag = (e: React.DragEvent) => {
@@ -124,8 +90,30 @@ export default function StagingForm({fetchImage, fetching, clickMode, mode, setI
       style: target.style.value,
       image: originalImage!
     }
-    fetchImage(data);
+    img2img(data);
   };
+
+  const validateForm2 = async (event: React.SyntheticEvent) => {
+    // Stop the form from submitting and refreshing the page.
+    event.preventDefault();
+    // Return if we're already fetching.
+    if (fetching) {
+      return;
+    }
+
+    const target = event.target as typeof event.target & {
+      action: { value: string };
+      style: { value: string };
+    };
+
+    const data = {
+      room: target.action.value,
+      style: target.style.value,
+      image: originalImage!,
+      mask: ''
+    }
+    inpainting(data);
+  }
 
   const sliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event);
@@ -133,17 +121,9 @@ export default function StagingForm({fetchImage, fetching, clickMode, mode, setI
 
   return (
     <div className={styles.stagingForm}>
-      <StagingTop mode={mode} clickMode={clickMode} />
-      {mode ? 
-      <AddForm validateForm={validateForm} handleDrag={handleDrag} removeImage={removeImage} originalImage={originalImage}
-      handleChange={handleChange} dragActive={dragActive} handleDrop={handleDrop} 
-      roomOptions={roomOptions} styleOptions={styleOptions}
-      sliderChange={sliderChange} fetching={fetching} /> 
-      : 
-      <RemoveForm validateForm={validateForm} handleDrag={handleDrag} removeImage={removeImage} originalImage={originalImage}
-      handleChange={handleChange} dragActive={dragActive} handleDrop={handleDrop} 
-      actionOptions={actionOptions} furnitureOptions={furnitureOptions} styleOptions={styleOptions}
-      sliderChange={sliderChange} fetching={fetching} />}
+      <MultiForm validateForm={validateForm2} handleDrag={handleDrag} removeImage={removeImage} originalImage={originalImage}
+      handleChange={handleChange} dragActive={dragActive} handleDrop={handleDrop}
+      sliderChange={sliderChange} fetching={fetching} />
     </div>
   );
 }
