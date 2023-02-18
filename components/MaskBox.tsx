@@ -4,8 +4,9 @@ import React, { useRef, useState } from 'react'
 import styles from "../styles/MaskBox.module.css";
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import MaskControl from './MaskControl';
+import NewRender from './NewRender';
 
-export default function MaskBox({originalImage, img64}: {originalImage: string | undefined, img64: string | null}) {
+export default function MaskBox({originalImage, img64, rendering}: {originalImage: string | undefined, img64: string | null, rendering: boolean}) {
   const sketchRef = useRef<any>(null);
 
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
@@ -33,7 +34,7 @@ export default function MaskBox({originalImage, img64}: {originalImage: string |
 
   return (
     <div className={styles.maskBox}>
-        <div className={`${styles.box} ${styles.left}`}>
+        {originalImage &&<div className={`${styles.box} ${styles.left}`}>
             <img src={originalImage} alt="original" className={styles.img} style={{width: 'auto', maxWidth: '100%', height: '100%', maxHeight: '520px'}} />
             <div className={styles.sketchBox}>
                 <ReactSketchCanvas
@@ -47,9 +48,9 @@ export default function MaskBox({originalImage, img64}: {originalImage: string |
                 />
                 <MaskControl undo={undoCanvas} sliderChange={sliderChange} clear={clearCanvas} strokeWidth={strokeWidth} />
             </div>
-        </div>
+        </div>}
         <div className={`${styles.box} ${styles.right}`}>
-            {img64 && <Image fill style={{objectFit: 'cover'}} src={'data:image/jpeg;base64,' + img64} alt="result" />}
+            <NewRender image={img64} rendering={rendering} /> 
         </div>
     </div>
   )

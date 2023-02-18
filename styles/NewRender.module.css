@@ -1,0 +1,22 @@
+.render {
+    max-height: 520px;
+    height: 100%;
+    width: auto;
+    position: relative;
+}
+.renderingIndicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.renderingHeading {
+    margin: 0;
+    font-weight: var(--regular);
+    color: var(--textOne);
+    font-size: 14px;
+}
