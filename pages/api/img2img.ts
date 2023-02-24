@@ -25,10 +25,10 @@ export default async function handler(
     }
   
     const modelParams = {
-        "prompt": `A ${body.room} in ${body.style} style`,
-        "image": body.image,
-        "guidance_scale": 12,
-        "strength": 0.7
+      "prompt": `A ${body.room} in ${body.style} style`,
+      "image": body.image,
+      "guidance_scale": 12,
+      "strength": 0.5
     }
   
     const data = await banana.run(bananaKey, modelKey, modelParams);

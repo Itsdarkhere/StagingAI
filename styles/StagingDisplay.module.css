@@ -16,3 +16,51 @@
 .stagingDisplay::-webkit-scrollbar {
   display: none;
 }
+.maskBox {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 520px;
+  grid-auto-flow: dense;
+  justify-content: center;
+  padding-top: 20px;
+  gap: 20px;
+}
+.box {
+  margin: auto;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+.right {
+  background-color: var(--form2);
+}
+.sketchBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: .15s;
+  cursor: pointer;
+}
+.img {
+  margin: auto;
+  transform: translate(0px, 0px) scale(1);
+  opacity: 1;
+  transition: transform 0.5s ease 0s;
+  max-width: 512px;
+  width: 100%;
+  height: auto;
+}
+@media screen and (min-width: 640px) {
+  .maskBox {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 520px));
+  }
+}

@@ -7,9 +7,10 @@ import styles from "../styles/NewRender.module.css"
 export default function NewRender({image, rendering}: {image: string | null, rendering: boolean}) {
   return (
     <div className={styles.render}>
-        {image && !rendering ? 
-        <img src={image} alt="render" style={{width: 'auto', maxWidth: '100%', height: '100%', maxHeight: '520px'}} />
-        :
+        {image && !rendering && 
+          <img src={image} alt="render" style={{width: 'auto', marginLeft: 'auto', marginRight: 'auto', maxWidth: '100%', height: '100%', maxHeight: '520px'}} />
+        }
+        {rendering &&
         <div className={styles.renderingIndicator}>
             <ProgressBar 
             height="40"

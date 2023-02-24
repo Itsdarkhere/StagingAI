@@ -1,5 +1,8 @@
 .maskControl {
-    transform: translate3d(0px, 20px, 0px);
+    position: absolute;
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+    transform: translate(-50%, 0);
+    bottom: -120px;
     margin-left: auto;
     margin-right: auto;
     width: 486px;

@@ -1,8 +1,8 @@
 import React from 'react'
-import styles from "../styles/MaskControl.module.css"
 import BACK2 from "../public/back2.svg"
 import DELETE from "../public/delete.svg"
 import Image from 'next/image'
+import styles from "../styles/MaskControl.module.css";
 
 export default function MaskControl({undo, sliderChange, clear, strokeWidth}: {undo: () => void, 
     sliderChange: (event: React.ChangeEvent<HTMLInputElement>) => void, clear: () => void, strokeWidth: number}) {
