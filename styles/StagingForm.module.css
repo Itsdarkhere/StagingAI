@@ -3,12 +3,19 @@
   height: 100%;
   position: relative;
   background-color: var(--form2);
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+		scrollbar-width: none; /* Firefox */
+}
+.stagingForm::-webkit-scrollbar {
+  display: none;
 }
 @media screen and (max-width: 800px) {
   .stagingForm {
     width: 100%;
   }
 }
+
 .form {
   display: flex;
   flex-direction: column;
@@ -95,13 +102,13 @@
   width: 50%;
   height: 50px;
   background-color: var(--form1);
+  color: var(--formInactive);
+  cursor: pointer;
   border: none;
   box-shadow: none;
-  color: var(--formInactive);
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 }
 .selected {
   background-color: var(--form3);
@@ -126,7 +133,6 @@
   color: var(--bgOne);
   margin-top: 5px;
   margin-bottom: 0;
-
 }
 .pTwo {
   font-size: 14px;

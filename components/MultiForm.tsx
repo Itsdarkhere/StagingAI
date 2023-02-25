@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { ProgressBar } from 'react-loader-spinner'
-import FormDropZone from './FormDropZone'
-import FormSelect from './FormSelect'
+import React, { useState } from 'react';
+import { ProgressBar } from 'react-loader-spinner';
+import FormDropZone from './FormDropZone';
+import FormSelect from './FormSelect';
 import styles from '../styles/StagingForm.module.css';
 import primaryStyles from '../styles/PrimaryButton.module.css';
 import FormFurnish from './FormFurnish';
@@ -9,14 +9,37 @@ import { SingleValue } from 'react-select';
 import FormReplace from './FormReplace';
 import FormRemove from './FormRemove';
 import FormAdd from './FormAdd';
+import FormSwitch from './FormSwitch';
+import FormInpainting from './FormInpainting';
 
-export default function MultiForm({img2img, inpainting, fetching, setImage, originalImage, action, setAction}: 
-  {img2img: (reqData: {room: string, style: string, image: string}) => void,
-  inpainting: (reqData: {room: string, style: string, image: string, mask: string}) => void, fetching: boolean,
-  setImage: (image: string | undefined) => void, originalImage: string | undefined,
-  action: string, setAction: (event: SingleValue<{ value: string; label: string; }>) => void}) {
-
+export default function MultiForm({
+  img2img,
+  inpainting,
+  fetching,
+  setImage,
+  originalImage,
+  mode,
+  setMode,
+}: {
+  img2img: (reqData: { room: string; style: string; image: string }) => void;
+  inpainting: (reqData: {
+    room: string;
+    style: string;
+    image: string;
+    mask: string;
+  }) => void;
+  fetching: boolean;
+  setImage: (image: string | undefined) => void;
+  originalImage: string | undefined;
+  mode: boolean;
+  setMode: (mode: boolean) => void;
+}) {
   const [dragActive, setDragActive] = useState(false);
+  const [inpaintingMode, setInpaintingMode] = useState(0)
+
+  const clickInpaintingMode = (mode: number) => {
+    setInpaintingMode(mode);
+  }
 
   // handle drag events
   const handleDrag = (e: React.DragEvent) => {
@@ -47,7 +70,7 @@ export default function MultiForm({img2img, inpainting, fetching, setImage, orig
     const file = e.target.files?.[0]!;
     // Upload image to S3
     await uploadPhoto(file);
-    e.target.value = "";
+    e.target.value = '';
   };
 
   const uploadPhoto = async (file: File) => {
@@ -55,13 +78,14 @@ export default function MultiForm({img2img, inpainting, fetching, setImage, orig
     const fileType = encodeURIComponent(file.type);
 
     // Generates a presigned POST
-    const res = await fetch(`/api/upload?file=${filename}&fileType=${fileType}`);
+    const res = await fetch(
+      `/api/upload?file=${filename}&fileType=${fileType}`
+    );
     const { url, fields } = await res.json();
     const formData = new FormData();
 
     Object.entries({ ...fields, file }).forEach(([key, value]) => {
       formData.append(key, value as string);
-      console.log(key, value as string);
     });
 
     const upload = await fetch(url, {
@@ -72,13 +96,13 @@ export default function MultiForm({img2img, inpainting, fetching, setImage, orig
     if (upload.ok) {
       setImage(url + filename);
     }
-  }
+  };
 
   // Remove image from state
   const removeImage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setImage(undefined);
-  }
+  };
 
   const validateForm1 = async (event: React.SyntheticEvent) => {
     // Stop the form from submitting and refreshing the page.
@@ -96,8 +120,8 @@ export default function MultiForm({img2img, inpainting, fetching, setImage, orig
     const data = {
       room: target.room.value,
       style: target.style.value,
-      image: originalImage!
-    }
+      image: originalImage!,
+    };
     img2img(data);
   };
 
@@ -109,100 +133,111 @@ export default function MultiForm({img2img, inpainting, fetching, setImage, orig
       return;
     }
 
-    const target = event.target as typeof event.target & {
-      action: { value: string };
-      style: { value: string };
+    let target;
+
+    let data = {
+      room: '',
+      style: 'Fill with something',
+      image: originalImage!,
+      mask: '',
     };
 
-    const data = {
-      room: target.action.value,
-      style: target.style.value,
-      image: originalImage!,
-      mask: ''
-    }
-    inpainting(data);
-  }
-
-  const validateBasedOnAction = (event: React.SyntheticEvent) => {
-    switch (action) {
-      case 'furnish':
-        // Send to IMG2MG API
-        validateForm1(event);
+    switch (inpaintingMode) {
+      case 0:
+        target = event.target as typeof event.target & {
+          what_to_add: { value: string };
+        };
+        data.room = target.what_to_add.value
         break;
-      case 'replace':
-      case 'remove':
-      case 'add':
-        // Send to Inpainting API
-        validateForm2(event);
+      case 1:
+        target = event.target as typeof event.target & {
+          item_to_remove: { value: string };
+        };
+        data.room = target.item_to_remove.value;
+        break;
+      case 2:
+        target = event.target as typeof event.target & {
+          to_replace: { value: string };
+          replace_with: { value: string };
+        };
+        data.room = target.to_replace.value;
+        data.style = target.replace_with.value;
         break;
       default:
-        return;
+        break;
     }
-  }
+
+    console.log(data);
+
+    inpainting(data);
+  };
+
+  const validateBasedOnMode = (event: React.SyntheticEvent) => {
+    if (mode) {
+      validateForm1(event);
+    } else {
+      validateForm2(event);
+    }
+  };
 
   const sliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event);
-  }
+  };
 
-  interface Option {
-    value: string;
-    label: string;
-  }
-    
-  const actionOptions: Option[] = [
-    { value: 'furnish', label: 'Furnish (entire image)' },
-    { value: 'replace', label: 'Replace (part of image)' },
-    { value: 'remove', label: 'Remove (part of image)' },
-    { value: 'add', label: 'Add (part of image)' },
-  ];
-
-  const getFormInners = () => {
-    switch (action) {
-      case 'furnish':
-        return <FormFurnish />;
-      case 'replace':
-        return <FormReplace />;
-      case 'remove':
-        return <FormRemove />;
-      case 'add':
-        return <FormAdd />;
-      default:
-        return;
-    }
-  }
 
   return (
     <div className={styles.stagingForm}>
+      <FormSwitch mode={mode} clickMode={(mode) => setMode(mode)} />
       <form
-          onSubmit={(e) => validateBasedOnAction(e)}
-          className={styles.form}
-          onDragEnter={handleDrag}
+        onSubmit={(e) => validateBasedOnMode(e)}
+        className={styles.form}
+        onDragEnter={handleDrag}
+      >
+        <label htmlFor="input-file-upload" className={styles.label}>
+          Current Interior
+        </label>
+        <FormDropZone
+          image={originalImage}
+          removeImage={removeImage}
+          handleChange={handleChange}
+          dragActive={dragActive}
+          handleDrag={handleDrag}
+          handleDrop={handleDrop}
+        />
+        {mode ? <FormFurnish /> : <FormInpainting inpaintingMode={inpaintingMode} clickInpaintingMode={clickInpaintingMode} />}
+        <label htmlFor="copies" className={styles.label}>
+          Amount of copies
+        </label>
+        <input
+          min={1}
+          max={10}
+          onChange={sliderChange}
+          id="copies"
+          name="copies"
+          type="range"
+          required
+          className={styles.slider}
+        />
+        <button
+          type="submit"
+          disabled={fetching}
+          className={`${primaryStyles.button} ${styles.button}`}
         >
-          <label htmlFor="input-file-upload" className={styles.label}>
-            Current Interior
-          </label>
-          <FormDropZone image={originalImage} removeImage={removeImage} handleChange={handleChange} dragActive={dragActive} handleDrag={handleDrag} handleDrop={handleDrop}  />
-          <label htmlFor="room" className={styles.label}>
-            Action
-          </label>
-          <FormSelect options={actionOptions} onChange={setAction} hasOnChange={true} name='action' placeholder='Furnish' />
-          {getFormInners()}
-          <label htmlFor="copies" className={styles.label}>
-            Amount of copies
-          </label>
-          <input min={1} max={10} onChange={sliderChange} id="copies" name="copies" type="range" required className={styles.slider} />
-          <button type='submit' disabled={fetching} className={`${primaryStyles.button} ${styles.button}`}>
-            {fetching ? <ProgressBar
+          {fetching ? (
+            <ProgressBar
               height="40"
               width="60"
               ariaLabel="progress-bar-loading"
               wrapperStyle={{}}
               wrapperClass="progress-bar-wrapper"
-              borderColor = '#252423'
-              barColor = '#2e2e2e'
-            /> : 'Render Images' }
-          </button>
-        </form>
-      </div>
-  )
+              borderColor="#252423"
+              barColor="#2e2e2e"
+            />
+          ) : (
+            'Render Images'
+          )}
+        </button>
+      </form>
+    </div>
+  );
 }

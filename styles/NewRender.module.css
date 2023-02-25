@@ -1,23 +1,23 @@
 .render {
-    max-height: 520px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  max-height: 520px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .renderingIndicator {
-    width: 100%;
-    height: 100%;
-    background-color: var(--form2);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--form2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .renderingHeading {
-    margin: 0;
-    font-weight: var(--regular);
-    color: var(--textOne);
-    font-size: 14px;
+  margin: 0;
+  font-weight: var(--regular);
+  color: var(--textOne);
+  font-size: 14px;
 }

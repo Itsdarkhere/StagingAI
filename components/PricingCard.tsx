@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from 'react';
 import styles from '../styles/PricingCard.module.css';
 import primaryStyles from '../styles/PrimaryButton.module.css';
@@ -35,7 +35,9 @@ export default function PricingCard({
       <SellingPoint spt="Max images" sp={sp1} />
       <SellingPoint spt="Support" sp={sp3} />
       <SellingPoint spt="Speed" sp={sp2} />
-      <button className={`${primaryStyles.button} ${styles.button}`}>Subscribe</button>
+      <button className={`${primaryStyles.button} ${styles.button}`}>
+        Subscribe
+      </button>
     </div>
   );
 }

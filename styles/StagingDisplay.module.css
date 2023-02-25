@@ -46,18 +46,15 @@
   height: 100%;
   width: 100%;
   transition-property: all;
-  transition-timing-function: cubic-bezier(.4,0,.2,1);
-  transition-duration: .15s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
   cursor: pointer;
 }
 .img {
-  margin: auto;
   transform: translate(0px, 0px) scale(1);
   opacity: 1;
   transition: transform 0.5s ease 0s;
-  max-width: 512px;
-  width: 100%;
-  height: auto;
+  max-height: 520px;
 }
 @media screen and (min-width: 640px) {
   .maskBox {

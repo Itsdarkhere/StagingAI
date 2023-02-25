@@ -1,16 +1,27 @@
-import React from 'react'
+import React from 'react';
 import Select, { SingleValue } from 'react-select';
 
-export default function FormSelect({options, onChange, hasOnChange, name, placeholder}: 
-  {options: {value: string, label: string}[], onChange?: (event: SingleValue<{ value: string; label: string; }>) => void, 
-  hasOnChange: boolean, name: string, placeholder: string}) {
-
+export default function FormSelect({
+  options,
+  onChange,
+  hasOnChange,
+  name,
+  placeholder,
+}: {
+  options: { value: string; label: string }[];
+  onChange?: (event: SingleValue<{ value: string; label: string }>) => void;
+  hasOnChange: boolean;
+  name: string;
+  placeholder: string;
+}) {
   // Check if onChange is passed in as a prop
-  const checkOnChange = (event: SingleValue<{ value: string; label: string; }>) => {
+  const checkOnChange = (
+    event: SingleValue<{ value: string; label: string }>
+  ) => {
     if (hasOnChange) {
       onChange!(event);
     }
-  }
+  };
 
   return (
     <Select
@@ -61,5 +72,5 @@ export default function FormSelect({options, onChange, hasOnChange, name, placeh
         },
       })}
     />
-  )
+  );
 }
