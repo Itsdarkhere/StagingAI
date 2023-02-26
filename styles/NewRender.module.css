@@ -9,6 +9,7 @@
 .renderingIndicator {
   width: 100%;
   height: 100%;
+  min-height: 520px;
   background-color: var(--form2);
   display: flex;
   flex-direction: column;
