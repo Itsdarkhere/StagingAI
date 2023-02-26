@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 const banana = require('@banana-dev/banana-dev');
 const bananaKey = process.env.BANANA_API_KEY;
-const modelKey = 'bdb8c495-452b-4743-a5c2-937c4a54fb7d';
+const modelKey = 'e00d3cbe-ad12-442a-a20f-160c6e75f989';
 
 type Data = {
   data: {
@@ -37,12 +37,11 @@ export default async function handler(
   // init_image = model_inputs.get('init_image', None)
 
   const modelParams = {
-    prompt: `Modern bedroom with giraffes`,
+    prompt: `Empty wall, no bed`,
     init_image: body.image,
     mask: body.mask,
-    scheduler: 'DPMSolverMultistep',
     guidance_scale: 12,
-    steps: 30,
+    steps: 50,
   };
 
   const data = await banana.run(bananaKey, modelKey, modelParams);

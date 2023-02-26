@@ -58,7 +58,8 @@ export default function StagingDisplay({
                 withViewBox={true}
                 style={canvasStyles}
                 strokeWidth={strokeWidth}
-                strokeColor="black"
+                exportWithBackgroundImage={true}
+                strokeColor="white"
               />
             </div>
           </div>

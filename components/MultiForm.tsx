@@ -167,8 +167,6 @@ export default function MultiForm({
         break;
     }
 
-    console.log(data);
-
     inpainting(data);
   };
 

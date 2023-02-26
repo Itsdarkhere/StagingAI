@@ -76,8 +76,8 @@ export default function Create() {
   const setImgMask = async () => {
     if (sketchRef.current !== null) {
       const maskDataUrl = await sketchRef.current.exportImage('png');
-      const maskFile = await dataUrlToFile(maskDataUrl);
-      return await uploadMask(maskFile);
+      var base64Image = maskDataUrl.split(",")[1];
+      return base64Image;
     }
     return '';
   };
