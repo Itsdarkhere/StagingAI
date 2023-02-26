@@ -37,7 +37,7 @@ export default async function handler(
   // init_image = model_inputs.get('init_image', None)
 
   const modelParams = {
-    prompt: `Exposed wall, exposed floor`,
+    prompt: `Change the furniture`,
     negative_prompt: "bed, nightstand",
     init_image: body.image,
     mask: body.mask,
