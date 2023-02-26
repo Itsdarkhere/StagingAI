@@ -2,8 +2,10 @@ import React from 'react';
 import Image from 'next/image';
 import UPLOAD from '../public/upload.svg';
 import styles from '../styles/StagingForm.module.css';
+import { Puff } from 'react-loader-spinner';
 
 export default function FormDropZone({
+  uploadingPhoto,
   handleChange,
   image,
   removeImage,
@@ -11,6 +13,7 @@ export default function FormDropZone({
   handleDrag,
   handleDrop,
 }: {
+  uploadingPhoto: boolean;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   image: string | undefined;
   removeImage: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -34,7 +37,7 @@ export default function FormDropZone({
         htmlFor="input-file-upload"
         className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}
       >
-        {image !== undefined ? (
+        {image !== undefined && !uploadingPhoto ? (
           <div className={styles.inputLabelInner}>
             <Image
               fill
@@ -54,11 +57,25 @@ export default function FormDropZone({
           </div>
         ) : (
           <div className={styles.inputLabelInner}>
-            <Image src={UPLOAD} alt="upload" />
-            <p className={styles.p}>
-              Click to upload <br />
-              <span className={styles.span}>or drag and drop it here</span>
-            </p>
+            {uploadingPhoto ? 
+            <Puff
+            height="60"
+            width="60"
+            radius={1}
+            color="white"
+            ariaLabel="puff-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            /> 
+            : 
+            <>
+              <Image src={UPLOAD} alt="upload" />
+              <p className={styles.p}>
+                Click to upload <br />
+                <span className={styles.span}>or drag and drop it here</span>
+              </p>
+            </>}
           </div>
         )}
       </label>

@@ -35,7 +35,8 @@ export default function MultiForm({
   setMode: (mode: boolean) => void;
 }) {
   const [dragActive, setDragActive] = useState(false);
-  const [inpaintingMode, setInpaintingMode] = useState(0)
+  const [inpaintingMode, setInpaintingMode] = useState(0);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
 
   const clickInpaintingMode = (mode: number) => {
     setInpaintingMode(mode);
@@ -74,6 +75,7 @@ export default function MultiForm({
   };
 
   const uploadPhoto = async (file: File) => {
+    setUploadingPhoto(true);
     const filename = encodeURIComponent(file.name);
     const fileType = encodeURIComponent(file.type);
 
@@ -96,6 +98,7 @@ export default function MultiForm({
     if (upload.ok) {
       setImage(url + filename);
     }
+    setUploadingPhoto(false);
   };
 
   // Remove image from state
@@ -195,6 +198,7 @@ export default function MultiForm({
           Current Interior
         </label>
         <FormDropZone
+          uploadingPhoto={uploadingPhoto}
           image={originalImage}
           removeImage={removeImage}
           handleChange={handleChange}
