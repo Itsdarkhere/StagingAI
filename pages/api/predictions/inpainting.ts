@@ -27,7 +27,7 @@ export default async function handler(
                 'mask': body.mask,
                 'num_outputs': 1,
                 'num_inference_steps': 35,
-                'guidance_scale': 21.5,
+                'guidance_scale': 7.5,
             },
         }),
     });
