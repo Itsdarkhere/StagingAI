@@ -14,8 +14,8 @@ export default function Header() {
           <h2 className={styles.brandname}>BotInterior</h2>
         </div>
         <div className={styles.headerRight}>
-          <SecondaryButton text="Try For Free" margin={true} />
-          <PrimaryButton text="Log In" />
+          {/* <SecondaryButton text="Try For Free" margin={true} />
+          <PrimaryButton text="Log In" /> */}
         </div>
       </div>
     </div>

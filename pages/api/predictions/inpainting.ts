@@ -26,8 +26,8 @@ export default async function handler(
                 'image': body.image,
                 'mask': body.mask,
                 'num_outputs': 1,
-                'num_inference_steps': 25,
-                'guidance_scale': 7.5,
+                'num_inference_steps': 35,
+                'guidance_scale': 21.5,
             },
         }),
     });
