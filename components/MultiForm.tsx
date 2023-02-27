@@ -198,7 +198,7 @@ export default function MultiForm({
           Current Interior
         </label>
         <FormDropZone
-          uploadingPhoto={uploadingPhoto}
+          uploadingPhoto={true}
           image={originalImage}
           removeImage={removeImage}
           handleChange={handleChange}
