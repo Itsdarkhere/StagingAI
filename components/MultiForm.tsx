@@ -221,7 +221,7 @@ export default function MultiForm({
           className={`${primaryStyles.button} ${styles.button}`}
         >
           {fetching ? (
-            <Spinner wh={40} white={false} />
+            <Spinner wh={30} white={true} />
           ) : (
             'Render Images'
           )}

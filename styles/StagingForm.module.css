@@ -92,6 +92,10 @@
   background-color: var(--bgOne) !important;
   color: var(--textTwo) !important;
   box-shadow: var(--shadow32) !important;
+  border: none !important;
+}
+.button:disabled {
+  background-color: var(--form1) !important;
 }
 .formTop {
   display: flex;
