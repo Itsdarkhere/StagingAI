@@ -9,6 +9,7 @@ export default function FormAdd() {
   }
 
   const furnitureOptions: Option[] = [
+    { value: 'office furniture', label: 'Office furniture' },
     { value: 'sofa', label: 'Sofa' },
     { value: 'chair', label: 'Chair' },
     { value: 'table', label: 'Table' },

@@ -21,7 +21,7 @@ export default async function handler(
         body: JSON.stringify({
             version: 'c28b92a7ecd66eee4aefcd8a94eb9e7f6c3805d5f06038165407fb5cb355ba67',
             input: {
-                'prompt': "Change the furniture",
+                'prompt': body.room,
                 'negative_prompt': '',
                 'image': body.image,
                 'mask': body.mask,

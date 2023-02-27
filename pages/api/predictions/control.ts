@@ -22,7 +22,7 @@ export default async function handler(
             version: '8ebda4c70b3ea2a2bf86e44595afb562a2cdf85525c620f1671a78113c9f325b',
             input: {
                 'image': body.image,
-                'prompt': `A ${body.room} furnished in ${body.style} style, ${body.room}, ${body.style}`,
+                'prompt': `${body.room} in ${body.style}, interior design, interior, decor, furniture`,
                 'model_type': "canny",
                 'num_samples': "1",
                 'image_resolution': "512",

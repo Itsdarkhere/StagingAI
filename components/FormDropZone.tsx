@@ -44,7 +44,7 @@ export default function FormDropZone({
               sizes="400px"
               style={{ objectFit: 'cover' }}
               className={styles.image}
-              src={image}
+              src={image + "?" + Math.random()}
               alt="upload"
             />
             <button

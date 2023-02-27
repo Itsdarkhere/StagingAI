@@ -15,6 +15,13 @@ export default function Create() {
   const [img64, setImg] = useState<string | null>(null);
   const [fetching, setFetching] = useState(false);
 
+  const paintingAddKeyMap = new Map([
+    ['office furniture', 'Office furniture, furnished, modern, work, desks, chairs, tables, lamps, computers, monitors'],
+    ['table', 'table'],
+    ['sofa', 'sofa'],
+    ['chair', 'chair'],
+  ])
+
   const controlnet = async (reqData: {
     room: string;
     style: string;
@@ -64,6 +71,7 @@ export default function Create() {
     mask: string;
   }) => {
     setFetching(true);
+    reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
     const response = await fetch('/api/predictions/inpainting', {
       method: 'POST',
@@ -150,6 +158,7 @@ export default function Create() {
   };
 
   const clickMode = (mode: boolean) => {
+    setImg(null);
     setMode(mode);
   } 
 
