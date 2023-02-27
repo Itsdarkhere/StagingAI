@@ -18,6 +18,7 @@
 }
 .renderingHeading {
   margin: 0;
+  padding-top: 10px;
   font-weight: var(--regular);
   color: var(--textOne);
   font-size: 14px;
