@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from 'next/image';
 import React from 'react';
-import { ProgressBar } from 'react-loader-spinner';
 import styles from '../styles/NewRender.module.css';
+import Spinner from './Spinner';
 
 export default function NewRender({
   image,
@@ -28,14 +27,7 @@ export default function NewRender({
       )}
       {rendering && (
         <div className={styles.renderingIndicator}>
-          <ProgressBar
-            height="40"
-            width="60"
-            ariaLabel="progress-bar-loading"
-            wrapperClass="progress-bar-wrapper"
-            borderColor="#616161"
-            barColor="#616161"
-          />
+          <Spinner wh={40} white={true} />
           <h4 className={styles.renderingHeading}>Rendering...</h4>
         </div>
       )}

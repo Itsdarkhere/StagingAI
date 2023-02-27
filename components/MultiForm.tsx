@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-import { ProgressBar } from 'react-loader-spinner';
 import FormDropZone from './FormDropZone';
-import FormSelect from './FormSelect';
 import styles from '../styles/StagingForm.module.css';
 import primaryStyles from '../styles/PrimaryButton.module.css';
 import FormFurnish from './FormFurnish';
-import { SingleValue } from 'react-select';
-import FormReplace from './FormReplace';
-import FormRemove from './FormRemove';
-import FormAdd from './FormAdd';
 import FormSwitch from './FormSwitch';
 import FormInpainting from './FormInpainting';
+import Spinner from './Spinner';
 
 export default function MultiForm({
   img2img,
@@ -198,7 +193,7 @@ export default function MultiForm({
           Current Interior
         </label>
         <FormDropZone
-          uploadingPhoto={true}
+          uploadingPhoto={uploadingPhoto}
           image={originalImage}
           removeImage={removeImage}
           handleChange={handleChange}
@@ -226,15 +221,7 @@ export default function MultiForm({
           className={`${primaryStyles.button} ${styles.button}`}
         >
           {fetching ? (
-            <ProgressBar
-              height="40"
-              width="60"
-              ariaLabel="progress-bar-loading"
-              wrapperStyle={{}}
-              wrapperClass="progress-bar-wrapper"
-              borderColor="#252423"
-              barColor="#2e2e2e"
-            />
+            <Spinner wh={40} white={false} />
           ) : (
             'Render Images'
           )}

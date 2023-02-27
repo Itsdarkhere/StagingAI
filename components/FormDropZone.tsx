@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import UPLOAD from '../public/upload.svg';
 import styles from '../styles/StagingForm.module.css';
-import { Puff } from 'react-loader-spinner';
+import Spinner from './Spinner';
 
 export default function FormDropZone({
   uploadingPhoto,
@@ -58,16 +58,7 @@ export default function FormDropZone({
         ) : (
           <div className={styles.inputLabelInner}>
             {uploadingPhoto ? 
-            <Puff
-            height="60"
-            width="60"
-            radius={1}
-            color="white"
-            ariaLabel="puff-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            /> 
+            <Spinner wh={45} white={true} />
             : 
             <>
               <Image src={UPLOAD} alt="upload" />
