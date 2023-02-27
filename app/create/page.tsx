@@ -5,37 +5,56 @@ import React, { useRef, useState } from 'react';
 import { SingleValue } from 'react-select';
 import styles from '../../styles/Staging.module.css';
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 export default function Create() {
   const [originalImage, setImage] = useState<string | undefined>(undefined);
   const [mode, setMode] = React.useState<boolean>(true);
   const sketchRef = useRef<any>(null);
+  const [prediction, setPrediction] = useState(null);
   const [img64, setImg] = useState<string | null>(null);
   const [fetching, setFetching] = useState(false);
 
-  const img2img = async (reqData: {
+  const controlnet = async (reqData: {
     room: string;
     style: string;
     image: string;
   }) => {
     setFetching(true);
-    try {
-      const res = await fetch(`/api/img2img`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reqData),
-      });
-      console.log('res: ', res);
-      const data = await res.json();
-      setImg(
-        'data:image/jpeg;base64,' + data.data.modelOutputs[0].image_base64
-      );
+    const response = await fetch('/api/predictions/control', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reqData),
+    });
+    
+    let prediction = await response.json();
+    if (response.status !== 201) {
+      console.log("Error:", prediction.detail);
       setFetching(false);
-    } catch (err) {
-      console.log(err);
-      setFetching(false);
+      return;
     }
+    setPrediction(prediction);
+
+    while (
+      prediction.status !== 'succeeded' &&
+      prediction.status !== 'failed'
+    ) {
+      // Check status every second
+      await sleep(1000);
+      const response = await fetch('/api/predictions/' + prediction.id);
+      prediction = await response.json();
+      if (response.status !== 200) {
+        console.log("Error:", prediction.detail);
+        setFetching(false);
+        return;
+      }
+      setPrediction(prediction);
+    }
+    // After completion, set the image
+    setImg(prediction.output[1]);
+    setFetching(false);
   };
 
   const inpainting = async (reqData: {
@@ -46,23 +65,41 @@ export default function Create() {
   }) => {
     setFetching(true);
     reqData.mask = await setImgMask();
-    console.log("Mask: ", reqData.mask);
-    try {
-      const res = await fetch(`/api/inpainting`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reqData),
-      });
-      console.log('res: ', res);
-      const data = await res.json();
-      setImg('data:image/jpeg;base64,' + data.data.modelOutputs[0].image_base64);
+    const response = await fetch('/api/predictions/inpainting', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reqData),
+    });
+    
+    let prediction = await response.json();
+    if (response.status !== 201) {
+      console.log("Error:", prediction.detail);
       setFetching(false);
-    } catch (err) {
-      console.log(err);
-      setFetching(false);
+      return;
     }
+    setPrediction(prediction);
+
+    while (
+      prediction.status !== 'succeeded' &&
+      prediction.status !== 'failed'
+    ) {
+      // Check status every second
+      await sleep(1000);
+      const response = await fetch('/api/predictions/' + prediction.id);
+      prediction = await response.json();
+      if (response.status !== 200) {
+        console.log("Error:", prediction.detail);
+        setFetching(false);
+        return;
+      }
+      setPrediction(prediction);
+    }
+    console.log(prediction);
+    // After completion, set the image
+    setImg(prediction.output[0]);
+    setFetching(false);
   };
 
   const dataUrlToFile = async (dataUrl: string): Promise<File> => {
@@ -76,8 +113,8 @@ export default function Create() {
   const setImgMask = async () => {
     if (sketchRef.current !== null) {
       const maskDataUrl = await sketchRef.current.exportImage('png');
-      var base64Image = maskDataUrl.split(",")[1];
-      return base64Image;
+      const maskBlob =  await dataUrlToFile(maskDataUrl);
+      return await uploadMask(maskBlob);
     }
     return '';
   };
@@ -119,7 +156,7 @@ export default function Create() {
   return (
     <div className={styles.staging}>
       <MultiForm
-        img2img={img2img}
+        img2img={controlnet}
         inpainting={inpainting}
         fetching={fetching}
         setImage={setOriginalImage}
