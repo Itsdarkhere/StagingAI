@@ -1,15 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react';
 import styles from '../styles/NewRender.module.css';
+import buttonStyles from "../styles/SecondaryButton.module.css";
 import Spinner from './Spinner';
 import Modal from "react-modal";
 
 export default function NewRender({
   image,
   rendering,
+  upscale,
 }: {
   image: string | null;
   rendering: boolean;
+  upscale: () => void;
 }) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
@@ -59,8 +62,12 @@ export default function NewRender({
         />
       </Modal>
       {image && !rendering && (
+        <>
+        <div className={styles.imageOptions}>
+          <button className={`${styles.optionButton} ${buttonStyles.button}`} onClick={openModal}>Open modal</button>
+          <button className={`${styles.optionButton} ${buttonStyles.button}`}  onClick={upscale}>Upscale</button>
+        </div>
         <img
-          onClick={openModal}
           src={image}
           alt="render"
           style={{
@@ -71,6 +78,7 @@ export default function NewRender({
             maxHeight: '520px',
           }}
         />
+        </>
       )}
       {rendering && (
         <div className={styles.renderingIndicator}>

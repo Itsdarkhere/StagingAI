@@ -5,6 +5,24 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  position: relative;
+}
+.imageOptions {
+  position: absolute;
+  bottom: -50px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.optionButton {
+  width: 50%;
+  height: 50px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
 }
 .renderingIndicator {
   width: 100%;
@@ -15,6 +33,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .renderingHeading {
   margin: 0;

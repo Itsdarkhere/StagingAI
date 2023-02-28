@@ -11,12 +11,14 @@ export default function StagingDisplay({
   originalImage,
   rendering,
   mode,
+  upscale,
 }: {
   sketchRef: RefObject<any>;
   img64: string | null;
   originalImage: string | undefined;
   rendering: boolean;
   mode: boolean;
+  upscale: () => void;
 }) {
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
   const canvasStyles = {
@@ -78,7 +80,7 @@ export default function StagingDisplay({
     <div className={styles.stagingDisplay}>
       <div className={styles.maskBox}>
         {!mode && getSketchBox()}
-        <NewRender image={img64} rendering={rendering} />
+        <NewRender image={img64} rendering={rendering} upscale={upscale} />
       </div>
     </div>
   );

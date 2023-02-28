@@ -110,6 +110,49 @@ export default function Create() {
     setFetching(false);
   };
 
+  const upscale = async () => {
+    setFetching(true);
+    const reqData = {
+      image: img64,
+      scale: 4,
+    }
+    const response = await fetch('/api/predictions/upscale', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reqData),
+    });
+    
+    let prediction = await response.json();
+    if (response.status !== 201) {
+      console.log("Error:", prediction.detail);
+      setFetching(false);
+      return;
+    }
+    setPrediction(prediction);
+
+    while (
+      prediction.status !== 'succeeded' &&
+      prediction.status !== 'failed'
+    ) {
+      // Check status every second
+      await sleep(1000);
+      const response = await fetch('/api/predictions/' + prediction.id);
+      prediction = await response.json();
+      if (response.status !== 200) {
+        console.log("Error:", prediction.detail);
+        setFetching(false);
+        return;
+      }
+      setPrediction(prediction);
+    }
+    console.log(prediction);
+    // After completion, set the image
+    setImg(prediction.output);
+    setFetching(false);
+  }
+
   const dataUrlToFile = async (dataUrl: string): Promise<File> => {
     const res: Response = await fetch(dataUrl);
     const blob: Blob = await res.blob();
@@ -179,6 +222,7 @@ export default function Create() {
         originalImage={originalImage}
         rendering={fetching}
         mode={mode}
+        upscale={upscale}
       />
     </div>
   );
