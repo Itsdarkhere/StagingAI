@@ -113,7 +113,6 @@ export default function StagingDisplay({
       <Modal 
         isOpen={modalOpen}
         onRequestClose={closeModal}
-        appElement={document.getElementById('app')!}
         contentLabel="Example Modal"
         style={customStyles}>
           <img
