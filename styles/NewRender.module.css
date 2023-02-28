@@ -1,29 +1,61 @@
 .render {
-  max-height: 520px;
+  max-height: 570px;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   position: relative;
+  cursor: pointer;
+  background-color: var(--form2);
+  border-radius: 8px;
+  padding-top: 50px;
 }
 .imageOptions {
   position: absolute;
-  bottom: -50px;
-  width: 100%;
+  top: 0;
+  width: 250px;
   height: 50px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  gap: 5px;
+  width: 100%;
+  padding: 5px;
 }
 .optionButton {
-  width: 50%;
-  height: 50px !important;
-  border: none !important;
-  border-radius: 0 !important;
-  outline: none !important;
+  width: 125px;
+  max-width: 50%;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  background-color: var(--form3);
+  font-weight: var(--regular);
+  color: var(--bgOne);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 12px;
+  border-radius: 4px;
+  cursor: pointer;
 }
+.optionButton:hover {
+  background-color: var(--bgFour);
+}
+.optionButton:active {
+  background-color: var(--bgFive);
+}
+.optionButton:focus-visible {
+  border: 1px solid var(--bgOne);
+}
+.optionButton:disabled {
+  background-color: var(--bgDisabled);
+  color: var(--textDisabled);
+}
+
 .renderingIndicator {
   width: 100%;
   height: 100%;
@@ -33,7 +65,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 .renderingHeading {
   margin: 0;

@@ -1,26 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
+'use client'
 import React, { RefObject, useState } from 'react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import styles from '../styles/StagingDisplay.module.css';
 import MaskControl from './MaskControl';
 import NewRender from './NewRender';
+import Modal from "react-modal";
+import LoadingRender from './LoadingRender';
 
 export default function StagingDisplay({
   sketchRef,
-  img64,
+  renders,
   originalImage,
   rendering,
   mode,
   upscale,
 }: {
   sketchRef: RefObject<any>;
-  img64: string | null;
+  renders: string[];
   originalImage: string | undefined;
   rendering: boolean;
   mode: boolean;
-  upscale: () => void;
+  upscale: (imgURL: string) => void;
 }) {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
+  const [modalIMG, setModalIMG] = useState<string>('');
   const canvasStyles = {
     border: 'none',
     borderRadius: '0.25rem',
@@ -76,11 +81,65 @@ export default function StagingDisplay({
     }
   };
 
+  const closeModal = () => {
+    setModalOpen(false);
+  }
+
+  const openModal = (imgURL: string) => {
+    setModalIMG(imgURL);
+    setModalOpen(true);
+  }
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: 'transparent',
+      border: 'none',
+      padding: 0,
+    },
+    overlay: {
+      zIndex: 1000,
+      backgroundColor: 'rgba(0, 0, 0, 0.85)',
+    }
+  };
+
   return (
     <div className={styles.stagingDisplay}>
+      <Modal 
+        isOpen={modalOpen}
+        onRequestClose={closeModal}
+        appElement={document.getElementById('app')!}
+        contentLabel="Example Modal"
+        style={customStyles}>
+          <img
+          src={modalIMG}
+          alt="render"
+          style={{
+            width: 'auto',
+            height: 'auto',
+            maxWidth: '90vw',
+            maxHeight: '90vh',
+          }}
+        />
+      </Modal>
       <div className={styles.maskBox}>
         {!mode && getSketchBox()}
-        <NewRender image={img64} rendering={rendering} upscale={upscale} />
+          {rendering && <LoadingRender />}
+          {renders.map((img, i) => {
+            return (
+              <NewRender
+                key={img}
+                image={img}
+                upscale={() => upscale(img)}
+                openModal={(imgURL: string) => openModal(imgURL)}
+              />
+            );
+          })}
       </div>
     </div>
   );

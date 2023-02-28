@@ -26,6 +26,15 @@
   padding-top: 20px;
   gap: 20px;
 }
+.rendersCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  gap: 75px;
+}
 .box {
   margin: auto;
   border-radius: 4px;

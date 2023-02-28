@@ -12,7 +12,7 @@ export default function Create() {
   const [mode, setMode] = React.useState<boolean>(true);
   const sketchRef = useRef<any>(null);
   const [prediction, setPrediction] = useState(null);
-  const [img64, setImg] = useState<string | null>(null);
+  const [renders, setRenders] = useState<string[]>([]);
   const [fetching, setFetching] = useState(false);
 
   const paintingAddKeyMap = new Map([
@@ -60,7 +60,7 @@ export default function Create() {
       setPrediction(prediction);
     }
     // After completion, set the image
-    setImg(prediction.output[1]);
+    setRenders([prediction.output[1], ...renders]);
     setFetching(false);
   };
 
@@ -106,14 +106,14 @@ export default function Create() {
     }
     console.log(prediction);
     // After completion, set the image
-    setImg(prediction.output[0]);
+    setRenders([prediction.output[0], ...renders]);
     setFetching(false);
   };
 
-  const upscale = async () => {
+  const upscale = async (imageURL: string) => {
     setFetching(true);
     const reqData = {
-      image: img64,
+      image: imageURL,
       scale: 4,
     }
     const response = await fetch('/api/predictions/upscale', {
@@ -149,7 +149,7 @@ export default function Create() {
     }
     console.log(prediction);
     // After completion, set the image
-    setImg(prediction.output);
+    setRenders([prediction.output, ...renders]);
     setFetching(false);
   }
 
@@ -201,7 +201,6 @@ export default function Create() {
   };
 
   const clickMode = (mode: boolean) => {
-    setImg(null);
     setMode(mode);
   } 
 
@@ -218,11 +217,11 @@ export default function Create() {
       />
       <StagingDisplay
         sketchRef={sketchRef}
-        img64={img64}
+        renders={renders}
         originalImage={originalImage}
         rendering={fetching}
         mode={mode}
-        upscale={upscale}
+        upscale={(imgURL: string) => upscale(imgURL)}
       />
     </div>
   );
