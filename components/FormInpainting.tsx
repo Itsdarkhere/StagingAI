@@ -5,6 +5,7 @@ import FormReplace from './FormReplace';
 import Image from 'next/image';
 import PLUS from '../public/plus.svg';
 import TRASH from '../public/trash.svg';
+import REPLACE from "../public/replace.svg";
 import styles from "../styles/FormInpainting.module.css";
 
 export default function FormInpainting({inpaintingMode, clickInpaintingMode}: {inpaintingMode: number, clickInpaintingMode: (mode: number) => void}) {
@@ -44,7 +45,8 @@ export default function FormInpainting({inpaintingMode, clickInpaintingMode}: {i
             <button type='button' className={`${styles.ipButton} ${inpaintingMode == 2 && styles.selected}`} onClick={() => clickInpaintingMode(2)}>
                 <Image
                 className={`${inpaintingMode == 2 && styles.brightImage}`}
-                src={PLUS}
+                src={REPLACE}
+                height={15}
                 alt="plus"
                 style={{ marginBottom: 5 }}
                 />

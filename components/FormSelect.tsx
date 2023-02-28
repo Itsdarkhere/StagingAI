@@ -47,6 +47,7 @@ export default function FormSelect({
           ...baseStyles,
           backgroundColor: '#2E2E2E',
           border: 'none',
+          fontSize: '14px',
           height: '48px',
           boxShadow: state.isFocused ? '0px 0px 6px #FFFFF' : 'none',
           '&:focus': {
