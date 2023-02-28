@@ -2,7 +2,7 @@
 import MultiForm from '@/components/MultiForm';
 import StagingDisplay from '@/components/StagingDisplay';
 import React, { useRef, useState } from 'react';
-import { SingleValue } from 'react-select';
+import Modal from "react-modal"
 import styles from '../styles/Staging.module.css';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -163,7 +163,7 @@ export default function Create() {
   } 
 
   return (
-    <div className={styles.staging}>
+    <div className={styles.staging} id="tool">
       <MultiForm
         img2img={controlnet}
         inpainting={inpainting}
