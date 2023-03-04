@@ -53,7 +53,7 @@ export default function StagingDisplay({
     if (originalImage) {
       return (
         <div className={`${styles.box} ${styles.left}`}>
-          <div style={{ position: 'relative', display: 'flex', marginLeft: 'auto', marginRight: 'auto' }}>
+          <div style={{ position: 'relative', cursor: 'none !important', display: 'flex', marginLeft: 'auto', marginRight: 'auto' }}>
             <img
               src={originalImage}
               alt="original"
