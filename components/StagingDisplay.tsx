@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import React, { RefObject, useState } from 'react';
+import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import styles from '../styles/StagingDisplay.module.css';
 import MaskControl from './MaskControl';
@@ -8,6 +8,8 @@ import NewRender from './NewRender';
 import Modal from "react-modal";
 import LoadingRender from './LoadingRender';
 import PaintCursor from './PaintCursor';
+import lottie from "lottie-web";
+import PAINT from "../public/paint1.json";
 
 export default function StagingDisplay({
   sketchRef,
@@ -28,6 +30,21 @@ export default function StagingDisplay({
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
   const [modalIMG, setModalIMG] = useState<string>('');
   const [showBrushCursor, setShowBrushCursor] = useState<boolean>(false);
+  const [showInstructions, setShowInstructions] = useState<boolean>(true);
+  let animationContainer = createRef<HTMLDivElement>();
+
+  useEffect(() => {
+    const anim = lottie.loadAnimation({
+      container: animationContainer.current!,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      // animationData: // local json file,
+      animationData: PAINT,
+    });
+    return () => anim.destroy(); // optional clean up for unmounting
+  }, [animationContainer]);
+  
   const canvasStyles = {
     border: 'none',
     borderRadius: '0.25rem',
@@ -50,6 +67,11 @@ export default function StagingDisplay({
     setStrokeWidth(parseInt(event.target.value));
   };
 
+  const onMouseEnter = () => {
+    setShowInstructions(false);
+    setShowBrushCursor(true);
+  }
+
   const getSketchBox = () => {
     if (originalImage) {
       return (
@@ -61,7 +83,7 @@ export default function StagingDisplay({
               className={styles.img}
             />
             {showBrushCursor && <PaintCursor size={strokeWidth} />}
-            <div className={styles.sketchBox} onMouseEnter={() => setShowBrushCursor(true)} onMouseLeave={() => setShowBrushCursor(false)}>
+            <div className={styles.sketchBox} onMouseEnter={() => onMouseEnter()} onMouseLeave={() => setShowBrushCursor(false)}>
               <ReactSketchCanvas
                 ref={sketchRef}
                 canvasColor="transparent"
@@ -71,6 +93,14 @@ export default function StagingDisplay({
                 exportWithBackgroundImage={true}
                 strokeColor="white"
               />
+              {showInstructions && <div className={styles.instructionContainer}>
+                <div ref={animationContainer} className={styles.paintAnimation}></div>
+                <div className={styles.instructions}>
+                  <p className={styles.mainI}>Draw on the parts of the image you want to modify.</p>
+                  <p className={styles.secondaryI}>To avoid modifications of objects when drawing on them, you can leave a visible part of the object untouched.</p>
+                </div>
+              </div>
+              }
             </div>
           </div>
           <MaskControl

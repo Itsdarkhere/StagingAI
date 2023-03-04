@@ -46,6 +46,45 @@
   width: 100%;
   height: 100%;
 }
+.instructionContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.paintAnimation {
+  width: 100px;
+  height: 100px;
+}
+.instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 300px;
+}
+.mainI {
+  font-weight: var(--regular);
+  color: var(--bgOne);
+  font-size: 16px;
+  margin: 0;
+  text-align: center;
+}
+.secondaryI {
+  font-weight: var(--regular);
+  color: var(--textDisabled);
+  font-size: 14px;
+  margin: 0;
+  margin-top: 5px;
+  text-align: center;
+}
 .right {
   background-color: var(--form2);
 }
