@@ -8,18 +8,6 @@ export default function FormSwitch({mode, clickMode}: {mode: boolean, clickMode:
   return (
     <div className={styles.formTop}>
         <button
-          onClick={() => clickMode(true)}
-          className={`${styles.topButton} ${mode && styles.selected}`}
-        >
-          <Image
-            className={`${mode && styles.brightImage}`}
-            src={IMAGE}
-            alt="plus"
-            height={15}
-            style={{ marginRight: 5 }}
-          />Full Image
-        </button>
-        <button
           onClick={() => clickMode(false)}
           className={`${styles.topButton} ${!mode && styles.selected}`}
         >
@@ -31,6 +19,18 @@ export default function FormSwitch({mode, clickMode}: {mode: boolean, clickMode:
             style={{ marginRight: 5 }}
           />
           Inpainting
+        </button>
+        <button
+          onClick={() => clickMode(true)}
+          className={`${styles.topButton} ${mode && styles.selected}`}
+        >
+          <Image
+            className={`${mode && styles.brightImage}`}
+            src={IMAGE}
+            alt="plus"
+            height={15}
+            style={{ marginRight: 5 }}
+          />Full Image
         </button>
       </div>
   )

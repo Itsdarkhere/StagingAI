@@ -9,7 +9,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export default function Create() {
   const [originalImage, setImage] = useState<string | undefined>(undefined);
-  const [mode, setMode] = React.useState<boolean>(true);
+  const [mode, setMode] = React.useState<boolean>(false);
   const sketchRef = useRef<any>(null);
   const [prediction, setPrediction] = useState(null);
   const [renders, setRenders] = useState<string[]>([]);
