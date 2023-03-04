@@ -7,6 +7,7 @@ import MaskControl from './MaskControl';
 import NewRender from './NewRender';
 import Modal from "react-modal";
 import LoadingRender from './LoadingRender';
+import PaintCursor from './PaintCursor';
 
 export default function StagingDisplay({
   sketchRef,
@@ -58,6 +59,7 @@ export default function StagingDisplay({
               alt="original"
               className={styles.img}
             />
+            <PaintCursor size={strokeWidth} />
             <div className={styles.sketchBox}>
               <ReactSketchCanvas
                 ref={sketchRef}
