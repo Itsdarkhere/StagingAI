@@ -16,6 +16,13 @@ export default function PaintCursor({size}: {size: number}) {
     };
   }, [])
   return (
-    <div style={{top: position.y + 'px', left: position.x + 'px', width: size, height: size}} className={styles.cursorCircle}></div>
+    <div 
+        style={{
+            top: position.y + 'px', 
+            left: position.x + 'px', 
+            width: size, height: size
+        }} 
+        className={styles.cursorCircle}>
+    </div>
   )
 }

@@ -27,6 +27,7 @@ export default function StagingDisplay({
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
   const [modalIMG, setModalIMG] = useState<string>('');
+  const [showBrushCursor, setShowBrushCursor] = useState<boolean>(false);
   const canvasStyles = {
     border: 'none',
     borderRadius: '0.25rem',
@@ -53,14 +54,14 @@ export default function StagingDisplay({
     if (originalImage) {
       return (
         <div className={`${styles.box} ${styles.left}`}>
-          <div style={{ position: 'relative', cursor: 'none !important', display: 'flex', marginLeft: 'auto', marginRight: 'auto' }}>
+          <div style={{ position: 'relative', display: 'flex', marginLeft: 'auto', marginRight: 'auto' }}>
             <img
               src={originalImage}
               alt="original"
               className={styles.img}
             />
-            <PaintCursor size={strokeWidth} />
-            <div className={styles.sketchBox}>
+            {showBrushCursor && <PaintCursor size={strokeWidth} />}
+            <div className={styles.sketchBox} onMouseEnter={() => setShowBrushCursor(true)} onMouseLeave={() => setShowBrushCursor(false)}>
               <ReactSketchCanvas
                 ref={sketchRef}
                 canvasColor="transparent"
