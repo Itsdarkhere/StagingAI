@@ -44,6 +44,10 @@ export default function StagingDisplay({
     });
     return () => anim.destroy(); // optional clean up for unmounting
   }, [animationContainer]);
+
+  useEffect(() => {
+    setShowInstructions(true);
+  }, [originalImage])
   
   const canvasStyles = {
     border: 'none',
