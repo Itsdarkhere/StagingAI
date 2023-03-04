@@ -165,7 +165,6 @@ export default function StagingDisplay({
       </Modal>
       <div className={styles.maskBox}>
         {!mode && getSketchBox()}
-          {rendering && <LoadingRender />}
           {renders.map((img, i) => {
             return (
               <NewRender

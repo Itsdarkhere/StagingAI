@@ -4,6 +4,7 @@ import styles from '../styles/NewRender.module.css';
 import DOWNLOAD from "../public/download.svg";
 import UPSCALE from "../public/upscale.svg";
 import Image from 'next/image';
+import Spinner from './Spinner';
 
 export default function NewRender({
   image,
@@ -16,6 +17,12 @@ export default function NewRender({
 }) {
   return (
     <div className={styles.render}>
+      { image == 'load' && 
+      <div className={styles.renderingIndicator}>
+        <Spinner wh={40} white={true} />
+        <h4 className={styles.renderingHeading}>Rendering...</h4>
+      </div>
+      }
       <div className={styles.imageOptions}>
         <button className={`${styles.optionButton}`}>
           <Image
@@ -36,7 +43,7 @@ export default function NewRender({
           Upscale
         </button>
       </div>
-      <img
+      {image !== 'load' && <img
         onClick={() => openModal(image)}
         src={image}
         alt="render"
@@ -49,6 +56,7 @@ export default function NewRender({
           borderRadius: '4px',
         }}
       />
+      }
     </div>
   );
 }

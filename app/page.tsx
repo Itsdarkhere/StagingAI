@@ -71,6 +71,8 @@ export default function Create() {
     mask: string;
   }) => {
     setFetching(true);
+    // Set a new Empty render to show loading
+    setRenders(['load', ...renders])
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
     const response = await fetch('/api/predictions/inpainting', {
@@ -85,6 +87,7 @@ export default function Create() {
     if (response.status !== 201) {
       console.log("Error:", prediction.detail);
       setFetching(false);
+      removeFromRenders();
       return;
     }
     setPrediction(prediction);
@@ -100,15 +103,26 @@ export default function Create() {
       if (response.status !== 200) {
         console.log("Error:", prediction.detail);
         setFetching(false);
+        removeFromRenders();
         return;
       }
       setPrediction(prediction);
     }
     console.log(prediction);
-    // After completion, set the image
+    // After completion, override the previously empty render with the image
     setRenders([prediction.output[0], ...renders]);
     setFetching(false);
   };
+
+  const replaceItemInRenders = (image: string) => {
+    setRenders([image, ...renders]);
+  }
+
+  const removeFromRenders = () => {
+    console.log("REMOVING REDNER");
+    const newRenders = renders.filter((_, i) => i !== 0);
+    setRenders(newRenders);
+  }
 
   const upscale = async (imageURL: string) => {
     setFetching(true);
