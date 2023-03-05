@@ -125,6 +125,7 @@ export default function Create() {
 
   const upscale = async (imageURL: string) => {
     setFetching(true);
+    setRenders(['load', ...renders]);
     const reqData = {
       image: imageURL,
       scale: 4,
@@ -140,6 +141,7 @@ export default function Create() {
     let prediction = await response.json();
     if (response.status !== 201) {
       console.log('Error:', prediction.detail);
+      removeFromRenders();
       setFetching(false);
       return;
     }
@@ -155,13 +157,14 @@ export default function Create() {
       prediction = await response.json();
       if (response.status !== 200) {
         console.log('Error:', prediction.detail);
+        removeFromRenders();
         setFetching(false);
         return;
       }
       setPrediction(prediction);
     }
     console.log(prediction);
-    // After completion, set the image
+    // After completion, override the previously empty render with the image
     setRenders([prediction.output, ...renders]);
     setFetching(false);
   };
