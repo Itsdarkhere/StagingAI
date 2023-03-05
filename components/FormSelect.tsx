@@ -57,6 +57,10 @@ export default function FormSelect({
             outline: '1px solid red',
           },
         }),
+        option: (baseStyles, state) => ({
+          ...baseStyles,
+          fontSize: '14px',
+        }),
         indicatorSeparator: (baseStyles, _) => ({
           ...baseStyles,
           display: 'none',
