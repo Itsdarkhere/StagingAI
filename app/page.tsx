@@ -98,13 +98,10 @@ export default function Create() {
   };
 
   // TODO check if this works
-  const removeFromRenders = (amountToRemove: number) => {
-    const removeArr = Array.from(
-      { length: amountToRemove },
-      (_, index) => index
+  const removeFromRenders = () => {
+    setRenders((prev: string[]) => 
+      prev.filter((render: string) => (render !== 'load'))
     );
-    const newRenders = renders.filter((_, i) => removeArr.includes(i));
-    setRenders(newRenders);
   };
 
   const upscale = async (imageURL: string) => {
@@ -139,9 +136,7 @@ export default function Create() {
   const getInferenceStatus = async (response: any, removeCount: number) => {
     let prediction = await response.json();
     if (response.status !== 201) {
-      console.log('Error:', prediction.detail);
-      removeFromRenders(removeCount);
-      setFetching(false);
+      inferenceError(prediction.detail);
       return;
     }
     setPrediction(prediction);
@@ -154,14 +149,18 @@ export default function Create() {
       const response = await fetch('/api/predictions/' + prediction.id);
       prediction = await response.json();
       if (response.status !== 200) {
-        console.log('Error:', prediction.detail);
-        removeFromRenders(removeCount);
-        setFetching(false);
+        inferenceError(prediction.detail);
         return;
       }
       setPrediction(prediction);
     }
     return prediction;
+  }
+
+  const inferenceError = (detail: string) => {
+    console.log('Error:', detail);
+    removeFromRenders();
+    setFetching(false);
   }
 
   const dataUrlToFile = async (dataUrl: string): Promise<File> => {
