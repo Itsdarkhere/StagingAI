@@ -1,11 +1,11 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import styles from '../styles/StagingDisplay.module.css';
 import lottie from 'lottie-web';
 import LOTTIE from '../public/lottie2.json';
 
 export default function EmptyDisplay() {
   const [showLottie, setShowLottie] = useState<boolean>(false);
-  let animationContainer = createRef<HTMLDivElement>();
+  const animationContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const anim = lottie.loadAnimation({
@@ -26,6 +26,7 @@ export default function EmptyDisplay() {
       anim.destroy();
     };
   }, [animationContainer]);
+
   return (
     <div className={styles.displayAnimation}>
       <div ref={animationContainer}></div>
