@@ -1,13 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { createRef, RefObject, useEffect, useState } from 'react'
-import { ReactSketchCanvas } from 'react-sketch-canvas'
-import styles from "../styles/StagingDisplay.module.css"
-import PaintCursor from './PaintCursor'
+import React, { createRef, RefObject, useEffect, useState } from 'react';
+import { ReactSketchCanvas } from 'react-sketch-canvas';
+import styles from '../styles/StagingDisplay.module.css';
+import PaintCursor from './PaintCursor';
 import lottie from 'lottie-web';
 import PAINT from '../public/paint1.json';
 import MaskControl from './MaskControl';
 
-export default function Sketch({originalImage, sketchRef}: {originalImage: string, sketchRef: RefObject<any>;}) {
+export default function Sketch({
+  originalImage,
+  sketchRef,
+}: {
+  originalImage: string;
+  sketchRef: RefObject<any>;
+}) {
   // State
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
   const [showBrushCursor, setShowBrushCursor] = useState<boolean>(false);
@@ -32,7 +38,7 @@ export default function Sketch({originalImage, sketchRef}: {originalImage: strin
     });
     return () => anim.destroy(); // optional clean up for unmounting
   }, [animationContainer]);
-  
+
   const clearCanvas = () => {
     if (sketchRef.current !== null) {
       sketchRef.current.clearCanvas();
@@ -61,66 +67,66 @@ export default function Sketch({originalImage, sketchRef}: {originalImage: strin
   };
   return (
     <div className={`${styles.box}`}>
-          <div
-            style={{
-              position: 'relative',
-              display: 'flex',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
-            <img
-              src={originalImage}
-              onLoad={() => setLoaded(true)}
-              alt="original"
-              className={`${styles.img} ${imgLoaded && styles.loaded}`}
-            />
-            {showBrushCursor && <PaintCursor size={strokeWidth} />}
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <img
+          src={originalImage}
+          onLoad={() => setLoaded(true)}
+          alt="original"
+          className={`${styles.img} ${imgLoaded && styles.loaded}`}
+        />
+        {showBrushCursor && <PaintCursor size={strokeWidth} />}
+        <div
+          className={styles.sketchBox}
+          onMouseEnter={() => onMouseEnter()}
+          onMouseLeave={() => setShowBrushCursor(false)}
+        >
+          <ReactSketchCanvas
+            ref={sketchRef}
+            canvasColor="transparent"
+            withViewBox={true}
+            style={canvasStyles}
+            strokeWidth={strokeWidth}
+            exportWithBackgroundImage={true}
+            strokeColor="white"
+          />
+          {showInstructions && imgLoaded && (
             <div
-              className={styles.sketchBox}
-              onMouseEnter={() => onMouseEnter()}
-              onMouseLeave={() => setShowBrushCursor(false)}
+              className={`${styles.instructionContainer} ${
+                imgLoaded && styles.loaded
+              }`}
             >
-              <ReactSketchCanvas
-                ref={sketchRef}
-                canvasColor="transparent"
-                withViewBox={true}
-                style={canvasStyles}
-                strokeWidth={strokeWidth}
-                exportWithBackgroundImage={true}
-                strokeColor="white"
-              />
-              {showInstructions && imgLoaded && (
-                <div
-                  className={`${styles.instructionContainer} ${
-                    imgLoaded && styles.loaded
-                  }`}
-                >
-                  <div
-                    ref={animationContainer}
-                    className={styles.paintAnimation}
-                  ></div>
-                  <div className={styles.instructions}>
-                    <p className={styles.mainI}>
-                      Draw on the parts of the image you want to modify.
-                    </p>
-                    <p className={styles.secondaryI}>
-                      To avoid modifications of objects when drawing on them,
-                      you can leave a visible part of the object untouched.
-                    </p>
-                  </div>
-                </div>
-              )}
+              <div
+                ref={animationContainer}
+                className={styles.paintAnimation}
+              ></div>
+              <div className={styles.instructions}>
+                <p className={styles.mainI}>
+                  Draw on the parts of the image you want to modify.
+                </p>
+                <p className={styles.secondaryI}>
+                  To avoid modifications of objects when drawing on them, you
+                  can leave a visible part of the object untouched.
+                </p>
+              </div>
             </div>
-          </div>
-          {imgLoaded && (
-            <MaskControl
-              undo={undoCanvas}
-              sliderChange={sliderChange}
-              clear={clearCanvas}
-              strokeWidth={strokeWidth}
-            />
           )}
         </div>
-  )
+      </div>
+      {imgLoaded && (
+        <MaskControl
+          undo={undoCanvas}
+          sliderChange={sliderChange}
+          clear={clearCanvas}
+          strokeWidth={strokeWidth}
+        />
+      )}
+    </div>
+  );
 }

@@ -107,7 +107,7 @@
 .topButton {
   width: 50%;
   height: 50px;
-  background-color: var(--form1);
+  background-color: var(--dark2);
   color: var(--formInactive);
   cursor: pointer;
   border: none;
