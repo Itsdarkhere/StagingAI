@@ -78,7 +78,7 @@ export default function StagingDisplay({
   const getSketchBox = () => {
     if (originalImage) {
       return (
-        <div className={`${styles.box} ${styles.left}`}>
+        <div className={`${styles.box}`}>
           <div
             style={{
               position: 'relative',
@@ -179,8 +179,8 @@ export default function StagingDisplay({
           }}
         />
       </Modal>
+      {!mode && getSketchBox()}
       <div className={styles.maskBox}>
-        {!mode && getSketchBox()}
         {renders.map((img, i) => {
           return (
             <NewRender

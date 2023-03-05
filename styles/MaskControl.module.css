@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: var(--shadow8);
+  box-shadow: var(--shadow16);
 }
 .controlTop {
   width: 100%;
