@@ -21,11 +21,11 @@ export default function NewRender({
   const showInferenceStatus = () => {
     switch (prediction?.status) {
       case 'starting':
-        return <div className={styles.preditionStatus}>Starting... This might take a few minutes.</div>
+        return <div className={styles.predictionStatus}>Starting... This might take a few minutes.</div>
       case 'processing':
-        return <div className={styles.preditionStatus}>Processing... <ProcessingCount /></div>
+        return <div className={styles.predictionStatus}>Processing... <ProcessingCount /></div>
       case 'succeeded':
-        return <div className={styles.preditionStatus}>Success!</div>
+        return <div className={styles.predictionStatus}>Success!</div>
       case 'failed':
       default:
         return;
@@ -61,14 +61,7 @@ export default function NewRender({
         onClick={() => openModal(image)}
         src={image}
         alt="render"
-        style={{
-          width: 'auto',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          maxWidth: '100%',
-          maxHeight: '520px',
-          borderRadius: '4px',
-        }}
+        className={styles.renderImage}
       />
       }
     </div>
