@@ -18,10 +18,9 @@ export default function MaskControl({
 }) {
   return (
     <div className={styles.maskControl}>
-      <div className={styles.controlTop}>
+      {/* <div className={styles.controlTop}>
         <label className={styles.controlLabel}>Mask Controls</label>
-        <button className={styles.controlClose}>X</button>
-      </div>
+      </div> */}
       <div className={styles.controlBottom}>
         <Tooltip
           delayShow={500}
