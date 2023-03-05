@@ -35,7 +35,7 @@ export default function MultiForm({
 
   const clickInpaintingMode = (mode: number) => {
     setInpaintingMode(mode);
-  }
+  };
 
   // handle drag events
   const handleDrag = (e: React.DragEvent) => {
@@ -145,7 +145,7 @@ export default function MultiForm({
         target = event.target as typeof event.target & {
           what_to_add: { value: string };
         };
-        data.room = target.what_to_add.value
+        data.room = target.what_to_add.value;
         break;
       case 1:
         target = event.target as typeof event.target & {
@@ -180,7 +180,6 @@ export default function MultiForm({
     console.log(event);
   };
 
-
   return (
     <div className={styles.stagingForm}>
       <FormSwitch mode={mode} clickMode={(mode) => setMode(mode)} />
@@ -201,7 +200,14 @@ export default function MultiForm({
           handleDrag={handleDrag}
           handleDrop={handleDrop}
         />
-        {mode ? <FormFurnish /> : <FormInpainting inpaintingMode={inpaintingMode} clickInpaintingMode={clickInpaintingMode} />}
+        {mode ? (
+          <FormFurnish />
+        ) : (
+          <FormInpainting
+            inpaintingMode={inpaintingMode}
+            clickInpaintingMode={clickInpaintingMode}
+          />
+        )}
         <label htmlFor="copies" className={styles.label}>
           Amount of copies
         </label>
@@ -220,11 +226,7 @@ export default function MultiForm({
           disabled={fetching}
           className={`${primaryStyles.button} ${styles.button}`}
         >
-          {fetching ? (
-            <Spinner wh={30} white={true} />
-          ) : (
-            'Render Images'
-          )}
+          {fetching ? <Spinner wh={30} white={true} /> : 'Render Images'}
         </button>
       </form>
     </div>

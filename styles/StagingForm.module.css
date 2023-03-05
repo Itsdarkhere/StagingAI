@@ -5,7 +5,7 @@
   background-color: var(--form2);
   overflow-y: scroll;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
-		scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; /* Firefox */
 }
 .stagingForm::-webkit-scrollbar {
   display: none;
@@ -29,6 +29,8 @@
   height: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 0;
 }
 .input {
   opacity: 0;

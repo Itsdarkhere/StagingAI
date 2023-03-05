@@ -2,7 +2,7 @@
 import MultiForm from '@/components/MultiForm';
 import StagingDisplay from '@/components/StagingDisplay';
 import React, { useRef, useState } from 'react';
-import Modal from "react-modal"
+import 'react-tooltip/dist/react-tooltip.css';
 import styles from '../styles/Staging.module.css';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -16,11 +16,14 @@ export default function Create() {
   const [fetching, setFetching] = useState(false);
 
   const paintingAddKeyMap = new Map([
-    ['office furniture', 'Office furniture, furnished, modern, standing desk, work, desks, chairs, tables, lamps, computers, monitors'],
+    [
+      'office furniture',
+      'Office furniture, furnished, modern, standing desk, work, desks, chairs, tables, lamps, computers, monitors',
+    ],
     ['table', 'table'],
     ['sofa', 'sofa'],
     ['chair', 'chair'],
-  ])
+  ]);
 
   const controlnet = async (reqData: {
     room: string;
@@ -35,10 +38,10 @@ export default function Create() {
       },
       body: JSON.stringify(reqData),
     });
-    
+
     let prediction = await response.json();
     if (response.status !== 201) {
-      console.log("Error:", prediction.detail);
+      console.log('Error:', prediction.detail);
       setFetching(false);
       return;
     }
@@ -53,7 +56,7 @@ export default function Create() {
       const response = await fetch('/api/predictions/' + prediction.id);
       prediction = await response.json();
       if (response.status !== 200) {
-        console.log("Error:", prediction.detail);
+        console.log('Error:', prediction.detail);
         setFetching(false);
         return;
       }
@@ -82,10 +85,10 @@ export default function Create() {
       },
       body: JSON.stringify(reqData),
     });
-    
+
     let prediction = await response.json();
     if (response.status !== 201) {
-      console.log("Error:", prediction.detail);
+      console.log('Error:', prediction.detail);
       setFetching(false);
       removeFromRenders();
       return;
@@ -102,7 +105,7 @@ export default function Create() {
       prediction = await response.json();
       console.log(prediction.logs);
       if (response.status !== 200) {
-        console.log("Error:", prediction.detail);
+        console.log('Error:', prediction.detail);
         setFetching(false);
         removeFromRenders();
         return;
@@ -118,14 +121,14 @@ export default function Create() {
   const removeFromRenders = () => {
     const newRenders = renders.filter((_, i) => i !== 0);
     setRenders(newRenders);
-  }
+  };
 
   const upscale = async (imageURL: string) => {
     setFetching(true);
     const reqData = {
       image: imageURL,
       scale: 4,
-    }
+    };
     const response = await fetch('/api/predictions/upscale', {
       method: 'POST',
       headers: {
@@ -133,10 +136,10 @@ export default function Create() {
       },
       body: JSON.stringify(reqData),
     });
-    
+
     let prediction = await response.json();
     if (response.status !== 201) {
-      console.log("Error:", prediction.detail);
+      console.log('Error:', prediction.detail);
       setFetching(false);
       return;
     }
@@ -151,7 +154,7 @@ export default function Create() {
       const response = await fetch('/api/predictions/' + prediction.id);
       prediction = await response.json();
       if (response.status !== 200) {
-        console.log("Error:", prediction.detail);
+        console.log('Error:', prediction.detail);
         setFetching(false);
         return;
       }
@@ -161,7 +164,7 @@ export default function Create() {
     // After completion, set the image
     setRenders([prediction.output, ...renders]);
     setFetching(false);
-  }
+  };
 
   const dataUrlToFile = async (dataUrl: string): Promise<File> => {
     const res: Response = await fetch(dataUrl);
@@ -174,7 +177,7 @@ export default function Create() {
   const setImgMask = async () => {
     if (sketchRef.current !== null) {
       const maskDataUrl = await sketchRef.current.exportImage('png');
-      const maskBlob =  await dataUrlToFile(maskDataUrl);
+      const maskBlob = await dataUrlToFile(maskDataUrl);
       return await uploadMask(maskBlob);
     }
     return '';
@@ -212,7 +215,7 @@ export default function Create() {
 
   const clickMode = (mode: boolean) => {
     setMode(mode);
-  } 
+  };
 
   return (
     <div className={styles.staging} id="tool">

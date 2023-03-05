@@ -44,7 +44,7 @@ export default function FormDropZone({
               sizes="400px"
               style={{ objectFit: 'cover' }}
               className={styles.image}
-              src={image + "?" + Math.random()}
+              src={image + '?' + Math.random()}
               alt="upload"
             />
             <button
@@ -57,16 +57,17 @@ export default function FormDropZone({
           </div>
         ) : (
           <div className={styles.inputLabelInner}>
-            {uploadingPhoto ? 
-            <Spinner wh={45} white={true} />
-            : 
-            <>
-              <Image src={UPLOAD} alt="upload" />
-              <p className={styles.p}>
-                Click to upload <br />
-                <span className={styles.span}>or drag and drop it here</span>
-              </p>
-            </>}
+            {uploadingPhoto ? (
+              <Spinner wh={45} white={true} />
+            ) : (
+              <>
+                <Image src={UPLOAD} alt="upload" />
+                <p className={styles.p}>
+                  Click to upload <br />
+                  <span className={styles.span}>or drag and drop it here</span>
+                </p>
+              </>
+            )}
           </div>
         )}
       </label>

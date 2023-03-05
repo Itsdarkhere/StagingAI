@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
+'use client';
 import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import styles from '../styles/StagingDisplay.module.css';
 import MaskControl from './MaskControl';
 import NewRender from './NewRender';
-import Modal from "react-modal";
+import Modal from 'react-modal';
 import PaintCursor from './PaintCursor';
-import lottie from "lottie-web";
-import PAINT from "../public/paint1.json";
+import lottie from 'lottie-web';
+import PAINT from '../public/paint1.json';
 
 export default function StagingDisplay({
   sketchRef,
@@ -46,8 +46,8 @@ export default function StagingDisplay({
 
   useEffect(() => {
     setShowInstructions(true);
-  }, [originalImage])
-  
+  }, [originalImage]);
+
   const canvasStyles = {
     border: 'none',
     borderRadius: '0.25rem',
@@ -73,20 +73,27 @@ export default function StagingDisplay({
   const onMouseEnter = () => {
     setShowInstructions(false);
     setShowBrushCursor(true);
-  }
+  };
 
   const getSketchBox = () => {
     if (originalImage) {
       return (
         <div className={`${styles.box} ${styles.left}`}>
-          <div style={{ position: 'relative', display: 'flex', marginLeft: 'auto', marginRight: 'auto' }}>
-            <img
-              src={originalImage}
-              alt="original"
-              className={styles.img}
-            />
+          <div
+            style={{
+              position: 'relative',
+              display: 'flex',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            <img src={originalImage} alt="original" className={styles.img} />
             {showBrushCursor && <PaintCursor size={strokeWidth} />}
-            <div className={styles.sketchBox} onMouseEnter={() => onMouseEnter()} onMouseLeave={() => setShowBrushCursor(false)}>
+            <div
+              className={styles.sketchBox}
+              onMouseEnter={() => onMouseEnter()}
+              onMouseLeave={() => setShowBrushCursor(false)}
+            >
               <ReactSketchCanvas
                 ref={sketchRef}
                 canvasColor="transparent"
@@ -96,14 +103,23 @@ export default function StagingDisplay({
                 exportWithBackgroundImage={true}
                 strokeColor="white"
               />
-              {showInstructions && <div className={styles.instructionContainer}>
-                <div ref={animationContainer} className={styles.paintAnimation}></div>
-                <div className={styles.instructions}>
-                  <p className={styles.mainI}>Draw on the parts of the image you want to modify.</p>
-                  <p className={styles.secondaryI}>To avoid modifications of objects when drawing on them, you can leave a visible part of the object untouched.</p>
+              {showInstructions && (
+                <div className={styles.instructionContainer}>
+                  <div
+                    ref={animationContainer}
+                    className={styles.paintAnimation}
+                  ></div>
+                  <div className={styles.instructions}>
+                    <p className={styles.mainI}>
+                      Draw on the parts of the image you want to modify.
+                    </p>
+                    <p className={styles.secondaryI}>
+                      To avoid modifications of objects when drawing on them,
+                      you can leave a visible part of the object untouched.
+                    </p>
+                  </div>
                 </div>
-              </div>
-              }
+              )}
             </div>
           </div>
           <MaskControl
@@ -119,12 +135,12 @@ export default function StagingDisplay({
 
   const closeModal = () => {
     setModalOpen(false);
-  }
+  };
 
   const openModal = (imgURL: string) => {
     setModalIMG(imgURL);
     setModalOpen(true);
-  }
+  };
 
   const customStyles = {
     content: {
@@ -141,17 +157,18 @@ export default function StagingDisplay({
     overlay: {
       zIndex: 1000,
       backgroundColor: 'rgba(0, 0, 0, 0.85)',
-    }
+    },
   };
 
   return (
     <div className={styles.stagingDisplay}>
-      <Modal 
+      <Modal
         isOpen={modalOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
-        style={customStyles}>
-          <img
+        style={customStyles}
+      >
+        <img
           src={modalIMG}
           alt="render"
           style={{
@@ -164,18 +181,18 @@ export default function StagingDisplay({
       </Modal>
       <div className={styles.maskBox}>
         {!mode && getSketchBox()}
-          {renders.map((img, i) => {
-            return (
-              <NewRender
-                prediction={prediction}
-                key={img}
-                image={img}
-                upscale={() => upscale(img)}
-                openModal={(imgURL: string) => openModal(imgURL)}
-              />
-            );
-          })}
-          {/* <NewRender
+        {renders.map((img, i) => {
+          return (
+            <NewRender
+              prediction={prediction}
+              key={img}
+              image={img}
+              upscale={() => upscale(img)}
+              openModal={(imgURL: string) => openModal(imgURL)}
+            />
+          );
+        })}
+        {/* <NewRender
             prediction={prediction = { status: 'processing'}}
             image={'load'}
             upscale={() => upscale('')}
