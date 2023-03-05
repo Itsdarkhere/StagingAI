@@ -13,11 +13,13 @@ export default function NewRender({
   upscale,
   prediction,
   openModal,
+  fetching,
 }: {
   image: string;
   upscale: () => void;
   prediction: any;
   openModal: (imgURL: string) => void;
+  fetching: boolean;
 }) {
   const [tooltipClass, setTooltipClass] = React.useState<string>('');
   const showInferenceStatus = () => {
@@ -85,6 +87,7 @@ export default function NewRender({
             className={`${styles.optionButton} ${tooltipClass}`}
             data-tooltip-content="Make this image larger"
             onClick={upscale}
+            disabled={fetching}
           >
             <Image src={UPSCALE} alt="plus" height={20} />
           </button>

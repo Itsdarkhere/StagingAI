@@ -25,12 +25,14 @@ export default function Create() {
     ['chair', 'chair'],
   ]);
 
+  // Still needs to have copies hooked in
   const controlnet = async (reqData: {
     room: string;
     style: string;
     image: string;
   }) => {
     setFetching(true);
+    // Send the inference request
     const response = await fetch('/api/predictions/control', {
       method: 'POST',
       headers: {
@@ -38,33 +40,20 @@ export default function Create() {
       },
       body: JSON.stringify(reqData),
     });
-
-    let prediction = await response.json();
-    if (response.status !== 201) {
-      console.log('Error:', prediction.detail);
-      setFetching(false);
-      return;
-    }
-    setPrediction(prediction);
-
-    while (
-      prediction.status !== 'succeeded' &&
-      prediction.status !== 'failed'
-    ) {
-      // Check status every second
-      await sleep(1000);
-      const response = await fetch('/api/predictions/' + prediction.id);
-      prediction = await response.json();
-      if (response.status !== 200) {
-        console.log('Error:', prediction.detail);
-        setFetching(false);
-        return;
-      }
-      setPrediction(prediction);
-    }
+    // Check status until completion
+    const prediction = await getInferenceStatus(response, 1);
     // After completion, set the image
-    setRenders([prediction.output[1], ...renders]);
-    setFetching(false);
+    if (prediction) {
+      setRenders([prediction.output[1], ...renders]);
+      prediction.output.forEach((img: string, index: number) => {
+        // 1st in controlnet is the scribble
+        if (index === 0) return;
+        setRenders((prev: string[]) => 
+          prev.map((render: string) => (render === 'load' ? img : render))
+        );
+      });
+      setFetching(false);
+    }
   };
 
   const inpainting = async (reqData: {
@@ -78,8 +67,10 @@ export default function Create() {
     // Set a new Empty render to show loading
     const loaderArr = Array.from({ length: reqData.copies }, () => 'load');
     setRenders([...loaderArr, ...renders]);
+    // Add stuff to reqData
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
+    // Send inference request
     const response = await fetch('/api/predictions/inpainting', {
       method: 'POST',
       headers: {
@@ -87,36 +78,17 @@ export default function Create() {
       },
       body: JSON.stringify(reqData),
     });
-
-    let prediction = await response.json();
-    if (response.status !== 201) {
-      console.log('Error:', prediction.detail);
-      setFetching(false);
-      removeFromRenders(loaderArr.length);
-      return;
-    }
-    setPrediction(prediction);
-
-    while (
-      prediction.status !== 'succeeded' &&
-      prediction.status !== 'failed'
-    ) {
-      // Check status every second
-      await sleep(1000);
-      const response = await fetch('/api/predictions/' + prediction.id);
-      prediction = await response.json();
-      if (response.status !== 200) {
-        console.log('Error:', prediction.detail);
-        setFetching(false);
-        removeFromRenders(loaderArr.length);
-        return;
-      }
-      setPrediction(prediction);
-    }
-    console.log(prediction);
+    // Check status until completion
+    const prediction = await getInferenceStatus(response, loaderArr.length);
     // After completion, override the previously empty render with the image
-    setRenders([...prediction.output, ...renders]);
-    setFetching(false);
+    if (prediction) {
+      prediction.output.forEach((img: string) => {
+        setRenders((prev: string[]) => 
+          prev.map((render: string) => (render === 'load' ? img : render))
+        );
+      });
+      setFetching(false); 
+    }
   };
 
   // TODO check if this works
@@ -136,6 +108,7 @@ export default function Create() {
       image: imageURL,
       scale: 4,
     };
+    // Send the inference request
     const response = await fetch('/api/predictions/upscale', {
       method: 'POST',
       headers: {
@@ -143,11 +116,22 @@ export default function Create() {
       },
       body: JSON.stringify(reqData),
     });
+    // Check status until completion
+    const prediction = await getInferenceStatus(response, 1);
+    // After completion, override the previously empty render with the image
+    if (prediction) {
+      setRenders((prev: string[]) => 
+        prev.map((render: string) => (render === 'load' ? prediction.output : render))
+      );
+      setFetching(false);
+    }
+  };
 
+  const getInferenceStatus = async (response: any, removeCount: number) => {
     let prediction = await response.json();
     if (response.status !== 201) {
       console.log('Error:', prediction.detail);
-      removeFromRenders(1);
+      removeFromRenders(removeCount);
       setFetching(false);
       return;
     }
@@ -157,23 +141,19 @@ export default function Create() {
       prediction.status !== 'succeeded' &&
       prediction.status !== 'failed'
     ) {
-      // Check status every second
       await sleep(1000);
       const response = await fetch('/api/predictions/' + prediction.id);
       prediction = await response.json();
       if (response.status !== 200) {
         console.log('Error:', prediction.detail);
-        removeFromRenders(1);
+        removeFromRenders(removeCount);
         setFetching(false);
         return;
       }
       setPrediction(prediction);
     }
-    console.log(prediction);
-    // After completion, override the previously empty render with the image
-    setRenders([prediction.output, ...renders]);
-    setFetching(false);
-  };
+    return prediction;
+  }
 
   const dataUrlToFile = async (dataUrl: string): Promise<File> => {
     const res: Response = await fetch(dataUrl);
@@ -239,6 +219,7 @@ export default function Create() {
       />
       <StagingDisplay
         sketchRef={sketchRef}
+        fetching={fetching}
         renders={renders}
         prediction={prediction}
         originalImage={originalImage}

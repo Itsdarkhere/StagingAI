@@ -9,6 +9,7 @@ import EmptyDisplay from './EmptyDisplay';
 
 export default function StagingDisplay({
   sketchRef,
+  fetching,
   renders,
   prediction,
   originalImage,
@@ -16,6 +17,7 @@ export default function StagingDisplay({
   upscale,
 }: {
   sketchRef: RefObject<any>;
+  fetching: boolean;
   renders: string[];
   prediction: any;
   originalImage: string | undefined;
@@ -79,6 +81,7 @@ export default function StagingDisplay({
         {renders.map((img, i) => {
           return (
             <NewRender
+              fetching={fetching}
               prediction={prediction}
               key={i}
               image={img}
