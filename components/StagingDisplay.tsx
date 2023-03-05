@@ -94,7 +94,7 @@ export default function StagingDisplay({
           }}
         />
       </Modal>
-      {!originalImage && renders.length === 0 && (
+      {(!originalImage || mode) && renders.length === 0 && (
         <div className={styles.displayAnimation}>
           <div ref={animationContainer}></div>
           <div
