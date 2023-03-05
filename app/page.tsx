@@ -72,7 +72,7 @@ export default function Create() {
   }) => {
     setFetching(true);
     // Set a new Empty render to show loading
-    setRenders(['load', ...renders])
+    setRenders(['load', ...renders]);
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
     const response = await fetch('/api/predictions/inpainting', {
@@ -114,12 +114,7 @@ export default function Create() {
     setFetching(false);
   };
 
-  const replaceItemInRenders = (image: string) => {
-    setRenders([image, ...renders]);
-  }
-
   const removeFromRenders = () => {
-    console.log("REMOVING REDNER");
     const newRenders = renders.filter((_, i) => i !== 0);
     setRenders(newRenders);
   }

@@ -6,7 +6,6 @@ import styles from '../styles/StagingDisplay.module.css';
 import MaskControl from './MaskControl';
 import NewRender from './NewRender';
 import Modal from "react-modal";
-import LoadingRender from './LoadingRender';
 import PaintCursor from './PaintCursor';
 import lottie from "lottie-web";
 import PAINT from "../public/paint1.json";
