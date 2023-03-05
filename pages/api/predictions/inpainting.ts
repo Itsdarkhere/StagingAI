@@ -6,7 +6,7 @@ export default async function handler(
 ) {
   const body = req.body;
 
-  if (!body.room || !body.style || !body.image || !body.mask) {
+  if (!body.room || !body.style || !body.image || !body.mask || !body.copies) {
     res.statusCode = 500;
     res.end(JSON.stringify({ detail: 'Incomplete request data' }));
     return;
@@ -26,7 +26,7 @@ export default async function handler(
         negative_prompt: '',
         image: body.image,
         mask: body.mask,
-        num_outputs: 1,
+        num_outputs: body.copies,
         num_inference_steps: 35,
         guidance_scale: 7.5,
       },

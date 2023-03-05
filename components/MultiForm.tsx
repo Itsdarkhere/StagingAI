@@ -32,6 +32,7 @@ export default function MultiForm({
   const [dragActive, setDragActive] = useState(false);
   const [inpaintingMode, setInpaintingMode] = useState(0);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [copies, setCopies] = useState(1);
 
   const clickInpaintingMode = (mode: number) => {
     setInpaintingMode(mode);
@@ -138,6 +139,7 @@ export default function MultiForm({
       style: 'Fill with something',
       image: originalImage!,
       mask: '',
+      copies: copies,
     };
 
     switch (inpaintingMode) {
@@ -176,9 +178,9 @@ export default function MultiForm({
     }
   };
 
-  const sliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event);
-  };
+  const sliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCopies(parseInt(e.target.value));
+  }
 
   return (
     <div className={styles.stagingForm}>
@@ -213,8 +215,9 @@ export default function MultiForm({
         </label>
         <input
           min={1}
-          max={10}
+          max={8}
           onChange={sliderChange}
+          value={copies}
           id="copies"
           name="copies"
           type="range"

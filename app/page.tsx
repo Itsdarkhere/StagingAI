@@ -72,6 +72,7 @@ export default function Create() {
     style: string;
     image: string;
     mask: string;
+    copies: number;
   }) => {
     setFetching(true);
     // Set a new Empty render to show loading
