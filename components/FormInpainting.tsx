@@ -31,10 +31,11 @@ export default function FormInpainting({
   return (
     <div className={styles.formInpainting}>
       <div className={styles.ipButtonContainer}>
-        <Tooltip
+        <Tooltip          
           place="bottom"
           style={{ opacity: 1 }}
           variant="light"
+          delayShow={500}
           anchorSelect=".my-tooltip"
         />
         <button

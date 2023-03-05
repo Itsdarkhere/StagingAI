@@ -51,6 +51,7 @@ export default function NewRender({
       {image !== 'load' && (
         <div className={styles.imageOptions}>
           <Tooltip
+            delayShow={500}
             place="left"
             style={{ opacity: 1 }}
             variant="light"

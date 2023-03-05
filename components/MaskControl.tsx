@@ -24,6 +24,7 @@ export default function MaskControl({
       </div>
       <div className={styles.controlBottom}>
         <Tooltip
+          delayShow={500}
           place="left"
           style={{ opacity: 1 }}
           variant="light"
