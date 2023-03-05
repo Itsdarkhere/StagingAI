@@ -1,5 +1,5 @@
 .maskControl {
-  margin-top: 20px;
+  margin-top: 15px;
   margin-left: auto;
   margin-right: auto;
   width: 486px;
@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow32);
 }
 .controlTop {
   width: 100%;
