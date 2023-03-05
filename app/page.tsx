@@ -76,7 +76,7 @@ export default function Create() {
   }) => {
     setFetching(true);
     // Set a new Empty render to show loading
-    const loaderArr = Array.from({ length: reqData.copies}, () => 'load');
+    const loaderArr = Array.from({ length: reqData.copies }, () => 'load');
     setRenders([...loaderArr, ...renders]);
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
@@ -115,13 +115,16 @@ export default function Create() {
     }
     console.log(prediction);
     // After completion, override the previously empty render with the image
-    setRenders([...prediction.output, ...renders])
+    setRenders([...prediction.output, ...renders]);
     setFetching(false);
   };
 
   // TODO check if this works
   const removeFromRenders = (amountToRemove: number) => {
-    const removeArr = Array.from({length: amountToRemove}, (_, index) => index);
+    const removeArr = Array.from(
+      { length: amountToRemove },
+      (_, index) => index
+    );
     const newRenders = renders.filter((_, i) => removeArr.includes(i));
     setRenders(newRenders);
   };

@@ -16,7 +16,7 @@ export default function MultiForm({
   mode,
   setMode,
 }: {
-  img2img: (reqData: { room: string; style: string; image: string;}) => void;
+  img2img: (reqData: { room: string; style: string; image: string }) => void;
   inpainting: (reqData: {
     room: string;
     style: string;
@@ -181,7 +181,7 @@ export default function MultiForm({
 
   const sliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCopies(parseInt(e.target.value));
-  }
+  };
 
   return (
     <div className={styles.stagingForm}>

@@ -89,7 +89,12 @@ export default function StagingDisplay({
               marginRight: 'auto',
             }}
           >
-            <img src={originalImage} onLoad={() => setLoaded(true)} alt="original" className={`${styles.img} ${imgLoaded && styles.loaded}`} />
+            <img
+              src={originalImage}
+              onLoad={() => setLoaded(true)}
+              alt="original"
+              className={`${styles.img} ${imgLoaded && styles.loaded}`}
+            />
             {showBrushCursor && <PaintCursor size={strokeWidth} />}
             <div
               className={styles.sketchBox}
@@ -106,7 +111,11 @@ export default function StagingDisplay({
                 strokeColor="white"
               />
               {showInstructions && imgLoaded && (
-                <div className={`${styles.instructionContainer} ${imgLoaded && styles.loaded}`}>
+                <div
+                  className={`${styles.instructionContainer} ${
+                    imgLoaded && styles.loaded
+                  }`}
+                >
                   <div
                     ref={animationContainer}
                     className={styles.paintAnimation}
@@ -124,12 +133,14 @@ export default function StagingDisplay({
               )}
             </div>
           </div>
-          {imgLoaded && <MaskControl
-            undo={undoCanvas}
-            sliderChange={sliderChange}
-            clear={clearCanvas}
-            strokeWidth={strokeWidth}
-          />}
+          {imgLoaded && (
+            <MaskControl
+              undo={undoCanvas}
+              sliderChange={sliderChange}
+              clear={clearCanvas}
+              strokeWidth={strokeWidth}
+            />
+          )}
         </div>
       );
     }
