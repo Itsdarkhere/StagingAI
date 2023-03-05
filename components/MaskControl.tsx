@@ -3,7 +3,7 @@ import BACK2 from '../public/back2.svg';
 import DELETE from '../public/delete.svg';
 import Image from 'next/image';
 import styles from '../styles/MaskControl.module.css';
-// import { Tooltip } from 'react-tooltip';
+import { Tooltip } from 'react-tooltip';
 
 export default function MaskControl({
   undo,
@@ -23,12 +23,12 @@ export default function MaskControl({
         <button className={styles.controlClose}>X</button>
       </div>
       <div className={styles.controlBottom}>
-        {/* <Tooltip
+        <Tooltip
           place="left"
           style={{ opacity: 1 }}
           variant="light"
           anchorSelect=".control-tooltip"
-        /> */}
+        />
         <input
           min={1}
           max={100}

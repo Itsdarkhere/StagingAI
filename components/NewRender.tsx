@@ -6,7 +6,7 @@ import UPSCALE from '../public/upscale.svg';
 import Image from 'next/image';
 import Spinner from './Spinner';
 import ProcessingCount from './ProcessingCount';
-// import { Tooltip } from 'react-tooltip';
+import { Tooltip } from 'react-tooltip';
 
 export default function NewRender({
   image,
@@ -50,12 +50,12 @@ export default function NewRender({
       )}
       {image !== 'load' && (
         <div className={styles.imageOptions}>
-          {/* <Tooltip
+          <Tooltip
             place="left"
             style={{ opacity: 1 }}
             variant="light"
             anchorSelect=".render-tooltip"
-          /> */}
+          />
           <button
             className={`${styles.optionButton} render-tooltip`}
             data-tooltip-content="Download image"
