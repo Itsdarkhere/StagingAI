@@ -39,7 +39,7 @@ export default function StagingDisplay({
 
     const lottieShow = () => {
       setShowLottie(true);
-    }
+    };
 
     anim.addEventListener('DOMLoaded', lottieShow);
 
@@ -97,7 +97,16 @@ export default function StagingDisplay({
       {!originalImage && renders.length === 0 && (
         <div className={styles.displayAnimation}>
           <div ref={animationContainer}></div>
-          <div className={`${styles.pitch} ${showLottie && styles.pitchVisible}`}>Experience the power of AI-generated virtual staging images, and save up to 95% compared to traditional virtual staging agencies who bill up to $60 per image and may take up to 3 days to complete the work. With our AI technology, you'll receive high-quality virtual staging images in seconds at a fraction of the cost. Don't wait - start saving time and money today!</div>
+          <div
+            className={`${styles.pitch} ${showLottie && styles.pitchVisible}`}
+          >
+            Experience the power of AI-generated virtual staging images, and
+            save up to 95% compared to traditional virtual staging agencies who
+            bill up to $60 per image and may take up to 3 days to complete the
+            work. With our AI technology, you&apos;ll receive high-quality virtual
+            staging images in seconds at a fraction of the cost. Don&apos;t wait -
+            start saving time and money today!
+          </div>
         </div>
       )}
       {!mode && originalImage && (
