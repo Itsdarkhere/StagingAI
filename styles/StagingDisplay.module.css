@@ -64,9 +64,9 @@
   padding: 20px;
 }
 .displayAnimation {
-  margin-top: 50px;
-  width: 800px;
-  max-width: 80%;
+  margin-top: 0px;
+  width: 65%;
+  max-width: 800px;
 }
 .pitch {
   opacity: 0;
