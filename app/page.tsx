@@ -30,7 +30,11 @@ export default function Create() {
     room: string;
     style: string;
     image: string;
+    copies: number;
   }) => {
+    if (fetching) {
+      return;
+    }
     setFetching(true);
     // Send the inference request
     const response = await fetch('/api/predictions/control', {
@@ -44,7 +48,6 @@ export default function Create() {
     const prediction = await getInferenceStatus(response, 1);
     // After completion, set the image
     if (prediction) {
-      setRenders([prediction.output[1], ...renders]);
       prediction.output.forEach((img: string, index: number) => {
         // 1st in controlnet is the scribble
         if (index === 0) return;
@@ -63,6 +66,9 @@ export default function Create() {
     mask: string;
     copies: number;
   }) => {
+    if (fetching) {
+      return;
+    }
     setFetching(true);
     // Set a new Empty render to show loading
     const loaderArr = Array.from({ length: reqData.copies }, () => 'load');
@@ -102,6 +108,9 @@ export default function Create() {
   };
 
   const upscale = async (imageURL: string) => {
+    if (fetching) {
+      return;
+    }
     setFetching(true);
     setRenders(['load', ...renders]);
     const reqData = {
