@@ -40,26 +40,23 @@ export default function NewRender({
         <h4 className={styles.renderingHeading}>Rendering...</h4>
       </div>
       }
-      <div className={styles.imageOptions}>
+      {image !== 'load' && <div className={styles.imageOptions}>
         <button className={`${styles.optionButton}`}>
           <Image
             src={DOWNLOAD}
             alt="plus"
             height={20}
-            style={{ marginRight: 5 }}
           />
-          Download
         </button>
         <button className={`${styles.optionButton}`}  onClick={upscale}>
           <Image
             src={UPSCALE}
             alt="plus"
             height={20}
-            style={{ marginRight: 5 }}
           />
-          Upscale
         </button>
       </div>
+      }
       {image !== 'load' && <img
         onClick={() => openModal(image)}
         src={image}
