@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../styles/NewRender.module.css';
 import DOWNLOAD from '../public/download.svg';
 import UPSCALE from '../public/upscale.svg';
@@ -19,6 +19,7 @@ export default function NewRender({
   prediction: any;
   openModal: (imgURL: string) => void;
 }) {
+  const [tooltipClass, setTooltipClass] = React.useState<string>('');
   const showInferenceStatus = () => {
     switch (prediction?.status) {
       case 'starting':
@@ -39,6 +40,11 @@ export default function NewRender({
         return;
     }
   };
+
+  useEffect(() => {
+    setTooltipClass((Math.random() + 1).toString(36).substring(7));
+  }, [])
+
   return (
     <div className={styles.render}>
       {image == 'load' && (
@@ -55,16 +61,16 @@ export default function NewRender({
             place="left"
             style={{ opacity: 1 }}
             variant="light"
-            anchorSelect=".render-tooltip"
+            anchorSelect={'.' + tooltipClass}
           />
           <button
-            className={`${styles.optionButton} render-tooltip`}
+            className={`${styles.optionButton} ${tooltipClass}`}
             data-tooltip-content="Download image"
           >
             <Image src={DOWNLOAD} alt="plus" height={20} />
           </button>
           <button
-            className={`${styles.optionButton} render-tooltip`}
+            className={`${styles.optionButton} ${tooltipClass}`}
             data-tooltip-content="Make this image larger"
             onClick={upscale}
           >
