@@ -18,7 +18,7 @@ export default function Create() {
   const paintingAddKeyMap = new Map([
     [
       'office furniture',
-      'Office furniture, furnished, modern, standing desk, work, desks, chairs, tables, lamps, computers, monitors'
+      'Office furniture, furnished, modern, standing desk, work, desks, chairs, tables, lamps, computers, monitors',
     ],
     ['table', 'table'],
     ['sofa', 'sofa'],

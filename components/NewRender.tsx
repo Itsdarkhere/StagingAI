@@ -50,11 +50,23 @@ export default function NewRender({
       )}
       {image !== 'load' && (
         <div className={styles.imageOptions}>
-          <Tooltip place='left' style={{opacity: 1}} variant='light' anchorSelect=".render-tooltip" />
-          <button className={`${styles.optionButton} render-tooltip`} data-tooltip-content="Download image">
+          <Tooltip
+            place="left"
+            style={{ opacity: 1 }}
+            variant="light"
+            anchorSelect=".render-tooltip"
+          />
+          <button
+            className={`${styles.optionButton} render-tooltip`}
+            data-tooltip-content="Download image"
+          >
             <Image src={DOWNLOAD} alt="plus" height={20} />
           </button>
-          <button className={`${styles.optionButton} render-tooltip`} data-tooltip-content="Make this image larger" onClick={upscale}>
+          <button
+            className={`${styles.optionButton} render-tooltip`}
+            data-tooltip-content="Make this image larger"
+            onClick={upscale}
+          >
             <Image src={UPSCALE} alt="plus" height={20} />
           </button>
         </div>

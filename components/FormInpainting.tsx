@@ -31,7 +31,12 @@ export default function FormInpainting({
   return (
     <div className={styles.formInpainting}>
       <div className={styles.ipButtonContainer}>
-        <Tooltip place='bottom' style={{opacity: 1}} variant='light' anchorSelect=".my-tooltip" />
+        <Tooltip
+          place="bottom"
+          style={{ opacity: 1 }}
+          variant="light"
+          anchorSelect=".my-tooltip"
+        />
         <button
           data-tooltip-content="Add furniture into the picture."
           type="button"

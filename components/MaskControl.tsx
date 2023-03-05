@@ -23,7 +23,12 @@ export default function MaskControl({
         <button className={styles.controlClose}>X</button>
       </div>
       <div className={styles.controlBottom}>
-        <Tooltip place='left' style={{opacity: 1}} variant='light' anchorSelect=".control-tooltip" />
+        <Tooltip
+          place="left"
+          style={{ opacity: 1 }}
+          variant="light"
+          anchorSelect=".control-tooltip"
+        />
         <input
           min={1}
           max={100}
@@ -39,10 +44,18 @@ export default function MaskControl({
           type={'text'}
           defaultValue={strokeWidth}
         />
-        <button className={`${styles.controlB} control-tooltip`} data-tooltip-content="Undo previous action" onClick={undo}>
+        <button
+          className={`${styles.controlB} control-tooltip`}
+          data-tooltip-content="Undo previous action"
+          onClick={undo}
+        >
           <Image width={20} height={20} src={BACK2} alt="back" />
         </button>
-        <button className={`${styles.controlR} control-tooltip`} data-tooltip-content="Remove paint" onClick={clear}>
+        <button
+          className={`${styles.controlR} control-tooltip`}
+          data-tooltip-content="Remove paint"
+          onClick={clear}
+        >
           <Image width={20} height={20} src={DELETE} alt="back" />
         </button>
       </div>
