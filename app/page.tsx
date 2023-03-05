@@ -144,7 +144,7 @@ export default function Create() {
     let prediction = await response.json();
     if (response.status !== 201) {
       console.log('Error:', prediction.detail);
-      removeFromRenders();
+      removeFromRenders(1);
       setFetching(false);
       return;
     }
@@ -160,7 +160,7 @@ export default function Create() {
       prediction = await response.json();
       if (response.status !== 200) {
         console.log('Error:', prediction.detail);
-        removeFromRenders();
+        removeFromRenders(1);
         setFetching(false);
         return;
       }
