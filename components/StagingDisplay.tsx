@@ -185,7 +185,7 @@ export default function StagingDisplay({
           return (
             <NewRender
               prediction={prediction}
-              key={img}
+              key={i}
               image={img}
               upscale={() => upscale(img)}
               openModal={(imgURL: string) => openModal(imgURL)}

@@ -18,7 +18,7 @@ export default function Create() {
   const paintingAddKeyMap = new Map([
     [
       'office furniture',
-      'Office furniture, furnished, modern, standing desk, work, desks, chairs, tables, lamps, computers, monitors',
+      'Office furniture, furnished, modern, standing desk, work, desks, chairs, tables, lamps, computers, monitors'
     ],
     ['table', 'table'],
     ['sofa', 'sofa'],
@@ -103,7 +103,6 @@ export default function Create() {
       await sleep(1000);
       const response = await fetch('/api/predictions/' + prediction.id);
       prediction = await response.json();
-      console.log(prediction.logs);
       if (response.status !== 200) {
         console.log('Error:', prediction.detail);
         setFetching(false);
