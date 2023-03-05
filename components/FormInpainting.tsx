@@ -7,7 +7,7 @@ import PLUS from '../public/plus.svg';
 import TRASH from '../public/trash.svg';
 import REPLACE from '../public/replace.svg';
 import styles from '../styles/FormInpainting.module.css';
-import { Tooltip } from 'react-tooltip';
+// import { Tooltip } from 'react-tooltip';
 
 export default function FormInpainting({
   inpaintingMode,
@@ -31,12 +31,12 @@ export default function FormInpainting({
   return (
     <div className={styles.formInpainting}>
       <div className={styles.ipButtonContainer}>
-        <Tooltip
+        {/* <Tooltip
           place="bottom"
           style={{ opacity: 1 }}
           variant="light"
           anchorSelect=".my-tooltip"
-        />
+        /> */}
         <button
           data-tooltip-content="Add furniture into the picture."
           type="button"
