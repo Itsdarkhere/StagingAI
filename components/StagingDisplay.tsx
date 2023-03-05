@@ -30,6 +30,7 @@ export default function StagingDisplay({
   const [modalIMG, setModalIMG] = useState<string>('');
   const [showBrushCursor, setShowBrushCursor] = useState<boolean>(false);
   const [showInstructions, setShowInstructions] = useState<boolean>(true);
+  const [imgLoaded, setLoaded] = useState(false);
   let animationContainer = createRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -46,6 +47,7 @@ export default function StagingDisplay({
 
   useEffect(() => {
     setShowInstructions(true);
+    setLoaded(false);
   }, [originalImage]);
 
   const canvasStyles = {
@@ -87,7 +89,7 @@ export default function StagingDisplay({
               marginRight: 'auto',
             }}
           >
-            <img src={originalImage} alt="original" className={styles.img} />
+            <img src={originalImage} onLoad={() => setLoaded(true)} alt="original" className={`${styles.img} ${imgLoaded && styles.loaded}`} />
             {showBrushCursor && <PaintCursor size={strokeWidth} />}
             <div
               className={styles.sketchBox}
@@ -103,8 +105,8 @@ export default function StagingDisplay({
                 exportWithBackgroundImage={true}
                 strokeColor="white"
               />
-              {showInstructions && (
-                <div className={styles.instructionContainer}>
+              {showInstructions && imgLoaded && (
+                <div className={`${styles.instructionContainer} ${imgLoaded && styles.loaded}`}>
                   <div
                     ref={animationContainer}
                     className={styles.paintAnimation}
@@ -122,12 +124,12 @@ export default function StagingDisplay({
               )}
             </div>
           </div>
-          <MaskControl
+          {imgLoaded && <MaskControl
             undo={undoCanvas}
             sliderChange={sliderChange}
             clear={clearCanvas}
             strokeWidth={strokeWidth}
-          />
+          />}
         </div>
       );
     }
