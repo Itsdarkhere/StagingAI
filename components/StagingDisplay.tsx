@@ -13,15 +13,15 @@ import PAINT from "../public/paint1.json";
 export default function StagingDisplay({
   sketchRef,
   renders,
+  prediction,
   originalImage,
-  rendering,
   mode,
   upscale,
 }: {
   sketchRef: RefObject<any>;
   renders: string[];
+  prediction: any;
   originalImage: string | undefined;
-  rendering: boolean;
   mode: boolean;
   upscale: (imgURL: string) => void;
 }) {
@@ -167,6 +167,7 @@ export default function StagingDisplay({
           {renders.map((img, i) => {
             return (
               <NewRender
+                prediction={prediction}
                 key={img}
                 image={img}
                 upscale={() => upscale(img)}
@@ -174,6 +175,12 @@ export default function StagingDisplay({
               />
             );
           })}
+          {/* <NewRender
+            prediction={prediction = { status: 'processing'}}
+            image={'load'}
+            upscale={() => upscale('')}
+            openModal={(imgURL: string) => openModal(imgURL)}
+          /> */}
       </div>
     </div>
   );

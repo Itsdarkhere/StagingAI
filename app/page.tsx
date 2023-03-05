@@ -100,6 +100,7 @@ export default function Create() {
       await sleep(1000);
       const response = await fetch('/api/predictions/' + prediction.id);
       prediction = await response.json();
+      console.log(prediction.logs);
       if (response.status !== 200) {
         console.log("Error:", prediction.detail);
         setFetching(false);
@@ -227,8 +228,8 @@ export default function Create() {
       <StagingDisplay
         sketchRef={sketchRef}
         renders={renders}
+        prediction={prediction}
         originalImage={originalImage}
-        rendering={fetching}
         mode={mode}
         upscale={(imgURL: string) => upscale(imgURL)}
       />

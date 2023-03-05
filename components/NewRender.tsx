@@ -5,20 +5,37 @@ import DOWNLOAD from "../public/download.svg";
 import UPSCALE from "../public/upscale.svg";
 import Image from 'next/image';
 import Spinner from './Spinner';
+import ProcessingCount from './ProcessingCount';
 
 export default function NewRender({
   image,
   upscale,
+  prediction,
   openModal
 }: {
   image: string;
   upscale: () => void;
+  prediction: any;
   openModal: (imgURL: string) => void;
 }) {
+  const showInferenceStatus = () => {
+    switch (prediction?.status) {
+      case 'starting':
+        return <div className={styles.preditionStatus}>Starting... This might take a few minutes.</div>
+      case 'processing':
+        return <div className={styles.preditionStatus}>Processing... <ProcessingCount /></div>
+      case 'succeeded':
+        return <div className={styles.preditionStatus}>Success!</div>
+      case 'failed':
+      default:
+        return;
+    }
+  }
   return (
     <div className={styles.render}>
       { image == 'load' && 
       <div className={styles.renderingIndicator}>
+        {showInferenceStatus()}
         <Spinner wh={40} white={true} />
         <h4 className={styles.renderingHeading}>Rendering...</h4>
       </div>
