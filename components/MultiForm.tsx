@@ -16,12 +16,13 @@ export default function MultiForm({
   mode,
   setMode,
 }: {
-  img2img: (reqData: { room: string; style: string; image: string }) => void;
+  img2img: (reqData: { room: string; style: string; image: string;}) => void;
   inpainting: (reqData: {
     room: string;
     style: string;
     image: string;
     mask: string;
+    copies: number;
   }) => void;
   fetching: boolean;
   setImage: (image: string | undefined) => void;
