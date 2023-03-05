@@ -42,8 +42,20 @@ export default function NewRender({
   };
 
   useEffect(() => {
-    setTooltipClass((Math.random() + 1).toString(36).substring(7));
+    setTooltipClass(generateRandomString(7));
   }, [])
+
+  function generateRandomString(length: number) {
+    let result = '';
+    const characters = 'abcdefghijklmnopqrstuvwxyz';
+    const charactersLength = characters.length;
+    
+    for (let i = 0; i < length; i++) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    
+    return result;
+  }
 
   return (
     <div className={styles.render}>
