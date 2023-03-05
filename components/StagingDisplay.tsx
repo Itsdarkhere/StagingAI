@@ -192,12 +192,6 @@ export default function StagingDisplay({
             />
           );
         })}
-        {/* <NewRender
-            prediction={prediction = { status: 'processing'}}
-            image={'load'}
-            upscale={() => upscale('')}
-            openModal={(imgURL: string) => openModal(imgURL)}
-          /> */}
       </div>
     </div>
   );

@@ -34,7 +34,6 @@ export default function NewRender({
           </div>
         );
       case 'succeeded':
-        return <div className={styles.predictionStatus}>Success!</div>;
       case 'failed':
       default:
         return;
