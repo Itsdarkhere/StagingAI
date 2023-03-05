@@ -53,6 +53,9 @@
   z-index: 6;
   overflow: hidden;
 }
+.inputLabel:hover {
+  filter: brightness(110%);
+}
 .drag_active {
   pointer-events: none;
 }
