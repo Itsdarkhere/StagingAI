@@ -64,22 +64,24 @@
   padding: 20px;
 }
 .paintAnimation {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
 }
 .instructions {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  max-width: 300px;
+  width: 500px;
+  max-width: 100%;
+  margin-bottom: 20px;
 }
 .mainI {
-  font-weight: var(--regular);
-  color: var(--bgOne);
-  font-size: 16px;
+  font-weight: var(--normal);
+  color: var(--bgTwo);
+  font-size: 18px;
   margin: 0;
-  text-align: center;
+  text-align: start;
 }
 .secondaryI {
   font-weight: var(--regular);
@@ -87,7 +89,7 @@
   font-size: 14px;
   margin: 0;
   margin-top: 5px;
-  text-align: center;
+  text-align: start;
 }
 .right {
   background-color: var(--form2);

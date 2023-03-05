@@ -73,7 +73,7 @@ export default function StagingDisplay({
   };
 
   const onMouseEnter = () => {
-    setShowInstructions(false);
+    // setShowInstructions(false);
     setShowBrushCursor(true);
   };
 

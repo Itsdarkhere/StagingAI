@@ -25,6 +25,7 @@ export default function FormSelect({
 
   return (
     <Select
+      tabIndex={10}
       placeholder={placeholder}
       onChange={checkOnChange}
       options={options}
