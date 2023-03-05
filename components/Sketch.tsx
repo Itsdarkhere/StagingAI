@@ -56,7 +56,7 @@ export default function Sketch({originalImage, sketchRef}: {originalImage: strin
   };
 
   const onMouseEnter = () => {
-    // setShowInstructions(false);
+    setShowInstructions(false);
     setShowBrushCursor(true);
   };
   return (
