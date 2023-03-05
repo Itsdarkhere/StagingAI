@@ -175,8 +175,12 @@
 }
 .image {
   transform: translate(0px, 0px) scale(1);
-  opacity: 1;
+  opacity: 0;
   transition: transform 0.5s ease 0s;
+}
+.image.loaded {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
 }
 .closeButton {
   position: absolute;
