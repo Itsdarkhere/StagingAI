@@ -76,7 +76,8 @@ export default function Create() {
   }) => {
     setFetching(true);
     // Set a new Empty render to show loading
-    setRenders(['load', ...renders]);
+    const loaderArr = Array.from({ length: reqData.copies}, () => 'load');
+    setRenders([...loaderArr, ...renders]);
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
     const response = await fetch('/api/predictions/inpainting', {
@@ -91,7 +92,7 @@ export default function Create() {
     if (response.status !== 201) {
       console.log('Error:', prediction.detail);
       setFetching(false);
-      removeFromRenders();
+      removeFromRenders(loaderArr.length);
       return;
     }
     setPrediction(prediction);
@@ -107,19 +108,21 @@ export default function Create() {
       if (response.status !== 200) {
         console.log('Error:', prediction.detail);
         setFetching(false);
-        removeFromRenders();
+        removeFromRenders(loaderArr.length);
         return;
       }
       setPrediction(prediction);
     }
     console.log(prediction);
     // After completion, override the previously empty render with the image
-    setRenders([prediction.output[0], ...renders]);
+    setRenders([...prediction.output, ...renders])
     setFetching(false);
   };
 
-  const removeFromRenders = () => {
-    const newRenders = renders.filter((_, i) => i !== 0);
+  // TODO check if this works
+  const removeFromRenders = (amountToRemove: number) => {
+    const removeArr = Array.from({length: amountToRemove}, (_, index) => index);
+    const newRenders = renders.filter((_, i) => removeArr.includes(i));
     setRenders(newRenders);
   };
 
