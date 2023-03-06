@@ -35,31 +35,14 @@ export default function StagingDisplay({
   };
 
   const openModal = (imgURL: string) => {
+    console.log("MODAL OPENED")
     setModalIMG(imgURL);
     setModalOpen(true);
   };
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      backgroundColor: 'transparent',
-      border: 'none',
-      padding: 0,
-    },
-    overlay: {
-      zIndex: 1000,
-      backgroundColor: 'rgba(0, 0, 0, 0.25)',
-    },
-  };
-
   return (
     <div className={styles.stagingDisplay}>
-      <AnimatePresence initial={false} mode="wait">
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {modalOpen && <Modal handleClose={closeModal} img={modalIMG} />}
       </AnimatePresence>
       {(!originalImage || mode) && renders.length === 0 && <EmptyDisplay />}

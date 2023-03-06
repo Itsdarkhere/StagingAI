@@ -1,28 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
+'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
 import Backdrop from './Backdrop';
 import styles from '../styles/Modal.module.css';
 
-const dropIn = {
-  hidden: {
-    y: '-100vh',
-    opacity: 0,
-  },
-  visible: {
-    y: '0',
-    opacity: 1,
-    transition: {
-      duration: 0.1,
-      type: 'spring',
-      damping: 25,
-      stiffness: 500,
-    },
-  },
-  exit: {
-    y: '100vh',
-    opacity: 0,
-  },
+const transitions = {
+    hidden: {
+        opacity: 0,
+        scale: 0,
+      },
+      visible: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+          duration: 0.2,
+          ease: "easeIn",
+        },
+      },
+      exit: {
+        opacity: 0,
+        scale: 0,
+        transition: {
+          duration: 0.15,
+          ease: "easeOut",
+        },
+      },
 };
 
 export default function Modal({
@@ -36,8 +39,7 @@ export default function Modal({
     <Backdrop onClick={handleClose}>
       <motion.div
         onClick={(e) => e.stopPropagation()}
-        className=""
-        variants={dropIn}
+        variants={transitions}
         initial="hidden"
         animate="visible"
         exit="exit"
