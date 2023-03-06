@@ -24,6 +24,7 @@ export default function Sketch({
 
   useEffect(() => {
     setShowInstructions(true);
+    sketchRef.current.clearCanvas();
     setLoaded(false);
   }, [originalImage]);
 

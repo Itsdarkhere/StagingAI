@@ -232,6 +232,7 @@ export default function Create() {
         prediction={prediction}
         originalImage={originalImage}
         mode={mode}
+        setImage={setOriginalImage}
         upscale={(imgURL: string) => upscale(imgURL)}
       />
     </div>

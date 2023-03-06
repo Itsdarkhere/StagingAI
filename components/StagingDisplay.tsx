@@ -15,6 +15,7 @@ export default function StagingDisplay({
   originalImage,
   mode,
   upscale,
+  setImage,
 }: {
   sketchRef: RefObject<any>;
   fetching: boolean;
@@ -23,6 +24,7 @@ export default function StagingDisplay({
   originalImage: string | undefined;
   mode: boolean;
   upscale: (imgURL: string) => void;
+  setImage: (image: string | undefined) => void;
 }) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalIMG, setModalIMG] = useState<string>('');
@@ -83,6 +85,7 @@ export default function StagingDisplay({
             <NewRender
               fetching={fetching}
               prediction={prediction}
+              setImage={setImage}
               key={i}
               image={img}
               upscale={() => upscale(img)}

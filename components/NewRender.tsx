@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import styles from '../styles/NewRender.module.css';
 import DOWNLOAD from '../public/download.svg';
 import UPSCALE from '../public/upscale.svg';
+import EDIT from "../public/edit.svg";
 import Image from 'next/image';
 import Spinner from './Spinner';
 import ProcessingCount from './ProcessingCount';
@@ -14,12 +15,14 @@ export default function NewRender({
   prediction,
   openModal,
   fetching,
+  setImage,
 }: {
   image: string;
   upscale: () => void;
   prediction: any;
   openModal: (imgURL: string) => void;
   fetching: boolean;
+  setImage: (image: string | undefined) => void;
 }) {
   const [tooltipClass, setTooltipClass] = React.useState<string>('');
   const showInferenceStatus = () => {
@@ -82,6 +85,13 @@ export default function NewRender({
             data-tooltip-content="Download image"
           >
             <Image src={DOWNLOAD} alt="plus" height={20} />
+          </button>
+          <button
+            className={`${styles.optionButton} ${tooltipClass}`}
+            data-tooltip-content="Use as base image"
+            onClick={() => setImage(image)}
+          >
+            <Image src={EDIT} alt="plus" height={20} />
           </button>
           <button
             className={`${styles.optionButton} ${tooltipClass}`}
