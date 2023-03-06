@@ -1,5 +1,5 @@
 import React, { createRef, useEffect } from 'react';
-import styles from '../styles/StagingDisplay.module.css';
+import styles from '../../styles/StagingDisplay.module.css';
 import { motion } from 'framer-motion';
 import lottie from 'lottie-web';
 import PAINT from '../../public/paint1.json';
