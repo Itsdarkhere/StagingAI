@@ -52,13 +52,13 @@ export default function StagingDisplay({
     },
     overlay: {
       zIndex: 1000,
-      backgroundColor: 'rgba(0, 0, 0, 0.85)',
+      backgroundColor: 'rgba(0, 0, 0, 0.25)',
     },
   };
 
   return (
     <div className={styles.stagingDisplay}>
-      <Modal
+      {/* <Modal
         isOpen={modalOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
@@ -67,14 +67,9 @@ export default function StagingDisplay({
         <img
           src={modalIMG}
           alt="render"
-          style={{
-            width: 'auto',
-            height: 'auto',
-            maxWidth: '90vw',
-            maxHeight: '90vh',
-          }}
+          className={`${styles.modalImage}`}
         />
-      </Modal>
+      </Modal> */}
       {(!originalImage || mode) && renders.length === 0 && <EmptyDisplay />}
       {!mode && originalImage && (
         <Sketch originalImage={originalImage} sketchRef={sketchRef} />

@@ -51,7 +51,7 @@ export default function Create() {
       prediction.output.forEach((img: string, index: number) => {
         // 1st in controlnet is the scribble
         if (index === 0) return;
-        setRenders((prev: string[]) => 
+        setRenders((prev: string[]) =>
           prev.map((render: string) => (render === 'load' ? img : render))
         );
       });
@@ -89,18 +89,18 @@ export default function Create() {
     // After completion, override the previously empty render with the image
     if (prediction) {
       prediction.output.forEach((img: string) => {
-        setRenders((prev: string[]) => 
+        setRenders((prev: string[]) =>
           prev.map((render: string) => (render === 'load' ? img : render))
         );
       });
-      setFetching(false); 
+      setFetching(false);
     }
   };
 
   // TODO check if this works
   const removeFromRenders = () => {
-    setRenders((prev: string[]) => 
-      prev.filter((render: string) => (render !== 'load'))
+    setRenders((prev: string[]) =>
+      prev.filter((render: string) => render !== 'load')
     );
   };
 
@@ -126,8 +126,10 @@ export default function Create() {
     const prediction = await getInferenceStatus(response, 1);
     // After completion, override the previously empty render with the image
     if (prediction) {
-      setRenders((prev: string[]) => 
-        prev.map((render: string) => (render === 'load' ? prediction.output : render))
+      setRenders((prev: string[]) =>
+        prev.map((render: string) =>
+          render === 'load' ? prediction.output : render
+        )
       );
       setFetching(false);
     }
@@ -155,13 +157,13 @@ export default function Create() {
       setPrediction(prediction);
     }
     return prediction;
-  }
+  };
 
   const inferenceError = (detail: string) => {
     console.log('Error:', detail);
     removeFromRenders();
     setFetching(false);
-  }
+  };
 
   const dataUrlToFile = async (dataUrl: string): Promise<File> => {
     const res: Response = await fetch(dataUrl);

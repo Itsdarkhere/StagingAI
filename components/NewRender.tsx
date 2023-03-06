@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import styles from '../styles/NewRender.module.css';
 import DOWNLOAD from '../public/download.svg';
 import UPSCALE from '../public/upscale.svg';
-import EDIT from "../public/edit.svg";
+import EDIT from '../public/edit.svg';
 import Image from 'next/image';
 import Spinner from './Spinner';
 import ProcessingCount from './ProcessingCount';

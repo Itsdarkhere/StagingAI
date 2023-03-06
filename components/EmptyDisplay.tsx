@@ -8,7 +8,6 @@ export default function EmptyDisplay() {
   const animationContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-
     const anim = lottie.loadAnimation({
       container: animationContainer.current!,
       renderer: 'svg',
@@ -32,9 +31,10 @@ export default function EmptyDisplay() {
     <div className={styles.displayAnimation}>
       <div ref={animationContainer}></div>
       <div className={`${styles.pitch} ${showLottie && styles.pitchVisible}`}>
-        With our AI technology, you&apos;ll receive high-quality virtual staging images
-        in seconds at a fraction of the cost of traditional virtual staging agencies who bill up to
-        $60 per image and may take days to complete the work.
+        With our AI technology, you&apos;ll receive high-quality virtual staging
+        images in seconds at a fraction of the cost of traditional virtual
+        staging agencies who bill up to $60 per image and may take days to
+        complete the work.
       </div>
     </div>
   );
