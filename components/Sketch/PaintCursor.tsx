@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styles from '../../styles/PaintCursor.module.css';
 
 export default function PaintCursor({ size }: { size: number }) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: -40, y: -40 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.pageX, y: e.pageY });
+      setPosition({ x: e.offsetX, y: e.offsetY });
     };
 
     document.addEventListener('mousemove', handleMouseMove);
