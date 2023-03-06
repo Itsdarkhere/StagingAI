@@ -11,6 +11,10 @@
   border-radius: 8px;
   box-shadow: var(--shadow16);
   overflow: hidden;
+  transition: filter 0.2s ease;
+}
+.render:hover {
+  filter: brightness(90%);
 }
 .renderingIndicator {
   width: 100%;
