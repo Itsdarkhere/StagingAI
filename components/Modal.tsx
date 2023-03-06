@@ -1,31 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
+'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
 import Backdrop from './Backdrop';
 import styles from '../styles/Modal.module.css';
 
 const transitions = {
-    hidden: {
-        opacity: 0,
-        scale: 0,
-      },
-      visible: {
-        opacity: 1,
-        scale: 1,
-        transition: {
-          duration: 0.2,
-          ease: "easeIn",
-        },
-      },
-      exit: {
-        opacity: 0,
-        scale: 0,
-        transition: {
-          duration: 0.15,
-          ease: "easeOut",
-        },
-      },
+  hidden: {
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.2,
+      ease: 'easeIn',
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0,
+    transition: {
+      duration: 0.15,
+      ease: 'easeOut',
+    },
+  },
 };
 
 export default function Modal({

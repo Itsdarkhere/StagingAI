@@ -97,9 +97,7 @@ export default function Sketch({
             mode="wait"
             onExitComplete={() => null}
           >
-            {showInstructions && !imgLoading && (
-              <Instructions />
-            )}
+            {showInstructions && !imgLoading && <Instructions />}
           </AnimatePresence>
         </div>
       </div>
