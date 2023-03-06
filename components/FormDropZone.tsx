@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import UPLOAD from '../public/upload.svg';
 import styles from '../styles/StagingForm.module.css';
@@ -22,6 +22,9 @@ export default function FormDropZone({
   handleDrop: (e: React.DragEvent) => void;
 }) {
   const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    setLoaded(false);
+  }, [image])
   return (
     <>
       <input
@@ -49,19 +52,21 @@ export default function FormDropZone({
               src={image + '?' + Math.random()}
               alt="upload"
             />
-            <button
-              type="button"
-              onClick={removeImage}
-              className={styles.closeButton}
-            >
-              X
-            </button>
+            {loaded ? (
+              <button
+                type="button"
+                onClick={removeImage}
+                className={styles.closeButton}
+              >
+                X
+              </button>
+            ) : (
+              <Spinner wh={45} white={true} />
+            )}
           </div>
         ) : (
           <div className={styles.inputLabelInner}>
-            {uploadingPhoto ? (
-              <Spinner wh={45} white={true} />
-            ) : (
+            {!uploadingPhoto && (
               <>
                 <Image src={UPLOAD} alt="upload" />
                 <p className={styles.p}>
