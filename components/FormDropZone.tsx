@@ -24,7 +24,7 @@ export default function FormDropZone({
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     setLoaded(false);
-  }, [image])
+  }, [image]);
   return (
     <>
       <input
@@ -41,8 +41,8 @@ export default function FormDropZone({
         htmlFor="input-file-upload"
         className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}
       >
-        {image !== undefined && !uploadingPhoto ? (
-          <div className={styles.inputLabelInner}>
+        <div className={styles.inputLabelInner}>
+          {image !== undefined && (
             <Image
               fill
               onLoad={() => setLoaded(true)}
@@ -52,19 +52,28 @@ export default function FormDropZone({
               src={image + '?' + Math.random()}
               alt="upload"
             />
-            {loaded ? (
-              <button
-                type="button"
-                onClick={removeImage}
-                className={styles.closeButton}
-              >
-                X
-              </button>
-            ) : (
-              <Spinner wh={45} white={true} />
-            )}
-          </div>
-        ) : (
+          )}
+          {image === undefined && !uploadingPhoto &&
+          <>
+          <Image src={UPLOAD} alt="upload" />
+          <p className={styles.p}>
+            Click to upload <br />
+            <span className={styles.span}>or drag and drop it here</span>
+          </p>
+        </>}
+          {loaded ? (
+            <button
+              type="button"
+              onClick={removeImage}
+              className={styles.closeButton}
+            >
+              X
+            </button>
+          ) : (
+            <Spinner wh={45} white={true} />
+          )}
+        </div>
+        {/* ) : (
           <div className={styles.inputLabelInner}>
             {!uploadingPhoto && (
               <>
@@ -76,7 +85,7 @@ export default function FormDropZone({
               </>
             )}
           </div>
-        )}
+        )} */}
       </label>
       {dragActive && (
         <div
