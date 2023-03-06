@@ -60,9 +60,7 @@ export default function FormDropZone({
         ) : (
           <div className={styles.inputLabelInner}>
             {uploadingPhoto ? (
-              <>
-                {!loaded && <Spinner wh={45} white={true} />}
-              </>
+              <Spinner wh={45} white={true} />
             ) : (
               <>
                 <Image src={UPLOAD} alt="upload" />
