@@ -1,12 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
-import styles from '../styles/StagingDisplay.module.css';
-import PaintCursor from './PaintCursor';
-import lottie from 'lottie-web';
-import PAINT from '../public/paint1.json';
 import MaskControl from './MaskControl';
-import { AnimatePresence, motion } from 'framer-motion';
+import PaintCursor from './PaintCursor';
+import styles from '../styles/StagingDisplay.module.css';
+import Instructions from './Instructions';
 
 export default function Sketch({
   originalImage,
@@ -21,8 +20,6 @@ export default function Sketch({
   const [showInstructions, setShowInstructions] = useState<boolean>(true);
   const [imgLoading, setImageLoading] = useState(true);
   const [shimmering, setShimmering] = useState(true);
-  // Refs
-  let animationContainer = createRef<HTMLDivElement>();
 
   useEffect(() => {
     setShowInstructions(true);
@@ -30,23 +27,11 @@ export default function Sketch({
     setImageLoading(true);
   }, [originalImage]);
 
-  useEffect(() => {
-    const anim = lottie.loadAnimation({
-      container: animationContainer.current!,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      // animationData: // local json file,
-      animationData: PAINT,
-    });
-    return () => anim.destroy(); // optional clean up for unmounting
-  }, [animationContainer]);
-
   const onImageLoad = () => {
     setImageLoading(false);
     // Remove timeout on return
     setTimeout(() => setShimmering(false), 600);
-  }
+  };
 
   const clearCanvas = () => {
     if (sketchRef.current !== null) {
@@ -76,22 +61,22 @@ export default function Sketch({
   };
   return (
     <div className={`${styles.box}`}>
-      <div
-        className={`${shimmering && styles.shimmer} ${styles.loadable}`}
-      >
-        <motion.img initial={{height: '10rem', opacity: 0}}
-        animate={{
-          height: imgLoading ? '10rem' : 'auto',
-          opacity: imgLoading ? 0 : 1
-        }}
-        className={`${styles.img}`}
-        transition={{
-          opacity: { delay: 0.5, duration: 0.4 },
-          height: { delay: 0, duration: 0.4 }
-        }}
-        onLoad={onImageLoad}
-        width='auto'
-        src={originalImage}/>
+      <div className={`${shimmering && styles.shimmer} ${styles.loadable}`}>
+        <motion.img
+          initial={{ height: '10rem', opacity: 0 }}
+          animate={{
+            height: imgLoading ? '10rem' : 'auto',
+            opacity: imgLoading ? 0 : 1,
+          }}
+          className={`${styles.img}`}
+          transition={{
+            opacity: { delay: 0.5, duration: 0.4 },
+            height: { delay: 0, duration: 0.4 },
+          }}
+          onLoad={onImageLoad}
+          width="auto"
+          src={originalImage}
+        />
         {showBrushCursor && <PaintCursor size={strokeWidth} />}
         <div
           className={styles.sketchBox}
@@ -107,35 +92,17 @@ export default function Sketch({
             exportWithBackgroundImage={true}
             strokeColor="white"
           />
-          <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-          {showInstructions && !imgLoading && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                opacity: { delay: 0.5, duration: 0.4 }
-              }}
-              className={`${styles.instructionContainer}`}
-            >
-              <div
-                ref={animationContainer}
-                className={styles.paintAnimation}
-              ></div>
-              <div className={styles.instructions}>
-                <p className={styles.mainI}>
-                  Draw on the parts of the image you want to modify.
-                </p>
-                <p className={styles.secondaryI}>
-                  To avoid modifications of objects when drawing on them, you
-                  can leave a visible part of the object untouched.
-                </p>
-              </div>
-            </motion.div>
-          )}
+          <AnimatePresence
+            initial={false}
+            mode="wait"
+            onExitComplete={() => null}
+          >
+            {showInstructions && !imgLoading && (
+              <Instructions />
+            )}
           </AnimatePresence>
         </div>
-      </div> 
+      </div>
       {!imgLoading && (
         <MaskControl
           undo={undoCanvas}

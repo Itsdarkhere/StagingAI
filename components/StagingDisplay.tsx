@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import React, { RefObject, useState } from 'react';
-import styles from '../styles/StagingDisplay.module.css';
-import NewRender from './NewRender';
 import { AnimatePresence } from 'framer-motion';
-import Sketch from './Sketch';
+import { RefObject, useState } from 'react';
+import styles from '../styles/StagingDisplay.module.css';
 import EmptyDisplay from './EmptyDisplay';
 import Modal from './Modal';
+import NewRender from './NewRender';
+import Sketch from './Sketch/Sketch';
 
 export default function StagingDisplay({
   sketchRef,
@@ -35,7 +35,7 @@ export default function StagingDisplay({
   };
 
   const openModal = (imgURL: string) => {
-    console.log("MODAL OPENED")
+    console.log('MODAL OPENED');
     setModalIMG(imgURL);
     setModalOpen(true);
   };
