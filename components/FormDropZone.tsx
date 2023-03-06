@@ -53,14 +53,15 @@ export default function FormDropZone({
               alt="upload"
             />
           )}
-          {image === undefined && !uploadingPhoto &&
-          <>
-          <Image src={UPLOAD} alt="upload" />
-          <p className={styles.p}>
-            Click to upload <br />
-            <span className={styles.span}>or drag and drop it here</span>
-          </p>
-        </>}
+          {image === undefined && !uploadingPhoto && (
+            <>
+              <Image src={UPLOAD} alt="upload" />
+              <p className={styles.p}>
+                Click to upload <br />
+                <span className={styles.span}>or drag and drop it here</span>
+              </p>
+            </>
+          )}
           {loaded ? (
             <button
               type="button"
