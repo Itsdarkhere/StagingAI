@@ -53,10 +53,7 @@ export default function FormDropZone({
               alt="upload"
             />
           )}
-
-          {uploadingPhoto || (image !== undefined && !loaded) && (
-              <Spinner wh={45} white={true} />
-            )}
+          {uploadingPhoto || (image !== undefined && !loaded) && <Spinner wh={45} white={true} />}
 
           {image === undefined && !uploadingPhoto && (
             <>
