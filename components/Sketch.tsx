@@ -6,6 +6,7 @@ import PaintCursor from './PaintCursor';
 import lottie from 'lottie-web';
 import PAINT from '../public/paint1.json';
 import MaskControl from './MaskControl';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function Sketch({
   originalImage,
@@ -18,14 +19,15 @@ export default function Sketch({
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
   const [showBrushCursor, setShowBrushCursor] = useState<boolean>(false);
   const [showInstructions, setShowInstructions] = useState<boolean>(true);
-  const [imgLoaded, setLoaded] = useState(false);
+  const [imgLoading, setImageLoading] = useState(true);
+  const [shimmering, setShimmering] = useState(true);
   // Refs
   let animationContainer = createRef<HTMLDivElement>();
 
   useEffect(() => {
     setShowInstructions(true);
     sketchRef.current.clearCanvas();
-    setLoaded(false);
+    setImageLoading(true);
   }, [originalImage]);
 
   useEffect(() => {
@@ -39,6 +41,12 @@ export default function Sketch({
     });
     return () => anim.destroy(); // optional clean up for unmounting
   }, [animationContainer]);
+
+  const onImageLoad = () => {
+    setImageLoading(false);
+    // Remove timeout on return
+    setTimeout(() => setShimmering(false), 600);
+  }
 
   const clearCanvas = () => {
     if (sketchRef.current !== null) {
@@ -69,19 +77,21 @@ export default function Sketch({
   return (
     <div className={`${styles.box}`}>
       <div
-        style={{
-          position: 'relative',
-          display: 'flex',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-        }}
+        className={`${shimmering && styles.shimmer} ${styles.loadable}`}
       >
-        <img
-          src={originalImage}
-          onLoad={() => setLoaded(true)}
-          alt="original"
-          className={`${styles.img} ${imgLoaded && styles.loaded}`}
-        />
+        <motion.img initial={{height: '10rem', opacity: 0}}
+        animate={{
+          height: imgLoading ? '10rem' : 'auto',
+          opacity: imgLoading ? 0 : 1
+        }}
+        className={`${styles.img}`}
+        transition={{
+          opacity: { delay: 0.5, duration: 0.4 },
+          height: { delay: 0, duration: 0.4 }
+        }}
+        onLoad={onImageLoad}
+        width='auto'
+        src={originalImage}/>
         {showBrushCursor && <PaintCursor size={strokeWidth} />}
         <div
           className={styles.sketchBox}
@@ -97,11 +107,16 @@ export default function Sketch({
             exportWithBackgroundImage={true}
             strokeColor="white"
           />
-          {showInstructions && imgLoaded && (
-            <div
-              className={`${styles.instructionContainer} ${
-                imgLoaded && styles.loaded
-              }`}
+          <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+          {showInstructions && !imgLoading && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                opacity: { delay: 0.5, duration: 0.4 }
+              }}
+              className={`${styles.instructionContainer}`}
             >
               <div
                 ref={animationContainer}
@@ -116,11 +131,12 @@ export default function Sketch({
                   can leave a visible part of the object untouched.
                 </p>
               </div>
-            </div>
+            </motion.div>
           )}
+          </AnimatePresence>
         </div>
-      </div>
-      {imgLoaded && (
+      </div> 
+      {!imgLoading && (
         <MaskControl
           undo={undoCanvas}
           sliderChange={sliderChange}
