@@ -3,9 +3,10 @@
 import React, { RefObject, useState } from 'react';
 import styles from '../styles/StagingDisplay.module.css';
 import NewRender from './NewRender';
-import Modal from 'react-modal';
+import { AnimatePresence } from 'framer-motion';
 import Sketch from './Sketch';
 import EmptyDisplay from './EmptyDisplay';
+import Modal from './Modal';
 
 export default function StagingDisplay({
   sketchRef,
@@ -58,18 +59,9 @@ export default function StagingDisplay({
 
   return (
     <div className={styles.stagingDisplay}>
-      {/* <Modal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        contentLabel="Example Modal"
-        style={customStyles}
-      >
-        <img
-          src={modalIMG}
-          alt="render"
-          className={`${styles.modalImage}`}
-        />
-      </Modal> */}
+      <AnimatePresence initial={false} mode="wait">
+        {modalOpen && <Modal handleClose={closeModal} img={modalIMG} />}
+      </AnimatePresence>
       {(!originalImage || mode) && renders.length === 0 && <EmptyDisplay />}
       {!mode && originalImage && (
         <Sketch originalImage={originalImage} sketchRef={sketchRef} />

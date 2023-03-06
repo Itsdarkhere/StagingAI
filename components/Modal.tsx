@@ -37,7 +37,7 @@ export default function Modal({
       <motion.div
         onClick={(e) => e.stopPropagation()}
         className=""
-        variants={undefined}
+        variants={dropIn}
         initial="hidden"
         animate="visible"
         exit="exit"

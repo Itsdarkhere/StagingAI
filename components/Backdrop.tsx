@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import styles from '../styles/Modal.module.css';
 
 export default function Backdrop({
   children,
@@ -11,7 +12,7 @@ export default function Backdrop({
   return (
     <motion.div
       onClick={onClick}
-      className=""
+      className={styles.backdrop}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
