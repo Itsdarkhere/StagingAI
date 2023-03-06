@@ -42,7 +42,7 @@ export default function FormDropZone({
         className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}
       >
         <div className={styles.inputLabelInner}>
-          {image !== undefined && !uploadingPhoto && (
+          {!uploadingPhoto && image !== undefined && (
             <Image
               fill
               onLoad={() => setLoaded(true)}
@@ -53,6 +53,11 @@ export default function FormDropZone({
               alt="upload"
             />
           )}
+
+          {uploadingPhoto || (image !== undefined && !loaded) && (
+              <Spinner wh={45} white={true} />
+            )}
+
           {image === undefined && !uploadingPhoto && (
             <>
               <Image src={UPLOAD} alt="upload" />
@@ -62,8 +67,8 @@ export default function FormDropZone({
               </p>
             </>
           )}
-          {uploadingPhoto || (image !== undefined && !loaded) && <Spinner wh={45} white={true} />}
-          {loaded && !uploadingPhoto && (
+
+          {!uploadingPhoto && loaded && (
             <button
               type="button"
               onClick={removeImage}
@@ -73,19 +78,6 @@ export default function FormDropZone({
             </button>
           )}
         </div>
-        {/* ) : (
-          <div className={styles.inputLabelInner}>
-            {!uploadingPhoto && (
-              <>
-                <Image src={UPLOAD} alt="upload" />
-                <p className={styles.p}>
-                  Click to upload <br />
-                  <span className={styles.span}>or drag and drop it here</span>
-                </p>
-              </>
-            )}
-          </div>
-        )} */}
       </label>
       {dragActive && (
         <div
