@@ -42,7 +42,7 @@ export default function FormDropZone({
         className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}
       >
         <div className={styles.inputLabelInner}>
-          {image !== undefined && (
+          {image !== undefined && !uploadingPhoto && (
             <Image
               fill
               onLoad={() => setLoaded(true)}
@@ -62,7 +62,8 @@ export default function FormDropZone({
               </p>
             </>
           )}
-          {loaded ? (
+          {uploadingPhoto || (image !== undefined && !loaded) && <Spinner wh={45} white={true} />}
+          {loaded && !uploadingPhoto && (
             <button
               type="button"
               onClick={removeImage}
@@ -70,8 +71,6 @@ export default function FormDropZone({
             >
               X
             </button>
-          ) : (
-            <Spinner wh={45} white={true} />
           )}
         </div>
         {/* ) : (
