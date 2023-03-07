@@ -1,9 +1,9 @@
 import Header from './Header';
 import '@/styles/variables.css';
 import '@/styles/globals.css';
-import { Poppins } from '@next/font/google';
+import { Inter } from '@next/font/google';
 
-const poppins = Poppins({
+const poppins = Inter({
   weight: ['400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
 });
