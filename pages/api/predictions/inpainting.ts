@@ -12,6 +12,8 @@ export default async function handler(
     return;
   }
 
+  console.log(body.copies);
+
   const response = await fetch('https://api.replicate.com/v1/predictions', {
     method: 'POST',
     headers: {
@@ -20,15 +22,15 @@ export default async function handler(
     },
     body: JSON.stringify({
       version:
-        'c28b92a7ecd66eee4aefcd8a94eb9e7f6c3805d5f06038165407fb5cb355ba67',
+        'e95cfec4806a1ea9ade8c651d0c031271b8d6c65f183944ceda37961a9a384e1',
       input: {
         prompt: body.room,
         negative_prompt: '',
         image: body.image,
         mask: body.mask,
         num_outputs: body.copies,
-        num_inference_steps: 35,
-        guidance_scale: 7.5,
+        num_inference_steps: 25,
+        guidance_scale: 6,
       },
     }),
   });

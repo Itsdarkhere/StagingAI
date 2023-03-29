@@ -20,7 +20,7 @@ export default function Create() {
       'office furniture',
       'Office furniture, furnished, modern, standing desk, work, desks, chairs, tables, lamps, computers, monitors',
     ],
-    ['table', 'table'],
+    ['table', 'A photo of a modern office, a _s1_s2_s3_s4_s5_s6_s7_s8_s9_s10_s11_s12_s13_s14_s15'],
     ['sofa', 'sofa'],
     ['chair', 'chair'],
   ]);
@@ -51,9 +51,15 @@ export default function Create() {
       prediction.output.forEach((img: string, index: number) => {
         // 1st in controlnet is the scribble
         if (index === 0) return;
-        setRenders((prev: string[]) =>
-          prev.map((render: string) => (render === 'load' ? img : render))
-        );
+        setRenders((prev: string[]) => {
+          const index = prev.findIndex((render: string) => render === 'load');
+          if (index !== -1) {
+            const updatedRenders = [...prev];
+            updatedRenders[index] = img;
+            return updatedRenders;
+          }
+          return prev;
+        });
       });
       setFetching(false);
     }
@@ -88,10 +94,17 @@ export default function Create() {
     const prediction = await getInferenceStatus(response, loaderArr.length);
     // After completion, override the previously empty render with the image
     if (prediction) {
+      console.log(prediction)
       prediction.output.forEach((img: string) => {
-        setRenders((prev: string[]) =>
-          prev.map((render: string) => (render === 'load' ? img : render))
-        );
+        setRenders((prev: string[]) => {
+          const index = prev.findIndex((render: string) => render === 'load');
+          if (index !== -1) {
+            const updatedRenders = [...prev];
+            updatedRenders[index] = img;
+            return updatedRenders;
+          }
+          return prev;
+        });
       });
       setFetching(false);
     }
