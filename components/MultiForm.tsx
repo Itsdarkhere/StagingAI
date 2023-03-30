@@ -27,6 +27,7 @@ export default function MultiForm({
     style: string;
     image: string;
     mask: string;
+    concept: string;
     copies: number;
   }) => void;
   fetching: boolean;
