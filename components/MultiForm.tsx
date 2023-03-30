@@ -146,6 +146,7 @@ export default function MultiForm({
       style: 'Fill with something',
       image: originalImage!,
       mask: '',
+      concept: '',
       copies: copies,
     };
 

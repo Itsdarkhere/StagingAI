@@ -7,12 +7,17 @@ export default function FormAdd() {
     value: string;
     label: string;
   }
-
+  
   const furnitureOptions: Option[] = [
-    { value: 'office furniture', label: 'Office furniture' },
-    { value: 'sofa', label: 'Sofa' },
-    { value: 'chair', label: 'Chair' },
-    { value: 'table', label: 'Table' },
+    { value: 'bedroom9000.pt', label: 'bedroom9000' },
+    { value: 'bedroom9800.pt', label: 'bedroom9800' },
+    { value: 'boardroom6000.pt', label: 'boardroom6000' },
+    { value: 'boardroom10000.pt', label: 'boardroom10000' },
+    { value: 'empty5000.pt', label: 'empty5000' },
+    { value: 'living6000.pt', label: 'living6000' },
+    { value: 'living10000.pt', label: 'living10000' },
+    { value: 'office3600.pt', label: 'office3600' },
+    { value: 'openoffice8200.pt', label: 'openoffice8200' },
   ];
 
   const styleOptions: Option[] = [

@@ -16,13 +16,15 @@ export default function Create() {
   const [fetching, setFetching] = useState(false);
 
   const paintingAddKeyMap = new Map([
-    [
-      'office furniture',
-      'Office furniture, furnished, modern, standing desk, work, desks, chairs, tables, lamps, computers, monitors',
-    ],
-    ['table', 'A photo of a modern office, a _s1_s2_s3_s4_s5_s6_s7_s8_s9_s10_s11_s12_s13_s14_s15'],
-    ['sofa', 'sofa'],
-    ['chair', 'chair'],
+    ['bedroom9000.pt', 'A photo of a modern bedroom, _a1_a2_a3_a4_a5_a6 , natural light'],
+    ['bedroom9800.pt', 'A photo of a modern bedroom, _b1_b2_b3_b4_b5_b6 , natural ligh'],
+    ['boardroom6000.pt', 'A photo of a modern boardroom, table, chairs, _c1_c2_c3_c4_c5_c6_c7_c8'],
+    ['boardroom10000.pt', 'A photo of a modern boardroom, table, chairs, _d1_d2_d3_d4_d5_d6_d7_d8'],
+    ['empty5000.pt', 'Empty space, _e1_e2'],
+    ['living6000.pt', 'A photo of a modern living room, natural light, _f1_f2_f3_f4_f5_f6'],
+    ['living10000.pt', 'A photo of a modern living room, natural light, _g1_g2_g3_g4_g5_g6'],
+    ['office3600.pt', 'A photo of a modern open office, _h1_h2_h3_h4_h5_h6_h7_h8_h9_h10_h11_h12_h13_h14_h15'],
+    ['openoffice8200.pt', 'a photo of an office, _i1_i2_i3_i4_i5_i6_i7_i8'],
   ]);
 
   // Still needs to have copies hooked in
@@ -70,6 +72,7 @@ export default function Create() {
     style: string;
     image: string;
     mask: string;
+    concept: string;
     copies: number;
   }) => {
     if (fetching) {
@@ -80,6 +83,7 @@ export default function Create() {
     const loaderArr = Array.from({ length: reqData.copies }, () => 'load');
     setRenders([...loaderArr, ...renders]);
     // Add stuff to reqData
+    reqData.concept = reqData.room
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
     // Send inference request
