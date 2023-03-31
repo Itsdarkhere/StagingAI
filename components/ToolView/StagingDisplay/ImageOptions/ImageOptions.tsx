@@ -1,6 +1,6 @@
 import Sketch from '@/components/ToolView/StagingDisplay/ImageOptions/Sketch/Sketch';
 import { RefObject, useState } from 'react';
-import styles from '../../../../styles/ImageOptions.module.css';
+import styles from '../../../../styles/ToolView/StagingDisplay/ImageOptions/ImageOptions.module.css';
 import Options from './Options/Options';
 import Image from 'next/image';
 import TRASH from '../../../../public/trash.svg';

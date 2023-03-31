@@ -4,7 +4,7 @@ import React, { RefObject, useEffect, useState } from 'react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import MaskControl from './MaskControl';
 import PaintCursor from './PaintCursor';
-import styles from '../../../../../styles/StagingDisplay.module.css';
+import styles from '../../../../../styles/ToolView/StagingDisplay/StagingDisplay.module.css';
 import Instructions from './Instructions';
 
 export default function Sketch({

@@ -2,7 +2,7 @@
 'use client';
 import { AnimatePresence } from 'framer-motion';
 import { RefObject, useState } from 'react';
-import styles from '../../../styles/StagingDisplay.module.css';
+import styles from '../../../styles/ToolView/StagingDisplay/StagingDisplay.module.css';
 import Modal from '../../Modal';
 import NewRender from '../../NewRender';
 import ImageOptions from './ImageOptions/ImageOptions';

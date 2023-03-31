@@ -1,5 +1,5 @@
 import FormDropZone from '@/components/FormDropZone';
-import styles from '../../../styles/ImageDrop.module.css';
+import styles from '../../../styles/ToolView/ImageDrop/ImageDrop.module.css';
 import React, { useState } from 'react';
 
 export default function ImageDrop({

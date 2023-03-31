@@ -2,7 +2,7 @@ import FormAdd from '@/components/FormAdd';
 import Spinner from '@/components/Spinner';
 import OptionsModel from '@/components/ToolView/StagingDisplay/ImageOptions/Options/OptionsModel/OptionsModel';
 import React, { useState } from 'react';
-import styles from '../../../../../styles/Options.module.css';
+import styles from '../../../../../styles/ToolView/StagingDisplay/ImageOptions/Options/Options.module.css';
 import primaryStyles from '../../../../../styles/PrimaryButton.module.css';
 
 export default function Options({
