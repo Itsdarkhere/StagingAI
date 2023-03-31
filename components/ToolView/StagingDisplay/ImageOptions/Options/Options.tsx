@@ -5,12 +5,8 @@ import React, { useState } from 'react';
 import styles from '../../../../../styles/Options.module.css';
 import primaryStyles from '../../../../../styles/PrimaryButton.module.css';
 
-export default function Options({ fetching, clickMode, mode }: { fetching: boolean, clickMode: (mode: boolean) => void, mode: boolean }) {
-  const [copies, setCopies] = useState(1);
-
-  const sliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCopies(parseInt(e.target.value));
-  };
+export default function Options({ fetching, clickMode, mode, copies, sliderChange }: 
+  { fetching: boolean, clickMode: (mode: boolean) => void, mode: boolean, copies: number, sliderChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
 
   return (
     <div className={styles.container}>

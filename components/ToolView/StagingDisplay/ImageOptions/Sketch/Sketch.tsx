@@ -79,8 +79,8 @@ export default function Sketch({
           width="auto"
           src={originalImage}
         />
-        {showBrushCursor && mode && <PaintCursor size={strokeWidth} />}
-        {mode && <div
+        {showBrushCursor && !mode && <PaintCursor size={strokeWidth} />}
+        {!mode && <div
           className={styles.sketchBox}
           onMouseEnter={() => onMouseEnter()}
           onMouseLeave={() => setShowBrushCursor(false)}
@@ -103,7 +103,7 @@ export default function Sketch({
           </AnimatePresence>
         </div> }
       </div>
-      {!imgLoading && mode && (
+      {!imgLoading && !mode && (
         <MaskControl
           undo={undoCanvas}
           sliderChange={sliderChange}

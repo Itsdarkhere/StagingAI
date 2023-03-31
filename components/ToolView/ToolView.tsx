@@ -278,6 +278,8 @@ export default function ToolView() {
           setImage={setOriginalImage}
           upscale={(imgURL: string) => upscale(imgURL)}
           clickMode={clickMode}
+          inpainting={inpainting}
+          controlnet={controlnet}
         />
       ) : (
         <ImageDrop

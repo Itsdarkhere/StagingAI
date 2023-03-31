@@ -17,6 +17,8 @@ export default function StagingDisplay({
   upscale,
   setImage,
   clickMode,
+  inpainting,
+  controlnet,
 }: {
   sketchRef: RefObject<any>;
   fetching: boolean;
@@ -27,6 +29,20 @@ export default function StagingDisplay({
   upscale: (imgURL: string) => void;
   setImage: (image: string | undefined) => void;
   clickMode: (mode: boolean) => void;
+  inpainting: (reqData: {
+    room: string;
+    style: string;
+    image: string;
+    mask: string;
+    concept: string;
+    copies: number;
+  }) => void;
+  controlnet: (reqData: {
+    room: string;
+    style: string;
+    image: string;
+    copies: number;
+  }) => void;
 }) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalIMG, setModalIMG] = useState<string>('');
@@ -54,6 +70,8 @@ export default function StagingDisplay({
         originalImage={originalImage}
         sketchRef={sketchRef}
         fetching={fetching}
+        inpainting={inpainting}
+        controlnet={controlnet}
       />
       {/* Resulting Images */}
       <div className={styles.maskBox}>

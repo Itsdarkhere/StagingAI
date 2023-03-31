@@ -25,11 +25,11 @@ export default function OptionsModel({
         data-tooltip-content="Add furniture into the picture."
         type="button"
         className={`${styles.ipButton} 
-              ${mode && styles.selected} my-tooltip`}
-        onClick={() => clickMode(true)}
+              ${!mode && styles.selected} my-tooltip`}
+        onClick={() => clickMode(false)}
       >
         <Image
-          className={`${mode && styles.brightImage}`}
+          className={`${!mode && styles.brightImage}`}
           src={PLUS}
           alt="plus"
           style={{ marginBottom: 5 }}
@@ -39,13 +39,13 @@ export default function OptionsModel({
       <button
         type="button"
         className={`${styles.ipButton} ${
-          !mode && styles.selected
+          mode && styles.selected
         } my-tooltip`}
         data-tooltip-content="Remove something from the picture."
-        onClick={() => clickMode(false)}
+        onClick={() => clickMode(true)}
       >
         <Image
-          className={`${!mode && styles.brightImage}`}
+          className={`${mode && styles.brightImage}`}
           src={TRASH}
           alt="plus"
           style={{ marginBottom: 5 }}
@@ -55,13 +55,13 @@ export default function OptionsModel({
       <button
         type="button"
         className={`${styles.ipButton} ${
-          !mode && styles.selected
+          mode && styles.selected
         } my-tooltip`}
         data-tooltip-content="Replace something in the picture."
-        onClick={() => clickMode(false)}
+        onClick={() => clickMode(true)}
       >
         <Image
-          className={`${!mode && styles.brightImage}`}
+          className={`${mode && styles.brightImage}`}
           src={REPLACE}
           height={15}
           alt="plus"
