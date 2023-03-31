@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../../styles/PaintCursor.module.css';
+import styles from '../../../../../styles/PaintCursor.module.css';
 
 export default function PaintCursor({ size }: { size: number }) {
   const [position, setPosition] = useState({ x: -40, y: -40 });

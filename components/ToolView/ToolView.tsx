@@ -1,31 +1,55 @@
 'use client';
-import MultiForm from '@/components/MultiForm';
-import StagingDisplay from '@/components/StagingDisplay';
+import StagingDisplay from '@/components/ToolView/StagingDisplay/StagingDisplay';
 import React, { useRef, useState } from 'react';
 import 'react-tooltip/dist/react-tooltip.css';
 import styles from '../../styles/Staging.module.css';
+import ImageDrop from './ImageDrop/ImageDrop';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export default function ToolView() {
-
   const [originalImage, setImage] = useState<string | undefined>(undefined);
   const [mode, setMode] = React.useState<boolean>(false);
+  const [continued, setContinued] = useState<boolean>(false);
   const sketchRef = useRef<any>(null);
   const [prediction, setPrediction] = useState(null);
   const [renders, setRenders] = useState<string[]>([]);
   const [fetching, setFetching] = useState(false);
 
   const paintingAddKeyMap = new Map([
-    ['bedroom9000.pt', 'A photo of a modern bedroom, _a1_a2_a3_a4_a5_a6 , natural light'],
-    ['bedroom9800.pt', 'A photo of a modern bedroom, _b1_b2_b3_b4_b5_b6 , natural ligh'],
-    ['boardroom6000.pt', 'A photo of a modern boardroom, table, chairs, _c1_c2_c3_c4_c5_c6_c7_c8'],
-    ['boardroom10000.pt', 'A photo of a modern boardroom, table, chairs, _d1_d2_d3_d4_d5_d6_d7_d8'],
+    [
+      'bedroom9000.pt',
+      'A photo of a modern bedroom, _a1_a2_a3_a4_a5_a6 , natural light',
+    ],
+    [
+      'bedroom9800.pt',
+      'A photo of a modern bedroom, _b1_b2_b3_b4_b5_b6 , natural ligh',
+    ],
+    [
+      'boardroom6000.pt',
+      'A photo of a modern boardroom, table, chairs, _c1_c2_c3_c4_c5_c6_c7_c8',
+    ],
+    [
+      'boardroom10000.pt',
+      'A photo of a modern boardroom, table, chairs, _d1_d2_d3_d4_d5_d6_d7_d8',
+    ],
     ['empty5000.pt', 'Empty space, _e1_e2'],
-    ['living6000.pt', 'A photo of a modern living room, natural light, _f1_f2_f3_f4_f5_f6'],
-    ['living10000.pt', 'A photo of a modern living room, natural light, _g1_g2_g3_g4_g5_g6'],
-    ['office10000.pt', 'A photo of a modern open office, _h1_h2_h3_h4_h5_h6_h7_h8_h9_h10_h11_h12_h13_h14_h15'],
-    ['office13200.pt', 'A photo of a modern open office, _j1_j2_j3_j4_j5_j6_j7_j8_j9_j10_j11_j12_j13_j14_j15'],
+    [
+      'living6000.pt',
+      'A photo of a modern living room, natural light, _f1_f2_f3_f4_f5_f6',
+    ],
+    [
+      'living10000.pt',
+      'A photo of a modern living room, natural light, _g1_g2_g3_g4_g5_g6',
+    ],
+    [
+      'office10000.pt',
+      'A photo of a modern open office, _h1_h2_h3_h4_h5_h6_h7_h8_h9_h10_h11_h12_h13_h14_h15',
+    ],
+    [
+      'office13200.pt',
+      'A photo of a modern open office, _j1_j2_j3_j4_j5_j6_j7_j8_j9_j10_j11_j12_j13_j14_j15',
+    ],
     ['privateoffice8200.pt', 'a photo of an office, _i1_i2_i3_i4_i5_i6_i7_i8'],
     ['privateoffice10000.pt', 'a photo of an office, _k1_k2_k3_k4_k5_k6_k7_k8'],
   ]);
@@ -86,7 +110,7 @@ export default function ToolView() {
     const loaderArr = Array.from({ length: reqData.copies }, () => 'load');
     setRenders([...loaderArr, ...renders]);
     // Add stuff to reqData
-    reqData.concept = reqData.room
+    reqData.concept = reqData.room;
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
     // Send inference request
@@ -101,7 +125,7 @@ export default function ToolView() {
     const prediction = await getInferenceStatus(response, loaderArr.length);
     // After completion, override the previously empty render with the image
     if (prediction) {
-      console.log(prediction)
+      console.log(prediction);
       prediction.output.forEach((img: string) => {
         setRenders((prev: string[]) => {
           const index = prev.findIndex((render: string) => render === 'load');
@@ -236,27 +260,32 @@ export default function ToolView() {
     setMode(mode);
   };
 
+  const clickContinue = () => {
+    console.log('Clicked continue');
+    setContinued(true);
+  };
+
   return (
     <div className={styles.staging} id="tool">
-      <MultiForm
-        img2img={controlnet}
-        inpainting={inpainting}
-        fetching={fetching}
-        setImage={setOriginalImage}
-        originalImage={originalImage}
-        mode={mode}
-        setMode={clickMode}
-      />
-      <StagingDisplay
-        sketchRef={sketchRef}
-        fetching={fetching}
-        renders={renders}
-        prediction={prediction}
-        originalImage={originalImage}
-        mode={mode}
-        setImage={setOriginalImage}
-        upscale={(imgURL: string) => upscale(imgURL)}
-      />
+      {continued ? (
+        <StagingDisplay
+          sketchRef={sketchRef}
+          fetching={fetching}
+          renders={renders}
+          prediction={prediction}
+          originalImage={originalImage}
+          mode={mode}
+          setImage={setOriginalImage}
+          upscale={(imgURL: string) => upscale(imgURL)}
+          clickMode={clickMode}
+        />
+      ) : (
+        <ImageDrop
+          originalImage={originalImage}
+          setImage={setOriginalImage}
+          clickContinue={clickContinue}
+        />
+      )}
     </div>
-  )
+  );
 }

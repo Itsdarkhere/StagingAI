@@ -1,8 +1,8 @@
-import React, { createRef, useEffect } from 'react';
-import styles from '../../styles/StagingDisplay.module.css';
 import { motion } from 'framer-motion';
 import lottie from 'lottie-web';
-import PAINT from '../../public/paint1.json';
+import { createRef, useEffect } from 'react';
+import PAINT from '../../../../../public/paint1.json';
+import styles from '../../../../../styles/StagingDisplay.module.css';
 
 export default function Instructions() {
   let animationContainer = createRef<HTMLDivElement>();

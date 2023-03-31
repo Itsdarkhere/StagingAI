@@ -2,11 +2,10 @@
 'use client';
 import { AnimatePresence } from 'framer-motion';
 import { RefObject, useState } from 'react';
-import styles from '../styles/StagingDisplay.module.css';
-import EmptyDisplay from './EmptyDisplay';
-import Modal from './Modal';
-import NewRender from './NewRender';
-import Sketch from './Sketch/Sketch';
+import styles from '../../../styles/StagingDisplay.module.css';
+import Modal from '../../Modal';
+import NewRender from '../../NewRender';
+import ImageOptions from './ImageOptions/ImageOptions';
 
 export default function StagingDisplay({
   sketchRef,
@@ -17,6 +16,7 @@ export default function StagingDisplay({
   mode,
   upscale,
   setImage,
+  clickMode,
 }: {
   sketchRef: RefObject<any>;
   fetching: boolean;
@@ -26,6 +26,7 @@ export default function StagingDisplay({
   mode: boolean;
   upscale: (imgURL: string) => void;
   setImage: (image: string | undefined) => void;
+  clickMode: (mode: boolean) => void;
 }) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalIMG, setModalIMG] = useState<string>('');
@@ -42,13 +43,19 @@ export default function StagingDisplay({
 
   return (
     <div className={styles.stagingDisplay}>
+      {/* Image popup */}
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {modalOpen && <Modal handleClose={closeModal} img={modalIMG} />}
       </AnimatePresence>
-      {(!originalImage || mode) && renders.length === 0 && <EmptyDisplay />}
-      {!mode && originalImage && (
-        <Sketch originalImage={originalImage} sketchRef={sketchRef} />
-      )}
+      {/* Image and options */}
+      <ImageOptions
+        clickMode={clickMode}
+        mode={mode}
+        originalImage={originalImage}
+        sketchRef={sketchRef}
+        fetching={fetching}
+      />
+      {/* Resulting Images */}
       <div className={styles.maskBox}>
         {renders.map((img, i) => {
           return (

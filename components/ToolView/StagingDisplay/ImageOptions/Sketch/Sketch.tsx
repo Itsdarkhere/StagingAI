@@ -1,18 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { createRef, RefObject, useEffect, useState } from 'react';
+import React, { RefObject, useEffect, useState } from 'react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import MaskControl from './MaskControl';
 import PaintCursor from './PaintCursor';
-import styles from '../../styles/StagingDisplay.module.css';
+import styles from '../../../../../styles/StagingDisplay.module.css';
 import Instructions from './Instructions';
 
 export default function Sketch({
   originalImage,
   sketchRef,
+  mode,
 }: {
   originalImage: string;
   sketchRef: RefObject<any>;
+  mode: boolean;
 }) {
   // State
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
@@ -23,7 +25,7 @@ export default function Sketch({
 
   useEffect(() => {
     setShowInstructions(true);
-    sketchRef.current.clearCanvas();
+    sketchRef.current?.clearCanvas();
     setImageLoading(true);
   }, [originalImage]);
 
@@ -77,8 +79,8 @@ export default function Sketch({
           width="auto"
           src={originalImage}
         />
-        {showBrushCursor && <PaintCursor size={strokeWidth} />}
-        <div
+        {showBrushCursor && mode && <PaintCursor size={strokeWidth} />}
+        {mode && <div
           className={styles.sketchBox}
           onMouseEnter={() => onMouseEnter()}
           onMouseLeave={() => setShowBrushCursor(false)}
@@ -99,9 +101,9 @@ export default function Sketch({
           >
             {showInstructions && !imgLoading && <Instructions />}
           </AnimatePresence>
-        </div>
+        </div> }
       </div>
-      {!imgLoading && (
+      {!imgLoading && mode && (
         <MaskControl
           undo={undoCanvas}
           sliderChange={sliderChange}

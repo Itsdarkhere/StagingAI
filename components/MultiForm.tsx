@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import FormDropZone from './FormDropZone';
-import styles from '../styles/StagingForm.module.css';
 import primaryStyles from '../styles/PrimaryButton.module.css';
+import styles from '../styles/StagingForm.module.css';
+import FormDropZone from './FormDropZone';
 import FormFurnish from './FormFurnish';
 import FormSwitch from './FormSwitch';
-import FormInpainting from './FormInpainting';
 import Spinner from './Spinner';
+import FormInpainting from './ToolView/StagingDisplay/ImageOptions/Options/OptionsModel/OptionsModel';
 
 export default function MultiForm({
   img2img,
@@ -37,9 +37,9 @@ export default function MultiForm({
   setMode: (mode: boolean) => void;
 }) {
   const [dragActive, setDragActive] = useState(false);
-  const [inpaintingMode, setInpaintingMode] = useState(0);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [copies, setCopies] = useState(1);
+  const [inpaintingMode, setInpaintingMode] = useState(0);
 
   const clickInpaintingMode = (mode: number) => {
     setInpaintingMode(mode);

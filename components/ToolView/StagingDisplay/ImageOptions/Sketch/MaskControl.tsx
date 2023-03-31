@@ -1,8 +1,8 @@
 import React from 'react';
-import BACK2 from '../../public/back2.svg';
-import DELETE from '../../public/delete.svg';
+import BACK2 from '../../../../../public/back2.svg';
+import DELETE from '../../../../../public/delete.svg';
 import Image from 'next/image';
-import styles from '../../styles/MaskControl.module.css';
+import styles from '../../../../../styles/MaskControl.module.css';
 import { Tooltip } from 'react-tooltip';
 
 export default function MaskControl({

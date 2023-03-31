@@ -4,20 +4,13 @@
   margin-right: auto;
   width: 486px;
   max-width: 100%;
-  background-color: var(--form2);
+  background-color: var(--form1);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: var(--shadow4white);
-}
-.controlTop {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 10px;
-  border-bottom: 1px solid var(--form3);
+  box-shadow: var(--shadow4white); 
 }
 .controlBottom {
   width: 100%;
@@ -37,7 +30,7 @@
   border-radius: 2px;
   width: 100%;
   height: 10px;
-  background-color: var(--form3);
+  background-color: var(--form2);
   cursor: ew-resize;
 }
 .controlSlider[type='range']::-webkit-slider-thumb {
@@ -58,7 +51,7 @@
   outline-offset: 2px !important;
   border: none;
   color: var(--bgOne);
-  background-color: var(--form3);
+  background-color: var(--form2);
 }
 .controlB {
   margin-left: 10px;
@@ -74,14 +67,7 @@
   border: none;
   outline: none;
   padding-left: 10px;
-  border-left: 1px solid var(--form3);
-  cursor: pointer;
-}
-.controlClose {
-  background-color: var(--form3);
-  border: none;
-  color: var(--bgOne);
-  border-radius: 4px;
+  border-left: 1px solid var(--form2);
   cursor: pointer;
 }
 .controlClose:hover {
