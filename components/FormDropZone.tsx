@@ -59,7 +59,7 @@ export default function FormDropZone({
             <>
               <Image src={UPLOAD} alt="upload" />
               <p className={styles.p}>
-                Click to upload
+                Click to upload an Image
               </p>
               <span className={styles.span}>or drag and drop it here</span>
             </>

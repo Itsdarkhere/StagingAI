@@ -202,7 +202,7 @@ export default function MultiForm({
         <label htmlFor="input-file-upload" className={styles.label}>
           Current Interior
         </label>
-        <FormDropZone
+        {/* <FormDropZone
           uploadingPhoto={uploadingPhoto}
           image={originalImage}
           removeImage={removeImage}
@@ -218,7 +218,7 @@ export default function MultiForm({
             inpaintingMode={inpaintingMode}
             clickInpaintingMode={clickInpaintingMode}
           />
-        )}
+        )} */}
         <label htmlFor="copies" className={styles.label}>
           Amount of copies
         </label>

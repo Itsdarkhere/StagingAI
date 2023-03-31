@@ -17,8 +17,8 @@
 }
 .brandname {
   font-size: 18px;
-  font-weight: var(--semibold);
-  color: var(--bgThree);
+  font-weight: var(--normal);
+  color: var(--textDisabled);
   margin-left: 5px;
 }
 .headerLeft {
