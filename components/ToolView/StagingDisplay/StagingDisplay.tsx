@@ -72,6 +72,7 @@ export default function StagingDisplay({
         fetching={fetching}
         inpainting={inpainting}
         controlnet={controlnet}
+        setImage={setImage}
       />
       {/* Resulting Images */}
       <div className={styles.maskBox}>

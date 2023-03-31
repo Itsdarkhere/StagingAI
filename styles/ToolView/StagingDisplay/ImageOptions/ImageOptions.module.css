@@ -16,7 +16,7 @@
   filter: brightness(150%);
 }
 .input {
-    position: absolute;
+  position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
@@ -25,7 +25,7 @@
     display: inline-block;
     cursor: pointer;
     background-color:  transparent;
-    color: var(--bgOne);
+    color: var(--bgDisabled);
     font-weight: bold;
     font-size: 12px;
     padding-bottom: 5px;

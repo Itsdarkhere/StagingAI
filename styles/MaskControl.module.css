@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: var(--shadow4white);
+  box-shadow: var(--shadow32);
 }
 .controlBottom {
   width: 100%;

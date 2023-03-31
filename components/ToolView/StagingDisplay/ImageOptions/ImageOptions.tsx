@@ -14,6 +14,7 @@ export default function ImageOptions({
   fetching,
   inpainting,
   controlnet,
+  setImage,
 }: {
   clickMode: (mode: boolean) => void;
   mode: boolean;
@@ -34,6 +35,7 @@ export default function ImageOptions({
     image: string;
     copies: number;
   }) => void;
+  setImage: (image: string | undefined) => void;
 }) {
   const [copies, setCopies] = useState(1);
 
@@ -98,11 +100,48 @@ export default function ImageOptions({
     }
   };
 
+  // triggers when file is selected with click
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const file = e.target.files?.[0]!;
+    // Upload image to S3
+    await uploadPhoto(file);
+    e.target.value = '';
+  };
+
+  const uploadPhoto = async (file: File) => {
+    // setUploadingPhoto(true);
+    const filename = encodeURIComponent(file.name);
+    const fileType = encodeURIComponent(file.type);
+
+    // Generates a presigned POST
+    const res = await fetch(
+      `/api/upload?file=${filename}&fileType=${fileType}`
+    );
+    const { url, fields } = await res.json();
+    const formData = new FormData();
+
+    Object.entries({ ...fields, file }).forEach(([key, value]) => {
+      formData.append(key, value as string);
+    });
+
+    const upload = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (upload.ok) {
+      setImage(url + filename);
+    }
+    // setUploadingPhoto(false);
+  };
+
   return (
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
       <div className={styles.sketchcontainer}>
         <div>
-          <input type="file" id="fileInput" className={styles.input} />
+          <input type="file"
+        accept="image/*" onChange={handleChange} id="fileInput" className={styles.input} />
           <label htmlFor="fileInput" className={styles.label}>
             Change Image
           </label>

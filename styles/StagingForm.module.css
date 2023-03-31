@@ -39,14 +39,14 @@
   height: 220px;
 }
 .inputLabel {
-  height: 250px;
-  width: 400px;
+  height: 400px;
+  width: 100%;
   max-width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  background-color: var(--form4);
+  background-color: var(--form2);
   text-align: center;
   color: var(--textOne);
   cursor: pointer;
