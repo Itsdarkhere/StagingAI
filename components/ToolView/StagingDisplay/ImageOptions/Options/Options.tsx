@@ -4,6 +4,8 @@ import OptionsModel from '@/components/ToolView/StagingDisplay/ImageOptions/Opti
 import React, { useState } from 'react';
 import styles from '../../../../../styles/ToolView/StagingDisplay/ImageOptions/Options/Options.module.css';
 import primaryStyles from '../../../../../styles/PrimaryButton.module.css';
+import Image from 'next/image';
+import wand from "../../../../../public/generate.svg";
 
 export default function Options({
   fetching,
@@ -41,7 +43,9 @@ export default function Options({
         disabled={fetching}
         className={`${primaryStyles.button} ${styles.button}`}
       >
-        {fetching ? <Spinner wh={30} white={true} /> : 'Magic'}
+        {fetching ? <Spinner wh={30} white={true} /> : (
+          <>Generate <Image src={wand} style={{width: 25, height: 25, marginLeft: 2}} alt="wand" /></>
+        )}
       </button>
     </div>
   );

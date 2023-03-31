@@ -33,7 +33,7 @@ export default function FormAdd() {
   return (
     <div className={styles.formSec}>
       <label htmlFor="what_to_add" className={styles.label}>
-        What to add
+        Choose room type
       </label>
       <FormSelect
         options={furnitureOptions}

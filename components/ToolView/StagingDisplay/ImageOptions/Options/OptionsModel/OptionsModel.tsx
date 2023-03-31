@@ -22,47 +22,47 @@ export default function OptionsModel({
         anchorSelect=".my-tooltip"
       />
       <button
-        data-tooltip-content="Add furniture into the picture."
+        data-tooltip-content="Edit only a part of the picture."
         type="button"
         className={`${styles.ipButton} 
               ${!mode && styles.selected} my-tooltip`}
         onClick={() => clickMode(false)}
       >
-        <Image
+        {/* <Image
           className={`${!mode && styles.brightImage}`}
           src={PLUS}
           alt="plus"
           style={{ marginBottom: 5 }}
-        />
+        /> */}
         Inpainting
       </button>
       <button
         type="button"
         className={`${styles.ipButton} ${mode && styles.selected} my-tooltip`}
-        data-tooltip-content="Remove something from the picture."
+        data-tooltip-content="Edit the whole picture."
         onClick={() => clickMode(true)}
       >
-        <Image
+        {/* <Image
           className={`${mode && styles.brightImage}`}
           src={TRASH}
           alt="plus"
           style={{ marginBottom: 5 }}
-        />
+        /> */}
         Img2Img
       </button>
       <button
         type="button"
         className={`${styles.ipButton} ${mode && styles.selected} my-tooltip`}
-        data-tooltip-content="Replace something in the picture."
+        data-tooltip-content="Edit full image, try to retain dimensions."
         onClick={() => clickMode(true)}
       >
-        <Image
+        {/* <Image
           className={`${mode && styles.brightImage}`}
           src={REPLACE}
           height={15}
           alt="plus"
           style={{ marginBottom: 5 }}
-        />
+        /> */}
         Controlnet
       </button>
     </div>
