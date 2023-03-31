@@ -20,7 +20,7 @@ export default async function handler(
     },
     body: JSON.stringify({
       version:
-        '2a17f7ae6f24a3aaf3f8c5df00da4c829cb8f5345a075893d0ab3be4d7839b9c',
+        'd4d94fa01e89cffc4c0eec5d7497c24df29b5e55e3930c51e4a91666dcae1a7f',
       input: {
         prompt: body.room,
         negative_prompt: '',

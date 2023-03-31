@@ -23,8 +23,10 @@ export default function Create() {
     ['empty5000.pt', 'Empty space, _e1_e2'],
     ['living6000.pt', 'A photo of a modern living room, natural light, _f1_f2_f3_f4_f5_f6'],
     ['living10000.pt', 'A photo of a modern living room, natural light, _g1_g2_g3_g4_g5_g6'],
-    ['office3600.pt', 'A photo of a modern open office, _h1_h2_h3_h4_h5_h6_h7_h8_h9_h10_h11_h12_h13_h14_h15'],
-    ['openoffice8200.pt', 'a photo of an office, _i1_i2_i3_i4_i5_i6_i7_i8'],
+    ['office10000.pt', 'A photo of a modern open office, _h1_h2_h3_h4_h5_h6_h7_h8_h9_h10_h11_h12_h13_h14_h15'],
+    ['office13200.pt', 'A photo of a modern open office, _j1_j2_j3_j4_j5_j6_j7_j8_j9_j10_j11_j12_j13_j14_j15'],
+    ['privateoffice8200.pt', 'a photo of an office, _i1_i2_i3_i4_i5_i6_i7_i8'],
+    ['privateoffice10000.pt', 'a photo of an office, _k1_k2_k3_k4_k5_k6_k7_k8'],
   ]);
 
   // Still needs to have copies hooked in

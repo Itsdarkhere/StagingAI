@@ -16,8 +16,10 @@ export default function FormAdd() {
     { value: 'empty5000.pt', label: 'empty5000' },
     { value: 'living6000.pt', label: 'living6000' },
     { value: 'living10000.pt', label: 'living10000' },
-    { value: 'office3600.pt', label: 'office3600' },
-    { value: 'openoffice8200.pt', label: 'openoffice8200' },
+    { value: 'office10000.pt', label: 'office10000' },
+    { value: 'office13200.pt', label: 'office13200' },
+    { value: 'privateoffice8200.pt', label: 'privateoffice8200' },
+    { value: 'privateoffice10000.pt', label: 'privateoffice10000' },
   ];
 
   const styleOptions: Option[] = [
