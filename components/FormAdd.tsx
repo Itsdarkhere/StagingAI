@@ -7,7 +7,7 @@ export default function FormAdd() {
     value: string;
     label: string;
   }
-  
+
   const furnitureOptions: Option[] = [
     { value: 'bedroom9000.pt', label: 'bedroom9000' },
     { value: 'bedroom9800.pt', label: 'bedroom9800' },

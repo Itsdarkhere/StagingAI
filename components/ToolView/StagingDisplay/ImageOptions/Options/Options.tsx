@@ -5,15 +5,22 @@ import React, { useState } from 'react';
 import styles from '../../../../../styles/Options.module.css';
 import primaryStyles from '../../../../../styles/PrimaryButton.module.css';
 
-export default function Options({ fetching, clickMode, mode, copies, sliderChange }: 
-  { fetching: boolean, clickMode: (mode: boolean) => void, mode: boolean, copies: number, sliderChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
-
+export default function Options({
+  fetching,
+  clickMode,
+  mode,
+  copies,
+  sliderChange,
+}: {
+  fetching: boolean;
+  clickMode: (mode: boolean) => void;
+  mode: boolean;
+  copies: number;
+  sliderChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
   return (
     <div className={styles.container}>
-      <OptionsModel
-        clickMode={clickMode}
-        mode={mode}
-      />
+      <OptionsModel clickMode={clickMode} mode={mode} />
       <FormAdd />
       <label htmlFor="copies" className={styles.label}>
         Amount of copies

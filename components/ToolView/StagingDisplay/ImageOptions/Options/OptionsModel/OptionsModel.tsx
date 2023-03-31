@@ -38,9 +38,7 @@ export default function OptionsModel({
       </button>
       <button
         type="button"
-        className={`${styles.ipButton} ${
-          mode && styles.selected
-        } my-tooltip`}
+        className={`${styles.ipButton} ${mode && styles.selected} my-tooltip`}
         data-tooltip-content="Remove something from the picture."
         onClick={() => clickMode(true)}
       >
@@ -54,9 +52,7 @@ export default function OptionsModel({
       </button>
       <button
         type="button"
-        className={`${styles.ipButton} ${
-          mode && styles.selected
-        } my-tooltip`}
+        className={`${styles.ipButton} ${mode && styles.selected} my-tooltip`}
         data-tooltip-content="Replace something in the picture."
         onClick={() => clickMode(true)}
       >

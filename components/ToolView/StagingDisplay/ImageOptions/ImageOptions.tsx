@@ -101,18 +101,27 @@ export default function ImageOptions({
   return (
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
       <div className={styles.sketchcontainer}>
-        <button className={styles.button} type='button'>
-          <Image
-            className={styles.icon}
-            src={REPLACE}
-            alt="plus"
-          />
-            Replace</button>
+        <div>
+          <input type="file" id="fileInput" className="file-input" />
+          <label htmlFor="fileInput" className="change-image-label">
+            Change Image
+          </label>
+        </div>
         {originalImage && (
-          <Sketch originalImage={originalImage} sketchRef={sketchRef} mode={mode} />
+          <Sketch
+            originalImage={originalImage}
+            sketchRef={sketchRef}
+            mode={mode}
+          />
         )}
       </div>
-      <Options fetching={fetching} clickMode={clickMode} mode={mode} copies={copies} sliderChange={sliderChange} />
+      <Options
+        fetching={fetching}
+        clickMode={clickMode}
+        mode={mode}
+        copies={copies}
+        sliderChange={sliderChange}
+      />
     </form>
   );
 }

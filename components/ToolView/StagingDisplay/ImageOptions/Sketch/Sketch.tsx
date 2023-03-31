@@ -80,28 +80,30 @@ export default function Sketch({
           src={originalImage}
         />
         {showBrushCursor && !mode && <PaintCursor size={strokeWidth} />}
-        {!mode && <div
-          className={styles.sketchBox}
-          onMouseEnter={() => onMouseEnter()}
-          onMouseLeave={() => setShowBrushCursor(false)}
-        >
-          <ReactSketchCanvas
-            ref={sketchRef}
-            canvasColor="transparent"
-            withViewBox={true}
-            style={canvasStyles}
-            strokeWidth={strokeWidth}
-            exportWithBackgroundImage={true}
-            strokeColor="white"
-          />
-          <AnimatePresence
-            initial={false}
-            mode="wait"
-            onExitComplete={() => null}
+        {!mode && (
+          <div
+            className={styles.sketchBox}
+            onMouseEnter={() => onMouseEnter()}
+            onMouseLeave={() => setShowBrushCursor(false)}
           >
-            {showInstructions && !imgLoading && <Instructions />}
-          </AnimatePresence>
-        </div> }
+            <ReactSketchCanvas
+              ref={sketchRef}
+              canvasColor="transparent"
+              withViewBox={true}
+              style={canvasStyles}
+              strokeWidth={strokeWidth}
+              exportWithBackgroundImage={true}
+              strokeColor="white"
+            />
+            <AnimatePresence
+              initial={false}
+              mode="wait"
+              onExitComplete={() => null}
+            >
+              {showInstructions && !imgLoading && <Instructions />}
+            </AnimatePresence>
+          </div>
+        )}
       </div>
       {!imgLoading && !mode && (
         <MaskControl
