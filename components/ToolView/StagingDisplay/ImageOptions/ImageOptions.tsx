@@ -102,8 +102,8 @@ export default function ImageOptions({
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
       <div className={styles.sketchcontainer}>
         <div>
-          <input type="file" id="fileInput" className="file-input" />
-          <label htmlFor="fileInput" className="change-image-label">
+          <input type="file" id="fileInput" className={styles.input} />
+          <label htmlFor="fileInput" className={styles.label}>
             Change Image
           </label>
         </div>
