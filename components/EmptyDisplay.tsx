@@ -1,5 +1,5 @@
 import React, { createRef, useEffect, useRef, useState } from 'react';
-import styles from '../styles/StagingDisplay.module.css';
+import styles from '../styles/ToolView/StagingDisplay/StagingDisplay.module.css';
 import lottie from 'lottie-web';
 import LOTTIE from '../public/lottie2.json';
 

@@ -5,9 +5,10 @@
   align-items: center;
   margin-top: 30px;
   padding: 20px;
-  background-color: var(--form2);
-  border-radius: 4px;
-  box-shadow: var(--shadow16);
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+  border: rgba(0, 0, 0, 0.125);
+  box-shadow: rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;;
 }
 .icon {
   height: 12px;
@@ -25,7 +26,7 @@
     display: inline-block;
     cursor: pointer;
     background-color:  transparent;
-    color: var(--bgDisabled);
+    color: var(--textThree);
     font-weight: bold;
     font-size: 12px;
     padding-bottom: 5px;

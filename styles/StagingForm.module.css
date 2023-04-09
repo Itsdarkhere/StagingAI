@@ -82,7 +82,7 @@
 }
 .label {
   font-weight: var(--regular);
-  color: var(--bgOne);
+  color: var(--textThree);
   font-size: 14px;
   margin-bottom: 5px;
   margin-top: 15px;

@@ -89,7 +89,8 @@
 .displayAnimation {
   margin-top: 0px;
   width: 65%;
-  max-width: 800px;
+  max-width: 400px;
+  margin-right: 20px;
 }
 .pitch {
   opacity: 0;

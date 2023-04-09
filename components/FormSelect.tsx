@@ -42,12 +42,12 @@ export default function FormSelect({
         placeholder: (baseStyles, _) => ({
           ...baseStyles,
           fontSize: '14px',
-          color: '#ADADAD',
+          color: 'rgb(52, 71, 103)',
         }),
         control: (baseStyles, state) => ({
           ...baseStyles,
-          backgroundColor: '#2E2E2E',
-          border: 'none',
+          backgroundColor: 'transparent',
+          border: '0.0625rem solid rgb(210, 214, 218)',
           fontSize: '14px',
           height: '48px',
           boxShadow: state.isFocused ? '0px 0px 6px #FFFFF' : 'none',
@@ -74,7 +74,7 @@ export default function FormSelect({
         ...theme,
         colors: {
           ...theme.colors,
-          neutral80: 'white',
+          neutral80: 'rgb(52, 71, 103)',
         },
       })}
     />

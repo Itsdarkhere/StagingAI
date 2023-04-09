@@ -1,5 +1,5 @@
 .header {
-  background-color: var(--form2);
+  background-color: rgb(248, 249, 250);
   height: 65px;
   width: 100%;
   display: flex;
@@ -18,7 +18,7 @@
 .brandname {
   font-size: 18px;
   font-weight: var(--normal);
-  color: var(--textDisabled);
+  color: var(--textTwo);
   margin-left: 5px;
 }
 .headerLeft {

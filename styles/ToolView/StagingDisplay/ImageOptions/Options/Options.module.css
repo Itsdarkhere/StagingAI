@@ -12,7 +12,7 @@
   border-radius: 2px;
   width: 100%;
   height: 10px;
-  background-color: var(--form3);
+  background-color: var(--form1);
   cursor: ew-resize;
 }
 
@@ -22,9 +22,9 @@
   height: 45px !important;
   font-weight: var(--regular);
   font-size: 16px;
-  background-color: var(--bgOne) !important;
-  color: var(--textTwo) !important;
-  box-shadow: var(--shadow32) !important;
+  background-image: linear-gradient(310deg, rgb(20, 23, 39), rgb(58, 65, 111)) !important;
+  color: rgb(255, 255, 255) !important;
+  box-shadow: rgba(0, 0, 0, 0.11) 0rem 0.25rem 0.4375rem -0.0625rem, rgba(0, 0, 0, 0.07) 0rem 0.125rem 0.25rem -0.0625rem !important;
   border: none !important;
 }
 .button:disabled {
@@ -35,13 +35,13 @@
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
-  background-color: var(--bgOne);
+  background-color: var(--form4);
   border-radius: 4px;
 }
 
 .label {
   font-weight: var(--regular);
-  color: var(--bgOne);
+  color: var(--textThree);
   font-size: 14px;
   margin-bottom: 10px;
   margin-top: 15px !important;
