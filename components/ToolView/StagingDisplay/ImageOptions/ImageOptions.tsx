@@ -7,7 +7,7 @@ import TRASH from '../../../../public/trash.svg';
 import REPLACE from '../../../../public/replace.svg';
 
 export default function ImageOptions({
-  clickMode,
+  changeMode,
   mode,
   originalImage,
   sketchRef,
@@ -16,8 +16,8 @@ export default function ImageOptions({
   controlnet,
   setImage,
 }: {
-  clickMode: (mode: boolean) => void;
-  mode: boolean;
+  changeMode: (event: React.MouseEvent<HTMLElement, MouseEvent>, value: any) => void;
+  mode: string;
   originalImage: string | undefined;
   sketchRef: RefObject<any>;
   fetching: boolean;
@@ -39,8 +39,10 @@ export default function ImageOptions({
 }) {
   const [copies, setCopies] = useState(1);
 
-  const sliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCopies(parseInt(e.target.value));
+  const sliderChange = (event: Event, value: number | number[], activeThumb: number) => {
+    if (typeof value === 'number') {
+      setCopies(value);
+    }
   };
 
   const validateForm1 = async (event: React.SyntheticEvent) => {
@@ -156,7 +158,7 @@ export default function ImageOptions({
       </div>
       <Options
         fetching={fetching}
-        clickMode={clickMode}
+        changeMode={changeMode}
         mode={mode}
         copies={copies}
         sliderChange={sliderChange}

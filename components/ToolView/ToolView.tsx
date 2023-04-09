@@ -10,7 +10,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export default function ToolView() {
   const [originalImage, setImage] = useState<string | undefined>(undefined);
-  const [mode, setMode] = React.useState<boolean>(false);
+  const [mode, setMode] = React.useState<string>('inpainting');
   const [continued, setContinued] = useState<boolean>(false);
   const sketchRef = useRef<any>(null);
   const [prediction, setPrediction] = useState(null);
@@ -257,8 +257,10 @@ export default function ToolView() {
     setImage(img);
   };
 
-  const clickMode = (mode: boolean) => {
-    setMode(mode);
+  const changeMode = (event: React.MouseEvent<HTMLElement, MouseEvent>, value: any) => {
+    if (value !== null) {
+      setMode(value);
+    }
   };
 
   const clickContinue = () => {
@@ -278,7 +280,7 @@ export default function ToolView() {
           mode={mode}
           setImage={setOriginalImage}
           upscale={(imgURL: string) => upscale(imgURL)}
-          clickMode={clickMode}
+          changeMode={changeMode}
           inpainting={inpainting}
           controlnet={controlnet}
         />

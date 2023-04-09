@@ -10,7 +10,7 @@ export default function OptionsModel({
   mode,
 }: {
   clickMode: (mode: boolean) => void;
-  mode: boolean;
+  mode: string;
 }) {
   return (
     <div className={styles.ipButtonContainer}>

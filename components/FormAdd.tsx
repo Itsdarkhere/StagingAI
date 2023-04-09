@@ -1,6 +1,6 @@
 import React from 'react';
-import FormSelect from './FormSelect';
 import styles from '../styles/StagingForm.module.css';
+import FormSelect from './FormSelect';
 
 export default function FormAdd() {
   interface Option {
@@ -22,14 +22,7 @@ export default function FormAdd() {
     { value: 'privateoffice10000.pt', label: 'privateoffice10000' },
   ];
 
-  const styleOptions: Option[] = [
-    { value: 'modern', label: 'Modern' },
-    { value: 'minimalist', label: 'Minimalist' },
-    { value: 'scandinavian', label: 'Scandinavian' },
-    { value: 'industrial', label: 'Industrial' },
-    { value: 'midcentury modern', label: 'Midcentury modern' },
-    { value: 'rustic', label: 'Rustic' },
-  ];
+
   return (
     <div className={styles.formSec}>
       <label htmlFor="what_to_add" className={styles.label}>
@@ -40,7 +33,7 @@ export default function FormAdd() {
         onChange={undefined}
         hasOnChange={false}
         name="what_to_add"
-        placeholder="Room"
+        placeholder="Select room type"
       />
     </div>
   );

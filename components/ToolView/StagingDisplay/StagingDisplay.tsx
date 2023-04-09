@@ -16,7 +16,7 @@ export default function StagingDisplay({
   mode,
   upscale,
   setImage,
-  clickMode,
+  changeMode,
   inpainting,
   controlnet,
 }: {
@@ -25,10 +25,10 @@ export default function StagingDisplay({
   renders: string[];
   prediction: any;
   originalImage: string | undefined;
-  mode: boolean;
+  mode: string;
   upscale: (imgURL: string) => void;
   setImage: (image: string | undefined) => void;
-  clickMode: (mode: boolean) => void;
+  changeMode: (event: React.MouseEvent<HTMLElement, MouseEvent>, value: any) => void;
   inpainting: (reqData: {
     room: string;
     style: string;
@@ -65,7 +65,7 @@ export default function StagingDisplay({
       </AnimatePresence>
       {/* Image and options */}
       <ImageOptions
-        clickMode={clickMode}
+        changeMode={changeMode}
         mode={mode}
         originalImage={originalImage}
         sketchRef={sketchRef}

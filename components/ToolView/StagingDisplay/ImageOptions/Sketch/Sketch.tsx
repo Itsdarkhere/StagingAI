@@ -14,7 +14,7 @@ export default function Sketch({
 }: {
   originalImage: string;
   sketchRef: RefObject<any>;
-  mode: boolean;
+  mode: string;
 }) {
   // State
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
@@ -79,8 +79,8 @@ export default function Sketch({
           width="auto"
           src={originalImage}
         />
-        {showBrushCursor && !mode && <PaintCursor size={strokeWidth} />}
-        {!mode && (
+        {showBrushCursor && mode === 'inpainting' && <PaintCursor size={strokeWidth} />}
+        {mode === 'inpainting' && (
           <div
             className={styles.sketchBox}
             onMouseEnter={() => onMouseEnter()}
@@ -105,7 +105,7 @@ export default function Sketch({
           </div>
         )}
       </div>
-      {!imgLoading && !mode && (
+      {!imgLoading && mode === 'inpainting' && (
         <MaskControl
           undo={undoCanvas}
           sliderChange={sliderChange}
