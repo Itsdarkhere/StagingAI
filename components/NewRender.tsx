@@ -67,7 +67,7 @@ export default function NewRender({
       {image == 'load' && (
         <div className={styles.renderingIndicator}>
           {showInferenceStatus()}
-          <Spinner wh={40} white={true} />
+          <Spinner wh={40} white={false} />
           <h4 className={styles.renderingHeading}>Rendering...</h4>
         </div>
       )}

@@ -5,11 +5,9 @@ import React, { useState } from 'react';
 export default function ImageDrop({
   originalImage,
   setImage,
-  clickContinue,
 }: {
   originalImage: string | undefined;
   setImage: (image: string | undefined) => void;
-  clickContinue: () => void;
 }) {
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [dragActive, setDragActive] = useState(false);
@@ -92,15 +90,6 @@ export default function ImageDrop({
           handleDrop={handleDrop}
         />
       </div>
-      {originalImage && (
-        <button
-          disabled={originalImage ? false : true}
-          onClick={clickContinue}
-          className={styles.button}
-        >
-          Continue
-        </button>
-      )}
     </>
   );
 }

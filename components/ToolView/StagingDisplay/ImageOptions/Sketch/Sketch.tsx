@@ -53,8 +53,10 @@ export default function Sketch({
     opacity: 0.8,
   };
 
-  const sliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setStrokeWidth(parseInt(event.target.value));
+  const sliderChange = (event: Event, value: number | number[], activeThumb: number) => {
+    if (typeof value === 'number') {
+      setStrokeWidth(value);
+    }
   };
 
   const onMouseEnter = () => {

@@ -11,7 +11,6 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 export default function ToolView() {
   const [originalImage, setImage] = useState<string | undefined>(undefined);
   const [mode, setMode] = React.useState<string>('inpainting');
-  const [continued, setContinued] = useState<boolean>(false);
   const sketchRef = useRef<any>(null);
   const [prediction, setPrediction] = useState(null);
   const [renders, setRenders] = useState<string[]>([]);
@@ -263,14 +262,8 @@ export default function ToolView() {
     }
   };
 
-  const clickContinue = () => {
-    console.log('Clicked continue');
-    setContinued(true);
-  };
-
   return (
     <div className={styles.staging} id="tool">
-      {continued ? (
         <StagingDisplay
           sketchRef={sketchRef}
           fetching={fetching}
@@ -284,13 +277,6 @@ export default function ToolView() {
           inpainting={inpainting}
           controlnet={controlnet}
         />
-      ) : (
-        <ImageDrop
-          originalImage={originalImage}
-          setImage={setOriginalImage}
-          clickContinue={clickContinue}
-        />
-      )}
     </div>
   );
 }

@@ -50,7 +50,7 @@ export default function Options({
       onChange={changeMode}
       aria-label="text alignment"
       >
-        <ToggleButton value="inpainting" aria-label="left aligned">
+        <ToggleButton style={{fontSize: 12}} value="inpainting" aria-label="left aligned">
           Inpainting
         </ToggleButton>
         <ToggleButton value="img2img" aria-label="centered">
@@ -88,7 +88,7 @@ export default function Options({
         type="submit"
         disabled={fetching}
         variant='contained'
-        style={{marginTop: 12, height: 45}}
+        style={{marginTop: 12, height: 45, backgroundImage: 'linear-gradient(310deg, rgb(20, 23, 39), rgb(58, 65, 111))'}}
       >
         {fetching ? <Spinner wh={30} white={true} /> : (
           <>Generate <Image src={wand} style={{width: 25, height: 25, marginLeft: 2}} alt="wand" /></>

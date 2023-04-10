@@ -5,6 +5,7 @@ import Options from './Options/Options';
 import Image from 'next/image';
 import TRASH from '../../../../public/trash.svg';
 import REPLACE from '../../../../public/replace.svg';
+import ImageDrop from '../../ImageDrop/ImageDrop';
 
 export default function ImageOptions({
   changeMode,
@@ -95,7 +96,7 @@ export default function ImageOptions({
   };
 
   const validateBasedOnMode = (event: React.SyntheticEvent) => {
-    if (mode) {
+    if (mode !== 'inpainting') {
       validateForm1(event);
     } else {
       validateForm2(event);
@@ -141,18 +142,24 @@ export default function ImageOptions({
   return (
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
       <div className={styles.sketchcontainer}>
-        <div>
+        {/* <div>
           <input type="file"
         accept="image/*" onChange={handleChange} id="fileInput" className={styles.input} />
           <label htmlFor="fileInput" className={styles.label}>
             Change Image
           </label>
-        </div>
-        {originalImage && (
+        </div> */}
+        {originalImage ? (
           <Sketch
             originalImage={originalImage}
             sketchRef={sketchRef}
             mode={mode}
+          />
+        ):
+        (
+          <ImageDrop
+            originalImage={originalImage}
+            setImage={setImage}
           />
         )}
       </div>

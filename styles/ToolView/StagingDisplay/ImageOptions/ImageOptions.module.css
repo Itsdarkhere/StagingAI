@@ -5,10 +5,13 @@
   align-items: center;
   margin-top: 30px;
   padding: 20px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 1rem;
+  gap: 20px;
+}
+.sketchcontainer {
+  /* background-color: rgb(255, 255, 255);
   border: rgba(0, 0, 0, 0.125);
-  box-shadow: rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;;
+  box-shadow: rgba(95, 116, 141, 0.03) 0px 2px 1px -1px, rgba(95, 116, 141, 0.04) 0px 1px 1px 0px, rgba(95, 116, 141, 0.08) 0px 1px 3px 0px;
+  border-radius: 1rem; */
 }
 .icon {
   height: 12px;

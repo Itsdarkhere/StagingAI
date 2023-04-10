@@ -46,7 +46,9 @@
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  background-color: var(--form2);
+  background-color: rgb(255, 255, 255);
+  border: 3px dashed var(--textDisabled);
+  box-shadow: rgba(95, 116, 141, 0.03) 0px 2px 1px -1px, rgba(95, 116, 141, 0.04) 0px 1px 1px 0px, rgba(95, 116, 141, 0.08) 0px 1px 3px 0px;
   text-align: center;
   color: var(--textOne);
   cursor: pointer;
@@ -139,13 +141,13 @@
 }
 .p {
   font-size: 16px;
-  color: var(--bgOne);
+  color: var(--formInactive);
   margin-top: 10px;
   margin-bottom: 0;
 }
 .pTwo {
   font-size: 14px;
-  color: var(--formInactive);
+  color: var(--textDisabled);
   max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;

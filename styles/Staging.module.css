@@ -6,7 +6,7 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(248, 249, 250);
+  background-color: rgb(243, 244, 249);
 }
 @media screen and (max-width: 800px) {
   .staging {
