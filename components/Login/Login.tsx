@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Login.module.css';
+import Link from 'next/link';
+import { Button } from '@mui/material';
 
 export default function Login({ handleLogin }: { handleLogin: () => void }) {
   const [username, setUsername] = useState('');
@@ -13,27 +15,39 @@ export default function Login({ handleLogin }: { handleLogin: () => void }) {
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <label className={styles.label}>Username</label>
-        <input
-          className={styles.input}
-          placeholder="Username"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label className={styles.label}>Password</label>
-        <input
-          className={styles.input}
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className={styles.button} type="submit">
-          Login
-        </button>
-      </form>
+      <div className={styles.innercontainer}>
+        <div className={styles.box}>
+          <div className={styles.textbox}>
+            <div className={styles.textboxinner}>
+              <span className={styles.span}>Log in</span>
+              <p className={styles.p}>
+                Dont have an account? <Link className={styles.link} href="/signup">Register</Link>
+              </p>
+            </div>
+          </div>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <input
+              className={styles.input}
+              placeholder="Email Address"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              className={styles.input}
+              style={{ marginTop: 24 }}
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button type="submit" variant='contained' className={styles.button}>Login</Button>
+            <div className={styles.forgotbox}>
+              <Link className={styles.link2} href="/forgot">Forgot password?</Link>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

@@ -30,21 +30,11 @@ export default function MaskControl({
           variant="light"
           anchorSelect=".control-tooltip"
         />
-        {/* <input
-          min={1}
-          max={100}
-          onChange={sliderChange}
-          defaultValue={strokeWidth}
-          id="copies"
-          name="width"
-          type="range"
-          className={styles.controlSlider}
-        /> */}
         <Slider 
           min={25}
           max={200}
           onChange={sliderChange}
-          defaultValue={strokeWidth}
+          defaultValue={50}
           id="copies"
           name="width"
         />

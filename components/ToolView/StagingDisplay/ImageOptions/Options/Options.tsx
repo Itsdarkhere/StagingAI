@@ -44,53 +44,56 @@ export default function Options({
   return (
     <div className={styles.container}>
       {/* <OptionsModel clickMode={clickMode} mode={mode} /> */}
-      <ToggleButtonGroup
-      value={mode}
-      exclusive
-      onChange={changeMode}
-      aria-label="text alignment"
-      >
-        <ToggleButton style={{fontSize: 12}} value="inpainting" aria-label="left aligned">
-          Inpainting
-        </ToggleButton>
-        <ToggleButton value="img2img" aria-label="centered">
-          IMG2IMG
-        </ToggleButton>
-        <ToggleButton value="controlnet" aria-label="right aligned">
-          Controlnet
-        </ToggleButton>
-      </ToggleButtonGroup>
-      <label htmlFor="what_to_add" className={styles.label}>
-        Select room type
-      </label>
-      <FormSelect
-        options={furnitureOptions}
-        onChange={undefined}
-        hasOnChange={false}
-        name="what_to_add"
-        placeholder="Room type"
-      />
-      <label htmlFor="copies" className={styles.label}>
-        Amount of copies
-      </label>
-      <Slider
-        id="copies"
-        name="copies"
-        aria-label="copies"
-        min={1}
-        max={8}
-        defaultValue={2}
-        step={1}
-        value={copies}
-        onChange={sliderChange}
-      />
+      <div style={{width: '100%', display: 'flex', flexDirection: 'column'}}>
+        <ToggleButtonGroup
+          value={mode}
+          color='primary'
+          exclusive
+          onChange={changeMode}
+          aria-label="text alignment"
+        >
+          <ToggleButton style={{fontSize: 12}} value="inpainting" aria-label="left aligned">
+            Inpainting
+          </ToggleButton>
+          <ToggleButton value="img2img" aria-label="centered">
+            IMG2IMG
+          </ToggleButton>
+          <ToggleButton value="controlnet" aria-label="right aligned">
+            Controlnet
+          </ToggleButton>
+        </ToggleButtonGroup>
+        <label htmlFor="what_to_add" className={styles.label}>
+          Select room type
+        </label>
+        <FormSelect
+          options={furnitureOptions}
+          onChange={undefined}
+          hasOnChange={false}
+          name="what_to_add"
+          placeholder="Room type"
+        />
+        <label htmlFor="copies" className={styles.label}>
+          Amount of copies
+        </label>
+        <Slider
+          id="copies"
+          name="copies"
+          aria-label="copies"
+          min={1}
+          max={8}
+          defaultValue={2}
+          step={1}
+          value={copies}
+          onChange={sliderChange}
+        />
+      </div>
       <Button
         type="submit"
         disabled={fetching}
         variant='contained'
-        style={{marginTop: 12, height: 45, backgroundImage: 'linear-gradient(310deg, rgb(20, 23, 39), rgb(58, 65, 111))'}}
+        style={{height: 45}}
       >
-        {fetching ? <Spinner wh={30} white={true} /> : (
+        {fetching ? <Spinner wh={30} white={false} /> : (
           <>Generate <Image src={wand} style={{width: 25, height: 25, marginLeft: 2}} alt="wand" /></>
         )}
       </Button>
