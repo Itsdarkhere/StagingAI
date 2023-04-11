@@ -3,9 +3,12 @@ import Link from 'next/link';
 import styles from '../styles/SideNav.module.css';
 import { usePathname } from 'next/navigation';
 import sofa from '../public/sofa.svg';
-import file from '../public/file.svg';
 import upgrade from '../public/upgrade.png';
 import Image from 'next/image';
+import HandyMan from "@mui/icons-material/Handyman"
+import ImageSearch from "@mui/icons-material/ImageSearch"
+import ManageAccount from "@mui/icons-material/ManageAccounts"
+import Logout from "@mui/icons-material/Logout"
 
 export default function SideNav() {
   const pathname = usePathname();
@@ -39,7 +42,7 @@ export default function SideNav() {
                     alignItems: 'center',
                   }}
                 >
-                  <Image height={20} src={file} alt="file" />
+                  <HandyMan htmlColor={`${pathname == '/' ? 'rgb(99, 102, 241)' : 'rgb(157, 164, 174)'}`} fontSize='small' />
                 </span>
                 <span
                   className={`${styles.span} ${
@@ -64,7 +67,7 @@ export default function SideNav() {
                     alignItems: 'center',
                   }}
                 >
-                  <Image height={20} src={file} alt="file" />
+                  <ImageSearch htmlColor={`${pathname == '/images' ? 'rgb(99, 102, 241)' : 'rgb(157, 164, 174)'}`} fontSize="small" />
                 </span>
                 <span
                   className={`${styles.span} ${
@@ -89,7 +92,7 @@ export default function SideNav() {
                     alignItems: 'center',
                   }}
                 >
-                  <Image height={20} src={file} alt="file" />
+                  <ManageAccount htmlColor={`${pathname == '/subscription' ? 'rgb(99, 102, 241)' : 'rgb(157, 164, 174)'}`} fontSize="small" />
                 </span>
                 <span
                   className={`${styles.span} ${
@@ -114,7 +117,7 @@ export default function SideNav() {
                     alignItems: 'center',
                   }}
                 >
-                  <Image height={20} src={file} alt="file" />
+                  <Logout htmlColor={`${pathname == '/logout' ? 'rgb(99, 102, 241)' : 'rgb(157, 164, 174)'}`} fontSize="small" />
                 </span>
                 <span
                   className={`${styles.span} ${
