@@ -3,8 +3,6 @@ import StagingDisplay from '@/components/ToolView/StagingDisplay/StagingDisplay'
 import React, { useRef, useState } from 'react';
 import 'react-tooltip/dist/react-tooltip.css';
 import styles from '../../styles/Staging.module.css';
-import ImageDrop from './ImageDrop/ImageDrop';
-import EmptyDisplay from '../EmptyDisplay';
 import SideNav from '../SideNav';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

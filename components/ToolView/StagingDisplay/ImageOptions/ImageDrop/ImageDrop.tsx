@@ -1,20 +1,23 @@
 import { Button } from "@mui/material"
 import Image from 'next/image';
-import styles from '../../../styles/ToolView/ImageDrop/ImageDrop.module.css';
+import styles from '../../../../../styles/ToolView/ImageDrop/ImageDrop.module.css';
 import React, { useEffect, useState } from 'react';
-import IMGUP from "../../../public/imageup.svg";
+import IMGUP from "../../../../../public/imageup.svg";
 import Spinner from "@/components/Spinner";
 
 export default function ImageDrop({
   originalImage,
   setImage,
+  loaded,
+  setLoaded,
 }: {
   originalImage: string | undefined;
   setImage: (image: string | undefined) => void;
+  setLoaded: (loaded: boolean) => void;
+  loaded: boolean;
 }) {
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [dragActive, setDragActive] = useState(false);
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setLoaded(false);
@@ -92,19 +95,20 @@ export default function ImageDrop({
         className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}
       >
         <div className={styles.inputLabelInner}>
+          {/* This is just for checking when image has loaded */}
           {!uploadingPhoto && originalImage !== undefined && (
             <Image
-              fill
               onLoad={() => setLoaded(true)}
-              sizes="400px"
-              style={{ objectFit: 'cover' }}
-              className={`${styles.image} ${loaded && styles.loaded}`}
+              fill
+              style={{ opacity: 0 }}
               src={originalImage + '?' + Math.random()}
-              alt="upload"
+              alt="load check"
             />
           )}
-          {uploadingPhoto || (originalImage !== undefined && !loaded) && <Spinner wh={45} white={true} />}
+          {/* Show this when we are loading the image */}
+          {uploadingPhoto || (originalImage !== undefined && !loaded) && <Spinner wh={45} white={false} />}
 
+          {/* Before uploading an image */}
           {originalImage === undefined && !uploadingPhoto && (
             <>
               <Image height={75} src={IMGUP} alt="upload" />
@@ -124,7 +128,7 @@ export default function ImageDrop({
             </>
           )}
 
-          {!uploadingPhoto && loaded && (
+          {/* {!uploadingPhoto && loaded && (
             <button
               type="button"
               onClick={removeImage}
@@ -132,7 +136,7 @@ export default function ImageDrop({
             >
               X
             </button>
-          )}
+          )} */}
         </div>
       </label>
       {dragActive && (

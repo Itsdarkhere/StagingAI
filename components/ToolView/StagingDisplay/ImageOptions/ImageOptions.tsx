@@ -1,11 +1,8 @@
 import Sketch from '@/components/ToolView/StagingDisplay/ImageOptions/Sketch/Sketch';
 import { RefObject, useState } from 'react';
 import styles from '../../../../styles/ToolView/StagingDisplay/ImageOptions/ImageOptions.module.css';
+import ImageDrop from './ImageDrop/ImageDrop';
 import Options from './Options/Options';
-import Image from 'next/image';
-import TRASH from '../../../../public/trash.svg';
-import REPLACE from '../../../../public/replace.svg';
-import ImageDrop from '../../ImageDrop/ImageDrop';
 
 export default function ImageOptions({
   changeMode,
@@ -42,6 +39,7 @@ export default function ImageOptions({
   setImage: (image: string | undefined) => void;
 }) {
   const [copies, setCopies] = useState(1);
+  const [loaded, setLoaded] = useState(false);
 
   const sliderChange = (
     event: Event,
@@ -149,21 +147,19 @@ export default function ImageOptions({
   return (
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
       <div className={styles.sketchcontainer}>
-        {/* <div>
-          <input type="file"
-        accept="image/*" onChange={handleChange} id="fileInput" className={styles.input} />
-          <label htmlFor="fileInput" className={styles.label}>
-            Change Image
-          </label>
-        </div> */}
-        {originalImage ? (
+        {originalImage && loaded ? (
           <Sketch
             originalImage={originalImage}
             sketchRef={sketchRef}
             mode={mode}
           />
         ) : (
-          <ImageDrop originalImage={originalImage} setImage={setImage} />
+          <ImageDrop 
+            originalImage={originalImage} 
+            setImage={setImage}
+            loaded={loaded}
+            setLoaded={setLoaded} 
+          />
         )}
       </div>
       <Options
