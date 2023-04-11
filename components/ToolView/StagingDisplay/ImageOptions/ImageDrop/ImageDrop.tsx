@@ -128,16 +128,6 @@ export default function ImageDrop({
               </Button>
             </>
           )}
-
-          {/* {!uploadingPhoto && loaded && (
-            <button
-              type="button"
-              onClick={removeImage}
-              className={styles.closeButton}
-            >
-              X
-            </button>
-          )} */}
         </div>
       </label>
       {dragActive && (

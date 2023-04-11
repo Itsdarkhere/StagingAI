@@ -21,7 +21,6 @@ export default function Sketch({
   const [showBrushCursor, setShowBrushCursor] = useState<boolean>(false);
   const [showInstructions, setShowInstructions] = useState<boolean>(true);
   const [imgLoading, setImageLoading] = useState(true);
-  const [shimmering, setShimmering] = useState(true);
 
   useEffect(() => {
     setShowInstructions(true);
@@ -31,8 +30,6 @@ export default function Sketch({
 
   const onImageLoad = () => {
     setImageLoading(false);
-    // Remove timeout on return
-    setTimeout(() => setShimmering(false), 600);
   };
 
   const clearCanvas = () => {
@@ -69,7 +66,7 @@ export default function Sketch({
   };
   return (
     <div className={`${styles.box}`}>
-      <div className={`${shimmering && styles.shimmer} ${styles.loadable}`}>
+      <div className={styles.loadable}>
         <motion.img
           initial={{ height: '10rem', opacity: 0 }}
           animate={{
