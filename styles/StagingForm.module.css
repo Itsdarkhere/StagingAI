@@ -32,56 +32,6 @@
   position: relative;
   z-index: 0;
 }
-.input {
-  opacity: 0;
-  position: absolute;
-  top: 50px;
-  height: 220px;
-}
-.inputLabel {
-  height: 400px;
-  width: 100%;
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: rgb(255, 255, 255);
-  border: 3px dashed var(--textDisabled);
-  box-shadow: rgba(95, 116, 141, 0.03) 0px 2px 1px -1px, rgba(95, 116, 141, 0.04) 0px 1px 1px 0px, rgba(95, 116, 141, 0.08) 0px 1px 3px 0px;
-  text-align: center;
-  color: var(--textOne);
-  cursor: pointer;
-  z-index: 6;
-  overflow: hidden;
-}
-.inputLabel:hover {
-  filter: brightness(110%);
-}
-.drag_active {
-  pointer-events: none;
-}
-.inputLabelInner {
-  padding: 20px;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.dragFileElement {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  z-index: 5;
-}
 .label {
   font-weight: var(--regular);
   color: var(--textThree);
@@ -139,12 +89,6 @@
   text-overflow: ellipsis;
   margin: 0;
 }
-.p {
-  font-size: 16px;
-  color: var(--formInactive);
-  margin-top: 10px;
-  margin-bottom: 0;
-}
 .pTwo {
   font-size: 14px;
   color: var(--textDisabled);
@@ -154,45 +98,4 @@
   white-space: nowrap;
   margin-top: 10px;
   margin-bottom: 0;
-}
-.span {
-  color: var(--formInactive);
-  margin-top: 5px;
-}
-.span:hover {
-  text-decoration: underline;
-}
-.image {
-  transform: translate(0px, 0px) scale(1);
-  opacity: 0;
-  transition: transform 0.5s ease 0s;
-}
-.image.loaded {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  background-color: var(--form3);
-  border: none;
-  color: var(--bgOne);
-  border-radius: 4px;
-  cursor: pointer;
-}
-.closeButton:hover {
-  background-color: var(--bgFour);
-}
-.closeButton:active {
-  background-color: var(--bgFive);
-}
-.closeButton:focus-visible {
-  border: 1px solid var(--bgOne);
-}
-.closeButton:disabled {
-  background-color: var(--bgDisabled);
-  color: var(--textDisabled);
 }
