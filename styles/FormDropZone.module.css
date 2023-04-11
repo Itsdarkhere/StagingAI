@@ -2,8 +2,8 @@
     font-size: 16px;
     color: rgb(122, 122, 122);
     font-weight: var(--semibold);
-    margin-top: 15px;
     margin-bottom: 0;
+    margin-top: 5px;
 }
 .input {
     opacity: 0;
@@ -57,11 +57,11 @@
 }
 .span {
     color: var(--formInactive);
-    margin-top: 5px;
+    font-size: 14px;
+    font-weight: var(--regular);
+    opacity: 0.8;
+    margin: 0;
     margin-top: 10px;
-}
-.span:hover {
-    text-decoration: underline;
 }
 .image {
     transform: translate(0px, 0px) scale(1);

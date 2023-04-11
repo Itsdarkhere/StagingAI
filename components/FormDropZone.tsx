@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import UPLOAD from '../public/upload.svg';
+import IMGUP from "../public/imageup.svg"
 import styles from '../styles/FormDropZone.module.css';
 import Spinner from './Spinner';
 import { Button } from "@mui/material"
@@ -58,13 +59,15 @@ export default function FormDropZone({
 
           {image === undefined && !uploadingPhoto && (
             <>
-              <Image height={50} src={UPLOAD} alt="upload" />
+              <Image height={75} src={IMGUP} alt="upload" />
               <p className={styles.p}>
                 Drag your image here to start uploading
               </p>
-              <span className={styles.span}>-------- OR --------</span>
+              <p className={styles.span}>───── OR ─────</p>
               <Button variant="contained" 
-              style={{marginTop: 15, textTransform: 'none', backgroundColor: 'rgb(99, 102, 241)', height: 40}}>Browse files</Button>
+              style={{marginTop: 15, textTransform: 'none', 
+              backgroundColor: 'rgb(99, 102, 241)', height: 40,
+              paddingLeft: 25, paddingRight: 25}}>Browse files</Button>
             </>
           )}
 
