@@ -167,6 +167,17 @@
 .bottomlink:hover {
   background-color: rgb(75, 78, 235);
 }
+.logolink {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7.5px;
+  text-decoration: none;
+  color: rgb(75, 78, 235);
+  font-size: 14px;
+  font-weight: var(--semibold);
+}
 .imagecontainer {
   display: flex;
   margin-top: 16px;
