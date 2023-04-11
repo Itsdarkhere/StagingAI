@@ -29,7 +29,7 @@ export default function FormDropZone({
   }, [image]);
   return (
     <>
-      <input
+      {/* <input
         onChange={handleChange}
         className={styles.input}
         type="file"
@@ -38,7 +38,7 @@ export default function FormDropZone({
         name="input-file-upload"
         required={image ? false : true}
         multiple={false}
-      />
+      /> */}
       <label
         htmlFor="input-file-upload"
         className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}
@@ -65,9 +65,14 @@ export default function FormDropZone({
               </p>
               <p className={styles.span}>───── OR ─────</p>
               <Button variant="contained" 
+              component="label"
               style={{marginTop: 15, textTransform: 'none', 
               backgroundColor: 'rgb(99, 102, 241)', height: 40,
-              paddingLeft: 25, paddingRight: 25}}>Browse files</Button>
+              paddingLeft: 25, paddingRight: 25}}>Browse files
+                <input hidden accept="image/*" multiple={false} onChange={handleChange} type="file"
+                name="input-file-upload"
+                required={image ? false : true} />
+              </Button>
             </>
           )}
 
