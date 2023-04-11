@@ -26,14 +26,14 @@
   height: 0;
 }
 .label {
-    display: inline-block;
-    cursor: pointer;
-    background-color:  transparent;
-    color: var(--textThree);
-    font-weight: bold;
-    font-size: 12px;
-    padding-bottom: 5px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--textThree);
+  font-weight: bold;
+  font-size: 12px;
+  padding-bottom: 5px;
 }
 .label:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }

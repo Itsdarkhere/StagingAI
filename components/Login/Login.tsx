@@ -21,7 +21,10 @@ export default function Login({ handleLogin }: { handleLogin: () => void }) {
             <div className={styles.textboxinner}>
               <span className={styles.span}>Log in</span>
               <p className={styles.p}>
-                Dont have an account? <Link className={styles.link} href="/signup">Register</Link>
+                Dont have an account?{' '}
+                <Link className={styles.link} href="/signup">
+                  Register
+                </Link>
               </p>
             </div>
           </div>
@@ -41,9 +44,13 @@ export default function Login({ handleLogin }: { handleLogin: () => void }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type="submit" variant='contained' className={styles.button}>Login</Button>
+            <Button type="submit" variant="contained" className={styles.button}>
+              Login
+            </Button>
             <div className={styles.forgotbox}>
-              <Link className={styles.link2} href="/forgot">Forgot password?</Link>
+              <Link className={styles.link2} href="/forgot">
+                Forgot password?
+              </Link>
             </div>
           </form>
         </div>

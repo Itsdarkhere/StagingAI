@@ -17,7 +17,10 @@ export default function ImageOptions({
   controlnet,
   setImage,
 }: {
-  changeMode: (event: React.MouseEvent<HTMLElement, MouseEvent>, value: any) => void;
+  changeMode: (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    value: any
+  ) => void;
   mode: string;
   originalImage: string | undefined;
   sketchRef: RefObject<any>;
@@ -40,7 +43,11 @@ export default function ImageOptions({
 }) {
   const [copies, setCopies] = useState(1);
 
-  const sliderChange = (event: Event, value: number | number[], activeThumb: number) => {
+  const sliderChange = (
+    event: Event,
+    value: number | number[],
+    activeThumb: number
+  ) => {
     if (typeof value === 'number') {
       setCopies(value);
     }
@@ -155,12 +162,8 @@ export default function ImageOptions({
             sketchRef={sketchRef}
             mode={mode}
           />
-        ):
-        (
-          <ImageDrop
-            originalImage={originalImage}
-            setImage={setImage}
-          />
+        ) : (
+          <ImageDrop originalImage={originalImage} setImage={setImage} />
         )}
       </div>
       <Options

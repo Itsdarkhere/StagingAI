@@ -53,7 +53,11 @@ export default function Sketch({
     opacity: 0.8,
   };
 
-  const sliderChange = (event: Event, value: number | number[], activeThumb: number) => {
+  const sliderChange = (
+    event: Event,
+    value: number | number[],
+    activeThumb: number
+  ) => {
     if (typeof value === 'number') {
       setStrokeWidth(value);
     }
@@ -81,7 +85,9 @@ export default function Sketch({
           width="auto"
           src={originalImage}
         />
-        {showBrushCursor && mode === 'inpainting' && <PaintCursor size={strokeWidth} />}
+        {showBrushCursor && mode === 'inpainting' && (
+          <PaintCursor size={strokeWidth} />
+        )}
         {mode === 'inpainting' && (
           <div
             className={styles.sketchBox}

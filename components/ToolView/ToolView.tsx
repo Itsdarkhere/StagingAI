@@ -257,7 +257,10 @@ export default function ToolView() {
     setImage(img);
   };
 
-  const changeMode = (event: React.MouseEvent<HTMLElement, MouseEvent>, value: any) => {
+  const changeMode = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    value: any
+  ) => {
     if (value !== null) {
       setMode(value);
     }
@@ -265,20 +268,20 @@ export default function ToolView() {
 
   return (
     <div className={styles.staging} id="tool">
-        <SideNav />
-        <StagingDisplay
-          sketchRef={sketchRef}
-          fetching={fetching}
-          renders={renders}
-          prediction={prediction}
-          originalImage={originalImage}
-          mode={mode}
-          setImage={setOriginalImage}
-          upscale={(imgURL: string) => upscale(imgURL)}
-          changeMode={changeMode}
-          inpainting={inpainting}
-          controlnet={controlnet}
-        />
+      <SideNav />
+      <StagingDisplay
+        sketchRef={sketchRef}
+        fetching={fetching}
+        renders={renders}
+        prediction={prediction}
+        originalImage={originalImage}
+        mode={mode}
+        setImage={setOriginalImage}
+        upscale={(imgURL: string) => upscale(imgURL)}
+        changeMode={changeMode}
+        inpainting={inpainting}
+        controlnet={controlnet}
+      />
     </div>
   );
 }

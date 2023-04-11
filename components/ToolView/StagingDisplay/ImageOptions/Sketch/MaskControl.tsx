@@ -4,7 +4,7 @@ import DELETE from '../../../../../public/delete.svg';
 import Image from 'next/image';
 import styles from '../../../../../styles/MaskControl.module.css';
 import { Tooltip } from 'react-tooltip';
-import { Slider } from "@mui/material"
+import { Slider } from '@mui/material';
 
 export default function MaskControl({
   undo,
@@ -13,7 +13,11 @@ export default function MaskControl({
   strokeWidth,
 }: {
   undo: () => void;
-  sliderChange: (event: Event, value: number | number[], activeThumb: number) => void;
+  sliderChange: (
+    event: Event,
+    value: number | number[],
+    activeThumb: number
+  ) => void;
   clear: () => void;
   strokeWidth: number;
 }) {
@@ -30,7 +34,7 @@ export default function MaskControl({
           variant="light"
           anchorSelect=".control-tooltip"
         />
-        <Slider 
+        <Slider
           min={25}
           max={200}
           onChange={sliderChange}
@@ -47,7 +51,7 @@ export default function MaskControl({
           className={`${styles.controlB} control-tooltip`}
           data-tooltip-content="Undo previous action"
           onClick={undo}
-          type='button'
+          type="button"
         >
           <Image width={20} height={20} src={BACK2} alt="back" />
         </button>

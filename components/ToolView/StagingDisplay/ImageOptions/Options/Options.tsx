@@ -3,9 +3,9 @@ import Spinner from '@/components/Spinner';
 import React from 'react';
 import styles from '../../../../../styles/ToolView/StagingDisplay/ImageOptions/Options/Options.module.css';
 import Image from 'next/image';
-import wand from "../../../../../public/generate.svg";
-import { Slider } from "@mui/material"
-import { Button, ToggleButton, ToggleButtonGroup } from "@mui/material"
+import wand from '../../../../../public/generate.svg';
+import { Slider } from '@mui/material';
+import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import FormSelect from '@/components/FormSelect';
 
 export default function Options({
@@ -16,12 +16,18 @@ export default function Options({
   sliderChange,
 }: {
   fetching: boolean;
-  changeMode: (event: React.MouseEvent<HTMLElement, MouseEvent>, value: any) => void;
+  changeMode: (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    value: any
+  ) => void;
   mode: string;
   copies: number;
-  sliderChange: (event: Event, value: number | number[], activeThumb: number) => void;
+  sliderChange: (
+    event: Event,
+    value: number | number[],
+    activeThumb: number
+  ) => void;
 }) {
-
   interface Option {
     value: string;
     label: string;
@@ -44,15 +50,19 @@ export default function Options({
   return (
     <div className={styles.container}>
       {/* <OptionsModel clickMode={clickMode} mode={mode} /> */}
-      <div style={{width: '100%', display: 'flex', flexDirection: 'column'}}>
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
         <ToggleButtonGroup
           value={mode}
-          color='primary'
+          color="primary"
           exclusive
           onChange={changeMode}
           aria-label="text alignment"
         >
-          <ToggleButton style={{fontSize: 12}} value="inpainting" aria-label="left aligned">
+          <ToggleButton
+            style={{ fontSize: 12 }}
+            value="inpainting"
+            aria-label="left aligned"
+          >
             Inpainting
           </ToggleButton>
           <ToggleButton value="img2img" aria-label="centered">
@@ -90,11 +100,20 @@ export default function Options({
       <Button
         type="submit"
         disabled={fetching}
-        variant='contained'
-        style={{height: 45}}
+        variant="contained"
+        style={{ height: 45 }}
       >
-        {fetching ? <Spinner wh={30} white={false} /> : (
-          <>Generate <Image src={wand} style={{width: 25, height: 25, marginLeft: 2}} alt="wand" /></>
+        {fetching ? (
+          <Spinner wh={30} white={false} />
+        ) : (
+          <>
+            Generate{' '}
+            <Image
+              src={wand}
+              style={{ width: 25, height: 25, marginLeft: 2 }}
+              alt="wand"
+            />
+          </>
         )}
       </Button>
     </div>

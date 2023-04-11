@@ -28,7 +28,10 @@ export default function StagingDisplay({
   mode: string;
   upscale: (imgURL: string) => void;
   setImage: (image: string | undefined) => void;
-  changeMode: (event: React.MouseEvent<HTMLElement, MouseEvent>, value: any) => void;
+  changeMode: (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    value: any
+  ) => void;
   inpainting: (reqData: {
     room: string;
     style: string;
