@@ -19,7 +19,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 4px;
-    background-color: rgba(25, 118, 210, 0.08);
+    background-color: #f3f7fc;
     border: 2px dashed rgb(216, 216, 216);
     box-shadow: rgba(95, 116, 141, 0.03) 0px 2px 1px -1px, rgba(95, 116, 141, 0.04) 0px 1px 1px 0px, rgba(95, 116, 141, 0.08) 0px 1px 3px 0px;
     text-align: center;
@@ -27,9 +27,6 @@
     cursor: pointer;
     z-index: 6;
     overflow: hidden;
-}
-.inputLabel:hover {
-    filter: brightness(110%);
 }
 .drag_active {
     pointer-events: none;
