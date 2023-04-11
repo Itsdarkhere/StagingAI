@@ -118,10 +118,11 @@ export default function ImageDrop({
               <p className={styles.span}>───── OR ─────</p>
               <Button variant="contained" 
               component="label"
-              style={{marginTop: 15, textTransform: 'none', 
+              style={{marginTop: 15, textTransform: 'none', position: 'relative', 
               backgroundColor: 'rgb(99, 102, 241)', height: 40,
               paddingLeft: 25, paddingRight: 25}}>Browse files
-                <input hidden accept="image/*" multiple={false} onChange={handleChange} type="file"
+                <input accept="image/*" multiple={false} onChange={handleChange} type="file"
+                style={{ opacity: 0, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}
                 name="input-file-upload"
                 required={originalImage ? false : true} />
               </Button>
