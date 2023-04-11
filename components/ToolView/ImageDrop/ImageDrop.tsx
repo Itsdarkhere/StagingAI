@@ -86,8 +86,7 @@ export default function ImageDrop({
   };
 
   return (
-    <>
-      <div className={styles.container} onDragEnter={handleDrag}>
+    <div className={styles.container} onDragEnter={handleDrag}>
         <label
         htmlFor="input-file-upload"
         className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}
@@ -146,6 +145,5 @@ export default function ImageDrop({
         ></div>
       )}
       </div>
-    </>
   );
 }
