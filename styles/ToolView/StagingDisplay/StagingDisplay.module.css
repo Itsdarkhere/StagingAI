@@ -167,3 +167,29 @@
     display: block;
   }
 }
+.closeButton {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--form3);
+  border: none;
+  color: var(--bgOne);
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 10;
+}
+.closeButton:hover {
+  background-color: #1976d2;
+}
+.closeButton:active {
+  background-color: var(--bgFive);
+}
+.closeButton:focus-visible {
+  border: 1px solid var(--bgOne);
+}
+.closeButton:disabled {
+  background-color: var(--bgDisabled);
+  color: var(--textDisabled);
+}

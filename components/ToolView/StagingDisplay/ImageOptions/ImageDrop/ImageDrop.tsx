@@ -23,12 +23,6 @@ export default function ImageDrop({
     setLoaded(false);
   }, [originalImage]);
 
-  // Remove image from state
-  const removeImage = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setImage(undefined);
-  };
-
   // triggers when file is dropped
   const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();

@@ -87,28 +87,3 @@
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  background-color: var(--form3);
-  border: none;
-  color: var(--bgOne);
-  border-radius: 4px;
-  cursor: pointer;
-}
-.closeButton:hover {
-  background-color: var(--bgFour);
-}
-.closeButton:active {
-  background-color: var(--bgFive);
-}
-.closeButton:focus-visible {
-  border: 1px solid var(--bgOne);
-}
-.closeButton:disabled {
-  background-color: var(--bgDisabled);
-  color: var(--textDisabled);
-}

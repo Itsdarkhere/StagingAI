@@ -9,10 +9,12 @@ import Instructions from './Instructions';
 
 export default function Sketch({
   originalImage,
+  setImage,
   sketchRef,
   mode,
 }: {
   originalImage: string;
+  setImage: (image: string | undefined) => void;
   sketchRef: RefObject<any>;
   mode: string;
 }) {
@@ -64,8 +66,22 @@ export default function Sketch({
     setShowInstructions(false);
     setShowBrushCursor(true);
   };
+
+  // Remove image from state
+  const removeImage = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setImage(undefined);
+  };
+
   return (
     <div className={`${styles.box}`}>
+      <button
+        type="button"
+        onClick={removeImage}
+        className={styles.closeButton}
+      >
+        X
+      </button>
       <div className={styles.loadable}>
         <motion.img
           initial={{ height: '10rem', opacity: 0 }}

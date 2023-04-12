@@ -150,6 +150,7 @@ export default function ImageOptions({
         {originalImage && loaded ? (
           <Sketch
             originalImage={originalImage}
+            setImage={setImage}
             sketchRef={sketchRef}
             mode={mode}
           />
