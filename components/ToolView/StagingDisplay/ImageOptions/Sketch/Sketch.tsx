@@ -22,6 +22,7 @@ export default function Sketch({
   const [strokeWidth, setStrokeWidth] = useState<number>(50);
   const [showBrushCursor, setShowBrushCursor] = useState<boolean>(false);
   const [showInstructions, setShowInstructions] = useState<boolean>(true);
+  const [position, setPosition] = useState({ x: 100, y: 100 });
   const [imgLoading, setImageLoading] = useState(true);
 
   useEffect(() => {
@@ -58,6 +59,12 @@ export default function Sketch({
     activeThumb: number
   ) => {
     if (typeof value === 'number') {
+      // Center and show the paint cursor
+      if (!showBrushCursor) {
+        console.log("LOG");
+        setShowBrushCursor(true);
+        centerPaintCursor();
+      }
       setStrokeWidth(value);
     }
   };
@@ -66,6 +73,26 @@ export default function Sketch({
     setShowInstructions(false);
     setShowBrushCursor(true);
   };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const offsetX = e.nativeEvent.offsetX;
+    const offsetY = e.nativeEvent.offsetY;
+    setPosition({ x: offsetX, y: offsetY });
+  };
+
+  const centerPaintCursor = () => {
+    const element = document.getElementById('sketchbox');
+    if (element) {
+      const rect = element.getBoundingClientRect();
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      setPosition({ x: centerX, y: centerY });
+    }
+  }
+
+  const onSliderChangeCommitted = () => {
+    setShowBrushCursor(false);
+  }
 
   return (
     <div className={`${styles.box}`}>
@@ -85,14 +112,13 @@ export default function Sketch({
           width="auto"
           src={originalImage}
         />
-        {showBrushCursor && mode === 'inpainting' && (
-          <PaintCursor size={strokeWidth} />
-        )}
         {mode === 'inpainting' && (
           <div
             className={styles.sketchBox}
+            id="sketchbox"
             onMouseEnter={() => onMouseEnter()}
             onMouseLeave={() => setShowBrushCursor(false)}
+            onMouseMove={handleMouseMove}
           >
             <ReactSketchCanvas
               ref={sketchRef}
@@ -103,6 +129,9 @@ export default function Sketch({
               exportWithBackgroundImage={true}
               strokeColor="white"
             />
+            {showBrushCursor && mode === 'inpainting' && (
+              <PaintCursor size={strokeWidth} position={position} />
+            )}
             <AnimatePresence
               initial={false}
               mode="wait"
@@ -117,6 +146,7 @@ export default function Sketch({
         <MaskControl
           undo={undoCanvas}
           sliderChange={sliderChange}
+          onSliderChangeCommitted={onSliderChangeCommitted}
           clear={clearCanvas}
           strokeWidth={strokeWidth}
         />

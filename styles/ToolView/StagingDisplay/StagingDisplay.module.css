@@ -30,6 +30,8 @@
   grid-auto-flow: dense;
   justify-content: center;
   padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   gap: 20px;
 }
 .rendersCol {

@@ -9,6 +9,7 @@ import { Slider } from '@mui/material';
 export default function MaskControl({
   undo,
   sliderChange,
+  onSliderChangeCommitted,
   clear,
   strokeWidth,
 }: {
@@ -18,6 +19,7 @@ export default function MaskControl({
     value: number | number[],
     activeThumb: number
   ) => void;
+  onSliderChangeCommitted: () => void;
   clear: () => void;
   strokeWidth: number;
 }) {
@@ -38,6 +40,7 @@ export default function MaskControl({
           min={25}
           max={200}
           onChange={sliderChange}
+          onChangeCommitted={onSliderChangeCommitted}
           defaultValue={50}
           id="copies"
           name="width"

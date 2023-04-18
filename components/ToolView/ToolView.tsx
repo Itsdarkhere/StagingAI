@@ -18,7 +18,7 @@ export default function ToolView() {
   const paintingAddKeyMap = new Map([
     [
       'bedroom9000.pt',
-      'A photo of a modern bedroom, _a1_a2_a3_a4_a5_a6 , natural light',
+      'A high resolution photo of a modern bedroom, _a1_a2_a3_a4_a5_a6 , hyperdetailed, architectural rendering, volumetric light, cozy athmosphere, contrast, ultradetail, sun light',
     ],
     [
       'bedroom9800.pt',
@@ -39,7 +39,7 @@ export default function ToolView() {
     ],
     [
       'living10000.pt',
-      'A photo of a modern living room, natural light, _g1_g2_g3_g4_g5_g6',
+      'A high resolution photo of a modern living room, _g1_g2_g3_g4_g5_g6 , interior design magazine, sun light',
     ],
     [
       'office10000.pt',
@@ -115,9 +115,6 @@ export default function ToolView() {
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
 
-    console.log("HEY");
-    console.log(reqData.width);
-    console.log(reqData.height);
     // Send inference request
     const response = await fetch('/api/predictions/inpainting', {
       method: 'POST',
