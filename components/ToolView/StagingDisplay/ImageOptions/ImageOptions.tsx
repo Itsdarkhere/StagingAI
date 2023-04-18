@@ -30,6 +30,8 @@ export default function ImageOptions({
     mask: string;
     concept: string;
     copies: number;
+    width: number;
+    height: number;
   }) => void;
   controlnet: (reqData: {
     room: string;
@@ -41,6 +43,7 @@ export default function ImageOptions({
 }) {
   const [copies, setCopies] = useState(1);
   const [loaded, setLoaded] = useState(false);
+  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0});
 
   const copiesChange = (
     value: number,
@@ -80,6 +83,8 @@ export default function ImageOptions({
 
     let target;
 
+    let newDimensions = await calculateNewDimensions(imageDimensions.width, imageDimensions.height);
+
     let data = {
       room: '',
       style: 'Fill with something',
@@ -87,6 +92,8 @@ export default function ImageOptions({
       mask: '',
       concept: '',
       copies: copies,
+      width: newDimensions.newWidth,
+      height: newDimensions.newHeight,
     };
 
     target = event.target as typeof event.target & {
@@ -105,41 +112,37 @@ export default function ImageOptions({
     }
   };
 
-  // triggers when file is selected with click
-  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const file = e.target.files?.[0]!;
-    // Upload image to S3
-    await uploadPhoto(file);
-    e.target.value = '';
-  };
+  const calculateNewDimensions = async (width: number, height: number, maxSize = 512) => {
+    let longerSide, shorterSide;
+    let newWidth, newHeight;
 
-  const uploadPhoto = async (file: File) => {
-    // setUploadingPhoto(true);
-    const filename = encodeURIComponent(file.name);
-    const fileType = encodeURIComponent(file.type);
-
-    // Generates a presigned POST
-    const res = await fetch(
-      `/api/upload?file=${filename}&fileType=${fileType}`
-    );
-    const { url, fields } = await res.json();
-    const formData = new FormData();
-
-    Object.entries({ ...fields, file }).forEach(([key, value]) => {
-      formData.append(key, value as string);
-    });
-
-    const upload = await fetch(url, {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (upload.ok) {
-      setImage(url + filename);
+    // Determine which side is the longer one or if they are equal
+    if (width > height) {
+      longerSide = width;
+      shorterSide = height;
+    } else if (width < height) {
+        longerSide = height;
+        shorterSide = width;
+    } else {
+        // If width and height are equal, both sides are resized to maxSize
+        return { newWidth: maxSize, newHeight: maxSize };
     }
-    // setUploadingPhoto(false);
-  };
+
+    const aspectRatio = shorterSide / longerSide;
+    const newLongerSide = maxSize;
+    const newShorterSide = Math.round(newLongerSide * aspectRatio);
+
+    // Assign the new dimensions based on which side was the longer one
+    if (width > height) {
+      newWidth = newLongerSide;
+      newHeight = newShorterSide;
+    } else {
+      newWidth = newShorterSide;
+      newHeight = newLongerSide;
+    }
+
+    return { newWidth, newHeight };
+  }
 
   return (
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
@@ -158,6 +161,7 @@ export default function ImageOptions({
               originalImage={originalImage}
               setImage={setImage}
               loaded={loaded}
+              setImageDimensions={setImageDimensions}
               setLoaded={setLoaded}
             />
           )}

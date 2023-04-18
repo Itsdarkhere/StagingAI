@@ -10,11 +10,13 @@ export default function ImageDrop({
   setImage,
   loaded,
   setLoaded,
+  setImageDimensions,
 }: {
   originalImage: string | undefined;
   setImage: (image: string | undefined) => void;
   setLoaded: (loaded: boolean) => void;
   loaded: boolean;
+  setImageDimensions: (dimensions: { width: number; height: number }) => void;
 }) {
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [dragActive, setDragActive] = useState(false);
@@ -82,6 +84,12 @@ export default function ImageDrop({
     setUploadingPhoto(false);
   };
 
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth: width, naturalHeight: height } = event.target as HTMLImageElement;
+    setImageDimensions({ width, height });
+    setLoaded(true)
+  }
+
   return (
     <div className={styles.container} onDragEnter={handleDrag}>
       <label
@@ -92,7 +100,7 @@ export default function ImageDrop({
           {/* This is just for checking when image has loaded */}
           {!uploadingPhoto && originalImage !== undefined && (
             <Image
-              onLoad={() => setLoaded(true)}
+              onLoad={handleImageLoad}
               fill
               style={{ opacity: 0 }}
               src={originalImage + '?' + Math.random()}

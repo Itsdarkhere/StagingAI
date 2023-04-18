@@ -40,6 +40,8 @@ export default function StagingDisplay({
     mask: string;
     concept: string;
     copies: number;
+    width: number;
+    height: number;
   }) => void;
   controlnet: (reqData: {
     room: string;

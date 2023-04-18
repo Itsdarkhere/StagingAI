@@ -100,6 +100,8 @@ export default function ToolView() {
     mask: string;
     concept: string;
     copies: number;
+    width: number;
+    height: number;
   }) => {
     if (fetching) {
       return;
@@ -112,6 +114,9 @@ export default function ToolView() {
     reqData.concept = reqData.room;
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
+
+    console.log("HEY");
+    console.log(reqData.width);
     // Send inference request
     const response = await fetch('/api/predictions/inpainting', {
       method: 'POST',
