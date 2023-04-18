@@ -42,14 +42,10 @@ export default function ImageOptions({
   const [copies, setCopies] = useState(1);
   const [loaded, setLoaded] = useState(false);
 
-  const sliderChange = (
-    event: Event,
-    value: number | number[],
-    activeThumb: number
+  const copiesChange = (
+    value: number,
   ) => {
-    if (typeof value === 'number') {
-      setCopies(value);
-    }
+    setCopies(value);
   };
 
   const validateForm1 = async (event: React.SyntheticEvent) => {
@@ -169,7 +165,7 @@ export default function ImageOptions({
         <Options
           fetching={fetching}
           copies={copies}
-          sliderChange={sliderChange}
+          copiesChange={copiesChange}
         />
       </div>
     </form>
