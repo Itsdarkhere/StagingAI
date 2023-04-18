@@ -143,7 +143,7 @@ export default function ImageOptions({
 
   return (
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
-      <TopBar mode={mode} changeMode={changeMode} setImage={setImage} canRemove={originalImage && loaded} />
+      <TopBar mode={mode} changeMode={changeMode} setImage={setImage} canRemove={loaded} />
       <div className={styles.innerContainer}>
         <div className={styles.sketchcontainer}>
           {originalImage && loaded ? (
