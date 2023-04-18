@@ -13,6 +13,12 @@
   padding: 20px;
 }
 
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 100%;
+  }
+}
+
 .slider[type='range'] {
   margin-top: 5px;
   -webkit-appearance: none;

@@ -8,12 +8,16 @@
   align-items: center;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 0 20px;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   padding-bottom: 20px;
   padding-top: 65px;
   padding-left: 280px;
+}
+@media screen and (max-width: 800px) {
+  .stagingDisplay {
+    padding-left: 0px;
+  }
 }
 .stagingDisplay::-webkit-scrollbar {
   display: none;

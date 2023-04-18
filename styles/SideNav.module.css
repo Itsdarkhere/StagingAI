@@ -16,6 +16,11 @@
   color: rgb(255, 255, 255);
   width: 280px;
 }
+@media screen and (max-width: 800px) {
+  .container {
+    display: none;
+  }
+}
 .containerInner {
   height: 100%;
   display: flex;
