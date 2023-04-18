@@ -92,8 +92,8 @@ export default function ImageOptions({
       mask: '',
       concept: '',
       copies: copies,
-      width: newDimensions.newWidth,
-      height: newDimensions.newHeight,
+      width: 512,
+      height: 512,
     };
 
     target = event.target as typeof event.target & {
@@ -130,7 +130,7 @@ export default function ImageOptions({
 
     const aspectRatio = shorterSide / longerSide;
     const newLongerSide = maxSize;
-    const newShorterSide = Math.round(newLongerSide * aspectRatio);
+    const newShorterSide = Math.round(newLongerSide * aspectRatio / 64) * 64;
 
     // Assign the new dimensions based on which side was the longer one
     if (width > height) {

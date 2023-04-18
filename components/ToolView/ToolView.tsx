@@ -22,7 +22,7 @@ export default function ToolView() {
     ],
     [
       'bedroom9800.pt',
-      'A photo of a modern bedroom, _b1_b2_b3_b4_b5_b6 , natural ligh',
+      'A photo of a modern bedroom, _b1_b2_b3_b4_b5_b6 , natural light',
     ],
     [
       'boardroom6000.pt',
@@ -117,6 +117,7 @@ export default function ToolView() {
 
     console.log("HEY");
     console.log(reqData.width);
+    console.log(reqData.height);
     // Send inference request
     const response = await fetch('/api/predictions/inpainting', {
       method: 'POST',
