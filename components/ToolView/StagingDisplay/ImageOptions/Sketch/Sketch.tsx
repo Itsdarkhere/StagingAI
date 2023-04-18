@@ -67,21 +67,8 @@ export default function Sketch({
     setShowBrushCursor(true);
   };
 
-  // Remove image from state
-  const removeImage = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setImage(undefined);
-  };
-
   return (
     <div className={`${styles.box}`}>
-      <button
-        type="button"
-        onClick={removeImage}
-        className={styles.closeButton}
-      >
-        X
-      </button>
       <div className={styles.loadable}>
         <motion.img
           initial={{ height: '10rem', opacity: 0 }}

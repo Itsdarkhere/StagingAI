@@ -6,6 +6,7 @@ import styles from '../../../styles/ToolView/StagingDisplay/StagingDisplay.modul
 import Modal from '../../Modal';
 import NewRender from '../../NewRender';
 import ImageOptions from './ImageOptions/ImageOptions';
+import TopBar from './TopBar/TopBar';
 
 export default function StagingDisplay({
   sketchRef,

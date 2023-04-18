@@ -3,6 +3,7 @@ import { RefObject, useState } from 'react';
 import styles from '../../../../styles/ToolView/StagingDisplay/ImageOptions/ImageOptions.module.css';
 import ImageDrop from './ImageDrop/ImageDrop';
 import Options from './Options/Options';
+import TopBar from '../TopBar/TopBar';
 
 export default function ImageOptions({
   changeMode,
@@ -146,30 +147,31 @@ export default function ImageOptions({
 
   return (
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
-      <div className={styles.sketchcontainer}>
-        {originalImage && loaded ? (
-          <Sketch
-            originalImage={originalImage}
-            setImage={setImage}
-            sketchRef={sketchRef}
-            mode={mode}
-          />
-        ) : (
-          <ImageDrop 
-            originalImage={originalImage} 
-            setImage={setImage}
-            loaded={loaded}
-            setLoaded={setLoaded} 
-          />
-        )}
+      <TopBar mode={mode} changeMode={changeMode} setImage={setImage} canRemove={originalImage && loaded} />
+      <div className={styles.innerContainer}>
+        <div className={styles.sketchcontainer}>
+          {originalImage && loaded ? (
+            <Sketch
+              originalImage={originalImage}
+              setImage={setImage}
+              sketchRef={sketchRef}
+              mode={mode}
+            />
+          ) : (
+            <ImageDrop
+              originalImage={originalImage}
+              setImage={setImage}
+              loaded={loaded}
+              setLoaded={setLoaded}
+            />
+          )}
+        </div>
+        <Options
+          fetching={fetching}
+          copies={copies}
+          sliderChange={sliderChange}
+        />
       </div>
-      <Options
-        fetching={fetching}
-        changeMode={changeMode}
-        mode={mode}
-        copies={copies}
-        sliderChange={sliderChange}
-      />
     </form>
   );
 }

@@ -45,7 +45,8 @@ export default function MaskControl({
         <input
           className={styles.controlValue}
           type={'text'}
-          defaultValue={strokeWidth}
+          readOnly={true}
+          value={strokeWidth}
         />
         <button
           className={`${styles.controlB} control-tooltip`}

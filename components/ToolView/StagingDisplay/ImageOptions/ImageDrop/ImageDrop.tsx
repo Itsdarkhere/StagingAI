@@ -1,9 +1,9 @@
-import { Button } from "@mui/material"
+import { Button } from '@mui/material';
 import Image from 'next/image';
 import styles from '../../../../../styles/ToolView/ImageDrop/ImageDrop.module.css';
 import React, { useEffect, useState } from 'react';
-import IMGUP from "../../../../../public/imageup.svg";
-import Spinner from "@/components/Spinner";
+import IMGUP from '../../../../../public/imageup.svg';
+import Spinner from '@/components/Spinner';
 
 export default function ImageDrop({
   originalImage,
@@ -84,7 +84,7 @@ export default function ImageDrop({
 
   return (
     <div className={styles.container} onDragEnter={handleDrag}>
-        <label
+      <label
         htmlFor="input-file-upload"
         className={`${styles.inputLabel} ${dragActive && styles.drag_active}`}
       >
@@ -100,7 +100,10 @@ export default function ImageDrop({
             />
           )}
           {/* Show this when we are loading the image */}
-          {uploadingPhoto || (originalImage !== undefined && !loaded) && <Spinner wh={45} white={false} />}
+          {uploadingPhoto ||
+            (originalImage !== undefined && !loaded && (
+              <Spinner wh={45} white={false} />
+            ))}
 
           {/* Before uploading an image */}
           {originalImage === undefined && !uploadingPhoto && (
@@ -110,15 +113,36 @@ export default function ImageDrop({
                 Drag your image here to start uploading
               </p>
               <p className={styles.span}>───── OR ─────</p>
-              <Button variant="contained" 
-              component="label"
-              style={{marginTop: 15, textTransform: 'none', position: 'relative', 
-              backgroundColor: 'rgb(99, 102, 241)', height: 40,
-              paddingLeft: 25, paddingRight: 25}}>Browse files
-                <input accept="image/*" multiple={false} onChange={handleChange} type="file"
-                style={{ opacity: 0, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}
-                name="input-file-upload"
-                required={originalImage ? false : true} />
+              <Button
+                variant="contained"
+                component="label"
+                style={{
+                  marginTop: 15,
+                  textTransform: 'none',
+                  position: 'relative',
+                  backgroundColor: 'rgb(99, 102, 241)',
+                  height: 40,
+                  paddingLeft: 25,
+                  paddingRight: 25,
+                }}
+              >
+                Browse files
+                <input
+                  accept="image/*"
+                  multiple={false}
+                  onChange={handleChange}
+                  type="file"
+                  style={{
+                    opacity: 0,
+                    position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                  }}
+                  name="input-file-upload"
+                  required={originalImage ? false : true}
+                />
               </Button>
             </>
           )}
@@ -133,6 +157,6 @@ export default function ImageDrop({
           onDrop={handleDrop}
         ></div>
       )}
-      </div>
+    </div>
   );
 }

@@ -32,7 +32,7 @@ export default function Login({ handleLogin }: { handleLogin: () => void }) {
             <input
               className={styles.input}
               placeholder="Email Address"
-              autoComplete='email'
+              autoComplete="email"
               type="email"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -42,7 +42,7 @@ export default function Login({ handleLogin }: { handleLogin: () => void }) {
               style={{ marginTop: 24 }}
               type="password"
               placeholder="Password"
-              autoComplete='current-password'
+              autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

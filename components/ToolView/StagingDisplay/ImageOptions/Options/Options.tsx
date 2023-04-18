@@ -1,26 +1,18 @@
-import FormAdd from '@/components/FormAdd';
 import Spinner from '@/components/Spinner';
 import React from 'react';
 import styles from '../../../../../styles/ToolView/StagingDisplay/ImageOptions/Options/Options.module.css';
 import Image from 'next/image';
 import wand from '../../../../../public/generate.svg';
 import { Slider } from '@mui/material';
-import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Button } from '@mui/material';
 import FormSelect from '@/components/FormSelect';
 
 export default function Options({
   fetching,
-  changeMode,
-  mode,
   copies,
   sliderChange,
 }: {
   fetching: boolean;
-  changeMode: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>,
-    value: any
-  ) => void;
-  mode: string;
   copies: number;
   sliderChange: (
     event: Event,
@@ -49,29 +41,7 @@ export default function Options({
 
   return (
     <div className={styles.container}>
-      {/* <OptionsModel clickMode={clickMode} mode={mode} /> */}
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-        <ToggleButtonGroup
-          value={mode}
-          color="primary"
-          exclusive
-          onChange={changeMode}
-          aria-label="text alignment"
-        >
-          <ToggleButton
-            style={{ fontSize: 12 }}
-            value="inpainting"
-            aria-label="left aligned"
-          >
-            Inpainting
-          </ToggleButton>
-          <ToggleButton value="img2img" aria-label="centered">
-            IMG2IMG
-          </ToggleButton>
-          <ToggleButton value="controlnet" aria-label="right aligned">
-            Controlnet
-          </ToggleButton>
-        </ToggleButtonGroup>
         <label htmlFor="what_to_add" className={styles.label}>
           Select room type
         </label>
@@ -82,7 +52,11 @@ export default function Options({
           name="what_to_add"
           placeholder="Room type"
         />
-        <label htmlFor="copies" className={styles.label}>
+        <label
+          htmlFor="copies"
+          style={{ marginTop: 15 }}
+          className={styles.label}
+        >
           Amount of copies
         </label>
         <Slider
@@ -91,7 +65,6 @@ export default function Options({
           aria-label="copies"
           min={1}
           max={8}
-          defaultValue={2}
           step={1}
           value={copies}
           onChange={sliderChange}
@@ -101,7 +74,7 @@ export default function Options({
         type="submit"
         disabled={fetching}
         variant="contained"
-        style={{ height: 45 }}
+        style={{ height: 45, marginTop: 15 }}
       >
         {fetching ? (
           <Spinner wh={30} white={false} />
