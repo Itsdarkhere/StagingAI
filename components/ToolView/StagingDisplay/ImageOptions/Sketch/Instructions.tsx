@@ -35,8 +35,7 @@ export default function Instructions() {
           Draw on the parts of the image you want to modify.
         </p>
         <p className={styles.secondaryI}>
-          To avoid modifications of objects when drawing on them, you can leave
-          a visible part of the object untouched.
+          To avoid modifying floor material etc, leave a part of it unpainted.
         </p>
       </div>
     </motion.div>

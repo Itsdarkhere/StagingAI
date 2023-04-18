@@ -107,8 +107,8 @@
   opacity: 1;
 }
 .paintAnimation {
-  width: 150px;
-  height: 150px;
+  width: 175px;
+  height: 175px;
   display: none;
 }
 .instructions {
@@ -119,6 +119,10 @@
   width: 500px;
   max-width: 100%;
   margin-bottom: 20px;
+  background-color: rgb(31, 30, 30, 0.8);
+  box-shadow: var(--shadow32);
+  border-radius: 4px;
+  padding: 10px 10px;
 }
 .mainI {
   font-weight: var(--normal);
