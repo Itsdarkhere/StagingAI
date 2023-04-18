@@ -32,8 +32,8 @@ export default function MaskControl({
         <Tooltip
           delayShow={500}
           place="left"
-          style={{ opacity: 1 }}
-          variant="light"
+          style={{ opacity: 1, zIndex: 10 }}
+          variant="dark"
           anchorSelect=".control-tooltip"
         />
         <Slider
