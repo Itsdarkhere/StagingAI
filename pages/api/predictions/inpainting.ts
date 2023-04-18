@@ -23,7 +23,7 @@ export default async function handler(
         'c10e556c38f9f899f783b7822f41ad8cb2fcc753cf0a7284eea2964e3fcaa101',
       input: {
         prompt: body.room,
-        negative_prompt: '',
+        negative_prompt: 'wood, wooden frame',
         image: body.image,
         concept: body.concept,
         mask: body.mask,
