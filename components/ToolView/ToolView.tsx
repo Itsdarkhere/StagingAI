@@ -39,7 +39,7 @@ export default function ToolView() {
     ],
     [
       'living10000.pt',
-      'A high resolution photo of a modern living room, _g1_g2_g3_g4_g5_g6 , interior design magazine, sun light',
+      'A high resolution photo of a modern minimalist living room, _g1_g2_g3_g4_g5_g6 , interior design magazine, sun light',
     ],
     [
       'office10000.pt',

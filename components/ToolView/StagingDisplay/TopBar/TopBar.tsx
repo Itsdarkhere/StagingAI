@@ -33,6 +33,7 @@ export default function TopBar({
             type="button"
             color="error"
             variant="contained"
+            size='small'
             >
             Remove Image
             </Button>
