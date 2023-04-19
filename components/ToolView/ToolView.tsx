@@ -18,39 +18,39 @@ export default function ToolView() {
   const paintingAddKeyMap = new Map([
     [
       'bedroom9000.pt',
-      'A high resolution photo of a modern bedroom, _a1_a2_a3_a4_a5_a6 , hyperdetailed, architectural rendering, volumetric light, cozy athmosphere, contrast, ultradetail, sun light',
+      'A high resolution photo of a modern bedroom, <your-chosen-concept> , hyperdetailed, architectural rendering, volumetric light, cozy athmosphere, contrast, ultradetail, sun light',
     ],
     [
       'bedroom9800.pt',
-      'A photo of a modern bedroom, _b1_b2_b3_b4_b5_b6 , natural light',
+      'A photo of a modern bedroom, <your-chosen-concept> , natural light',
     ],
     [
       'boardroom6000.pt',
-      'A photo of a modern boardroom, table, chairs, _c1_c2_c3_c4_c5_c6_c7_c8',
+      'A photo of a modern boardroom, table, chairs, <your-chosen-concept>',
     ],
     [
       'boardroom10000.pt',
-      'A photo of a modern boardroom, table, chairs, _d1_d2_d3_d4_d5_d6_d7_d8',
+      'A photo of a modern boardroom, table, chairs, <your-chosen-concept>',
     ],
-    ['empty5000.pt', 'Empty space, _e1_e2'],
+    ['empty5000.pt', 'Empty space, <your-chosen-concept>'],
     [
       'living6000.pt',
-      'A photo of a modern living room, natural light, _f1_f2_f3_f4_f5_f6',
+      'A photo of a modern living room, natural light, <your-chosen-concept>',
     ],
     [
       'living10000.pt',
-      'A high resolution photo of a modern minimalist living room, _g1_g2_g3_g4_g5_g6 , interior design magazine, sun light',
+      'A high resolution photo of a modern minimalist living room, <your-chosen-concept> , interior design magazine, sun light',
     ],
     [
       'office10000.pt',
-      'A photo of a modern open office, _h1_h2_h3_h4_h5_h6_h7_h8_h9_h10_h11_h12_h13_h14_h15',
+      'A photo of a modern open office, <your-chosen-concept>',
     ],
     [
       'office13200.pt',
-      'A photo of a modern open office, _j1_j2_j3_j4_j5_j6_j7_j8_j9_j10_j11_j12_j13_j14_j15',
+      'A photo of a modern open office, <your-chosen-concept>',
     ],
-    ['privateoffice8200.pt', 'a photo of an office, _i1_i2_i3_i4_i5_i6_i7_i8'],
-    ['privateoffice10000.pt', 'a photo of an office, _k1_k2_k3_k4_k5_k6_k7_k8'],
+    ['privateoffice8200.pt', 'a photo of an office, <your-chosen-concept>'],
+    ['privateoffice10000.pt', 'a photo of an office, <your-chosen-concept>'],
   ]);
 
   // Still needs to have copies hooked in

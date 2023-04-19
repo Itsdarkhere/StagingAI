@@ -20,7 +20,7 @@ export default async function handler(
     },
     body: JSON.stringify({
       version:
-        'c10e556c38f9f899f783b7822f41ad8cb2fcc753cf0a7284eea2964e3fcaa101',
+        '941b88d8aa7748b6dca21de02592e7356def096c8da8e64adb53c302804c51b9',
       input: {
         prompt: body.room,
         negative_prompt: 'wood, wooden frame',
@@ -32,6 +32,7 @@ export default async function handler(
         guidance_scale: 6,
         width: body.width,
         height: body.height,
+        scheduler: 'K_EULER_ANCESTRAL',
       },
     }),
   });
