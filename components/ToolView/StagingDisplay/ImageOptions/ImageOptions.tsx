@@ -82,10 +82,8 @@ export default function ImageOptions({
     }
 
     let target;
-    console.log(imageDimensions);
     let newDimensions = await calculateNewDimensions(imageDimensions.width, imageDimensions.height);
 
-    console.log("Height: " + newDimensions.newHeight + " Width: " + newDimensions.newWidth + "")
     let data = {
       room: '',
       style: 'Fill with something',
