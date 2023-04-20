@@ -1,11 +1,12 @@
 .render {
-  width: auto;
-  height: auto;
+  width: 512px;
+  height: 512px;
+  display: flex;
   justify-content: center;
   align-items: flex-start;
   position: relative;
   cursor: pointer;
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
   border-radius: 4px;
   overflow: hidden;
   transition: filter 0.2s ease;
@@ -27,7 +28,8 @@
 .imageOptions {
   position: absolute;
   top: 10px;
-  right: 10px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

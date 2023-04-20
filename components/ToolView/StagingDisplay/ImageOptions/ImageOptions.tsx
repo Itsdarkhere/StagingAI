@@ -82,9 +82,10 @@ export default function ImageOptions({
     }
 
     let target;
-
+    console.log(imageDimensions);
     let newDimensions = await calculateNewDimensions(imageDimensions.width, imageDimensions.height);
 
+    console.log("Height: " + newDimensions.newHeight + " Width: " + newDimensions.newWidth + "")
     let data = {
       room: '',
       style: 'Fill with something',
@@ -152,7 +153,7 @@ export default function ImageOptions({
           {originalImage && loaded ? (
             <Sketch
               originalImage={originalImage}
-              setImage={setImage}
+              setImageDimensions={setImageDimensions}
               sketchRef={sketchRef}
               mode={mode}
             />
@@ -161,7 +162,6 @@ export default function ImageOptions({
               originalImage={originalImage}
               setImage={setImage}
               loaded={loaded}
-              setImageDimensions={setImageDimensions}
               setLoaded={setLoaded}
             />
           )}

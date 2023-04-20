@@ -17,39 +17,27 @@ export default function ToolView() {
 
   const paintingAddKeyMap = new Map([
     [
-      'bedroom9000.pt',
-      'A high resolution photo of a modern bedroom, <your-chosen-concept> , hyperdetailed, architectural rendering, volumetric light, cozy athmosphere, contrast, ultradetail, sun light',
-    ],
-    [
       'bedroom9800.pt',
       'A photo of a modern bedroom, natural light',
     ],
     [
-      'boardroom6000.pt',
-      'A photo of a modern boardroom, table, chairs, <your-chosen-concept>',
+      'dining',
+      'A high resolution photo of a modern dining room, interior design magazine, sun light',
     ],
     [
       'boardroom10000.pt',
       'A photo of a modern boardroom, table, chairs, <your-chosen-concept>',
     ],
     ['empty5000.pt', 'Empty space, <your-chosen-concept>'],
-    [
-      'living6000.pt',
-      'A photo of a modern living room, natural light, <your-chosen-concept>',
-    ],
+    ['wall', 'An empty plain wall, paint'],
     [
       'living10000.pt',
       'A high resolution photo of a modern minimalist living room, <your-chosen-concept> , interior design magazine, sun light',
     ],
     [
-      'office10000.pt',
-      'A photo of a modern open office, <your-chosen-concept>',
-    ],
-    [
       'office13200.pt',
       'A photo of a modern open office, <your-chosen-concept>',
     ],
-    ['privateoffice8200.pt', 'a photo of an office, <your-chosen-concept>'],
     ['privateoffice10000.pt', 'a photo of an office, <your-chosen-concept>'],
   ]);
 
@@ -158,7 +146,7 @@ export default function ToolView() {
     setRenders(['load', ...renders]);
     const reqData = {
       image: imageURL,
-      scale: 4,
+      scale: 2,
     };
     // Send the inference request
     const response = await fetch('/api/predictions/upscale', {

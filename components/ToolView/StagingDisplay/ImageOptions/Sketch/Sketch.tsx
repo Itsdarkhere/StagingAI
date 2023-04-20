@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { RefObject, useEffect, useState } from 'react';
+import React, { RefObject, WheelEventHandler, useEffect, useRef, useState } from 'react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import MaskControl from './MaskControl';
 import PaintCursor from './PaintCursor';
@@ -9,12 +9,12 @@ import Instructions from './Instructions';
 
 export default function Sketch({
   originalImage,
-  setImage,
+  setImageDimensions,
   sketchRef,
   mode,
 }: {
   originalImage: string;
-  setImage: (image: string | undefined) => void;
+  setImageDimensions: (dimensions: { width: number; height: number }) => void;
   sketchRef: RefObject<any>;
   mode: string;
 }) {
@@ -31,7 +31,9 @@ export default function Sketch({
     setImageLoading(true);
   }, [originalImage]);
 
-  const onImageLoad = () => {
+  const onImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth: width, naturalHeight: height } = event.target as HTMLImageElement;
+    setImageDimensions({ width, height });
     setImageLoading(false);
   };
 
@@ -129,7 +131,7 @@ export default function Sketch({
               exportWithBackgroundImage={true}
               strokeColor="white"
             />
-            {showBrushCursor && mode === 'inpainting' && (
+            {showBrushCursor && (
               <PaintCursor size={strokeWidth} position={position} />
             )}
             <AnimatePresence

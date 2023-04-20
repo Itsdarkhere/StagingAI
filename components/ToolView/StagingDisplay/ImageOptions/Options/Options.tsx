@@ -25,8 +25,10 @@ export default function Options({
 
   const furnitureOptions: Option[] = [
     { value: 'bedroom9800.pt', label: 'Bedroom' },
+    { value: 'dining', label: 'Dining room' },
     { value: 'boardroom10000.pt', label: 'Boardroom' },
     { value: 'empty5000.pt', label: 'Remove anything' },
+    { value: 'wall', label: 'Just a wall' },
     { value: 'living10000.pt', label: 'Living room' },
     { value: 'office13200.pt', label: 'Office' },
     { value: 'privateoffice10000.pt', label: 'Private office' },
