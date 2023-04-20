@@ -20,7 +20,7 @@ export default async function handler(
     },
     body: JSON.stringify({
       version:
-        '941b88d8aa7748b6dca21de02592e7356def096c8da8e64adb53c302804c51b9',
+        'a4de72df6527c23fe51638e354fe87398dd2ba53e785ded19fae06ac69816ac8',
       input: {
         prompt: body.room,
         negative_prompt: 'wood, wooden frame',

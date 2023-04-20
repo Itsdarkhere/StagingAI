@@ -92,8 +92,8 @@ export default function ImageOptions({
       mask: '',
       concept: '',
       copies: copies,
-      width: 512,
-      height: 512,
+      width: newDimensions.newWidth,
+      height: newDimensions.newHeight,
     };
 
     target = event.target as typeof event.target & {

@@ -22,7 +22,7 @@ export default function ToolView() {
     ],
     [
       'bedroom9800.pt',
-      'A photo of a modern bedroom, <your-chosen-concept> , natural light',
+      'A photo of a modern bedroom, natural light',
     ],
     [
       'boardroom6000.pt',
