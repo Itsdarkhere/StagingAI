@@ -14,9 +14,7 @@ export default function Options({
 }: {
   fetching: boolean;
   copies: number;
-  copiesChange: (
-    value: number,
-  ) => void;
+  copiesChange: (value: number) => void;
 }) {
   interface Option {
     value: string;
@@ -66,14 +64,50 @@ export default function Options({
         /> */}
         <div className={styles.btnGroup}>
           <div className={styles.btnInner}>
-            <Button onClick={() => copiesChange(1)} variant={copies === 1 ? 'contained' : 'outlined'} style={{flex: 1}}>1</Button>
-            <Button onClick={() => copiesChange(2)} variant={copies === 2 ? 'contained' : 'outlined'} style={{flex: 1}}>2</Button>
-            <Button onClick={() => copiesChange(3)} variant={copies === 3 ? 'contained' : 'outlined'} style={{flex: 1}}>3</Button>
+            <Button
+              onClick={() => copiesChange(1)}
+              variant={copies === 1 ? 'contained' : 'outlined'}
+              style={{ flex: 1 }}
+            >
+              1
+            </Button>
+            <Button
+              onClick={() => copiesChange(2)}
+              variant={copies === 2 ? 'contained' : 'outlined'}
+              style={{ flex: 1 }}
+            >
+              2
+            </Button>
+            <Button
+              onClick={() => copiesChange(3)}
+              variant={copies === 3 ? 'contained' : 'outlined'}
+              style={{ flex: 1 }}
+            >
+              3
+            </Button>
           </div>
           <div className={styles.btnInner}>
-            <Button onClick={() => copiesChange(4)} variant={copies === 4 ? 'contained' : 'outlined'} style={{flex: 1}}>4</Button>
-            <Button onClick={() => copiesChange(5)} variant={copies === 5 ? 'contained' : 'outlined'} style={{flex: 1}}>5</Button>
-            <Button onClick={() => copiesChange(6)} variant={copies === 6 ? 'contained' : 'outlined'} style={{flex: 1}}>6</Button>
+            <Button
+              onClick={() => copiesChange(4)}
+              variant={copies === 4 ? 'contained' : 'outlined'}
+              style={{ flex: 1 }}
+            >
+              4
+            </Button>
+            <Button
+              onClick={() => copiesChange(5)}
+              variant={copies === 5 ? 'contained' : 'outlined'}
+              style={{ flex: 1 }}
+            >
+              5
+            </Button>
+            <Button
+              onClick={() => copiesChange(6)}
+              variant={copies === 6 ? 'contained' : 'outlined'}
+              style={{ flex: 1 }}
+            >
+              6
+            </Button>
           </div>
         </div>
       </div>

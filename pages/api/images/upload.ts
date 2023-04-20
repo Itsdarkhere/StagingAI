@@ -6,6 +6,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const userId = req.query.userId as string;
+  const file = req.query.file as string;
+  const fileType = req.query.fileType as string;
+
+  // Make sure we have what we need
+  if (!userId || !file || !fileType) {
+    return res.status(400).json({ error: 'id, file or fileType missing' });
+  }
+
   const s3Client = new S3Client({
     region: process.env.AWS_REGION,
     credentials: {
@@ -16,10 +25,10 @@ export default async function handler(
 
   const post = await createPresignedPost(s3Client, {
     Bucket: process.env.AWS_BUCKET_NAME!,
-    Key: req.query.file as string,
+    Key: `${userId}/${file}`,
     Fields: {
       // acl: 'public-read',
-      'Content-Type': req.query.fileType as string,
+      'Content-Type': fileType,
     },
     Expires: 600, // seconds
     Conditions: [

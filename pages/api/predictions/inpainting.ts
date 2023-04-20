@@ -6,7 +6,15 @@ export default async function handler(
 ) {
   const body = req.body;
 
-  if (!body.room || !body.style || !body.image || !body.mask || !body.copies || !body.width || !body.height) {
+  if (
+    !body.room ||
+    !body.style ||
+    !body.image ||
+    !body.mask ||
+    !body.copies ||
+    !body.width ||
+    !body.height
+  ) {
     res.statusCode = 500;
     res.end(JSON.stringify({ detail: 'Incomplete request data' }));
     return;

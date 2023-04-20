@@ -9,14 +9,14 @@ export default async function handler(
 
   // Return if no JWT provided
   if (!authHeader) {
-    return res.status(401).json({ error: 'No JWT provided' })
-  };
+    return res.status(401).json({ error: 'No JWT provided' });
+  }
 
   jwt.verify(authHeader, process.env.JWT_SECRET!, (err, user) => {
     if (err) {
-        return res.status(403).json({ error: 'Invalid or expired JWT'});
+      return res.status(403).json({ error: 'Invalid or expired JWT' });
     } else {
-        return res.status(200).json({ message: "JWT is valid"});
+      return res.status(200).json({ message: 'JWT is valid' });
     }
-  })
+  });
 }

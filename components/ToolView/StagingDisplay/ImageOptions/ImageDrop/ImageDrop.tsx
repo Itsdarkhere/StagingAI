@@ -59,11 +59,13 @@ export default function ImageDrop({
     setUploadingPhoto(true);
     const filename = encodeURIComponent(file.name);
     const fileType = encodeURIComponent(file.type);
+    const userId = localStorage.getItem('userId');
 
     // Generates a presigned POST
     const res = await fetch(
-      `/api/upload?file=${filename}&fileType=${fileType}`
+      `/api/images/upload?file=${filename}&fileType=${fileType}&userId=${userId}`
     );
+
     const { url, fields } = await res.json();
     const formData = new FormData();
 
@@ -76,15 +78,16 @@ export default function ImageDrop({
       body: formData,
     });
 
+    // Bucket url/ + userId + / + filename
     if (upload.ok) {
-      setImage(url + filename);
+      setImage(url + userId + '/' + filename);
     }
     setUploadingPhoto(false);
   };
 
   const handleImageLoad = () => {
-    setLoaded(true)
-  }
+    setLoaded(true);
+  };
 
   return (
     <div className={styles.container} onDragEnter={handleDrag}>

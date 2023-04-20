@@ -1,6 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { RefObject, WheelEventHandler, useEffect, useRef, useState } from 'react';
+import React, {
+  RefObject,
+  WheelEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import MaskControl from './MaskControl';
 import PaintCursor from './PaintCursor';
@@ -32,7 +38,8 @@ export default function Sketch({
   }, [originalImage]);
 
   const onImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
-    const { naturalWidth: width, naturalHeight: height } = event.target as HTMLImageElement;
+    const { naturalWidth: width, naturalHeight: height } =
+      event.target as HTMLImageElement;
     setImageDimensions({ width, height });
     setImageLoading(false);
   };
@@ -63,7 +70,7 @@ export default function Sketch({
     if (typeof value === 'number') {
       // Center and show the paint cursor
       if (!showBrushCursor) {
-        console.log("LOG");
+        console.log('LOG');
         setShowBrushCursor(true);
         centerPaintCursor();
       }
@@ -90,11 +97,11 @@ export default function Sketch({
       const centerY = rect.height / 2;
       setPosition({ x: centerX, y: centerY });
     }
-  }
+  };
 
   const onSliderChangeCommitted = () => {
     setShowBrushCursor(false);
-  }
+  };
 
   return (
     <div className={`${styles.box}`}>

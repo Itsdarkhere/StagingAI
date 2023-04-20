@@ -10,7 +10,11 @@ import ImageSearch from '@mui/icons-material/ImageSearch';
 import ManageAccount from '@mui/icons-material/ManageAccounts';
 import Logout from '@mui/icons-material/Logout';
 
-export default function SideNav() {
+export default function SideNav({
+  handleLogout,
+}: {
+  handleLogout: () => void;
+}) {
   const pathname = usePathname();
 
   return (
@@ -127,10 +131,9 @@ export default function SideNav() {
             </li>
             <li className={styles.li}>
               <Link
-                href="/logout"
-                className={`${styles.listlink} ${
-                  pathname == '/logout' ? styles.active : ''
-                }`}
+                onClick={handleLogout}
+                href="/"
+                className={`${styles.listlink}`}
               >
                 <span
                   style={{

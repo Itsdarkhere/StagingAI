@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@mui/material';
 import Spinner from '../Spinner';
 
-export default function Login({handleLogin}: {handleLogin: () => void}) {
+export default function Login({ handleLogin }: { handleLogin: () => void }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -16,7 +16,7 @@ export default function Login({handleLogin}: {handleLogin: () => void}) {
     const reqData = {
       email,
       password,
-    }
+    };
 
     // Perform authentication logic here (e.g., call an API)
     const res = await fetch('/api/auth/login', {
@@ -30,40 +30,22 @@ export default function Login({handleLogin}: {handleLogin: () => void}) {
     if (res?.ok) {
       const data = await res.json();
       const jwt = data.token;
+      const userId = data.userId;
+
+      // Store JWT and userId, JWT is needed for subsequent logins / api calls
+      // userId is needed to keep track of the user's data -> Images
       localStorage.setItem('authToken', jwt);
+      localStorage.setItem('userId', userId);
+
+      // Allow user access to app
       handleLogin();
     } else {
       setError(true);
       setTimeout(() => {
         setError(false);
-      }, 750) 
+      }, 750);
     }
   };
-
-
-  // If we have a valid JWT, we can log the user in
-  const checkJWT = async (authToken: string) => {
-    // Perform authentication logic here (e.g., call an API)
-    const res = await fetch('/api/auth/checkJWT', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': authToken
-      },
-    });
-
-    if (res?.ok) {
-      handleLogin();
-    }
-  }
-
-  useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
-    if (authToken) {
-      console.log('authToken', authToken);
-      checkJWT(authToken);
-    }
-  }, [])
 
   return (
     <div className={styles.container}>
@@ -98,7 +80,12 @@ export default function Login({handleLogin}: {handleLogin: () => void}) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button color={error ? 'error' : 'primary'} type="submit" variant="contained" className={styles.button}>
+            <Button
+              color={error ? 'error' : 'primary'}
+              type="submit"
+              variant="contained"
+              className={styles.button}
+            >
               {error ? 'Invalid login' : 'Login'}
             </Button>
             <div className={styles.forgotbox}>

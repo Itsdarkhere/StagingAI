@@ -26,18 +26,18 @@ export default function TopBar({
   return (
     <div className={styles.container}>
       <div className={styles.leftSide}>
-        {canRemove &&
-            <Button
-                startIcon={<DeleteIcon />}
+        {canRemove && (
+          <Button
+            startIcon={<DeleteIcon />}
             onClick={removeImage}
             type="button"
             color="error"
             variant="contained"
-            size='small'
-            >
+            size="small"
+          >
             Remove Image
-            </Button>
-        }
+          </Button>
+        )}
       </div>
       {/* <ToggleButtonGroup
         value={mode}

@@ -7,7 +7,11 @@ import SideNav from '../SideNav';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-export default function ToolView() {
+export default function ToolView({
+  handleLogout,
+}: {
+  handleLogout: () => void;
+}) {
   const [originalImage, setImage] = useState<string | undefined>(undefined);
   const [mode, setMode] = React.useState<string>('inpainting');
   const sketchRef = useRef<any>(null);
@@ -16,10 +20,7 @@ export default function ToolView() {
   const [fetching, setFetching] = useState(false);
 
   const paintingAddKeyMap = new Map([
-    [
-      'bedroom9800.pt',
-      'A photo of a modern bedroom, natural light',
-    ],
+    ['bedroom9800.pt', 'A photo of a modern bedroom, natural light'],
     [
       'dining',
       'A high resolution photo of a modern dining room, interior design magazine, sun light',
@@ -95,9 +96,11 @@ export default function ToolView() {
       return;
     }
     setFetching(true);
+
     // Set a new Empty render to show loading
     const loaderArr = Array.from({ length: reqData.copies }, () => 'load');
     setRenders([...loaderArr, ...renders]);
+
     // Add stuff to reqData
     reqData.concept = reqData.room;
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
@@ -111,13 +114,18 @@ export default function ToolView() {
       },
       body: JSON.stringify(reqData),
     });
+
     // Check status until completion
     const prediction = await getInferenceStatus(response, loaderArr.length);
+
+    // Upload this into rds
+    const imageURLS = prediction.output;
+
     // After completion, override the previously empty render with the image
     if (prediction) {
-      console.log(prediction);
       prediction.output.forEach((img: string) => {
         setRenders((prev: string[]) => {
+          // Find all 'load' and replace with the image
           const index = prev.findIndex((render: string) => render === 'load');
           if (index !== -1) {
             const updatedRenders = [...prev];
@@ -128,6 +136,33 @@ export default function ToolView() {
         });
       });
       setFetching(false);
+    }
+
+    // Save the images in RDS
+    saveURLsInRDS(imageURLS);
+  };
+
+  const saveURLsInRDS = async (urls: string[]) => {
+    const userId = localStorage.getItem('userId');
+    // Store images w userId
+    const reqData = {
+      urls,
+      userId,
+    };
+
+    const response = await fetch('/api/images/track', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reqData),
+    });
+
+    // Check status
+    if (response.ok) {
+      console.log('Successfully saved images in RDS');
+    } else {
+      console.log('Failed to save images in RDS');
     }
   };
 
@@ -158,6 +193,7 @@ export default function ToolView() {
     });
     // Check status until completion
     const prediction = await getInferenceStatus(response, 1);
+
     // After completion, override the previously empty render with the image
     if (prediction) {
       setRenders((prev: string[]) =>
@@ -167,6 +203,9 @@ export default function ToolView() {
       );
       setFetching(false);
     }
+
+    // Save the image in RDS
+    saveURLsInRDS([prediction.output]);
   };
 
   const getInferenceStatus = async (response: any, removeCount: number) => {
@@ -219,10 +258,11 @@ export default function ToolView() {
   const uploadMask = async (file: File) => {
     const filename = encodeURIComponent(file.name);
     const fileType = encodeURIComponent(file.type);
+    const userId = localStorage.getItem('userId');
 
     // Generates a presigned POST
     const res = await fetch(
-      `/api/upload?file=${filename}&fileType=${fileType}`
+      `/api/images/upload?file=${filename}&fileType=${fileType}&userId=${userId}`
     );
     const { url, fields } = await res.json();
     const formData = new FormData();
@@ -237,7 +277,8 @@ export default function ToolView() {
     });
 
     if (upload.ok) {
-      return url + filename;
+      // BucketURL/ + userId/ + filename
+      return url + userId + '/' + filename;
     }
     return '';
   };
@@ -257,7 +298,7 @@ export default function ToolView() {
 
   return (
     <div className={styles.staging} id="tool">
-      <SideNav />
+      <SideNav handleLogout={handleLogout} />
       <StagingDisplay
         sketchRef={sketchRef}
         fetching={fetching}

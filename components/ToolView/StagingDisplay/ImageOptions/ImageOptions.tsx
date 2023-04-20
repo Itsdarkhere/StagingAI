@@ -43,11 +43,12 @@ export default function ImageOptions({
 }) {
   const [copies, setCopies] = useState(1);
   const [loaded, setLoaded] = useState(false);
-  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0});
+  const [imageDimensions, setImageDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
 
-  const copiesChange = (
-    value: number,
-  ) => {
+  const copiesChange = (value: number) => {
     setCopies(value);
   };
 
@@ -82,7 +83,10 @@ export default function ImageOptions({
     }
 
     let target;
-    let newDimensions = await calculateNewDimensions(imageDimensions.width, imageDimensions.height);
+    let newDimensions = await calculateNewDimensions(
+      imageDimensions.width,
+      imageDimensions.height
+    );
 
     let data = {
       room: '',
@@ -111,7 +115,11 @@ export default function ImageOptions({
     }
   };
 
-  const calculateNewDimensions = async (width: number, height: number, maxSize = 512) => {
+  const calculateNewDimensions = async (
+    width: number,
+    height: number,
+    maxSize = 512
+  ) => {
     let longerSide, shorterSide;
     let newWidth, newHeight;
 
@@ -120,16 +128,16 @@ export default function ImageOptions({
       longerSide = width;
       shorterSide = height;
     } else if (width < height) {
-        longerSide = height;
-        shorterSide = width;
+      longerSide = height;
+      shorterSide = width;
     } else {
-        // If width and height are equal, both sides are resized to maxSize
-        return { newWidth: maxSize, newHeight: maxSize };
+      // If width and height are equal, both sides are resized to maxSize
+      return { newWidth: maxSize, newHeight: maxSize };
     }
 
     const aspectRatio = shorterSide / longerSide;
     const newLongerSide = maxSize;
-    const newShorterSide = Math.round(newLongerSide * aspectRatio / 64) * 64;
+    const newShorterSide = Math.round((newLongerSide * aspectRatio) / 64) * 64;
 
     // Assign the new dimensions based on which side was the longer one
     if (width > height) {
@@ -141,11 +149,16 @@ export default function ImageOptions({
     }
 
     return { newWidth, newHeight };
-  }
+  };
 
   return (
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
-      <TopBar mode={mode} changeMode={changeMode} setImage={setImage} canRemove={loaded} />
+      <TopBar
+        mode={mode}
+        changeMode={changeMode}
+        setImage={setImage}
+        canRemove={loaded}
+      />
       <div className={styles.innerContainer}>
         <div className={styles.sketchcontainer}>
           {originalImage && loaded ? (

@@ -18,7 +18,9 @@ export default async function handler(
 
   try {
     // Fetch the user and their hashed password from the database
-    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [
+      email,
+    ]);
 
     if (result.rowCount === 0) {
       // User not found
@@ -27,17 +29,20 @@ export default async function handler(
     }
 
     // Verify the submitted password against the stored hash
-    const isPasswordCorrect = await bcrypt.compare(password, result.rows[0].password);
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      result.rows[0].password
+    );
 
     if (isPasswordCorrect) {
       // Password is correct, issue a JWT
+      const userId = result.rows[0].id;
       const token = jwt.sign(
-        { userId: result.rows[0].id, email: result.rows[0].email },
+        { userId, email: result.rows[0].email },
         process.env.JWT_SECRET!,
         { expiresIn: '24h' }
       );
-      console.log("LOGIN TOKEN,", token);
-      res.status(200).json({ message: 'Login successful', token });
+      res.status(200).json({ message: 'Login successful', token, userId });
     } else {
       // Incorrect password
       res.status(401).json({ error: 'Invalid email or password' });
