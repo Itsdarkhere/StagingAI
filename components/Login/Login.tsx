@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../../styles/Login.module.css';
 import Link from 'next/link';
 import { Button } from '@mui/material';
-import Spinner from '../Spinner';
 
 export default function Login({ handleLogin }: { handleLogin: () => void }) {
   const [email, setEmail] = useState('');
@@ -41,6 +40,9 @@ export default function Login({ handleLogin }: { handleLogin: () => void }) {
       handleLogin();
     } else {
       setError(true);
+      console.log(res)
+      const data = await res.json();
+      console.log(data);
       setTimeout(() => {
         setError(false);
       }, 750);
