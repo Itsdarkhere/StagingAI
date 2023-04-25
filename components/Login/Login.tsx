@@ -10,6 +10,8 @@ export default function Login({ handleLogin }: { handleLogin: () => void }) {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    handleLogin();
+    return;
 
     // Data to send to the API
     const reqData = {

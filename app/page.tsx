@@ -17,6 +17,8 @@ export default function Create() {
 
   // If we have a valid JWT, we can log the user in
   const checkJWT = async (authToken: string) => {
+    handleLogin();
+    return;
     // Perform authentication logic here (e.g., call an API)
     const res = await fetch('/api/auth/checkJWT', {
       method: 'POST',

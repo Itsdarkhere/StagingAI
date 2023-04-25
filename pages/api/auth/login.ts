@@ -16,6 +16,8 @@ export default async function handler(
 ) {
   const { email, password } = req.body;
 
+  res.status(200).json({ message: 'Login successful', token: '11123', userId: 5 });
+
   try {
     // Fetch the user and their hashed password from the database
     const result = await pool.query('SELECT * FROM users WHERE email = $1', [

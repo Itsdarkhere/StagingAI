@@ -27,9 +27,15 @@ export default function Options({
     { value: 'boardroom10000.pt', label: 'Boardroom' },
     { value: 'empty5000.pt', label: 'Remove anything' },
     { value: 'wall', label: 'Just a wall' },
-    { value: 'wallOffice', label: 'Office furniture by the walls' },
+    { value: 'office2', label: 'OfficeV2' },
+    { value: 'office3', label: 'OfficeV3' },
+    { value: 'office4', label: 'OfficeV4' },
+    { value: 'office5', label: 'OfficeV5' },
+    { value: 'office6', label: 'OfficeV6' },
+    { value: 'office7', label: 'OfficeV7' },
+    { value: 'office8', label: 'OfficeV8' },
     { value: 'living10000.pt', label: 'Living room' },
-    { value: 'office13200.pt', label: 'Office' },
+    { value: 'office13200.pt', label: 'OfficeV1' },
     { value: 'privateoffice10000.pt', label: 'Private office' },
   ];
 
