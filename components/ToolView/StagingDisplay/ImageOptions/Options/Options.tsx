@@ -27,6 +27,7 @@ export default function Options({
     { value: 'boardroom10000.pt', label: 'Boardroom' },
     { value: 'empty5000.pt', label: 'Remove anything' },
     { value: 'wall', label: 'Just a wall' },
+    { value: 'wallOffice', label: 'Office furniture by the walls' },
     { value: 'living10000.pt', label: 'Living room' },
     { value: 'office13200.pt', label: 'Office' },
     { value: 'privateoffice10000.pt', label: 'Private office' },

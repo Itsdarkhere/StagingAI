@@ -29,17 +29,18 @@ export default function ToolView({
       'boardroom10000.pt',
       'A photo of a modern boardroom, table, chairs, <your-chosen-concept>',
     ],
-    ['empty5000.pt', 'Empty space, <your-chosen-concept>'],
+    ['empty5000.pt', 'Empty space'],
     ['wall', 'An empty plain wall, paint'],
+    ['wallOffice', 'A high resolution photo of a modern office'],
     [
       'living10000.pt',
       'A high resolution photo of a modern minimalist living room, <your-chosen-concept> , interior design magazine, sun light',
     ],
     [
       'office13200.pt',
-      'A photo of a modern open office, <your-chosen-concept>',
+      'a high resolution photo of a modern office, office design, 2022, interior design magazine',
     ],
-    ['privateoffice10000.pt', 'a photo of an office, <your-chosen-concept>'],
+    ['privateoffice10000.pt', 'a high resolution photo of a modern minimalist office, desk and chair, personal office'],
   ]);
 
   // Still needs to have copies hooked in
