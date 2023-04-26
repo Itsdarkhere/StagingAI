@@ -19,7 +19,6 @@ export default function StagingDisplay({
   setImage,
   changeMode,
   inpainting,
-  controlnet,
 }: {
   sketchRef: RefObject<any>;
   fetching: boolean;
@@ -42,12 +41,6 @@ export default function StagingDisplay({
     copies: number;
     width: number;
     height: number;
-  }) => void;
-  controlnet: (reqData: {
-    room: string;
-    style: string;
-    image: string;
-    copies: number;
   }) => void;
 }) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -77,7 +70,6 @@ export default function StagingDisplay({
         sketchRef={sketchRef}
         fetching={fetching}
         inpainting={inpainting}
-        controlnet={controlnet}
         setImage={setImage}
       />
       {/* Resulting Images */}

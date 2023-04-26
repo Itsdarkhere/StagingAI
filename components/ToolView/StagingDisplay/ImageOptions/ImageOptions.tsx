@@ -12,7 +12,6 @@ export default function ImageOptions({
   sketchRef,
   fetching,
   inpainting,
-  controlnet,
   setImage,
 }: {
   changeMode: (
@@ -32,12 +31,6 @@ export default function ImageOptions({
     copies: number;
     width: number;
     height: number;
-  }) => void;
-  controlnet: (reqData: {
-    room: string;
-    style: string;
-    image: string;
-    copies: number;
   }) => void;
   setImage: (image: string | undefined) => void;
 }) {
@@ -71,7 +64,7 @@ export default function ImageOptions({
       image: originalImage!,
       copies: copies,
     };
-    controlnet(data);
+    // controlnet(data);
   };
 
   const validateForm2 = async (event: React.SyntheticEvent) => {

@@ -107,6 +107,26 @@ export default function ToolView({
     }
   };
 
+  const dream = async (imageUrl: string, width: number, height: number) => {
+    if (fetching) {
+      return;
+    }
+    setFetching(true);
+
+    const mask = await setImgMask();
+    // Resize mask for fun
+    const response = await fetch(`/api/images/resize?imageUrl=${mask}&width=${width}&height=${height}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => res.json()); // Resolve the promise
+
+    console.log(response);
+
+    setFetching(false);
+  }
+
   const inpainting = async (reqData: {
     room: string;
     style: string;
@@ -335,7 +355,6 @@ export default function ToolView({
         upscale={(imgURL: string) => upscale(imgURL)}
         changeMode={changeMode}
         inpainting={inpainting}
-        controlnet={controlnet}
       />
     </div>
   );
