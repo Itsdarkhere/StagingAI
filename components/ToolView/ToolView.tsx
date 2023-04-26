@@ -141,8 +141,8 @@ export default function ToolView({
     const formData = new FormData();
     formData.append('init_image', new Blob([resizedIMGBuffer], { type: resizedIMGContentType! }));
     formData.append('mask_image', new Blob([resizedMaskBuffer], { type: resizedMaskContentType! }));
-    formData.append('mask_source', 'MASK_IMAGE_BLACK');
-    formData.append('text_prompts[0][text]', 'a smiling man');
+    formData.append('mask_source', 'MASK_IMAGE_WHITE');
+    formData.append('text_prompts[0][text]', 'A photo of a modern bedroom, natural light');
 
     // Set API host, engine ID, and API key
     const apiHost = 'https://api.stability.ai';
