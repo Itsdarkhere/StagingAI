@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import InfiniteScroll from './InfiniteScroll/InfiniteScroll';
 import styles from "../../../styles/ImagesContent.module.css"
 
 export default function ImagesContent() {
   const [images, setImages] = React.useState<{ url: string }[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchImages = async (fetchNumber: number) => {
+    setLoading(true);
     const userId = localStorage.getItem('userId');
     const reqData = {
       userId,
@@ -22,18 +24,18 @@ export default function ImagesContent() {
 
     const data = response.urls;
 
-    console.log(data);
+    if (!data) return;
+    setLoading(false);
     setImages((prev: { url: string }[]) => [...prev, ...data]);
   };
 
-  useEffect(() => {
-    console.log("LOG LOG")
-    fetchImages(1);
-  }, []);
+//   useEffect(() => {
+//     fetchImages(1);
+//   }, []);
 
   return (
     <div className={styles.container}>
-      <InfiniteScroll images={images} fetchImages={fetchImages} />
+      <InfiniteScroll images={images} fetchImages={fetchImages} loading={loading} setLoading={setLoading} />
     </div>
   );
 }

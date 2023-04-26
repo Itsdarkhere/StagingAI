@@ -5,11 +5,14 @@ import React, { useEffect, useRef, useState } from 'react';
 export default function InfiniteScroll({
   images,
   fetchImages,
+  loading,
+  setLoading,
 }: {
   images: { url: string }[];
   fetchImages: (fetchNumber: number) => Promise<void>;
+  loading: boolean,
+  setLoading: (loading: boolean) => void
 }) {
-  const [loading, setLoading] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
   const lastImageRef = useRef<HTMLImageElement | null>(null);
   const [fetchNumber, setFetchNumber] = React.useState<number>(1);
@@ -24,8 +27,6 @@ export default function InfiniteScroll({
         if (entries[0].isIntersecting) {
           setLoading(true);
           await fetchImages(fetchNumber);
-        //   setFetchNumber(fetchNumber + 1);
-          setLoading(false);
         }
       },
       { threshold: 1 }
@@ -50,6 +51,9 @@ export default function InfiniteScroll({
         alignItems: 'flex-start',
       }}
     >
+      <div style={{width: '100%', padding: '20px'}}>
+        <p style={{ textAlign: 'start', color: 'rgb(52, 71, 103)' }}>Generated images are only stored once the product is finalized.</p>
+      </div>
       {images.map((url, index) => (
         <img
           key={index}
@@ -59,7 +63,7 @@ export default function InfiniteScroll({
           style={{ width: 'auto', height: 'auto', marginBottom: '16px' }}
         />
       ))}
-      {loading && <Spinner wh={40} white={false} />}
+      {loading && <div style={{padding: 50}}><Spinner wh={40} white={false} /></div>}
     </div>
   );
 }
