@@ -71,6 +71,7 @@ export default function StagingDisplay({
         sketchRef={sketchRef}
         fetching={fetching}
         inpainting={inpainting}
+        dream={dream}
         setImage={setImage}
       />
       {/* Resulting Images */}

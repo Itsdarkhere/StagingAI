@@ -115,12 +115,42 @@ export default function ToolView({
 
     const mask = await setImgMask();
     // Resize mask for fun
-    const response = await fetch(`/api/images/resize?imageUrl=${mask}&width=${width}&height=${height}`, {
+    const resizedIMG = await fetch(`/api/images/resize?imageUrl=${imageUrl}&width=${width}&height=${height}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'image/*',
       },
-    }).then((res) => res.json()); // Resolve the promise
+    }).then((res) => res.json());
+
+    const resizedMask = await fetch(`/api/images/resize?imageUrl=${mask}&width=${width}&height=${height}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'image/*',
+      },
+    }).then((res) => res.json());
+
+    const formData = new FormData();
+    formData.append('init_image', resizedIMG);
+    formData.append('mask_image', resizedMask);
+    formData.append('mask_source', 'BLACK');
+    formData.append('text_prompts', 'a dream');
+
+    const apiHost = 'https://api.stability.ai';
+    const engineId = 'stable-diffusion-xl-beta-v2-2-2';
+    const apiKey = 'sk-jeYJ5D78tIaD5zRwpFGzw3uptZMUqyWq3Gx14Ocgzq4Egrwa';
+
+    // Send the inference request
+    const response = await fetch(
+      `${apiHost}/v1/generation/${engineId}/image-to-image/masking`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: formData,
+      }
+    ).then((res) => res.json());
 
     console.log(response);
 
