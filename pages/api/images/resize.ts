@@ -25,7 +25,7 @@ export default async function handler(
             .toBuffer();
 
         res.setHeader('Content-Type', response.headers.get('Content-Type')!);
-        res.status(200).json({ image: resizedImageBuffer})
+        res.status(200).send(resizedImageBuffer);
     } catch {
         res.status(500).json({ error: 'Error resizing image'})
     }

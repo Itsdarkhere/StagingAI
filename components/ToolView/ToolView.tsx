@@ -111,30 +111,40 @@ export default function ToolView({
     if (fetching) {
       return;
     }
+    setRenders(['load', ...renders]);
     setFetching(true);
 
+    // Get mask
     const mask = await setImgMask();
-    // Resize mask for fun
+    // Resize Mask and Image
     const resizedIMG = await fetch(`/api/images/resize?imageUrl=${imageUrl}&width=${width}&height=${height}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'image/*',
       },
-    }).then((res) => res.json());
+    });
 
     const resizedMask = await fetch(`/api/images/resize?imageUrl=${mask}&width=${width}&height=${height}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'image/*',
       },
-    }).then((res) => res.json());
+    });
+    
+    // Get binary data and content type
+    const resizedIMGBuffer = await resizedIMG.arrayBuffer();
+    const resizedIMGContentType = resizedIMG.headers.get('Content-Type');
+    const resizedMaskBuffer = await resizedMask.arrayBuffer();
+    const resizedMaskContentType = resizedMask.headers.get('Content-Type');
 
+    // Append data to inference request
     const formData = new FormData();
-    formData.append('init_image', resizedIMG);
-    formData.append('mask_image', resizedMask);
-    formData.append('mask_source', 'BLACK');
-    formData.append('text_prompts', 'a dream');
+    formData.append('init_image', new Blob([resizedIMGBuffer], { type: resizedIMGContentType! }));
+    formData.append('mask_image', new Blob([resizedMaskBuffer], { type: resizedMaskContentType! }));
+    formData.append('mask_source', 'MASK_IMAGE_BLACK');
+    formData.append('text_prompts[0][text]', 'a smiling man');
 
+    // Set API host, engine ID, and API key
     const apiHost = 'https://api.stability.ai';
     const engineId = 'stable-diffusion-xl-beta-v2-2-2';
     const apiKey = 'sk-jeYJ5D78tIaD5zRwpFGzw3uptZMUqyWq3Gx14Ocgzq4Egrwa';
@@ -153,6 +163,14 @@ export default function ToolView({
     ).then((res) => res.json());
 
     console.log(response);
+    const artifact = response.artifacts[0].base64;
+    const imageSrc = 'data:image/png;base64,' + artifact;
+
+    setRenders((prev: string[]) =>
+        prev.map((render: string) =>
+          render === 'load' ? imageSrc : render
+        )
+      );
 
     setFetching(false);
   }
