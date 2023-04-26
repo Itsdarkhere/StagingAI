@@ -6,7 +6,6 @@ import styles from '../../../styles/ToolView/StagingDisplay/StagingDisplay.modul
 import Modal from '../../Modal';
 import NewRender from '../../NewRender';
 import ImageOptions from './ImageOptions/ImageOptions';
-import TopBar from './TopBar/TopBar';
 
 export default function StagingDisplay({
   sketchRef,
@@ -19,6 +18,7 @@ export default function StagingDisplay({
   setImage,
   changeMode,
   inpainting,
+  dream,
 }: {
   sketchRef: RefObject<any>;
   fetching: boolean;
@@ -42,6 +42,7 @@ export default function StagingDisplay({
     width: number;
     height: number;
   }) => void;
+  dream: (imageUrl: string, width: number, height: number) => void;
 }) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalIMG, setModalIMG] = useState<string>('');

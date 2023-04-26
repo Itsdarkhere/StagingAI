@@ -355,6 +355,7 @@ export default function ToolView({
         upscale={(imgURL: string) => upscale(imgURL)}
         changeMode={changeMode}
         inpainting={inpainting}
+        dream={dream}
       />
     </div>
   );
