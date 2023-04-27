@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import { AnimatePresence } from 'framer-motion';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styles from '../../styles/ToolView/StagingDisplay/StagingDisplay.module.css';
-import Modal from '../Modal';
+import Modal from '../Modal/Modal';
 import NewRender from '../NewRender';
 import ImageOptions from './ImageOptions/ImageOptions';
 

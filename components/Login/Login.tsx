@@ -1,8 +1,9 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import styles from '../../styles/Login.module.css';
 import Link from 'next/link';
 import { Button } from '@mui/material';
+import { signIn } from 'next-auth/react';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -11,7 +12,10 @@ export default function Login() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // handleLogin();
+    signIn('credentials', {
+      email,
+      password,
+    });
     return;
 
     // Data to send to the API
@@ -21,7 +25,7 @@ export default function Login() {
     };
 
     // Perform authentication logic here (e.g., call an API)
-    const res = await fetch('/api/auth/login', {
+    const res = await fetch('/api/auth/login123', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

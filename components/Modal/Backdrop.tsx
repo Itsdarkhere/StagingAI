@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
-import styles from '../styles/Modal.module.css';
+import styles from '../../styles/Modal.module.css';
 
 export default function Backdrop({
   children,

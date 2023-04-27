@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import React from 'react';
 import { motion } from 'framer-motion';
+import styles from '../../styles/Modal.module.css';
 import Backdrop from './Backdrop';
-import styles from '../styles/Modal.module.css';
 
 const transitions = {
   hidden: {

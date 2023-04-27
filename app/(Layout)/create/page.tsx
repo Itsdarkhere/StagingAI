@@ -1,9 +1,22 @@
 'use client';
 import StagingDisplay from '@/components/StagingDisplay/StagingDisplay';
 import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 export default function Create() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      // checkJWT(authToken);
+    }
+  }, []);
+
+  if (!session) {
+    return <h1>Login to use the app.</h1>
+  }
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -31,13 +44,6 @@ export default function Create() {
       handleLogin();
     }
   };
-
-  useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
-    if (authToken) {
-      // checkJWT(authToken);
-    }
-  }, []);
 
   return <StagingDisplay />;
 }

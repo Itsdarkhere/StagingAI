@@ -1,5 +1,5 @@
 import Sketch from '@/components/StagingDisplay/ImageOptions/Sketch/Sketch';
-import { RefObject, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import styles from '../../../styles/ToolView/StagingDisplay/ImageOptions/ImageOptions.module.css';
 import TopBar from '../TopBar/TopBar';
 import ImageDrop from './ImageDrop/ImageDrop';
@@ -160,10 +160,7 @@ export default function ImageOptions({
 
   return (
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
-      <TopBar
-        setImage={setImage}
-        canRemove={loaded}
-      />
+      <TopBar setImage={setImage} canRemove={loaded} />
       <div className={styles.innerContainer}>
         <div className={styles.sketchcontainer}>
           {originalImage && loaded ? (

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import InfiniteScroll from './InfiniteScroll/InfiniteScroll';
 import styles from '../../styles/ImagesContent.module.css';

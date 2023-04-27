@@ -1,6 +1,7 @@
 import '@/styles/variables.css';
 import '@/styles/globals.css';
 import { Inter } from '@next/font/google';
+import Providers from './providers';
 
 const inter = Inter({
   weight: ['400', '500', '600', '700', '800', '900'],
@@ -15,7 +16,11 @@ export default function RootLayout({
   return (
     <html className={inter.className}>
       <head />
-      <body>{children}</body>
+      <body>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

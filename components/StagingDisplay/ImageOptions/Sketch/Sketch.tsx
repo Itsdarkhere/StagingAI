@@ -1,10 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { AnimatePresence, motion } from 'framer-motion';
-import React, {
-  RefObject,
-  useEffect,
-  useState,
-} from 'react';
+import React, { RefObject, useEffect, useState } from 'react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import MaskControl from './MaskControl';
 import PaintCursor from './PaintCursor';

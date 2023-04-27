@@ -9,13 +9,14 @@ import HandyMan from '@mui/icons-material/Handyman';
 import ImageSearch from '@mui/icons-material/ImageSearch';
 import ManageAccount from '@mui/icons-material/ManageAccounts';
 import Logout from '@mui/icons-material/Logout';
+import { signOut } from "next-auth/react";
 
-export default function SideNav({
-  handleLogout,
-}: {
-  handleLogout: () => void;
-}) {
+export default function SideNav() {
   const pathname = usePathname();
+
+  const logout = () => {
+    signOut();
+  }
 
   return (
     <div className={styles.container}>
@@ -131,8 +132,8 @@ export default function SideNav({
             </li>
             <li className={styles.li}>
               <Link
-                onClick={handleLogout}
-                href="/"
+                onClick={logout}
+                href="/login"
                 className={`${styles.listlink}`}
               >
                 <span
