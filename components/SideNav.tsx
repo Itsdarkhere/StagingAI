@@ -37,7 +37,7 @@ export default function SideNav({
               <Link
                 href="/"
                 className={`${styles.listlink} ${
-                  pathname == '/' ? styles.active : ''
+                  pathname == '/create' ? styles.active : ''
                 }`}
               >
                 <span
@@ -49,7 +49,7 @@ export default function SideNav({
                 >
                   <HandyMan
                     htmlColor={`${
-                      pathname == '/'
+                      pathname == '/create'
                         ? 'rgb(99, 102, 241)'
                         : 'rgb(157, 164, 174)'
                     }`}
@@ -58,7 +58,7 @@ export default function SideNav({
                 </span>
                 <span
                   className={`${styles.span} ${
-                    pathname == '/' ? styles.ac : ''
+                    pathname == '/create' ? styles.ac : ''
                   }`}
                 >
                   Tool
