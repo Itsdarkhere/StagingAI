@@ -35,7 +35,7 @@ export default function SideNav({
           <ul className={styles.list}>
             <li className={styles.li}>
               <Link
-                href="/"
+                href="/create"
                 className={`${styles.listlink} ${
                   pathname == '/create' ? styles.active : ''
                 }`}

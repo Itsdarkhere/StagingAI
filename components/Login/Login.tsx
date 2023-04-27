@@ -1,16 +1,17 @@
+'use client'
 import React, { useState } from 'react';
 import styles from '../../styles/Login.module.css';
 import Link from 'next/link';
 import { Button } from '@mui/material';
 
-export default function Login({ handleLogin }: { handleLogin: () => void }) {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    handleLogin();
+    // handleLogin();
     return;
 
     // Data to send to the API
@@ -39,10 +40,10 @@ export default function Login({ handleLogin }: { handleLogin: () => void }) {
       localStorage.setItem('userId', userId);
 
       // Allow user access to app
-      handleLogin();
+      // handleLogin();
     } else {
       setError(true);
-      console.log(res)
+      console.log(res);
       const data = await res.json();
       console.log(data);
       setTimeout(() => {

@@ -10,8 +10,8 @@ export default function InfiniteScroll({
 }: {
   images: { url: string }[];
   fetchImages: (fetchNumber: number) => Promise<void>;
-  loading: boolean,
-  setLoading: (loading: boolean) => void
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 }) {
   const observer = useRef<IntersectionObserver | null>(null);
   const lastImageRef = useRef<HTMLImageElement | null>(null);
@@ -51,8 +51,10 @@ export default function InfiniteScroll({
         alignItems: 'flex-start',
       }}
     >
-      <div style={{width: '100%', padding: '20px'}}>
-        <p style={{ textAlign: 'start', color: 'rgb(52, 71, 103)' }}>Generated images are only stored once the product is finalized.</p>
+      <div style={{ width: '100%', padding: '20px' }}>
+        <p style={{ textAlign: 'start', color: 'rgb(52, 71, 103)' }}>
+          Generated images are only stored once the product is finalized.
+        </p>
       </div>
       {images.map((url, index) => (
         <img
@@ -63,7 +65,11 @@ export default function InfiniteScroll({
           style={{ width: 'auto', height: 'auto', marginBottom: '16px' }}
         />
       ))}
-      {loading && <div style={{padding: 50}}><Spinner wh={40} white={false} /></div>}
+      {loading && (
+        <div style={{ padding: 50 }}>
+          <Spinner wh={40} white={false} />
+        </div>
+      )}
     </div>
   );
 }

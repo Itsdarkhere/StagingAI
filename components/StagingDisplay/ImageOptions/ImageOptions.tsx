@@ -1,12 +1,11 @@
-import Sketch from '@/components/ToolView/StagingDisplay/ImageOptions/Sketch/Sketch';
+import Sketch from '@/components/StagingDisplay/ImageOptions/Sketch/Sketch';
 import { RefObject, useState } from 'react';
-import styles from '../../../../styles/ToolView/StagingDisplay/ImageOptions/ImageOptions.module.css';
+import styles from '../../../styles/ToolView/StagingDisplay/ImageOptions/ImageOptions.module.css';
+import TopBar from '../TopBar/TopBar';
 import ImageDrop from './ImageDrop/ImageDrop';
 import Options from './Options/Options';
-import TopBar from '../TopBar/TopBar';
 
 export default function ImageOptions({
-  changeMode,
   mode,
   originalImage,
   sketchRef,
@@ -15,10 +14,6 @@ export default function ImageOptions({
   setImage,
   dream,
 }: {
-  changeMode: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>,
-    value: any
-  ) => void;
   mode: string;
   originalImage: string | undefined;
   sketchRef: RefObject<any>;
@@ -166,8 +161,6 @@ export default function ImageOptions({
   return (
     <form className={styles.container} onSubmit={(e) => validateBasedOnMode(e)}>
       <TopBar
-        mode={mode}
-        changeMode={changeMode}
         setImage={setImage}
         canRemove={loaded}
       />

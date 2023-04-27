@@ -1,8 +1,8 @@
 import { Button } from '@mui/material';
 import Image from 'next/image';
-import styles from '../../../../../styles/ToolView/ImageDrop/ImageDrop.module.css';
+import styles from '../../../../styles/ToolView/ImageDrop/ImageDrop.module.css';
 import React, { useEffect, useState } from 'react';
-import IMGUP from '../../../../../public/imageup.svg';
+import IMGUP from '../../../../public/imageup.svg';
 import Spinner from '@/components/Spinner';
 
 export default function ImageDrop({

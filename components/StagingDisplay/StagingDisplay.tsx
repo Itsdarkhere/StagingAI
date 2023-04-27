@@ -1,17 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
-import StagingDisplay from '@/components/ToolView/StagingDisplay/StagingDisplay';
+import { AnimatePresence } from 'framer-motion';
 import React, { useRef, useState } from 'react';
-import 'react-tooltip/dist/react-tooltip.css';
-import styles from '../../styles/Staging.module.css';
-import SideNav from '../SideNav';
+import styles from '../../styles/ToolView/StagingDisplay/StagingDisplay.module.css';
+import Modal from '../Modal';
+import NewRender from '../NewRender';
+import ImageOptions from './ImageOptions/ImageOptions';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-export default function ToolView({
-  handleLogout,
-}: {
-  handleLogout: () => void;
-}) {
+export default function StagingDisplay() {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalIMG, setModalIMG] = useState<string>('');
   const [originalImage, setImage] = useState<string | undefined>(undefined);
   const [mode, setMode] = React.useState<string>('inpainting');
   const sketchRef = useRef<any>(null);
@@ -64,7 +64,10 @@ export default function ToolView({
       'office7',
       'Scandinavian-inspired modern office design with clean lines, warm wood tones, and an emphasis on natural light.',
     ],
-    ['privateoffice10000.pt', 'a high resolution photo of a modern minimalist office, desk and chair, personal office'],
+    [
+      'privateoffice10000.pt',
+      'a high resolution photo of a modern minimalist office, desk and chair, personal office',
+    ],
   ]);
 
   // Still needs to have copies hooked in
@@ -117,20 +120,26 @@ export default function ToolView({
     // Get mask
     const mask = await setImgMask();
     // Resize Mask and Image
-    const resizedIMG = await fetch(`/api/images/resize?imageUrl=${imageUrl}&width=${width}&height=${height}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'image/*',
-      },
-    });
+    const resizedIMG = await fetch(
+      `/api/images/resize?imageUrl=${imageUrl}&width=${width}&height=${height}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'image/*',
+        },
+      }
+    );
 
-    const resizedMask = await fetch(`/api/images/resize?imageUrl=${mask}&width=${width}&height=${height}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'image/*',
-      },
-    });
-    
+    const resizedMask = await fetch(
+      `/api/images/resize?imageUrl=${mask}&width=${width}&height=${height}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'image/*',
+        },
+      }
+    );
+
     // Get binary data and content type
     const resizedIMGBuffer = await resizedIMG.arrayBuffer();
     const resizedIMGContentType = resizedIMG.headers.get('Content-Type');
@@ -139,10 +148,19 @@ export default function ToolView({
 
     // Append data to inference request
     const formData = new FormData();
-    formData.append('init_image', new Blob([resizedIMGBuffer], { type: resizedIMGContentType! }));
-    formData.append('mask_image', new Blob([resizedMaskBuffer], { type: resizedMaskContentType! }));
+    formData.append(
+      'init_image',
+      new Blob([resizedIMGBuffer], { type: resizedIMGContentType! })
+    );
+    formData.append(
+      'mask_image',
+      new Blob([resizedMaskBuffer], { type: resizedMaskContentType! })
+    );
     formData.append('mask_source', 'MASK_IMAGE_WHITE');
-    formData.append('text_prompts[0][text]', 'A photo of a modern bedroom, natural light');
+    formData.append(
+      'text_prompts[0][text]',
+      'A photo of a modern bedroom, natural light'
+    );
 
     // Set API host, engine ID, and API key
     const apiHost = 'https://api.stability.ai';
@@ -167,13 +185,11 @@ export default function ToolView({
     const imageSrc = 'data:image/png;base64,' + artifact;
 
     setRenders((prev: string[]) =>
-        prev.map((render: string) =>
-          render === 'load' ? imageSrc : render
-        )
-      );
+      prev.map((render: string) => (render === 'load' ? imageSrc : render))
+    );
 
     setFetching(false);
-  }
+  };
 
   const inpainting = async (reqData: {
     room: string;
@@ -389,22 +405,48 @@ export default function ToolView({
     }
   };
 
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const openModal = (imgURL: string) => {
+    console.log('MODAL OPENED');
+    setModalIMG(imgURL);
+    setModalOpen(true);
+  };
+
   return (
-    <div className={styles.staging} id="tool">
-      <SideNav handleLogout={handleLogout} />
-      <StagingDisplay
+    <div className={styles.stagingDisplay}>
+      {/* Image popup */}
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+        {modalOpen && <Modal handleClose={closeModal} img={modalIMG} />}
+      </AnimatePresence>
+      {/* Image and options */}
+      <ImageOptions
+        mode={mode}
+        originalImage={originalImage}
         sketchRef={sketchRef}
         fetching={fetching}
-        renders={renders}
-        prediction={prediction}
-        originalImage={originalImage}
-        mode={mode}
-        setImage={setOriginalImage}
-        upscale={(imgURL: string) => upscale(imgURL)}
-        changeMode={changeMode}
         inpainting={inpainting}
         dream={dream}
+        setImage={setImage}
       />
+      {/* Resulting Images */}
+      <div className={styles.maskBox}>
+        {renders.map((img, i) => {
+          return (
+            <NewRender
+              fetching={fetching}
+              prediction={prediction}
+              setImage={setImage}
+              key={i}
+              image={img}
+              upscale={() => upscale(img)}
+              openModal={(imgURL: string) => openModal(imgURL)}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

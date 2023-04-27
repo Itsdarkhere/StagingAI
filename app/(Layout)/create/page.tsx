@@ -1,7 +1,6 @@
 'use client';
+import StagingDisplay from '@/components/StagingDisplay/StagingDisplay';
 import { useEffect, useState } from 'react';
-import Login from '@/components/Login/Login';
-import ToolView from '@/components/ToolView/ToolView';
 
 export default function Create() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,17 +35,9 @@ export default function Create() {
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
-      checkJWT(authToken);
+      // checkJWT(authToken);
     }
   }, []);
 
-  return (
-    <div style={{ flex: 1 }}>
-      {isLoggedIn ? (
-        <ToolView handleLogout={handleLogout} />
-      ) : (
-        <Login handleLogin={handleLogin} />
-      )}
-    </div>
-  );
+  return <StagingDisplay />;
 }

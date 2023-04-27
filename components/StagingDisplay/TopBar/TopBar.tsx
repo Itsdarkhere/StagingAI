@@ -1,19 +1,12 @@
 import React from 'react';
-import { ToggleButton, ToggleButtonGroup, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import styles from '../../../../styles/ToolView/StagingDisplay/ImageOptions/TopBar/TopBar.module.css';
+import styles from '../../../styles/ToolView/StagingDisplay/ImageOptions/TopBar/TopBar.module.css';
 
 export default function TopBar({
-  mode,
-  changeMode,
   setImage,
   canRemove,
 }: {
-  changeMode: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>,
-    value: any
-  ) => void;
-  mode: string;
   setImage: (image: string | undefined) => void;
   canRemove: boolean;
 }) {

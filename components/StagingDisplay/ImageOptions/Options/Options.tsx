@@ -1,8 +1,8 @@
 import Spinner from '@/components/Spinner';
 import React from 'react';
-import styles from '../../../../../styles/ToolView/StagingDisplay/ImageOptions/Options/Options.module.css';
+import styles from '../../../../styles/ToolView/StagingDisplay/ImageOptions/Options/Options.module.css';
 import Image from 'next/image';
-import wand from '../../../../../public/generate.svg';
+import wand from '../../../../public/generate.svg';
 import { Slider } from '@mui/material';
 import { Button } from '@mui/material';
 import FormSelect from '@/components/FormSelect';

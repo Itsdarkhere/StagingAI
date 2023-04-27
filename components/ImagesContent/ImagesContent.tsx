@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+'use client'
+import React, { useState } from 'react';
 import InfiniteScroll from './InfiniteScroll/InfiniteScroll';
-import styles from "../../../styles/ImagesContent.module.css"
+import styles from '../../styles/ImagesContent.module.css';
 
 export default function ImagesContent() {
   const [images, setImages] = React.useState<{ url: string }[]>([]);
@@ -29,13 +30,18 @@ export default function ImagesContent() {
     setImages((prev: { url: string }[]) => [...prev, ...data]);
   };
 
-//   useEffect(() => {
-//     fetchImages(1);
-//   }, []);
+  //   useEffect(() => {
+  //     fetchImages(1);
+  //   }, []);
 
   return (
     <div className={styles.container}>
-      <InfiniteScroll images={images} fetchImages={fetchImages} loading={loading} setLoading={setLoading} />
+      <InfiniteScroll
+        images={images}
+        fetchImages={fetchImages}
+        loading={loading}
+        setLoading={setLoading}
+      />
     </div>
   );
 }

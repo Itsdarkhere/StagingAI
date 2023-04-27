@@ -2,15 +2,13 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, {
   RefObject,
-  WheelEventHandler,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import MaskControl from './MaskControl';
 import PaintCursor from './PaintCursor';
-import styles from '../../../../../styles/ToolView/StagingDisplay/StagingDisplay.module.css';
+import styles from '../../../../styles/ToolView/StagingDisplay/StagingDisplay.module.css';
 import Instructions from './Instructions';
 
 export default function Sketch({
