@@ -1,7 +1,6 @@
 import '@/styles/variables.css';
 import '@/styles/globals.css';
 import { Inter } from '@next/font/google';
-import { Analytics } from '@vercel/analytics/react';
 import Providers from './providers';
 
 const inter = Inter({
@@ -18,10 +17,7 @@ export default function RootLayout({
     <html className={inter.className}>
       <head />
       <body>
-        <Providers>
-          {children}
-          <Analytics />  
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
