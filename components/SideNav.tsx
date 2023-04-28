@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from 'react';
 import Link from 'next/link';
 import styles from '../styles/SideNav.module.css';
@@ -10,14 +10,14 @@ import HandyMan from '@mui/icons-material/Handyman';
 import ImageSearch from '@mui/icons-material/ImageSearch';
 import ManageAccount from '@mui/icons-material/ManageAccounts';
 import Logout from '@mui/icons-material/Logout';
-import { signOut } from "next-auth/react";
+import { signOut } from 'next-auth/react';
 
 export default function SideNav() {
   const pathname = usePathname();
 
   const logout = () => {
-    signOut({ callbackUrl: '/login'});
-  }
+    signOut({ callbackUrl: '/login' });
+  };
 
   return (
     <div className={styles.container}>

@@ -3,7 +3,7 @@ import '@/styles/variables.css';
 import type { AppProps } from 'next/app';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from 'next-auth/react';
 
 const theme = createTheme({
   palette: {
@@ -13,10 +13,13 @@ const theme = createTheme({
   },
 });
 
-export default function App({ Component, pageProps: {session, ...pageProps} }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }

@@ -1,39 +1,39 @@
 .container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: rgb(243, 244, 249);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(243, 244, 249);
 }
 .innercontainer {
-    padding: 120px 24px 120px 24px;
-    max-width: 600px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+  padding: 120px 24px 120px 24px;
+  max-width: 600px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .box {
-    color: rgb(17, 25, 39);
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    background-color: rgb(255, 255, 255);
-    border: rgba(0, 0, 0, 0.125);
-    box-shadow: rgba(95, 116, 141, 0.03) 0px 2px 1px -1px,
+  color: rgb(17, 25, 39);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: rgb(255, 255, 255);
+  border: rgba(0, 0, 0, 0.125);
+  box-shadow: rgba(95, 116, 141, 0.03) 0px 2px 1px -1px,
     rgba(95, 116, 141, 0.04) 0px 1px 1px 0px,
     rgba(95, 116, 141, 0.08) 0px 1px 3px 0px;
-    overflow: hidden;
-    border-radius: 4px;
-    padding: 20px;
+  overflow: hidden;
+  border-radius: 4px;
+  padding: 20px;
 }
 .span {
-    font-weight: var(--bold);
-    color: var(--textTwo);
-    font-size: 16px;
-    margin: 0;
+  font-weight: var(--bold);
+  color: var(--textTwo);
+  font-size: 16px;
+  margin: 0;
 }
 .heading {
-    font-weight: var(--normal);
-    color: var(--textOne);
-    font-size: 16px;
-    margin: 10px 0;
+  font-weight: var(--normal);
+  color: var(--textOne);
+  font-size: 16px;
+  margin: 10px 0;
 }

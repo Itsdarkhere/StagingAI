@@ -15,7 +15,7 @@ export const authOptions = {
           email: credentials.email,
           password: credentials.password,
           is_success: true,
-        }
+        };
 
         if (user.is_success) {
           console.log('nextauth daki user: ' + user.is_success);
@@ -30,7 +30,7 @@ export const authOptions = {
   callbacks: {
     jwt: async ({ token, user }) => {
       if (user) {
-        console.log("User: ", user);
+        console.log('User: ', user);
         token.email = user.email;
         // token.user_type = user.data.auth.userType;
         // token.accessToken = user.token;

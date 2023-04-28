@@ -16,7 +16,7 @@ export default function Login() {
       email,
       password,
       // Redirect to create
-      callbackUrl: '/create'
+      callbackUrl: '/create',
     });
   };
 

@@ -3,7 +3,6 @@ import StagingDisplay from '@/components/StagingDisplay/StagingDisplay';
 import { useEffect, useState } from 'react';
 
 export default function Create() {
-
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
