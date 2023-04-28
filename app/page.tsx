@@ -9,7 +9,7 @@ import React from 'react';
 
 export default function Home() {
   // F the landing redirect to create
-  redirect('/create');
+  redirect('/login');
 
   return (
     <div>

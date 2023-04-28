@@ -156,7 +156,7 @@ export default function StagingDisplay() {
       'mask_image',
       new Blob([resizedMaskBuffer], { type: resizedMaskContentType! })
     );
-    formData.append('mask_source', 'MASK_IMAGE_WHITE');
+    formData.append('mask_source', 'MASK_IMAGE_BLACK');
     formData.append(
       'text_prompts[0][text]',
       'A photo of a modern bedroom, natural light'

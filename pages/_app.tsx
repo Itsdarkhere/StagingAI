@@ -3,7 +3,6 @@ import '@/styles/variables.css';
 import type { AppProps } from 'next/app';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
-import { SessionProvider } from 'next-auth/react';
 
 const theme = createTheme({
   palette: {
