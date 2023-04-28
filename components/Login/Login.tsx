@@ -15,45 +15,9 @@ export default function Login() {
     signIn('credentials', {
       email,
       password,
+      // Redirect to create
+      callbackUrl: '/create'
     });
-    return;
-
-    // Data to send to the API
-    const reqData = {
-      email,
-      password,
-    };
-
-    // Perform authentication logic here (e.g., call an API)
-    const res = await fetch('/api/auth/login123', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(reqData),
-    });
-
-    if (res?.ok) {
-      const data = await res.json();
-      const jwt = data.token;
-      const userId = data.userId;
-
-      // Store JWT and userId, JWT is needed for subsequent logins / api calls
-      // userId is needed to keep track of the user's data -> Images
-      localStorage.setItem('authToken', jwt);
-      localStorage.setItem('userId', userId);
-
-      // Allow user access to app
-      // handleLogin();
-    } else {
-      setError(true);
-      console.log(res);
-      const data = await res.json();
-      console.log(data);
-      setTimeout(() => {
-        setError(false);
-      }, 750);
-    }
   };
 
   return (

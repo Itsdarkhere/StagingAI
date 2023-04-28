@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import { AnimatePresence } from 'framer-motion';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from '../../styles/ToolView/StagingDisplay/StagingDisplay.module.css';
 import Modal from '../Modal/Modal';
 import NewRender from '../NewRender';
@@ -392,25 +392,11 @@ export default function StagingDisplay() {
     return '';
   };
 
-  const setOriginalImage = (img: string | undefined) => {
-    setImage(img);
-  };
-
-  const changeMode = (
-    event: React.MouseEvent<HTMLElement, MouseEvent>,
-    value: any
-  ) => {
-    if (value !== null) {
-      setMode(value);
-    }
-  };
-
   const closeModal = () => {
     setModalOpen(false);
   };
 
   const openModal = (imgURL: string) => {
-    console.log('MODAL OPENED');
     setModalIMG(imgURL);
     setModalOpen(true);
   };

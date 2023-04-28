@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import Link from 'next/link';
 import styles from '../styles/SideNav.module.css';
@@ -15,7 +16,7 @@ export default function SideNav() {
   const pathname = usePathname();
 
   const logout = () => {
-    signOut();
+    signOut({ callbackUrl: '/login'});
   }
 
   return (

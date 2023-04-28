@@ -1,11 +1,8 @@
 'use client';
 import StagingDisplay from '@/components/StagingDisplay/StagingDisplay';
 import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
 
 export default function Create() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { data: session } = useSession();
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -14,22 +11,8 @@ export default function Create() {
     }
   }, []);
 
-  if (!session) {
-    return <h1>Login to use the app.</h1>
-  }
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    setIsLoggedIn(false);
-  };
-
   // If we have a valid JWT, we can log the user in
   const checkJWT = async (authToken: string) => {
-    handleLogin();
     return;
     // Perform authentication logic here (e.g., call an API)
     const res = await fetch('/api/auth/checkJWT', {
@@ -41,7 +24,7 @@ export default function Create() {
     });
 
     if (res?.ok) {
-      handleLogin();
+      // handleLogin();
     }
   };
 

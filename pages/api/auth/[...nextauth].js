@@ -1,35 +1,19 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-const backendURL = 'localhost:3000';
-
 // Js since Idk about the types for this
 export const authOptions = {
   session: {
-    strategy: 'jwt',
+    // strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
+  secret: process.env.JWT_SECRET,
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        const credentialDetails = {
+        const user = {
           email: credentials.email,
           password: credentials.password,
-        };
-
-        // const resp = await fetch(backendURL + '/auth/login', {
-        //   method: 'POST',
-        //   headers: {
-        //     Accept: 'application/json',
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(credentialDetails),
-        // });
-
-        // const user = await resp.json();
-        const user = {
-          email: 'emo@il.com',
-          password: 'passsword',
           is_success: true,
         }
 
@@ -49,7 +33,7 @@ export const authOptions = {
         console.log("User: ", user);
         token.email = user.email;
         // token.user_type = user.data.auth.userType;
-        // token.accessToken = user.data.auth.token;
+        // token.accessToken = user.token;
       }
 
       return token;
