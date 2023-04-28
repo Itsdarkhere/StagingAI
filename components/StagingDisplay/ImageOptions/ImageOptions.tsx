@@ -118,7 +118,7 @@ export default function ImageOptions({
     if (mode !== 'inpainting') {
       validateForm1(event);
     } else {
-      validateForm3(event);
+      validateForm2(event);
     }
   };
 
