@@ -4,6 +4,7 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  optimizeFonts: false,
   images: {
     domains: ['botinterior.s3.eu-north-1.amazonaws.com', 'replicate.delivery'],
     remotePatterns: [
