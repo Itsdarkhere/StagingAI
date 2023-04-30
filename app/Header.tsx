@@ -1,9 +1,10 @@
-import PrimaryButton from '@/components/PrimaryButton';
+'use client'
 import React from 'react';
 import styles from '../styles/Header.module.css';
 import Image from 'next/image';
 import SOFA from '../public/sofa.svg';
-import SecondaryButton from '@/components/SecondaryButton';
+import { IconButton } from '@mui/material';
+import MenuIcon from "@mui/icons-material/Menu"
 
 export default function Header() {
   return (
@@ -14,8 +15,9 @@ export default function Header() {
           <h2 className={styles.brandname}>RealTool</h2>
         </div>
         <div className={styles.headerRight}>
-          {/* <SecondaryButton text="Try For Free" margin={true} />
-          <PrimaryButton text="Log In" /> */}
+          <IconButton color="primary" aria-label="open navigation">
+            <MenuIcon />
+          </IconButton>
         </div>
       </div>
     </div>
