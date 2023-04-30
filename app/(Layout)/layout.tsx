@@ -5,6 +5,7 @@ import styles from '../../styles/Layout.module.css';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
 import LogInTo from '@/components/LogInTo';
+import Header from '../Header';
 
 export default async function Layout({
   children,
@@ -18,6 +19,7 @@ export default async function Layout({
   }
   return (
     <div className={styles.layout} id="tool">
+      <Header />
       <SideNav />
       {children}
     </div>

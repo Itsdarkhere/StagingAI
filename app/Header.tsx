@@ -10,7 +10,7 @@ export default function Header() {
     <div className={styles.header}>
       <div className={styles.headerInner}>
         <div className={styles.headerLeft}>
-          {/* <Image src={SOFA} height={30} width={35} alt="logo" /> */}
+          <Image src={SOFA} height={30} width={35} alt="logo" />
           <h2 className={styles.brandname}>RealTool</h2>
         </div>
         <div className={styles.headerRight}>
