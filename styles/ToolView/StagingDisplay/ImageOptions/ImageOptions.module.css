@@ -19,6 +19,9 @@
   .innerContainer {
     flex-direction: column;
   }
+  .container {
+    padding: 0 20px;
+  }
 }
 .sketchcontainer {
   max-width: 100%;

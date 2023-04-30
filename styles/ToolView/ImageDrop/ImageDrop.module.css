@@ -46,6 +46,11 @@
   z-index: 6;
   overflow: hidden;
 }
+@media screen and (max-width: 450px) {
+  .inputLabel {
+    height: 300px;
+  }
+}
 .drag_active {
   pointer-events: none;
 }
