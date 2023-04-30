@@ -122,7 +122,7 @@ export default function Options({
         type="submit"
         disabled={fetching}
         variant="contained"
-        style={{ height: 45, marginTop: 15 }}
+        style={{ height: 45, marginTop: 20 }}
       >
         {fetching ? (
           <Spinner wh={30} white={false} />
