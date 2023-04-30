@@ -1,11 +1,11 @@
-// 'use client';
-import SideNav from '@/components/SideNav';
-import React from 'react';
-import styles from '../../styles/Layout.module.css';
+import LogInTo from '@/components/LogInTo';
+import SideNav from '@/components/Nav/SideNav';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
-import LogInTo from '@/components/LogInTo';
-import Header from '../Header';
+import React from 'react';
+import Header from '../../components/Nav/Header';
+import styles from '../../styles/Layout.module.css';
+import Navigation from '@/components/Nav/Navigation';
 
 export default async function Layout({
   children,
@@ -19,8 +19,7 @@ export default async function Layout({
   }
   return (
     <div className={styles.layout} id="tool">
-      <Header />
-      <SideNav />
+      <Navigation />
       {children}
     </div>
   );

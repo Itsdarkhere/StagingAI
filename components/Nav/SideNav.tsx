@@ -1,10 +1,10 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import styles from '../styles/SideNav.module.css';
+import styles from '../../styles/SideNav.module.css';
 import { usePathname } from 'next/navigation';
-import sofa from '../public/sofa.svg';
-import upgrade from '../public/upgrade.png';
+import sofa from '../../public/sofa.svg';
+import upgrade from '../../public/upgrade.png';
 import Image from 'next/image';
 import HandyMan from '@mui/icons-material/Handyman';
 import ImageSearch from '@mui/icons-material/ImageSearch';
@@ -12,7 +12,7 @@ import ManageAccount from '@mui/icons-material/ManageAccounts';
 import Logout from '@mui/icons-material/Logout';
 import { signOut } from 'next-auth/react';
 
-export default function SideNav() {
+export default function SideNav({ open }: { open: boolean}) {
   const pathname = usePathname();
 
   const logout = () => {
@@ -20,7 +20,7 @@ export default function SideNav() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${open && styles.visible}`}>
       <div className={styles.containerInner}>
         <div className={styles.top}>
           <Link href="/" className={styles.logolink}>
