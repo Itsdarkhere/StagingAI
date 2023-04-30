@@ -38,7 +38,7 @@ export default function StagingDisplay() {
     ],
     [
       'office13200.pt',
-      'a high resolution photo of a modern office, office design, 2022, interior design magazine',
+      'a high resolution photo of a modern office, standing desks, computers, workstation',
     ],
     [
       'office2',

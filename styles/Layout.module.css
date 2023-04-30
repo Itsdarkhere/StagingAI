@@ -15,5 +15,6 @@
     flex-direction: column;
     height: auto;
     min-height: 100vh;
+    padding-left: 0px;
   }
 }
