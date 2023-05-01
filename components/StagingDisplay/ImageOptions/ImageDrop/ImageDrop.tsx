@@ -28,6 +28,7 @@ export default function ImageDrop({
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
+    setUploadingPhoto(true);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const file = e.dataTransfer.files[0];
       // Upload image to S3
@@ -38,6 +39,7 @@ export default function ImageDrop({
   // triggers when file is selected with click
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    setUploadingPhoto(true);
     const file = e.target.files?.[0]!;
     // Upload image to S3
     await uploadPhoto(file);
@@ -56,7 +58,6 @@ export default function ImageDrop({
   };
 
   const uploadPhoto = async (file: File) => {
-    setUploadingPhoto(true);
     const filename = encodeURIComponent(file.name);
     const fileType = encodeURIComponent(file.type);
     const userId = localStorage.getItem('userId');
