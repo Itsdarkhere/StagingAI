@@ -108,8 +108,8 @@ export default function Sketch({
           }}
           className={`${styles.img}`}
           transition={{
-            opacity: { delay: 0.5, duration: 0.4 },
-            height: { delay: 0, duration: 0.4 },
+            opacity: { delay: 0.3, duration: 0.2 },
+            height: { delay: 0, duration: 0.2 },
           }}
           onLoad={onImageLoad}
           width="auto"
