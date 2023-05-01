@@ -63,6 +63,36 @@ export default function NewRender({
     return result;
   }
 
+  const downloadImage = async (url: string, name: string) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = objectUrl;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Clean up object URL after download is complete
+      setTimeout(() => {
+        URL.revokeObjectURL(objectUrl);
+      }, 100);
+    } catch (error) {
+      console.error('Error downloading the image:', error);
+    }
+  };
+
+  // If fileName is not provided, extract it from the imageUrl or generate one based on the current timestamp
+  const getFileName = (url: string) => {
+    const urlParts = url.split('/');
+    const extractedName = urlParts[urlParts.length - 1];
+    if (extractedName) return extractedName;
+    return `image-${Date.now()}.jpg`;
+  };
+
   return (
     <div className={styles.render}>
       {image == 'load' && (
@@ -80,6 +110,7 @@ export default function NewRender({
               disableElevation
               color='primary'
               className={`${styles.optionButton}`}
+              onClick={() => downloadImage(image, getFileName(image))}
             >
               <Image src={DOWNLOAD} alt="plus" height={20} />
             </Button>

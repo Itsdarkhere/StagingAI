@@ -27,7 +27,7 @@ export default function SideNav({ open, setOpen }: { open: boolean, setOpen: (op
         <div className={styles.top}>
           <Link href="/" className={styles.logolink}>
             <Image height={40} src={sofa} alt="sofa" />
-            Realtool
+            RealTool
           </Link>
           <div className={styles.bio}>
             <h6 className={styles.name}>Valtteri Juvonen</h6>
