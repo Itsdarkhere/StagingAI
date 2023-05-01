@@ -3,7 +3,7 @@ import BACK2 from '../../../../public/back2.svg';
 import DELETE from '../../../../public/delete.svg';
 import Image from 'next/image';
 import styles from '../../../../styles/MaskControl.module.css';
-import { Tooltip } from 'react-tooltip';
+import { Tooltip } from '@mui/material';
 import { Slider } from '@mui/material';
 
 export default function MaskControl({
@@ -29,13 +29,6 @@ export default function MaskControl({
         <label className={styles.controlLabel}>Mask Controls</label>
       </div> */}
       <div className={styles.controlBottom}>
-        <Tooltip
-          delayShow={500}
-          place="left"
-          style={{ opacity: 1, zIndex: 10 }}
-          variant="dark"
-          anchorSelect=".control-tooltip"
-        />
         <Slider
           min={25}
           max={200}
@@ -51,22 +44,26 @@ export default function MaskControl({
           readOnly={true}
           value={strokeWidth}
         />
-        <button
-          className={`${styles.controlB} control-tooltip`}
-          data-tooltip-content="Undo previous action"
-          onClick={undo}
-          type="button"
-        >
-          <Image width={20} height={20} src={BACK2} alt="back" />
-        </button>
-        <button
-          type="button"
-          className={`${styles.controlR} control-tooltip`}
-          data-tooltip-content="Remove paint"
-          onClick={clear}
-        >
-          <Image width={20} height={20} src={DELETE} alt="back" />
-        </button>
+        <Tooltip title="Undo previous action">
+          <button
+            className={`${styles.controlB}`}
+            data-tooltip-content="Undo previous action"
+            onClick={undo}
+            type="button"
+          >
+            <Image width={20} height={20} src={BACK2} alt="back" />
+          </button>
+        </Tooltip>
+        <Tooltip title="Remove paint">
+          <button
+            type="button"
+            className={`${styles.controlR}`}
+            data-tooltip-content="Remove paint"
+            onClick={clear}
+          >
+            <Image width={20} height={20} src={DELETE} alt="back" />
+          </button>
+        </Tooltip>
       </div>
     </div>
   );

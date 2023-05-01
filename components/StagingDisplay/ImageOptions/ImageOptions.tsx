@@ -13,6 +13,7 @@ export default function ImageOptions({
   inpainting,
   setImage,
   dream,
+  enhance,
 }: {
   mode: string;
   originalImage: string | undefined;
@@ -30,6 +31,7 @@ export default function ImageOptions({
   }) => void;
   setImage: (image: string | undefined) => void;
   dream: (imageUrl: string, width: number, height: number) => void;
+  enhance: (imageUrl: string, width: number, height: number) => void;
 }) {
   const [copies, setCopies] = useState(1);
   const [loaded, setLoaded] = useState(false);
@@ -113,6 +115,23 @@ export default function ImageOptions({
 
     dream(originalImage!, newDimensions.newWidth, newDimensions.newHeight);
   };
+
+  const enhanceImage = async (event: React.SyntheticEvent) => {
+    // Stop the form from submitting and refreshing the page.
+    event.preventDefault();
+    // Return if we're already fetching.
+    if (fetching) {
+      return;
+    }
+
+    // Get new dimensions scaled down to max 512px
+    let newDimensions = await calculateNewDimensions(
+      imageDimensions.width,
+      imageDimensions.height
+    );
+
+    enhance(originalImage!, newDimensions.newWidth, newDimensions.newHeight);
+  }
 
   const validateBasedOnMode = (event: React.SyntheticEvent) => {
     if (mode !== 'inpainting') {

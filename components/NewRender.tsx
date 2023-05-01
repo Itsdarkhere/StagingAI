@@ -7,7 +7,7 @@ import EDIT from '../public/edit.svg';
 import Image from 'next/image';
 import Spinner from './Spinner';
 import ProcessingCount from './ProcessingCount';
-import { Tooltip } from 'react-tooltip';
+import { Tooltip } from '@mui/material';
 
 export default function NewRender({
   image,
@@ -73,34 +73,37 @@ export default function NewRender({
       )}
       {image !== 'load' && (
         <div className={styles.imageOptions}>
-          <Tooltip
+          {/* <Tooltip
             delayShow={500}
-            place="left"
+            place="bottom"
             style={{ opacity: 1 }}
-            variant="light"
+            variant="dark"
             anchorSelect={'.' + tooltipClass}
-          />
-          <button
-            className={`${styles.optionButton} ${tooltipClass}`}
-            data-tooltip-content="Download image"
-          >
-            <Image src={DOWNLOAD} alt="plus" height={20} />
-          </button>
-          <button
-            className={`${styles.optionButton} ${tooltipClass}`}
-            data-tooltip-content="Use as base image"
-            onClick={() => setImage(image)}
-          >
-            <Image src={EDIT} alt="plus" height={20} />
-          </button>
-          <button
-            className={`${styles.optionButton} ${tooltipClass}`}
-            data-tooltip-content="Make this image larger"
-            onClick={upscale}
-            disabled={fetching}
-          >
-            <Image src={UPSCALE} alt="plus" height={20} />
-          </button>
+          /> */}
+          <Tooltip title="Download image">
+            <button
+              className={`${styles.optionButton}`}
+            >
+              <Image src={DOWNLOAD} alt="plus" height={20} />
+            </button>
+          </Tooltip>
+          <Tooltip title="Use as base image">
+            <button
+              className={`${styles.optionButton}`}
+              onClick={() => setImage(image)}
+            >
+              <Image src={EDIT} alt="plus" height={20} />
+            </button>
+          </Tooltip>
+          <Tooltip title="Make this image larger">
+            <button
+              className={`${styles.optionButton}`}
+              onClick={upscale}
+              disabled={fetching}
+            >
+              <Image src={UPSCALE} alt="plus" height={20} />
+            </button>
+          </Tooltip>
         </div>
       )}
       {image !== 'load' && (
