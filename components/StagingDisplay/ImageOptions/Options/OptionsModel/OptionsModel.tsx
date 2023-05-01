@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { Tooltip } from 'react-tooltip';
 import PLUS from '../../../../../../public/plus.svg';
 import REPLACE from '../../../../../../public/replace.svg';
 import TRASH from '../../../../../../public/trash.svg';
@@ -14,18 +13,10 @@ export default function OptionsModel({
 }) {
   return (
     <div className={styles.ipButtonContainer}>
-      <Tooltip
-        place="bottom"
-        style={{ opacity: 1 }}
-        variant="light"
-        delayShow={500}
-        anchorSelect=".my-tooltip"
-      />
       <button
-        data-tooltip-content="Edit only a part of the picture."
         type="button"
         className={`${styles.ipButton} 
-              ${!mode && styles.selected} my-tooltip`}
+              ${!mode && styles.selected}`}
         onClick={() => clickMode(false)}
       >
         {/* <Image
@@ -38,8 +29,7 @@ export default function OptionsModel({
       </button>
       <button
         type="button"
-        className={`${styles.ipButton} ${mode && styles.selected} my-tooltip`}
-        data-tooltip-content="Edit the whole picture."
+        className={`${styles.ipButton} ${mode && styles.selected}`}
         onClick={() => clickMode(true)}
       >
         {/* <Image
@@ -52,8 +42,7 @@ export default function OptionsModel({
       </button>
       <button
         type="button"
-        className={`${styles.ipButton} ${mode && styles.selected} my-tooltip`}
-        data-tooltip-content="Edit full image, try to retain dimensions."
+        className={`${styles.ipButton} ${mode && styles.selected}`}
         onClick={() => clickMode(true)}
       >
         {/* <Image

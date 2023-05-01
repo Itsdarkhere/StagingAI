@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Spinner from './Spinner';
 import ProcessingCount from './ProcessingCount';
 import { Tooltip } from '@mui/material';
+import { Button } from '@mui/material';
 
 export default function NewRender({
   image,
@@ -73,36 +74,35 @@ export default function NewRender({
       )}
       {image !== 'load' && (
         <div className={styles.imageOptions}>
-          {/* <Tooltip
-            delayShow={500}
-            place="bottom"
-            style={{ opacity: 1 }}
-            variant="dark"
-            anchorSelect={'.' + tooltipClass}
-          /> */}
           <Tooltip title="Download image">
-            <button
+            <Button
+              variant='contained'
+              color='primary'
               className={`${styles.optionButton}`}
             >
               <Image src={DOWNLOAD} alt="plus" height={20} />
-            </button>
+            </Button>
           </Tooltip>
           <Tooltip title="Use as base image">
-            <button
+            <Button
+              variant='contained'
+              color='primary'
               className={`${styles.optionButton}`}
               onClick={() => setImage(image)}
             >
               <Image src={EDIT} alt="plus" height={20} />
-            </button>
+            </Button>
           </Tooltip>
           <Tooltip title="Make this image larger">
-            <button
+            <Button
+              variant='contained'
+              color='primary'
               className={`${styles.optionButton}`}
               onClick={upscale}
               disabled={fetching}
             >
               <Image src={UPSCALE} alt="plus" height={20} />
-            </button>
+            </Button>
           </Tooltip>
         </div>
       )}

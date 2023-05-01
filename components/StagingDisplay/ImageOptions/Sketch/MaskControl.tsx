@@ -47,7 +47,6 @@ export default function MaskControl({
         <Tooltip title="Undo previous action">
           <button
             className={`${styles.controlB}`}
-            data-tooltip-content="Undo previous action"
             onClick={undo}
             type="button"
           >
@@ -58,7 +57,6 @@ export default function MaskControl({
           <button
             type="button"
             className={`${styles.controlR}`}
-            data-tooltip-content="Remove paint"
             onClick={clear}
           >
             <Image width={20} height={20} src={DELETE} alt="back" />
