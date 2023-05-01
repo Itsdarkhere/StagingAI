@@ -107,6 +107,7 @@
   width: 175px;
   height: 175px;
   display: none;
+  transform: rotate(-90deg);
 }
 .instructions {
   display: flex;

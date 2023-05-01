@@ -3,6 +3,7 @@ import lottie from 'lottie-web';
 import { createRef, useEffect } from 'react';
 import styles from '../../../../styles/ToolView/StagingDisplay/StagingDisplay.module.css';
 import PAINT from '../../../../public/paint1.json';
+import { Alert, AlertTitle } from '@mui/material';
 
 export default function Instructions() {
   let animationContainer = createRef<HTMLDivElement>();
@@ -29,15 +30,19 @@ export default function Instructions() {
       }}
       className={`${styles.instructionContainer}`}
     >
-      <div ref={animationContainer} className={styles.paintAnimation}></div>
-      <div className={styles.instructions}>
+      {/* <div ref={animationContainer} className={styles.paintAnimation}></div> */}
+      {/* <div className={styles.instructions}>
         <p className={styles.mainI}>
           Draw on the parts of the image you want to modify.
         </p>
         <p className={styles.secondaryI}>
           To avoid modifying floor material etc, leave a part of it unpainted.
         </p>
-      </div>
+      </div> */}
+      <Alert severity="info" color='info'>
+        <AlertTitle>Draw on the parts of the image you want to modify.</AlertTitle>
+        To avoid modifying floor material etc, <strong>leave a part of it unpainted.</strong>
+      </Alert>
     </motion.div>
   );
 }
