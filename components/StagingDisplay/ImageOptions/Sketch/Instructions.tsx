@@ -31,14 +31,6 @@ export default function Instructions() {
       className={`${styles.instructionContainer}`}
     >
       {/* <div ref={animationContainer} className={styles.paintAnimation}></div> */}
-      {/* <div className={styles.instructions}>
-        <p className={styles.mainI}>
-          Draw on the parts of the image you want to modify.
-        </p>
-        <p className={styles.secondaryI}>
-          To avoid modifying floor material etc, leave a part of it unpainted.
-        </p>
-      </div> */}
       <Alert severity="info" color='info'>
         <AlertTitle><strong>Draw</strong> on the parts of the image you want to modify.</AlertTitle>
         To avoid modifying floor materials etc, <strong>leave a part of it unpainted.</strong>
