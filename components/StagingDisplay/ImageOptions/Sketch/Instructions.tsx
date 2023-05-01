@@ -40,8 +40,8 @@ export default function Instructions() {
         </p>
       </div> */}
       <Alert severity="info" color='info'>
-        <AlertTitle>Draw on the parts of the image you want to modify.</AlertTitle>
-        To avoid modifying floor material etc, <strong>leave a part of it unpainted.</strong>
+        <AlertTitle><strong>Draw</strong> on the parts of the image you want to modify.</AlertTitle>
+        To avoid modifying floor materials etc, <strong>leave a part of it unpainted.</strong>
       </Alert>
     </motion.div>
   );
