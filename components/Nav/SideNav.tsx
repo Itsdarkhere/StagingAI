@@ -175,7 +175,7 @@ export default function SideNav({ open, setOpen }: { open: boolean, setOpen: (op
           <div className={styles.imagecontainer}>
             <Image width={160} src={upgrade} alt="upgrade" />
           </div>
-          <Link href="/subscribe" className={styles.bottomlink}>
+          <Link href="/subscription" className={styles.bottomlink}>
             Upgrade to Pro
             <span></span>
           </Link>
