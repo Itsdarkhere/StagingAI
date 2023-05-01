@@ -8,7 +8,7 @@ export default function Navigation() {
   return (
     <>
       <Header setOpen={setOpen} />
-      <SideNav open={open} />
+      <SideNav open={open} setOpen={setOpen} />
     </>
   );
 }

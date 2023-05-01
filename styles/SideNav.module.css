@@ -11,14 +11,31 @@
   top: 0px;
   outline: 0px;
   left: 0px;
-  border-right: 1px solid rgb(242, 244, 247);
   background-color: rgb(28, 37, 54);
   color: rgb(255, 255, 255);
   width: 280px;
 }
+.sideDrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100%;
+  background: #0000008d;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+  z-index: 7;
+}
 @media screen and (max-width: 800px) {
   .container {
     display: none;
+  }
+  .sideDrop {
+    display: flex;
   }
 }
 .visible {

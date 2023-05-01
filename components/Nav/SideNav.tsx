@@ -12,7 +12,7 @@ import ManageAccount from '@mui/icons-material/ManageAccounts';
 import Logout from '@mui/icons-material/Logout';
 import { signOut } from 'next-auth/react';
 
-export default function SideNav({ open }: { open: boolean}) {
+export default function SideNav({ open, setOpen }: { open: boolean, setOpen: (open: boolean) => void}) {
   const pathname = usePathname();
 
   const logout = () => {
@@ -20,6 +20,8 @@ export default function SideNav({ open }: { open: boolean}) {
   };
 
   return (
+    <>
+    {open && <div className={styles.sideDrop} onClick={() => setOpen(false)}></div>}
     <div className={`${styles.container} ${open && styles.visible}`}>
       <div className={styles.containerInner}>
         <div className={styles.top}>
@@ -180,5 +182,6 @@ export default function SideNav({ open }: { open: boolean}) {
         </div>
       </div>
     </div>
+    </>
   );
 }
