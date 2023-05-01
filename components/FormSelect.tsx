@@ -47,15 +47,10 @@ export default function FormSelect({
         control: (baseStyles, state) => ({
           ...baseStyles,
           backgroundColor: 'transparent',
-          border: '0.0625rem solid rgb(210, 214, 218)',
           fontSize: '14px',
           height: '48px',
+          border: '0.0625rem solid rgb(210, 214, 218)',
           boxShadow: state.isFocused ? '0px 0px 6px #FFFFF' : 'none',
-          '&:focus': {
-            boxShadow: 'none',
-            border: '1px solid red',
-            outline: '1px solid red',
-          },
         }),
         option: (baseStyles, state) => ({
           ...baseStyles,

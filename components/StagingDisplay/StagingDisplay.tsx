@@ -41,6 +41,10 @@ export default function StagingDisplay() {
       'Sleek and minimalist open-concept office with large windows, natural light, and ergonomic furniture.',
     ],
     [
+      'bluesky',
+      'A beautiful blue sky.',
+    ],
+    [
       'privateoffice10000.pt',
       'a high resolution photo of a modern minimalist office, desk and chair, personal office',
     ],

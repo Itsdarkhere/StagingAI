@@ -28,6 +28,7 @@ export default function Options({
     { value: 'empty5000.pt', label: 'Remove anything' },
     { value: 'wall', label: 'Just a wall' },
     { value: 'office', label: 'Office' },
+    { value: 'bluesky', label: 'Blue sky' },
     { value: 'living10000.pt', label: 'Living room' },
     { value: 'privateoffice10000.pt', label: 'Private office' },
   ];
