@@ -77,6 +77,7 @@ export default function NewRender({
           <Tooltip title="Download image">
             <Button
               variant='contained'
+              disableElevation
               color='primary'
               className={`${styles.optionButton}`}
             >
@@ -87,6 +88,7 @@ export default function NewRender({
             <Button
               variant='contained'
               color='primary'
+              disableElevation
               className={`${styles.optionButton}`}
               onClick={() => setImage(image)}
             >
@@ -97,6 +99,7 @@ export default function NewRender({
             <Button
               variant='contained'
               color='primary'
+              disableElevation
               className={`${styles.optionButton}`}
               onClick={upscale}
               disabled={fetching}
