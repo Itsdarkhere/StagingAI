@@ -37,32 +37,8 @@ export default function StagingDisplay() {
       'A high resolution photo of a modern minimalist living room, <your-chosen-concept> , interior design magazine, sun light',
     ],
     [
-      'office13200.pt',
-      'a high resolution photo of a modern office, standing desks, computers, workstation',
-    ],
-    [
-      'office2',
+      'office',
       'Sleek and minimalist open-concept office with large windows, natural light, and ergonomic furniture.',
-    ],
-    [
-      'office3',
-      'Spacious modern office with a blend of industrial and natural elements, featuring exposed brick walls, wooden beams, and plenty of greenery',
-    ],
-    [
-      'office4',
-      'Contemporary office space with collaborative workstations, colorful accents, and designated breakout areas for relaxation and brainstorming.',
-    ],
-    [
-      'office5',
-      'Futuristic office design incorporating cutting-edge technology, flexible workspaces, and interactive digital displays.',
-    ],
-    [
-      'office6',
-      'Modern office with a mix of private offices, glass-walled meeting rooms, and open workspaces for enhanced collaboration and productivity.',
-    ],
-    [
-      'office7',
-      'Scandinavian-inspired modern office design with clean lines, warm wood tones, and an emphasis on natural light.',
     ],
     [
       'privateoffice10000.pt',

@@ -55,14 +55,7 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  color: var(--textOne);
-  font-size: 12px;
   white-space: pre-wrap;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
 }
 .renderingHeading {
   margin: 0;

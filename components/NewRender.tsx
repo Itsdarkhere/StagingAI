@@ -9,6 +9,7 @@ import Spinner from './Spinner';
 import ProcessingCount from './ProcessingCount';
 import { Tooltip } from '@mui/material';
 import { Button } from '@mui/material';
+import { Alert } from '@mui/material';
 
 export default function NewRender({
   image,
@@ -25,19 +26,18 @@ export default function NewRender({
   fetching: boolean;
   setImage: (image: string | undefined) => void;
 }) {
-  const [tooltipClass, setTooltipClass] = React.useState<string>('');
   const showInferenceStatus = () => {
     switch (prediction?.status) {
       case 'starting':
         return (
           <div className={styles.predictionStatus}>
-            Starting... This might take a few minutes.
+            <Alert severity='info'>Starting... This might take a few minutes</Alert>
           </div>
         );
       case 'processing':
         return (
           <div className={styles.predictionStatus}>
-            Processing... <ProcessingCount />
+            <Alert severity='success'>Processing... <ProcessingCount /></Alert>
           </div>
         );
       case 'succeeded':
@@ -46,10 +46,6 @@ export default function NewRender({
         return;
     }
   };
-
-  useEffect(() => {
-    setTooltipClass(generateRandomString(7));
-  }, []);
 
   function generateRandomString(length: number) {
     let result = '';
@@ -99,7 +95,7 @@ export default function NewRender({
         <div className={styles.renderingIndicator}>
           {showInferenceStatus()}
           <Spinner wh={40} white={false} />
-          <h4 className={styles.renderingHeading}>Rendering...</h4>
+          <h4 className={styles.renderingHeading}>Loading...</h4>
         </div>
       )}
       {image !== 'load' && (
@@ -107,8 +103,7 @@ export default function NewRender({
           <Tooltip title="Download image">
             <Button
               variant='contained'
-              disableElevation
-              color='primary'
+              color='warning'
               className={`${styles.optionButton}`}
               onClick={() => downloadImage(image, getFileName(image))}
             >
@@ -118,8 +113,7 @@ export default function NewRender({
           <Tooltip title="Use as base image">
             <Button
               variant='contained'
-              color='primary'
-              disableElevation
+              color='warning'
               className={`${styles.optionButton}`}
               onClick={() => setImage(image)}
             >
@@ -129,8 +123,7 @@ export default function NewRender({
           <Tooltip title="Make this image larger">
             <Button
               variant='contained'
-              color='primary'
-              disableElevation
+              color='warning'
               className={`${styles.optionButton}`}
               onClick={upscale}
               disabled={fetching}
