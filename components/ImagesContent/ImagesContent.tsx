@@ -1,7 +1,6 @@
 import React from 'react';
 import InfiniteScroll from './InfiniteScroll/InfiniteScroll';
 import styles from '../../styles/ImagesContent.module.css';
-import { Alert, AlertTitle } from '@mui/material';
 import { getServerSession } from 'next-auth';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
 
