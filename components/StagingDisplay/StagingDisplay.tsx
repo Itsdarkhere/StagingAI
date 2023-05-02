@@ -236,7 +236,7 @@ export default function StagingDisplay() {
     room: string;
     style: string;
     image: string;
-    mask: string;
+    mask: string | undefined;
     concept: string;
     copies: number;
     width: number;

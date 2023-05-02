@@ -21,11 +21,12 @@ export default function InfiniteScroll({
     <div
       style={{
         gap: 20,
+        paddingTop: 20,
         width: '100%',
         height: '100%',
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'flex-start',
       }}
     >
@@ -34,7 +35,7 @@ export default function InfiniteScroll({
           key={index}
           src={url.url}
           alt={`Image ${index + 1}`}
-          style={{ width: 'auto', height: 'auto', marginBottom: '16px' }}
+          style={{ width: 'auto', minHeight: 100, minWidth: 100, backgroundColor: 'grey', height: 'auto', marginBottom: '16px' }}
         />
       ))}
       {loading && (

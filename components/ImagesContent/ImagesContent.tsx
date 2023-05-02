@@ -1,8 +1,9 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import InfiniteScroll from './InfiniteScroll/InfiniteScroll';
 import styles from '../../styles/ImagesContent.module.css';
 import { useSession } from 'next-auth/react';
+import { Alert, AlertTitle } from '@mui/material';
 
 export default function ImagesContent() {
   const [images, setImages] = useState<{ url: string }[]>([]);
@@ -10,16 +11,21 @@ export default function ImagesContent() {
   const [hasMoreImages, setHasMoreImages] = useState(true);
   const session = useSession();
 
+  useEffect(() => {
+    if (session.status === 'authenticated') {
+      fetchImages(1);
+    }
+  }, [session.status])
+
   const fetchImages = async (fetchNumber: number) => {
     setLoading(true);
-    console.log("b4 session", session)
     if (!session?.data?.user?.id) return;
     const userId = session.data.user.id;
     const reqData = {
       userId,
       fetchNumber,
     };
-    console.log("Should fetch")
+
     // Send the inference request
     const response = await fetch('/api/images/fetch', {
       method: 'POST',
@@ -38,13 +44,12 @@ export default function ImagesContent() {
     setHasMoreImages(data.length >= 20);
   };
 
-  useEffect(() => {
-    if (!session) return;
-    fetchImages(1);
-  }, [session])
-
   return (
     <div className={styles.container}>
+      <Alert severity="info" variant='filled'>
+        <AlertTitle>Information</AlertTitle>
+        Generated images are currently only stored for about an hour...
+      </Alert>
       <InfiniteScroll
         images={images}
         hasMoreImages={hasMoreImages}
