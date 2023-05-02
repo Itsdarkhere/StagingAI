@@ -125,15 +125,18 @@ export default function NewRender({
             </Button>
           </Tooltip>
           <Tooltip title="Make this image larger">
-            <Button
-              variant="contained"
-              color="warning"
-              className={`${styles.optionButton}`}
-              onClick={upscale}
-              disabled={fetching}
-            >
-              <Image src={UPSCALE} alt="plus" height={20} />
-            </Button>
+            {/* Span for mui since the button get disabled */}
+            <span>
+              <Button
+                variant="contained"
+                color="warning"
+                className={`${styles.optionButton}`}
+                onClick={upscale}
+                disabled={fetching}
+              >
+                <Image src={UPSCALE} alt="plus" height={20} />
+              </Button>
+            </span>
           </Tooltip>
         </div>
       )}

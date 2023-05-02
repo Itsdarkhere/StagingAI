@@ -75,9 +75,11 @@ export default function ImageDrop({
     if (!session?.data?.user?.id) return;
     const userId = session.data.user.id;
 
+    // Masks and images the user uploads go here
+    const directory = 'uploads'
     // Generates a presigned POST
     const res = await fetch(
-      `/api/images/upload?file=${filename}&fileType=${fileType}&userId=${userId}`
+      `/api/images/upload?file=${filename}&fileType=${fileType}&userId=${userId}&dir=${directory}`
     );
 
     const { url, fields } = await res.json();
@@ -94,7 +96,7 @@ export default function ImageDrop({
 
     // Bucket url/ + userId + / + filename
     if (upload.ok) {
-      setImage(url + userId + '/' + filename);
+      setImage(url + userId + '/' + directory + '/' + filename);
     }
     setUploadingPhoto(false);
   };

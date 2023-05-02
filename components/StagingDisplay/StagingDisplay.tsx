@@ -288,11 +288,13 @@ export default function StagingDisplay() {
       setFetching(false);
     }
 
-    // Save the images in RDS
-    saveURLsInRDS(imageURLS);
+    imageURLS.forEach((url: string) => {
+      // Upload the upscaled image to s3
+      uploadS3FromURL(url);
+    })
   };
 
-  const saveURLsInRDS = async (urls: string[]) => {
+  const saveURLs = async (urls: string[]) => {
     if (!session?.data?.user?.id) return;
     const userId = session.data.user.id;
     // Store images w userId
@@ -355,8 +357,8 @@ export default function StagingDisplay() {
       setFetching(false);
     }
 
-    // Save the image in RDS
-    saveURLsInRDS([prediction.output]);
+    // Upload the upscaled image to s3
+    uploadS3FromURL(prediction.output);
   };
 
   const getInferenceStatus = async (response: any, removeCount: number) => {
@@ -412,9 +414,12 @@ export default function StagingDisplay() {
     if (!session?.data?.user?.id) return;
     const userId = session.data.user.id;
 
+    
+    // Masks and images the user uploads go here
+    const directory = 'uploads'
     // Generates a presigned POST
     const res = await fetch(
-      `/api/images/upload?file=${filename}&fileType=${fileType}&userId=${userId}`
+      `/api/images/upload?file=${filename}&fileType=${fileType}&userId=${userId}&dir=${directory}`
     );
     const { url, fields } = await res.json();
     const formData = new FormData();
@@ -430,7 +435,45 @@ export default function StagingDisplay() {
 
     if (upload.ok) {
       // BucketURL/ + userId/ + filename
-      return url + userId + '/' + filename;
+      return url + userId + '/' + directory + '/' + filename;
+    }
+    return '';
+  };
+
+  const uploadS3FromURL = async (imageUrl: string) => {
+    // Extract the filename and file extension
+    const urlParts = imageUrl.split('/');
+    const fileName = encodeURIComponent(urlParts[urlParts.length - 1]);
+  
+    if (!session?.data?.user?.id) return;
+    const userId = session.data.user.id;
+  
+    // Download the image file
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+    const fileType = encodeURIComponent(blob.type);
+  
+    // Masks and images the user uploads go here
+    const directory = 'generations';
+    // Generates a presigned POST
+    const res = await fetch(
+      `/api/images/upload?file=${fileName}&fileType=${fileType}&userId=${userId}&dir=${directory}`
+    );
+    const { url, fields } = await res.json();
+    const formData = new FormData();
+  
+    Object.entries({ ...fields, file: blob }).forEach(([key, value]) => {
+      formData.append(key, value as string);
+    });
+  
+    const upload = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    });
+  
+    if (upload.ok) {
+      // BucketURL/ + userId/ + directory/ + fileName
+      saveURLs([url + userId + '/' + directory + '/' + fileName]);
     }
     return '';
   };

@@ -48,7 +48,7 @@ export default function ImagesContent() {
     <div className={styles.container}>
       <Alert severity="info" variant='filled'>
         <AlertTitle>Information</AlertTitle>
-        Generated images are currently only stored for about an hour...
+        Generated images are only stored for 72 hours. 
       </Alert>
       <InfiniteScroll
         images={images}
