@@ -15,6 +15,7 @@ export default function Login() {
     signIn('credentials', {
       email,
       password,
+      redirect: false,
       // Redirect to create
       callbackUrl: '/create',
     });

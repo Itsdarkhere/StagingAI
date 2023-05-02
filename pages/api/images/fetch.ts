@@ -18,8 +18,6 @@ export default async function handler(
     return res.status(400).json({ error: 'No userId or fetchNumber provided' });
   }
 
-  console.log('REQBODY', req.body);
-
   try {
     const query = `
     SELECT url FROM images

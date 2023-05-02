@@ -1,21 +1,43 @@
 'use client';
 import Spinner from '@/components/Spinner';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function InfiniteScroll({
-  images,
-  fetchImages,
-  loading,
-  setLoading,
-  hasMoreImages,
-}: {
-  images: { url: string }[];
-  fetchImages: (fetchNumber: number) => Promise<void>;
-  loading: boolean;
-  setLoading: (loading: boolean) => void;
-  hasMoreImages: boolean;
-}) {
-  const [fetchNumber, setFetchNumber] = React.useState<number>(1);
+export default function InfiniteScroll({ session }: { session: any }) {
+  const [page, setPage] = React.useState<number>(1);
+  const [images, setImages] = useState<{ url: string }[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [hasMoreImages, setHasMoreImages] = useState(true);
+
+  useEffect(() => {
+    fetchImages(1);
+  }, [])
+
+  const fetchImages = async (fetchNumber: number) => {
+    setLoading(true);
+    if (!session?.user?.id) return;
+    const userId = session.user.id;
+    const reqData = {
+      userId,
+      fetchNumber,
+    };
+
+    // Send the inference request
+    const response = await fetch('/api/images/fetch', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reqData),
+    }).then((res) => res.json());
+
+    const data = response.urls;
+
+    if (!data) return;
+    setImages((prev: { url: string }[]) => [...prev, ...data]);
+    setLoading(false);
+    // Set hasMoreImages based on the number of URLs in the response
+    setHasMoreImages(data.length >= 20);
+  };
 
   return (
     <div
