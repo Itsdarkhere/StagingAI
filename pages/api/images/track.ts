@@ -13,17 +13,23 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { userId, urls } = req.body;
+  console.log("REQBODY", req.body);
 
   if (!userId || !urls) {
     return res.status(400).json({ error: 'No userId or urls provided' });
   }
+  console.log("UserId", userId);
+  console.log("Urls", urls);
 
   try {
     // Make the query
+    console.log("Urls", urls);
     const values = urls.flatMap((url: string) => [userId, url]);
+    console.log("Values", values);
     const valuePlaceholders = urls
       .map((_: any, index: number) => `($${index * 2 + 1}, $${index * 2 + 2})`)
       .join(', ');
+    console.log("Valueplaceholders", valuePlaceholders);
     const query = `INSERT INTO images (id, url) VALUES ${valuePlaceholders} RETURNING *`;
     // Send the query
     const result = await pool.query(query, values);

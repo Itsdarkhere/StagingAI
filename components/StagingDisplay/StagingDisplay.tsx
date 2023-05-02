@@ -289,19 +289,21 @@ export default function StagingDisplay() {
     }
 
     const uploadedURLS: string[] = [];
-    imageURLS.forEach( async (url: string) => {
+    
+    // Save images in s3
+    for (const url of imageURLS) {
       // Upload the upscaled image to s3
-      console.log("Uploading .... s3 ...")
       const S3URL = await uploadS3FromURL(url);
       if (S3URL) uploadedURLS.push(S3URL);
-    })
-    console.log("Uploaded URLs: ", uploadedURLS);
+    }
+    // Save image locations on postgres
     saveURLs(uploadedURLS);
   };
 
   const saveURLs = async (urls: string[]) => {
     if (!session?.data?.user?.id) return;
     const userId = session.data.user.id;
+    console.log("urls: ", urls);
     // Store images w userId
     const reqData = {
       urls,
@@ -364,7 +366,9 @@ export default function StagingDisplay() {
     }
 
     // Upload the upscaled image to s3
-    uploadS3FromURL(prediction.output);
+    const S3URL = await uploadS3FromURL(prediction.output);
+    // Save image location on postgres
+    saveURLs([S3URL]);
   };
 
   const getInferenceStatus = async (response: any, removeCount: number) => {
@@ -419,10 +423,9 @@ export default function StagingDisplay() {
     const fileType = encodeURIComponent(file.type);
     if (!session?.data?.user?.id) return;
     const userId = session.data.user.id;
-
-    
     // Masks and images the user uploads go here
     const directory = 'uploads'
+
     // Generates a presigned POST
     const res = await fetch(
       `/api/images/upload?file=${filename}&fileType=${fileType}&userId=${userId}&dir=${directory}`
@@ -441,7 +444,7 @@ export default function StagingDisplay() {
 
     if (upload.ok) {
       // BucketURL/ + userId/ + filename
-      return url + userId + '/' + directory + '/' + filename;
+      return url + fields.key;
     }
     return '';
   };
@@ -458,9 +461,9 @@ export default function StagingDisplay() {
     const response = await fetch(imageUrl);
     const blob = await response.blob();
     const fileType = encodeURIComponent(blob.type);
-  
     // Masks and images the user uploads go here
     const directory = 'generations';
+  
     // Generates a presigned POST
     const res = await fetch(
       `/api/images/upload?file=${fileName}&fileType=${fileType}&userId=${userId}&dir=${directory}`
@@ -479,7 +482,7 @@ export default function StagingDisplay() {
   
     if (upload.ok) {
       // BucketURL/ + userId/ + directory/ + fileName
-      return url + userId + '/' + directory + '/' + fileName;
+      return url + fields.key;
     }
     return '';
   };

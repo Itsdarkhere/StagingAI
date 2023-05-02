@@ -96,7 +96,7 @@ export default function ImageDrop({
 
     // Bucket url/ + userId + / + filename
     if (upload.ok) {
-      setImage(url + userId + '/' + directory + '/' + filename);
+      setImage(url + fields.key);
     }
     setUploadingPhoto(false);
   };
