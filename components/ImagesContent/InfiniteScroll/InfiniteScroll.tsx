@@ -1,5 +1,6 @@
 'use client';
 import Spinner from '@/components/Spinner';
+import { Alert, AlertTitle } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 export default function InfiniteScroll({ session }: { session: any }) {
@@ -43,7 +44,6 @@ export default function InfiniteScroll({ session }: { session: any }) {
     <div
       style={{
         gap: 20,
-        paddingTop: 20,
         width: '100%',
         height: '100%',
         display: 'flex',
@@ -52,12 +52,18 @@ export default function InfiniteScroll({ session }: { session: any }) {
         alignItems: 'flex-start',
       }}
     >
+      <div style={{width: '100%'}}>
+        <Alert severity="info" variant='filled'>
+          <AlertTitle>Information</AlertTitle>
+          Generated images are only stored for 72 hours. 
+        </Alert>
+      </div>
       {images.map((url, index) => (
         <img
           key={index}
           src={url.url}
           alt={`Image ${index + 1}`}
-          style={{ width: 'auto', height: 'auto', marginBottom: '16px' }}
+          style={{ width: 'auto', height: 'auto', maxWidth: '100%', marginBottom: '16px' }}
         />
       ))}
       {loading && (

@@ -8,10 +8,6 @@ export default async function ImagesContent() {
   const session = await getServerSession(authOptions);
   return (
     <div className={styles.container}>
-      {/* <Alert severity="info" variant='filled'>
-        <AlertTitle>Information</AlertTitle>
-        Generated images are only stored for 72 hours. 
-      </Alert> */}
       <InfiniteScroll
         session={session}
       />
