@@ -12,13 +12,20 @@ export default function Login() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    signIn('credentials', {
+    const res = await signIn('credentials', {
       email,
       password,
       redirect: false,
-      // Redirect to create
+      // Redirect to create, not actually since error redirect is awfull
       callbackUrl: '/create',
-    });
+    }).then((res) => {
+      if (res?.ok) {
+        window.location.href = '/create';
+      } else {
+        setError(true);
+        setTimeout(() => setError(false), 1000);
+      }
+    })
   };
 
   return (

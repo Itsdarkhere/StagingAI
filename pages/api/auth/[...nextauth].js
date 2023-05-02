@@ -1,5 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+const dev = process.env.NODE_ENV !== 'production';
+const server = dev ? 'http://localhost:3000' : 'https://realtool.io';
 
 // Js since Idk about the types for this
 export const authOptions = {
@@ -16,7 +18,7 @@ export const authOptions = {
           password: credentials.password,
         };
 
-        const user = await fetch('http://localhost:3000/api/auth/login123', {
+        const user = await fetch(`${server}/api/auth/login123`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
