@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 const dev = process.env.NODE_ENV !== 'production';
-const server = dev ? 'http://localhost:3000' : 'https://realtool.io';
+const server = dev ? 'http://localhost:3000' : 'https://www.realtool.io';
 
 // Js since Idk about the types for this
 export const authOptions = {

@@ -12,7 +12,10 @@ export default function Login() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const res = await signIn('credentials', {
+    const dev = process.env.NODE_ENV !== 'production';
+    const server = dev ? 'http://localhost:3000' : 'https://www.realtool.io';
+    console.log(server);
+    await signIn('credentials', {
       email,
       password,
       redirect: false,
