@@ -11,11 +11,20 @@ export const authOptions = {
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        const user = {
+        const reqData = {
           email: credentials.email,
           password: credentials.password,
-          is_success: true,
         };
+
+        const user = await fetch('http://localhost:3000/api/auth/login123', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(reqData),
+        }).then((res) => res.json());
+
+        console.log('user: ', user);
 
         if (user.is_success) {
           console.log('nextauth daki user: ' + user.is_success);
@@ -30,7 +39,7 @@ export const authOptions = {
   callbacks: {
     jwt: async ({ token, user }) => {
       if (user) {
-        console.log('User: ', user);
+        token.id = user.id;
         token.email = user.email;
         // token.user_type = user.data.auth.userType;
         // token.accessToken = user.token;
@@ -40,6 +49,7 @@ export const authOptions = {
     },
     session: ({ session, token, user }) => {
       if (token) {
+        session.user.id = token.id;
         session.user.email = token.email;
         // session.user.accessToken = token.accessToken;
       }

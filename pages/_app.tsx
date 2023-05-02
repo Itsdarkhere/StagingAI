@@ -14,7 +14,7 @@ const theme = createTheme({
 
 export default function App({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { ...pageProps },
 }: AppProps) {
   return (
     <ThemeProvider theme={theme}>

@@ -131,7 +131,7 @@ export default function ImageOptions({
     );
 
     enhance(originalImage!, newDimensions.newWidth, newDimensions.newHeight);
-  }
+  };
 
   const validateBasedOnMode = (event: React.SyntheticEvent) => {
     if (mode !== 'inpainting') {

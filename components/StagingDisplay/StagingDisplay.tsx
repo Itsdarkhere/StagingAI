@@ -6,6 +6,7 @@ import styles from '../../styles/ToolView/StagingDisplay/StagingDisplay.module.c
 import Modal from '../Modal/Modal';
 import NewRender from '../NewRender';
 import ImageOptions from './ImageOptions/ImageOptions';
+import { useSession } from 'next-auth/react';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -18,6 +19,7 @@ export default function StagingDisplay() {
   const [prediction, setPrediction] = useState(null);
   const [renders, setRenders] = useState<string[]>([]);
   const [fetching, setFetching] = useState(false);
+  const session = useSession();
 
   const paintingAddKeyMap = new Map([
     ['bedroom9800.pt', 'A photo of a modern bedroom, natural light'],
@@ -40,10 +42,7 @@ export default function StagingDisplay() {
       'office',
       'Sleek and minimalist open-concept office with large windows, natural light, and ergonomic furniture.',
     ],
-    [
-      'bluesky',
-      'A beautiful blue sky.',
-    ],
+    ['bluesky', 'A beautiful blue sky.'],
     [
       'privateoffice10000.pt',
       'a high resolution photo of a modern minimalist office, desk and chair, personal office',
@@ -200,14 +199,8 @@ export default function StagingDisplay() {
       new Blob([resizedIMGBuffer], { type: resizedIMGContentType! })
     );
     formData.append('style_preset', 'enhance');
-    formData.append(
-      'text_prompts[0][text]',
-      'Natural light'
-    );
-    formData.append(
-      'image_strength',
-      '0.99'
-    )
+    formData.append('text_prompts[0][text]', 'Natural light');
+    formData.append('image_strength', '0.99');
 
     // Set API host, engine ID, and API key
     const apiHost = 'https://api.stability.ai';
@@ -237,7 +230,7 @@ export default function StagingDisplay() {
     );
 
     setFetching(false);
-  }
+  };
 
   const inpainting = async (reqData: {
     room: string;
@@ -300,7 +293,8 @@ export default function StagingDisplay() {
   };
 
   const saveURLsInRDS = async (urls: string[]) => {
-    const userId = localStorage.getItem('userId');
+    if (!session?.data?.user?.id) return;
+    const userId = session.data.user.id;
     // Store images w userId
     const reqData = {
       urls,
@@ -317,9 +311,9 @@ export default function StagingDisplay() {
 
     // Check status
     if (response.ok) {
-      console.log('Successfully saved images in RDS');
+      console.log('Successfully saved images on postgres');
     } else {
-      console.log('Failed to save images in RDS');
+      console.log('Failed to save images on postgres');
     }
   };
 
@@ -415,7 +409,8 @@ export default function StagingDisplay() {
   const uploadMask = async (file: File) => {
     const filename = encodeURIComponent(file.name);
     const fileType = encodeURIComponent(file.type);
-    const userId = localStorage.getItem('userId');
+    if (!session?.data?.user?.id) return;
+    const userId = session.data.user.id;
 
     // Generates a presigned POST
     const res = await fetch(

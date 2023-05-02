@@ -1,9 +1,7 @@
 import LogInTo from '@/components/LogInTo';
-import SideNav from '@/components/Nav/SideNav';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
 import React from 'react';
-import Header from '../../components/Nav/Header';
 import styles from '../../styles/Layout.module.css';
 import Navigation from '@/components/Nav/Navigation';
 

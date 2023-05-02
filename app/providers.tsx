@@ -9,5 +9,5 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <Analytics />
       {children}
     </SessionProvider>
-  )
+  );
 }

@@ -12,7 +12,13 @@ import ManageAccount from '@mui/icons-material/ManageAccounts';
 import Logout from '@mui/icons-material/Logout';
 import { signOut } from 'next-auth/react';
 
-export default function SideNav({ open, setOpen }: { open: boolean, setOpen: (open: boolean) => void}) {
+export default function SideNav({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}) {
   const pathname = usePathname();
 
   const logout = () => {
@@ -21,167 +27,169 @@ export default function SideNav({ open, setOpen }: { open: boolean, setOpen: (op
 
   return (
     <>
-    {open && <div className={styles.sideDrop} onClick={() => setOpen(false)}></div>}
-    <div className={`${styles.container} ${open && styles.visible}`}>
-      <div className={styles.containerInner}>
-        <div className={styles.top}>
-          <Link href="/" className={styles.logolink}>
-            <Image height={40} src={sofa} alt="sofa" />
-            RealTool
-          </Link>
-          <div className={styles.bio}>
-            <h6 className={styles.name}>Valtteri Juvonen</h6>
-            <p className={styles.subscription}>Organization</p>
+      {open && (
+        <div className={styles.sideDrop} onClick={() => setOpen(false)}></div>
+      )}
+      <div className={`${styles.container} ${open && styles.visible}`}>
+        <div className={styles.containerInner}>
+          <div className={styles.top}>
+            <Link href="/" className={styles.logolink}>
+              <Image height={40} src={sofa} alt="sofa" />
+              RealTool
+            </Link>
+            <div className={styles.bio}>
+              <h6 className={styles.name}>Valtteri Juvonen</h6>
+              <p className={styles.subscription}>Organization</p>
+            </div>
           </div>
-        </div>
-        <hr className={styles.hr} />
-        <div className={styles.center}>
-          <ul className={styles.list}>
-            <li className={styles.li}>
-              <Link
-                href="/create"
-                className={`${styles.listlink} ${
-                  pathname == '/create' ? styles.active : ''
-                }`}
-              >
-                <span
-                  style={{
-                    marginRight: 16,
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <HandyMan
-                    htmlColor={`${
-                      pathname == '/create'
-                        ? 'rgb(99, 102, 241)'
-                        : 'rgb(157, 164, 174)'
-                    }`}
-                    fontSize="small"
-                  />
-                </span>
-                <span
-                  className={`${styles.span} ${
-                    pathname == '/create' ? styles.ac : ''
+          <hr className={styles.hr} />
+          <div className={styles.center}>
+            <ul className={styles.list}>
+              <li className={styles.li}>
+                <Link
+                  href="/create"
+                  className={`${styles.listlink} ${
+                    pathname == '/create' ? styles.active : ''
                   }`}
                 >
-                  Tool
-                </span>
-              </Link>
-            </li>
-            <li className={styles.li}>
-              <Link
-                href="/images"
-                className={`${styles.listlink} ${
-                  pathname == '/images' ? styles.active : ''
-                }`}
-              >
-                <span
-                  style={{
-                    marginRight: 16,
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <ImageSearch
-                    htmlColor={`${
-                      pathname == '/images'
-                        ? 'rgb(99, 102, 241)'
-                        : 'rgb(157, 164, 174)'
+                  <span
+                    style={{
+                      marginRight: 16,
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <HandyMan
+                      htmlColor={`${
+                        pathname == '/create'
+                          ? 'rgb(99, 102, 241)'
+                          : 'rgb(157, 164, 174)'
+                      }`}
+                      fontSize="small"
+                    />
+                  </span>
+                  <span
+                    className={`${styles.span} ${
+                      pathname == '/create' ? styles.ac : ''
                     }`}
-                    fontSize="small"
-                  />
-                </span>
-                <span
-                  className={`${styles.span} ${
-                    pathname == '/images' ? styles.ac : ''
+                  >
+                    Tool
+                  </span>
+                </Link>
+              </li>
+              <li className={styles.li}>
+                <Link
+                  href="/images"
+                  className={`${styles.listlink} ${
+                    pathname == '/images' ? styles.active : ''
                   }`}
                 >
-                  Images
-                </span>
-              </Link>
-            </li>
-            <li className={styles.li}>
-              <Link
-                href="/subscription"
-                className={`${styles.listlink} ${
-                  pathname == '/subscription' ? styles.active : ''
-                }`}
-              >
-                <span
-                  style={{
-                    marginRight: 16,
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <ManageAccount
-                    htmlColor={`${
-                      pathname == '/subscription'
-                        ? 'rgb(99, 102, 241)'
-                        : 'rgb(157, 164, 174)'
+                  <span
+                    style={{
+                      marginRight: 16,
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <ImageSearch
+                      htmlColor={`${
+                        pathname == '/images'
+                          ? 'rgb(99, 102, 241)'
+                          : 'rgb(157, 164, 174)'
+                      }`}
+                      fontSize="small"
+                    />
+                  </span>
+                  <span
+                    className={`${styles.span} ${
+                      pathname == '/images' ? styles.ac : ''
                     }`}
-                    fontSize="small"
-                  />
-                </span>
-                <span
-                  className={`${styles.span} ${
-                    pathname == '/subscription' ? styles.ac : ''
+                  >
+                    Images
+                  </span>
+                </Link>
+              </li>
+              <li className={styles.li}>
+                <Link
+                  href="/subscription"
+                  className={`${styles.listlink} ${
+                    pathname == '/subscription' ? styles.active : ''
                   }`}
                 >
-                  Subscription
-                </span>
-              </Link>
-            </li>
-            <li className={styles.li}>
-              <Link
-                onClick={logout}
-                href="/login"
-                className={`${styles.listlink}`}
-              >
-                <span
-                  style={{
-                    marginRight: 16,
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Logout
-                    htmlColor={`${
-                      pathname == '/logout'
-                        ? 'rgb(99, 102, 241)'
-                        : 'rgb(157, 164, 174)'
+                  <span
+                    style={{
+                      marginRight: 16,
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <ManageAccount
+                      htmlColor={`${
+                        pathname == '/subscription'
+                          ? 'rgb(99, 102, 241)'
+                          : 'rgb(157, 164, 174)'
+                      }`}
+                      fontSize="small"
+                    />
+                  </span>
+                  <span
+                    className={`${styles.span} ${
+                      pathname == '/subscription' ? styles.ac : ''
                     }`}
-                    fontSize="small"
-                  />
-                </span>
-                <span
-                  className={`${styles.span} ${
-                    pathname == '/logout' ? styles.ac : ''
-                  }`}
+                  >
+                    Subscription
+                  </span>
+                </Link>
+              </li>
+              <li className={styles.li}>
+                <Link
+                  onClick={logout}
+                  href="/login"
+                  className={`${styles.listlink}`}
                 >
-                  Logout
-                </span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <hr className={styles.hr} />
-        <div className={styles.bottom}>
-          <h6 className={styles.bottomh6}>Want to upgrade ?</h6>
-          <p className={styles.bottomp}>
-            Check out the added perks on the Pro package.
-          </p>
-          <div className={styles.imagecontainer}>
-            <Image width={160} src={upgrade} alt="upgrade" />
+                  <span
+                    style={{
+                      marginRight: 16,
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Logout
+                      htmlColor={`${
+                        pathname == '/logout'
+                          ? 'rgb(99, 102, 241)'
+                          : 'rgb(157, 164, 174)'
+                      }`}
+                      fontSize="small"
+                    />
+                  </span>
+                  <span
+                    className={`${styles.span} ${
+                      pathname == '/logout' ? styles.ac : ''
+                    }`}
+                  >
+                    Logout
+                  </span>
+                </Link>
+              </li>
+            </ul>
           </div>
-          <Link href="/subscription" className={styles.bottomlink}>
-            Upgrade to Pro
-            <span></span>
-          </Link>
+          <hr className={styles.hr} />
+          <div className={styles.bottom}>
+            <h6 className={styles.bottomh6}>Want to upgrade ?</h6>
+            <p className={styles.bottomp}>
+              Check out the added perks on the Pro package.
+            </p>
+            <div className={styles.imagecontainer}>
+              <Image width={160} src={upgrade} alt="upgrade" />
+            </div>
+            <Link href="/subscription" className={styles.bottomlink}>
+              Upgrade to Pro
+              <span></span>
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }

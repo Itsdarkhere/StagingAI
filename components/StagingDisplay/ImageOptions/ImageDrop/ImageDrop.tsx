@@ -1,9 +1,11 @@
+'use client'
 import { Button } from '@mui/material';
 import Image from 'next/image';
 import styles from '../../../../styles/ToolView/ImageDrop/ImageDrop.module.css';
 import React, { useEffect, useState } from 'react';
 import IMGUP from '../../../../public/imageup.svg';
 import Spinner from '@/components/Spinner';
+import { useSession } from 'next-auth/react';
 
 export default function ImageDrop({
   originalImage,
@@ -18,6 +20,7 @@ export default function ImageDrop({
 }) {
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+  const session = useSession();
 
   useEffect(() => {
     setLoaded(false);
@@ -69,7 +72,8 @@ export default function ImageDrop({
   const uploadPhoto = async (file: File) => {
     const filename = encodeURIComponent(file.name);
     const fileType = encodeURIComponent(file.type);
-    const userId = localStorage.getItem('userId');
+    if (!session?.data?.user?.id) return;
+    const userId = session.data.user.id;
 
     // Generates a presigned POST
     const res = await fetch(
@@ -117,10 +121,10 @@ export default function ImageDrop({
             />
           )}
           {/* Show this when we are loading the image */}
-          {uploadingPhoto || (originalImage !== undefined && !loaded) && (
+          {uploadingPhoto ||
+            (originalImage !== undefined && !loaded && (
               <Spinner wh={45} white={false} />
-            )
-          }
+            ))}
 
           {/* Before uploading an image */}
           {originalImage === undefined && !uploadingPhoto && (

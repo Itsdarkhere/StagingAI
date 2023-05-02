@@ -31,13 +31,17 @@ export default function NewRender({
       case 'starting':
         return (
           <div className={styles.predictionStatus}>
-            <Alert severity='info'>Starting... This might take a few minutes</Alert>
+            <Alert severity="info">
+              Starting... This might take a few minutes
+            </Alert>
           </div>
         );
       case 'processing':
         return (
           <div className={styles.predictionStatus}>
-            <Alert severity='success'>Processing... <ProcessingCount /></Alert>
+            <Alert severity="success">
+              Processing... <ProcessingCount />
+            </Alert>
           </div>
         );
       case 'succeeded':
@@ -102,8 +106,8 @@ export default function NewRender({
         <div className={styles.imageOptions}>
           <Tooltip title="Download image">
             <Button
-              variant='contained'
-              color='warning'
+              variant="contained"
+              color="warning"
               className={`${styles.optionButton}`}
               onClick={() => downloadImage(image, getFileName(image))}
             >
@@ -112,8 +116,8 @@ export default function NewRender({
           </Tooltip>
           <Tooltip title="Use as base image">
             <Button
-              variant='contained'
-              color='warning'
+              variant="contained"
+              color="warning"
               className={`${styles.optionButton}`}
               onClick={() => setImage(image)}
             >
@@ -122,8 +126,8 @@ export default function NewRender({
           </Tooltip>
           <Tooltip title="Make this image larger">
             <Button
-              variant='contained'
-              color='warning'
+              variant="contained"
+              color="warning"
               className={`${styles.optionButton}`}
               onClick={upscale}
               disabled={fetching}

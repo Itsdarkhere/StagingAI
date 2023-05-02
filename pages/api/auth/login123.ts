@@ -16,10 +16,6 @@ export default async function handler(
 ) {
   const { email, password } = req.body;
 
-  res
-    .status(200)
-    .json({ message: 'Login successful', token: '11123', userId: 5 });
-
   try {
     // Fetch the user and their hashed password from the database
     const result = await pool.query('SELECT * FROM users WHERE email = $1', [
@@ -40,18 +36,17 @@ export default async function handler(
 
     if (isPasswordCorrect) {
       // Password is correct, issue a JWT
-      const userId = result.rows[0].id;
-      const token = jwt.sign(
-        { userId, email: result.rows[0].email },
-        process.env.JWT_SECRET!,
-        { expiresIn: '24h' }
-      );
-      res.status(200).json({ message: 'Login successful', token, userId });
+      const id = result.rows[0].id;
+      res
+        .status(200)
+        .json({ is_success: true, message: 'Login successful', id, email });
     } else {
       // Incorrect password
-      res.status(401).json({ error: 'Invalid email or password' });
+      res
+        .status(401)
+        .json({ is_success: false, error: 'Invalid email or password' });
     }
   } catch (err: any) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ is_success: false, error: err.message });
   }
 }

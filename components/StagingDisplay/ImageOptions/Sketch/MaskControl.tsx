@@ -45,11 +45,7 @@ export default function MaskControl({
           value={strokeWidth}
         />
         <Tooltip title="Undo previous action">
-          <button
-            className={`${styles.controlB}`}
-            onClick={undo}
-            type="button"
-          >
+          <button className={`${styles.controlB}`} onClick={undo} type="button">
             <Image width={20} height={20} src={BACK2} alt="back" />
           </button>
         </Tooltip>

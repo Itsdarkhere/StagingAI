@@ -30,12 +30,14 @@ export default async function handler(
 
     if (result.rowCount === 0) {
       // User not found
+      console.log(result);
       res.status(401).json({ error: 'Insert unsuccesful...' });
       return;
     }
 
     res.status(200).json({ message: 'URLs inserted' });
   } catch (err: any) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 }
