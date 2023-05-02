@@ -4,17 +4,17 @@ import styles from '../../styles/Login.module.css';
 import Link from 'next/link';
 import { Button } from '@mui/material';
 import { signIn } from 'next-auth/react';
+import Spinner from '../Spinner';
 
 export default function Login() {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const dev = process.env.NODE_ENV !== 'production';
-    const server = dev ? 'http://localhost:3000' : 'https://www.realtool.io';
-    console.log(server);
+    setLoading(true);
     await signIn('credentials', {
       email,
       password,
@@ -25,6 +25,7 @@ export default function Login() {
       if (res?.ok) {
         window.location.href = '/create';
       } else {
+        setLoading(false);
         setError(true);
         setTimeout(() => setError(false), 1000);
       }
@@ -72,7 +73,7 @@ export default function Login() {
               variant="contained"
               className={styles.button}
             >
-              {error ? 'Invalid login' : 'Login'}
+              {loading ? <Spinner wh={30} white={true} /> : error ? 'Invalid login' : 'Log in'}
             </Button>
             <div className={styles.forgotbox}>
               <Link className={styles.link2} href="/forgot">
