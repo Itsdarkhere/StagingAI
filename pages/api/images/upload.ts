@@ -1,6 +1,7 @@
 import { S3Client } from '@aws-sdk/client-s3';
 import { createPresignedPost } from '@aws-sdk/s3-presigned-post';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { v4 as uuidv4 } from 'uuid';
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,7 +27,7 @@ export default async function handler(
 
   const post = await createPresignedPost(s3Client, {
     Bucket: process.env.AWS_BUCKET_NAME!,
-    Key: `${userId}/${dir}/${file}`,
+    Key: `${userId}/${dir}/${uuidv4()}_${file}`,
     Fields: {
       // acl: 'public-read',
       'Content-Type': fileType,

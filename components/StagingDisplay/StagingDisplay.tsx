@@ -288,10 +288,15 @@ export default function StagingDisplay() {
       setFetching(false);
     }
 
-    imageURLS.forEach((url: string) => {
+    const uploadedURLS: string[] = [];
+    imageURLS.forEach( async (url: string) => {
       // Upload the upscaled image to s3
-      uploadS3FromURL(url);
+      console.log("Uploading .... s3 ...")
+      const S3URL = await uploadS3FromURL(url);
+      if (S3URL) uploadedURLS.push(S3URL);
     })
+    console.log("Uploaded URLs: ", uploadedURLS);
+    saveURLs(uploadedURLS);
   };
 
   const saveURLs = async (urls: string[]) => {
@@ -315,6 +320,7 @@ export default function StagingDisplay() {
     if (response.ok) {
       console.log('Successfully saved images on postgres');
     } else {
+      console.log(await response.json());
       console.log('Failed to save images on postgres');
     }
   };
@@ -473,7 +479,7 @@ export default function StagingDisplay() {
   
     if (upload.ok) {
       // BucketURL/ + userId/ + directory/ + fileName
-      saveURLs([url + userId + '/' + directory + '/' + fileName]);
+      return url + userId + '/' + directory + '/' + fileName;
     }
     return '';
   };
