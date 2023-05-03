@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Login.module.css';
 import Link from 'next/link';
-import { Button } from '@mui/material';
+import { Alert, Button, Snackbar } from '@mui/material';
 import { signIn } from 'next-auth/react';
 import Spinner from '../Spinner';
 
@@ -10,7 +10,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -26,14 +26,26 @@ export default function Login() {
         window.location.href = '/create';
       } else {
         setLoading(false);
-        setError(true);
-        setTimeout(() => setError(false), 1000);
+        handleOpen();
       }
     });
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
+
   return (
     <div className={styles.container}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert variant="filled" severity="error" sx={{ width: '100%' }}>
+          Incorrect login!
+        </Alert>
+      </Snackbar>
       <div className={styles.innercontainer}>
         <div className={styles.box}>
           <div className={styles.textbox}>
@@ -68,14 +80,14 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button
-              color={error ? 'error' : 'primary'}
+              color={open ? 'error' : 'primary'}
               type="submit"
               variant="contained"
               className={styles.button}
             >
               {loading ? (
                 <Spinner wh={30} white={true} />
-              ) : error ? (
+              ) : open ? (
                 'Invalid login'
               ) : (
                 'Log in'
