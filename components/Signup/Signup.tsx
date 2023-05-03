@@ -25,11 +25,11 @@ export default function Signup() {
     event.preventDefault();
     // Check that passwords match
     if (password !== repeatPassword) {
-        setMessage('Passwords dont match!');
-        handleOpen();
-        setPassword('');
-        setRepeatPassword('');
-        return;
+      setMessage('Passwords dont match!');
+      handleOpen();
+      setPassword('');
+      setRepeatPassword('');
+      return;
     }
 
     setMessage('Signup is not available!');
@@ -37,9 +37,9 @@ export default function Signup() {
     return;
 
     const reqData = {
-        email,
-        password,
-      };
+      email,
+      password,
+    };
 
     const response = await fetch(`/api/auth/signup123`, {
       method: 'POST',
@@ -50,12 +50,11 @@ export default function Signup() {
     }).then((res) => res.json());
 
     if (response?.message) {
-        console.log("Success!")
+      console.log('Success!');
     } else {
-        console.log(response);
+      console.log(response);
     }
   };
-
 
   return (
     <div className={styles.container}>

@@ -13,7 +13,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ error: 'No email or password provided' });
@@ -22,10 +22,10 @@ export default async function handler(
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     // Send the query
-    const result = await pool.query('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *', [
-        email,
-        hashedPassword
-    ]);
+    const result = await pool.query(
+      'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *',
+      [email, hashedPassword]
+    );
 
     if (result.rowCount === 0) {
       // User not found

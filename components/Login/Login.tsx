@@ -33,11 +33,11 @@ export default function Login() {
 
   const handleClose = () => {
     setOpen(false);
-  }
+  };
 
   const handleOpen = () => {
     setOpen(true);
-  }
+  };
 
   return (
     <div className={styles.container}>

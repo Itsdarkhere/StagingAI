@@ -1,3 +1,4 @@
+// prettier-ignore
 import ImagesContent from '@/components/ImagesContent/ImagesContent';
 import React from 'react';
 
