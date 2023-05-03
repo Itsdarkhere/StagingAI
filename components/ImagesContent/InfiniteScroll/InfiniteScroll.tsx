@@ -46,7 +46,6 @@ export default function InfiniteScroll({ session }: { session: any }) {
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMoreImages) {
           setPage((prevPage) => prevPage + 1);
-          fetchImages(page);
         }
       });
       if (node) observer.current.observe(node);
@@ -55,8 +54,8 @@ export default function InfiniteScroll({ session }: { session: any }) {
   );
 
   useEffect(() => {
-    fetchImages(1);
-  }, []);
+    fetchImages(page);
+  }, [page]);
 
   return (
     <div
