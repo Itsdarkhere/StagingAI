@@ -8,9 +8,7 @@ export default async function ImagesContent() {
   const session = await getServerSession(authOptions);
   return (
     <div className={styles.container}>
-      <InfiniteScroll
-        session={session}
-      />
+      <InfiniteScroll session={session} />
     </div>
   );
 }

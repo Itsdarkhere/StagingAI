@@ -29,7 +29,7 @@ export default function Login() {
         setError(true);
         setTimeout(() => setError(false), 1000);
       }
-    })
+    });
   };
 
   return (
@@ -73,7 +73,13 @@ export default function Login() {
               variant="contained"
               className={styles.button}
             >
-              {loading ? <Spinner wh={30} white={true} /> : error ? 'Invalid login' : 'Log in'}
+              {loading ? (
+                <Spinner wh={30} white={true} />
+              ) : error ? (
+                'Invalid login'
+              ) : (
+                'Log in'
+              )}
             </Button>
             <div className={styles.forgotbox}>
               <Link className={styles.link2} href="/forgot">

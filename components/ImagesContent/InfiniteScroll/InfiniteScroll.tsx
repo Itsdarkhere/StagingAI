@@ -11,7 +11,7 @@ export default function InfiniteScroll({ session }: { session: any }) {
 
   useEffect(() => {
     fetchImages(1);
-  }, [])
+  }, []);
 
   const fetchImages = async (fetchNumber: number) => {
     setLoading(true);
@@ -52,10 +52,10 @@ export default function InfiniteScroll({ session }: { session: any }) {
         alignItems: 'flex-start',
       }}
     >
-      <div style={{width: '100%'}}>
-        <Alert severity="info" variant='filled'>
+      <div style={{ width: '100%' }}>
+        <Alert severity="info" variant="filled">
           <AlertTitle>Information</AlertTitle>
-          Generated images are only stored for 72 hours. 
+          Generated images are only stored for 72 hours.
         </Alert>
       </div>
       {images.map((url, index) => (
@@ -63,7 +63,12 @@ export default function InfiniteScroll({ session }: { session: any }) {
           key={index}
           src={url.url}
           alt={`Image ${index + 1}`}
-          style={{ width: 'auto', height: 'auto', maxWidth: '100%', marginBottom: '16px' }}
+          style={{
+            width: 'auto',
+            height: 'auto',
+            maxWidth: '100%',
+            marginBottom: '16px',
+          }}
         />
       ))}
       {loading && (

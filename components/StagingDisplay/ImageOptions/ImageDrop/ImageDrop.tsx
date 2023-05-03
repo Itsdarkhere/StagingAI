@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Button } from '@mui/material';
 import Image from 'next/image';
 import styles from '../../../../styles/ToolView/ImageDrop/ImageDrop.module.css';
@@ -76,7 +76,7 @@ export default function ImageDrop({
     const userId = session.data.user.id;
 
     // Masks and images the user uploads go here
-    const directory = 'uploads'
+    const directory = 'uploads';
     // Generates a presigned POST
     const res = await fetch(
       `/api/images/upload?file=${filename}&fileType=${fileType}&userId=${userId}&dir=${directory}`
