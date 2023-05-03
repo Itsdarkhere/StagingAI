@@ -237,7 +237,6 @@ export default function StagingDisplay() {
     style: string;
     image: string;
     mask: string | undefined;
-    concept: string;
     copies: number;
     width: number;
     height: number;
@@ -252,7 +251,6 @@ export default function StagingDisplay() {
     setRenders([...loaderArr, ...renders]);
 
     // Add stuff to reqData
-    reqData.concept = reqData.room;
     reqData.room = paintingAddKeyMap.get(reqData.room)!;
     reqData.mask = await setImgMask();
 

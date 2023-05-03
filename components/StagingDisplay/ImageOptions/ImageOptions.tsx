@@ -24,7 +24,6 @@ export default function ImageOptions({
     style: string;
     image: string;
     mask: string;
-    concept: string;
     copies: number;
     width: number;
     height: number;
@@ -85,7 +84,6 @@ export default function ImageOptions({
       style: 'Fill with something',
       image: originalImage!,
       mask: '',
-      concept: '',
       copies: copies,
       width: newDimensions.newWidth,
       height: newDimensions.newHeight,

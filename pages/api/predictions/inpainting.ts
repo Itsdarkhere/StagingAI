@@ -33,7 +33,6 @@ export default async function handler(
         prompt: body.room,
         negative_prompt: 'wood, wooden frame',
         image: body.image,
-        concept: body.concept,
         mask: body.mask,
         num_outputs: body.copies,
         num_inference_steps: 25,
