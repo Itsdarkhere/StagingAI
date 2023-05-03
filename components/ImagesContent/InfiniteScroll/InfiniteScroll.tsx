@@ -1,7 +1,7 @@
 'use client';
 import Spinner from '@/components/Spinner';
 import { Alert, AlertTitle } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function InfiniteScroll({ session }: { session: any }) {
   const [page, setPage] = React.useState<number>(1);
@@ -9,12 +9,9 @@ export default function InfiniteScroll({ session }: { session: any }) {
   const [loading, setLoading] = useState(false);
   const [hasMoreImages, setHasMoreImages] = useState(true);
 
-  useEffect(() => {
-    fetchImages(1);
-  }, []);
-
   const fetchImages = async (fetchNumber: number) => {
     setLoading(true);
+    console.log("Fetch", fetchNumber);
     if (!session?.user?.id) return;
     const userId = session.user.id;
     const reqData = {
@@ -40,6 +37,27 @@ export default function InfiniteScroll({ session }: { session: any }) {
     setHasMoreImages(data.length >= 20);
   };
 
+  const observer = useRef<IntersectionObserver | null>(null);
+
+  const lastImageRef = useCallback(
+    (node: any) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMoreImages) {
+          setPage((prevPage) => prevPage + 1);
+          fetchImages(page);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMoreImages, page]
+  );
+
+  useEffect(() => {
+    fetchImages(1);
+  }, []);
+
   return (
     <div
       style={{
@@ -60,6 +78,7 @@ export default function InfiniteScroll({ session }: { session: any }) {
       </div>
       {images.map((url, index) => (
         <img
+          ref={index === images.length - 1 ? lastImageRef : null}
           key={index}
           src={url.url}
           alt={`Image ${index + 1}`}
